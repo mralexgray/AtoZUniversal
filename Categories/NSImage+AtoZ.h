@@ -1,4 +1,4 @@
-
+/*
 #import "AZSizer.h"
 @import Quartz;
 
@@ -66,7 +66,7 @@ typedef void(^LockedFocusWithFrame)(NSR dRect);
 + (NSIMG*) imageWithSize:(NSSZ)size drawnUsingBlock:(NSImageDrawer)drawBlock;
 + (NSIMG*)  imageInFrame:(NSR)frame withBlock:(LockedFocusWithFrame)drawBlockwithFrame;	@end // (AtoZDrawBlock)
 
-#define NSIMGNAMED(x) [NSIMG imageNamed:NSStrigify(x)] /*! [NSImage imageNamed:@"document"] */
+#define NSIMGNAMED(x) [NSIMG imageNamed:NSStrigify(x)] /// [NSImage imageNamed:@"document"]
 
 
 @class AZFile;
