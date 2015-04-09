@@ -607,7 +607,7 @@
 		7B582BBC1AA6A4F300C450C3 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0610;
+				LastUpgradeCheck = 0630;
 				ORGANIZATIONNAME = "Alex Gray";
 				TargetAttributes = {
 					7B582BC41AA6A4F300C450C3 = {
@@ -791,6 +791,7 @@
 			buildSettings = {
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
 				GCC_C_LANGUAGE_STANDARD = c11;
+				ONLY_ACTIVE_ARCH = YES;
 			};
 			name = Debug;
 		};
