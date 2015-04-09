@@ -1,0 +1,34 @@
+[submodule "BaseModel"]
+	  path = BaseModel
+	   url = https://github.com/mralexgray/BaseModel.git
+[submodule "Modules/_ObjC"]
+	  path = _ObjC
+	   url = https://github.com/mralexgray/_ObjC.git
+[submodule "DatabaseStorage"]
+	  path = DatabaseStorage
+	   url = https://github.com/mralexgray/DatabaseStorage.git
+[submodule "ObjcAssociatedObjectHelpers"]
+    path = ObjcAssociatedObjectHelpers
+     url = https://github.com/mralexgray/ObjcAssociatedObjectHelpers.git
+[submodule "libextobjc"]
+	  path = libextobjc
+   	 url = https://github.com/mralexgray/libextobjc.git
+[submodule "OrderedDictionary"]
+	  path = OrderedDictionary
+   	 url = https://github.com/nicklockwood/OrderedDictionary.git
+[submodule "Functional"]
+	  path = Functional
+	   url = https://github.com/mralexgray/Functional.m.git
+[submodule "THObserversAndBinders"]
+    path = THObserversAndBinders
+     url = https://github.com/mralexgray/THObserversAndBinders.git
+[submodule "JREnum"]
+ 	  path = JREnum
+ 	   url = https://github.com/mralexgray/JREnum.git
+[submodule "ObjectMatcher"]
+    path = ObjectMatcher
+     url = https://github.com/mralexgray/ObjectMatcher.git
+[submodule "_ObjC"]
+	ignore = all
+	update = rebase
+	fetchRecurseSubmodules = true

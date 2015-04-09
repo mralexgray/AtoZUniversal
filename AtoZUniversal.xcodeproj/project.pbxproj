@@ -63,7 +63,7 @@
 		7BBD2D851AA7536A00CD9477 /* EXTSynthesize.h in Headers */ = {isa = PBXBuildFile; fileRef = 7BBD2D801AA7536A00CD9477 /* EXTSynthesize.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7BBD2D861AA7536A00CD9477 /* NSMethodSignature+EXT.h in Headers */ = {isa = PBXBuildFile; fileRef = 7BBD2D811AA7536A00CD9477 /* NSMethodSignature+EXT.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7BBD2D871AA7536A00CD9477 /* NSMethodSignature+EXT.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BBD2D821AA7536A00CD9477 /* NSMethodSignature+EXT.m */; };
-		7BCD26351ABE59B300F1D563 /* FunSize.framework in Copy Files */ = {isa = PBXBuildFile; fileRef = 7BDADDFD1AB0726E00581B83 /* FunSize.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		7BC4597D1AD6D92D0097F508 /* FunSize.framework in Copy Files */ = {isa = PBXBuildFile; fileRef = 7BC459781AD6D9110097F508 /* FunSize.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7BD3CAE21AB8350900E05319 /* NSImage+AtoZ.h in Headers */ = {isa = PBXBuildFile; fileRef = 7BD3CAE01AB8350900E05319 /* NSImage+AtoZ.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7BD3CAE71AB843F300E05319 /* AtoZGeometry.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BD3CAE51AB843F300E05319 /* AtoZGeometry.m */; };
 		7BD3CAE81AB843F300E05319 /* AtoZGeometry.h in Headers */ = {isa = PBXBuildFile; fileRef = 7BD3CAE61AB843F300E05319 /* AtoZGeometry.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -123,19 +123,26 @@
 			remoteGlobalIDString = 7BC4594A1AD68DAA0097F508;
 			remoteInfo = _ObjC_Tool;
 		};
-		7BDADDFC1AB0726E00581B83 /* PBXContainerItemProxy */ = {
+		7BC459771AD6D9110097F508 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 7BDADDF71AB0726E00581B83 /* FunSize.xcodeproj */;
+			containerPortal = 7BC459721AD6D9110097F508 /* FunSize.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 4311A74413D7429E00820313;
 			remoteInfo = FunSize;
 		};
-		7BDADDFE1AB0726E00581B83 /* PBXContainerItemProxy */ = {
+		7BC459791AD6D9110097F508 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 7BDADDF71AB0726E00581B83 /* FunSize.xcodeproj */;
+			containerPortal = 7BC459721AD6D9110097F508 /* FunSize.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 4339C607142222D300C21E14;
 			remoteInfo = "FunSize-Static";
+		};
+		7BC4597B1AD6D9240097F508 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7BC459721AD6D9110097F508 /* FunSize.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 4311A74313D7429E00820313;
+			remoteInfo = FunSize;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -146,7 +153,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				7BCD26351ABE59B300F1D563 /* FunSize.framework in Copy Files */,
+				7BC4597D1AD6D92D0097F508 /* FunSize.framework in Copy Files */,
 			);
 			name = "Copy Files";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -179,7 +186,6 @@
 		7B0A4F0C1AA947A6008FB45A /* Functions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Functions.m; path = AtoZUniversal/Functions.m; sourceTree = "<group>"; };
 		7B0A4F0F1AA94D94008FB45A /* NSBag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NSBag.m; path = AtoZUniversal/NSBag.m; sourceTree = "<group>"; };
 		7B0A4F101AA94D94008FB45A /* NSBag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = NSBag.h; path = AtoZUniversal/NSBag.h; sourceTree = "<group>"; wrapsLines = 1; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		7B2EF3D51AB01AC800382535 /* Universal.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Universal.xcconfig; path = ../../xcconfigs/Base/Universal.xcconfig; sourceTree = "<group>"; };
 		7B2EF3E81AB0319600382535 /* OrderedDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OrderedDictionary.h; path = OrderedDictionary/OrderedDictionary/OrderedDictionary.h; sourceTree = "<group>"; wrapsLines = 1; };
 		7B2EF3EC1AB032CE00382535 /* NSString-Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString-Utilities.h"; path = "Categories/NSString-Utilities.h"; sourceTree = "<group>"; wrapsLines = 1; };
 		7B2EF3ED1AB032CE00382535 /* NSString-Utilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString-Utilities.m"; path = "Categories/NSString-Utilities.m"; sourceTree = "<group>"; };
@@ -187,7 +193,6 @@
 		7B2EF3F11AB0395000382535 /* BadWords.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = BadWords.plist; path = ../Resources/BadWords.plist; sourceTree = "<group>"; };
 		7B2EF4331AB0493400382535 /* ObjcAssociatedObjectHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ObjcAssociatedObjectHelpers.h; path = ObjcAssociatedObjectHelpers/ObjcAssociatedObjectHelpers/ObjcAssociatedObjectHelpers.h; sourceTree = "<group>"; wrapsLines = 1; };
 		7B2EF4341AB0493400382535 /* ObjcAssociatedObjectHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ObjcAssociatedObjectHelpers.m; path = ObjcAssociatedObjectHelpers/ObjcAssociatedObjectHelpers/ObjcAssociatedObjectHelpers.m; sourceTree = "<group>"; };
-		7B2EF4351AB0493400382535 /* AssociatedObjectHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = AssociatedObjectHelpers.h; path = ObjcAssociatedObjectHelpers/ObjcAssociatedObjectHelpers/AssociatedObjectHelpers.h; sourceTree = "<group>"; wrapsLines = 1; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		7B313A271AADC0AD00179E72 /* objswitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = objswitch.m; sourceTree = "<group>"; };
 		7B313A281AADC0AD00179E72 /* objswitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = objswitch.h; sourceTree = "<group>"; wrapsLines = 1; };
 		7B313A291AADC0AD00179E72 /* README.markdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.markdown; sourceTree = "<group>"; };
@@ -235,6 +240,8 @@
 		7BBD2D801AA7536A00CD9477 /* EXTSynthesize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EXTSynthesize.h; sourceTree = "<group>"; wrapsLines = 1; };
 		7BBD2D811AA7536A00CD9477 /* NSMethodSignature+EXT.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMethodSignature+EXT.h"; sourceTree = "<group>"; wrapsLines = 1; };
 		7BBD2D821AA7536A00CD9477 /* NSMethodSignature+EXT.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMethodSignature+EXT.m"; sourceTree = "<group>"; };
+		7BC459611AD6D78C0097F508 /* AtoZUniversal.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = AtoZUniversal.xcconfig; sourceTree = SOURCE_ROOT; };
+		7BC459721AD6D9110097F508 /* FunSize.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = FunSize.xcodeproj; path = ../../../AtoZ.framework/AtoZUniversal/FunSize/FunSize.xcodeproj; sourceTree = "<group>"; };
 		7BD3CAE01AB8350900E05319 /* NSImage+AtoZ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSImage+AtoZ.h"; path = "Categories/NSImage+AtoZ.h"; sourceTree = "<group>"; wrapsLines = 1; };
 		7BD3CAE11AB8350900E05319 /* NSImage+AtoZ.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSImage+AtoZ.m"; path = "Categories/NSImage+AtoZ.m"; sourceTree = "<group>"; wrapsLines = 1; };
 		7BD3CAE51AB843F300E05319 /* AtoZGeometry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AtoZGeometry.m; sourceTree = "<group>"; };
@@ -243,7 +250,6 @@
 		7BD3CAEB1AB8469E00E05319 /* Rectlike.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Rectlike.m; path = Protocols/Rectlike.m; sourceTree = "<group>"; };
 		7BD3E4A21ABD4BF100552876 /* Color+AtoZ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Color+AtoZ.h"; path = "Categories/Color+AtoZ.h"; sourceTree = "<group>"; };
 		7BD3E4A31ABD4BF100552876 /* Color+AtoZ.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Color+AtoZ.m"; path = "Categories/Color+AtoZ.m"; sourceTree = "<group>"; };
-		7BDADDF71AB0726E00581B83 /* FunSize.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = FunSize.xcodeproj; path = ../../Frameworks/FunSize.framework/FunSize.xcodeproj; sourceTree = "<group>"; };
 		7BE12B641AA917DC001AF7CE /* NSBundle+AtoZ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSBundle+AtoZ.h"; path = "Categories/NSBundle+AtoZ.h"; sourceTree = SOURCE_ROOT; wrapsLines = 1; };
 		7BE12B651AA917DC001AF7CE /* NSBundle+AtoZ.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSBundle+AtoZ.m"; path = "Categories/NSBundle+AtoZ.m"; sourceTree = SOURCE_ROOT; };
 		7BE12B681AA918A6001AF7CE /* AtoZUniversal-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "AtoZUniversal-Prefix.pch"; path = "AtoZUniversal/AtoZUniversal-Prefix.pch"; sourceTree = "<group>"; };
@@ -308,11 +314,11 @@
 			isa = PBXGroup;
 			children = (
 				7BA729881AB703F900BFD612 /* Resources */,
-				7B2EF3D51AB01AC800382535 /* Universal.xcconfig */,
+				7BC459611AD6D78C0097F508 /* AtoZUniversal.xcconfig */,
 				7B582C7D1AA6F4FE00C450C3 /* UniversalFrameworkAggregate.sh */,
 				7BC2C99F1AD5E4D500D3923D /* Products */,
-				7BDADDF71AB0726E00581B83 /* FunSize.xcodeproj */,
 				7B582BC91AA6A4F400C450C3 /* Info.plist */,
+				7BC459721AD6D9110097F508 /* FunSize.xcodeproj */,
 				7B582BD71AA6A4F800C450C3 /* AtoZUniversalTests.m */,
 			);
 			name = Support;
@@ -371,7 +377,6 @@
 				7B380C841ACA2FC000285B4E /* OrderedDictionary.m */,
 				7B2EF4331AB0493400382535 /* ObjcAssociatedObjectHelpers.h */,
 				7B2EF4341AB0493400382535 /* ObjcAssociatedObjectHelpers.m */,
-				7B2EF4351AB0493400382535 /* AssociatedObjectHelpers.h */,
 				7BE12BBA1AA9222F001AF7CE /* AZObserversAndBinders.h */,
 				7BE12BB91AA9222F001AF7CE /* AZObserversAndBinders.m */,
 				7B89AE9A1AA9666C0036EC09 /* AZRange.h */,
@@ -436,6 +441,15 @@
 			name = Modules;
 			sourceTree = "<group>";
 		};
+		7BC459731AD6D9110097F508 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7BC459781AD6D9110097F508 /* FunSize.framework */,
+				7BC4597A1AD6D9110097F508 /* libFunSize.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		7BD3CAE91AB845CB00E05319 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
@@ -450,15 +464,6 @@
 				7B7D96391AC2A18200F5504D /* BoundingObject.m */,
 			);
 			name = Protocols;
-			sourceTree = "<group>";
-		};
-		7BDADDF81AB0726E00581B83 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				7BDADDFD1AB0726E00581B83 /* FunSize.framework */,
-				7BDADDFF1AB0726E00581B83 /* libFunSize.a */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		7BE12B631AA917B8001AF7CE /* Categories */ = {
@@ -571,6 +576,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				7BC4597C1AD6D9240097F508 /* PBXTargetDependency */,
 				7BB4153C1ACEBFF30024D285 /* PBXTargetDependency */,
 			);
 			name = AtoZUniversal;
@@ -628,8 +634,8 @@
 					ProjectRef = 7B9B402C1AC14E7D002EDD01 /* _ObjC.xcodeproj */;
 				},
 				{
-					ProductGroup = 7BDADDF81AB0726E00581B83 /* Products */;
-					ProjectRef = 7BDADDF71AB0726E00581B83 /* FunSize.xcodeproj */;
+					ProductGroup = 7BC459731AD6D9110097F508 /* Products */;
+					ProjectRef = 7BC459721AD6D9110097F508 /* FunSize.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -655,18 +661,18 @@
 			remoteRef = 7BC459531AD6BB0E0097F508 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		7BDADDFD1AB0726E00581B83 /* FunSize.framework */ = {
+		7BC459781AD6D9110097F508 /* FunSize.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = FunSize.framework;
-			remoteRef = 7BDADDFC1AB0726E00581B83 /* PBXContainerItemProxy */;
+			remoteRef = 7BC459771AD6D9110097F508 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		7BDADDFF1AB0726E00581B83 /* libFunSize.a */ = {
+		7BC4597A1AD6D9110097F508 /* libFunSize.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libFunSize.a;
-			remoteRef = 7BDADDFE1AB0726E00581B83 /* PBXContainerItemProxy */;
+			remoteRef = 7BC459791AD6D9110097F508 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -772,6 +778,11 @@
 			name = _ObjC;
 			targetProxy = 7BB4153B1ACEBFF30024D285 /* PBXContainerItemProxy */;
 		};
+		7BC4597C1AD6D9240097F508 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = FunSize;
+			targetProxy = 7BC4597B1AD6D9240097F508 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
@@ -793,7 +804,7 @@
 		};
 		7B582BDC1AA6A4F800C450C3 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7B2EF3D51AB01AC800382535 /* Universal.xcconfig */;
+			baseConfigurationReference = 7BC459611AD6D78C0097F508 /* AtoZUniversal.xcconfig */;
 			buildSettings = {
 				CREATE_INFOPLIST_SECTION_IN_BINARY = YES;
 				CURRENT_PROJECT_VERSION = 5;
@@ -821,7 +832,7 @@
 		};
 		7B582BDD1AA6A4F800C450C3 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7B2EF3D51AB01AC800382535 /* Universal.xcconfig */;
+			baseConfigurationReference = 7BC459611AD6D78C0097F508 /* AtoZUniversal.xcconfig */;
 			buildSettings = {
 				CREATE_INFOPLIST_SECTION_IN_BINARY = YES;
 				CURRENT_PROJECT_VERSION = 5;
