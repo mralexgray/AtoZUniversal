@@ -1,12 +1,13 @@
 
 
 #import <AtoZUniversal/AtoZUniversal.h>
+#import <AtoZUniversal/AtoZMacroDefines.h>
 
 @interface AZSparseArray ()
-@prop_RO NSMD * storage;
-@prop_ int lastIndex;
+_RO  mDict storage;
+_AT    int lastIndex;
 @end
- 
+
 @implementation AZSparseArray
 
 - (NSUInteger) countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(__unsafe_unretained id [])buffer count:(NSUInteger)le { DEMAND_CONFORMANCE; return NSNotFound; }
@@ -202,6 +203,11 @@ VOID(addObjectsIfMissing:(id<NSFastEnumeration>)x { for (id z in x) [self addObj
 @end
 
 @implementation NSArray (AtoZ)
+
++ _Kind_ array _ anything {
+
+  return ISA(anything,List) ? anything : anything ? @[anything] : @[];
+}
 
 - reduce:initial withBlock:(id(^)(id sum, id obj))block {
 
@@ -888,9 +894,10 @@ static NSI comparatorForSortingUsingArray(id object1, id object2, void *context)
 - fifth    { return [self objectOrNilAtIndex:4]; }
 - sixth    { return [self objectOrNilAtIndex:5]; }
 - (NSA*)             after:(NSUI)from                     { return [self subarrayFromIndex:from]; }
-- (NSA*) subarrayFromIndex:(NSUI)start                    { return [self subarrayFromIndex:start toIndex:self.count - 1]; }
+- (NSA*) subarrayFromIndex:(NSUI)start                    { return [self subarrayWithRange:NSMakeRange(start,self.count - start)]; } // FromIndex:start toIndex:self.count - 1]; }
 - (NSA*)   subarrayToIndex:(NSUI)end                      { return [self subarrayFromIndex:0 toIndex:end];                }
 - (NSA*) subarrayFromIndex:(NSUI)start toIndex:(NSUI)end  {
+
   NSAssert(self.count, @"im emtpy, b!");
 //  if (start + end < self.count) return @[];
   //  NSParameterAssert(start + end < self.count);

@@ -192,7 +192,7 @@ CLANG_IGNORE(-Wincomplete-implementation)
   return (add = col - self.length) > 0 ? [[NSS spaces:add] withString:self] : self;
 }
 
-+ (NSA*) weirdUnicodes { AZSTATIC_OBJ(NSA, weirdos, ({ @[@"℀", @"%℁", @"ℂ", @"℃", @"℄", @"℅", @"℆", @"ℇ", @"℈", @"℉", @"ℊ", @"ℋ", @"ℌ", @"ℍ", @"ℎ", @"ℏ", @"ℐ", @"ℑ", @"ℒ", @"ℓ", @"℔", @"ℕ", @"№", @"℗", @"℘", @"ℙ", @"ℚ", @"ℛ", @"ℜ", @"ℝ", @"℞", @"℟", @"℠", @"℡", @"™", @"℣", @"ℤ", @"℥", @"Ω", @"℧", @"ℨ", @"℩", @"K", @"Å", @"ℬ", @"ℭ", @"℮", @"ℯ", @"ℰ", @"ℱ", @"Ⅎ", @"ℳ", @"ℴ", @"ℵ", @"ℶ", @"ℷ", @"ℸ", @"ℹ", @"℺", @"℻", @"ℼ", @"ℽ", @"ℾ", @"ℿ", @"⅀", @"⅁", @"⅂", @"⅃", @"⅄", @"ⅅ", @"ⅆ", @"ⅇ", @"ⅈ", @"ⅉ", @"⅋", @"ⅎ"]; }));
++ _List_ weirdUnicodes { AZSTATIC_OBJ(NSA, weirdos, ({ @[@"℀", @"%℁", @"ℂ", @"℃", @"℄", @"℅", @"℆", @"ℇ", @"℈", @"℉", @"ℊ", @"ℋ", @"ℌ", @"ℍ", @"ℎ", @"ℏ", @"ℐ", @"ℑ", @"ℒ", @"ℓ", @"℔", @"ℕ", @"№", @"℗", @"℘", @"ℙ", @"ℚ", @"ℛ", @"ℜ", @"ℝ", @"℞", @"℟", @"℠", @"℡", @"™", @"℣", @"ℤ", @"℥", @"Ω", @"℧", @"ℨ", @"℩", @"K", @"Å", @"ℬ", @"ℭ", @"℮", @"ℯ", @"ℰ", @"ℱ", @"Ⅎ", @"ℳ", @"ℴ", @"ℵ", @"ℶ", @"ℷ", @"ℸ", @"ℹ", @"℺", @"℻", @"ℼ", @"ℽ", @"ℾ", @"ℿ", @"⅀", @"⅁", @"⅂", @"⅃", @"⅄", @"ⅅ", @"ⅆ", @"ⅇ", @"ⅈ", @"ⅉ", @"⅋", @"ⅎ"]; }));
   return weirdos;
 }
 
@@ -263,16 +263,35 @@ CLANG_IGNORE(-Wincomplete-implementation)
 	// done
 	return encodedString;
 }
--  (NSS*) withFormat:(NSS*)format,... 					{	return !format ? self : [self withString:({
 
-    va_list va; NSString* string; va_start(va, format);
-    string = [NSS.alloc initWithFormat:format arguments:va]; va_end(va); string; })];
+- _Text_ withFormat __Text_ fmt __ ... {
+
+  return !fmt ? self : [self withString _ ({ va_list va; _Text x;
+
+  va_start(va, fmt); x = [NSS.alloc initWithFormat:fmt arguments:va]; va_end(va); x;
+
+  })];
 }
--  (NSS*) JSONRepresentation 							{
-	__block NSMutableString *jsonString = @"\"".mutableCopy;
+
+- JSONFromURLString { _ObjC u; _Data d;
+
+  NSParameterAssert(self.length);
+           NSAssert((u = [NSURL URLWithString:self]), @"need url");
+
+#ifdef DEBUG
+  fprintf(stderr, "JSONFromURLString URL: %s\n", [u absoluteString].UTF8String);
+#endif
+  return d = [Data dataWithContentsOfURL:u] ?
+             [NSJSONSerialization JSONObjectWithData:d options:NSJSONReadingAllowFragments
+                                      error:nil] : nil;
+}
+
+- _Text_ JSONRepresentation {
+
+	__block mText jsonString = @"\"".mutableCopy;
 
 	// Build the result one character at a time, inserting escaped characters as necessary
-	[[NSArray from:0 to:self.length] eachWithIndex:^(id obj, NSInteger i) {
+	[@(self.length) do:^(int i) {
 		unichar nextChar = [self characterAtIndex:i];
 		switch (nextChar) {
 			case '\"':
@@ -307,21 +326,21 @@ CLANG_IGNORE(-Wincomplete-implementation)
 				break;
 		}
 	}];
-	[jsonString appendString:@"\""];
-	return jsonString;
+
+	return [jsonString withString:@"\""];
 }
 
 //return ((NSS*)[NSS stringWithContentsOfURL: encoding:NSUTF8StringEncoding error:nil]).trim; }
 
-+ (NSS*) dicksonParagraphWith:(NSUI)sentences 	{
++ _Text_ dicksonParagraphWith:(NSUI)sentences 	{
 	return [self stringFromArray:[self.dicksonPhrases.shuffeled withMaxItems:sentences]];
 }
-+ (NSA*) dicksonPhrases {
++ _List_ dicksonPhrases {
 
   AZSTATIC_OBJ(List, bible, [List arrayFromPlist:[[NSBundle bundleWithIdentifier:@"com.mrgray.AtoZUniversal"] pathForResource:@"Dicksonisms" ofType:@"plist"]]);
 	return bible; // [self.dicksonBible extractAllSentences];
 }
-+ (NSA*) dicksonisms { AZSTATIC_OBJ(NSA,dicks,self.dicksonBible.sentences); return dicks;
++ _List_ dicksonisms { AZSTATIC_OBJ(NSA,dicks,self.dicksonBible.sentences); return dicks;
 
 //dicks : @[                                                                           @"When I was 10 years old - I wore this dress; I just keep getting it altered.",  @"See? I still fit into my 10-year-old clothing.", @"Look at that! Oh, is that me on the wall? I drew it myself - with chalk!",
 //                                                                           @"I can't move, but boy, can I ever pose!", @"I wish there was a close up on my face.. there it is! <<sighing>> Wow, looking better and better all the time.",
@@ -330,16 +349,16 @@ CLANG_IGNORE(-Wincomplete-implementation)
 }
 
 
-+ (NSS*) dicksonBible							 		{ return self.dicksonPhrases.joinedWithSpaces; }
++ _Text_ dicksonBible							 		{ return self.dicksonPhrases.joinedWithSpaces; }
 
-+ (NSS*) randomWord 									{
++ _Text_ randomWord 									{
 	NSURLRequest *request = [NSURLRequest requestWithURL:$URL(@"http://randomword.setgetgo.com/get.php") cachePolicy:0 timeoutInterval:5];
 	NSURLResponse *response = nil;    NSError *error = nil;
 	NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
 	NSS *theWord = data ? [data UTF8String] : @"Timeout!";
 	return [theWord stringByTrimmingWhiteSpace];
 }
-+ (NSS*) randomWiki 									{	__block NSS *wiki; __block NSS *word; NSUI tries = 10;
++ _Text_ randomWiki 									{	__block NSS *wiki; __block NSS *word; NSUI tries = 10;
 
   [@(tries).toArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
 
@@ -370,35 +389,35 @@ CLANG_IGNORE(-Wincomplete-implementation)
 // else  return [wikiPage parseXMLTag:@"Description"].stringByDecodingXMLEntities ?: @"Error parsing XML";
 //requestError ? $(@"Error parsing wiki: %@", requestError) : ;      // $(@"%@: %@", self,
 }
-+ (NSS*) spaces:(NSUI)ct 							{
++ _Text_ spaces:(NSUI)ct 							{
 	return [[@(0)to : @(ct)] reduce:^id (id memo, id l) { return [memo withString:@" "]; } withInitialMemo:@""];
 }
-+ (NSS*) randomBadWord  {
++ _Text_ randomBadWord  {
 	return self.badWords.randomElement;
 }
-+ (NSA*)       badWords {
++ _List_       badWords {
 	static NSA *swearwords = nil;
 	swearwords = swearwords ? : [NSA arrayFromPlist:[AZUNIVERSALRESOURCES withPath:@"BadWords.plist"]];
 	return swearwords;
 }
-+ (NSA*)       gaySlang {
++ _List_       gaySlang {
 
   AZSTATIC_OBJ(NSA,gaySlang, [NSA arrayFromPlist:[AZUNIVERSALRESOURCES withPath:@"GaySlang.plist"]]);
 	return gaySlang;
 
 }
-+ (NSS*) randomGaySlang { return self.gaySlang.randomElement; }
++ _Text_ randomGaySlang { return self.gaySlang.randomElement; }
 
-+ (NSS*) randomAppPath 								{
++ _Text_ randomAppPath 								{
 #if MAC_ONLY
 	return [[AZWORKSPACE.runningApplications valueForKeyPath:@"executableURL.path"] randomElement];
 #endif
   return (id)nil;
 }
-+ (NSS*) randomDicksonism 						{	return self.dicksonisms.randomElement;
++ _Text_ randomDicksonism 						{	return self.dicksonisms.randomElement;
 }
-+ (NSS*) randomWords:		 (NSI)ct			{	return [LoremIpsum.new words:ct];     }
-+ (NSS*) randomSentences:(NSI)ct      {	return [LoremIpsum.new sentences:ct];	}
++ _Text_ randomWords:		 (NSI)ct			{	return [LoremIpsum.new words:ct];     }
++ _Text_ randomSentences:(NSI)ct      {	return [LoremIpsum.new sentences:ct];	}
 
 #pragma mark - Coping with lenths.
 
@@ -417,7 +436,7 @@ NSS* pad = [NSString.string paddedRightTo:MAX(1,self.length-count)];
 
   return self.length >= ct ? self : [self stringByPaddingToLength:ct withString:@" " startingAtIndex:0];
 }
-+ (NSA*) properNames	 								{
++ _List_ properNames	 								{
 
   AZSTATIC_OBJ(NSA, propers,
                [[[self stringWithContentsOfFile:@"/usr/share/dict/propernames" usedEncoding:NULL error:NULL]
@@ -582,7 +601,7 @@ finish:
 #else
 // OSX code
 
-+ (NSS*) clipboard {
++ _Text_ clipboard {
 	NSPasteboard *pasteboard 	= NSPasteboard.generalPasteboard;
 	NSArray *supportedTypes 	= @[NSStringPboardType];
 	NSString *type 				= [pasteboard availableTypeFromArray:supportedTypes];
@@ -1314,7 +1333,7 @@ finish:
 	return encoded;
 }
 
-+ (NSA*) testDomains {
++ _List_ testDomains {
 	static NSA *testDOmains_ = nil;
 
 	return testDOmains_ = testDOmains_ ? : @[ @"manhunt.net", @"adam4adam.com", @"grindr.com", @"facebook.com", @"google.com", @"youtube.com", @"yahoo.com", @"baidu.com", @"wikipedia.org", @"live.com", @"qq.com", @"twitter.com", @"amazon.com", @"blogspot.com", @"google.co.in", @"taobao.com", @"linkedin.com", @"yahoo.co.jp", @"msn.com", @"sina.com.cn", @"google.com.hk", @"google.de", @"bing.com", @"yandex.ru", @"babylon.com", @"wordpress.com", @"ebay.com", @"google.co.uk", @"google.co.jp", @"google.fr", @"163.com", @"soso.com", @"vk.com", @"weibo.com", @"microsoft.com", @"mail.ru", @"googleusercontent.com", @"google.com.br", @"tumblr.com", @"ask.com", @"craigslist.org", @"pinterest.com", @"paypal.com", @"xhamster.com", @"google.es", @"sohu.com", @"apple.com", @"google.it", @"bbc.co.uk", @"avg.com", @"xvideos.com", @"google.ru", @"blogger.com", @"fc2.com", @"livejasmin.com", @"imdb.com", @"tudou.com", @"adobe.com", @"t.co", @"google.com.mx", @"go.com", @"flickr.com", @"conduit.com", @"youku.com", @"google.ca", @"odnoklassniki.ru", @"ifeng.com", @"tmall.com", @"hao123.com", @"aol.com", @"mywebsearch.com", @"pornhub.com", @"zedo.com", @"ebay.de", @"blogspot.in", @"google.co.id", @"cnn.com", @"thepiratebay.se", @"sogou.com", @"rakuten.co.jp", @"about.com", @"amazon.de", @"alibaba.com", @"google.com.au", @"google.com.tr", @"espn.go.com", @"redtube.com", @"huffingtonpost.com", @"ebay.co.uk", @"360buy.com", @"mediafire.com", @"chinaz.com", @"google.pl", @"adf.ly", @"uol.com.br", @"stackoverflow.com", @"netflix.com", @"ameblo.jp", @"youporn.com", @"dailymotion.com", @"amazon.co.jp", @"imgur.com", @"instagram.com", @"godaddy.com", @"wordpress.org", @"doubleclick.com", @"4shared.com", @"alipay.com", @"360.cn", @"globo.com", @"livedoor.com", @"amazon.co.uk", @"bp.blogspot.com", @"xnxx.com", @"cnet.com", @"searchnu.com", @"weather.com", @"torrentz.eu", @"search-results.com", @"google.com.sa", @"wigetmedia.com", @"google.nl", @"livejournal.com", @"nytimes.com", @"adcash.com", @"incredibar.com", @"tube8.com", @"dailymail.co.uk", @"neobux.com", @"ehow.com", @"badoo.com", @"google.com.ar", @"douban.com", @"cnzz.com", @"renren.com", @"tianya.cn", @"vimeo.com", @"bankofamerica.com", @"reddit.com", @"warriorforum.com", @"spiegel.de", @"deviantart.com", @"aweber.com", @"dropbox.com", @"indiatimes.com", @"pconline.com.cn", @"kat.ph", @"blogfa.com", @"google.com.pk", @"mozilla.org", @"secureserver.net", @"chase.com", @"google.co.th", @"google.com.eg", @"goo.ne.jp", @"booking.com", @"56.com", @"stumbleupon.com", @"google.co.za", @"google.cn", @"softonic.com", @"london2012.org", @"walmart.com", @"answers.com", @"sourceforge.net", @"comcast.net", @"addthis.com", @"foxnews.com", @"photobucket.com", @"wikimedia.org", @"zeekrewards.com", @"onet.pl", @"clicksor.com", @"amazonaws.com", @"pengyou.com", @"wellsfargo.com", @"wikia.com", @"liveinternet.ru", @"depositfiles.com", @"yesky.com", @"outbrain.com", @"google.co.ve", @"bild.de", @"etsy.com", @"xunlei.com", @"allegro.pl", @"statcounter.com", @"guardian.co.uk", @"skype.com", @"adultfriendfinder.com", @"fbcdn.net", @"leboncoin.fr", @"58.com", @"mgid.com", @"reference.com", @"squidoo.com", @"myspace.com", @"fiverr.com", @"iqiyi.com", @"letv.com", @"funmoods.com", @"google.com.co", @"google.com.my", @"optmd.com", @"youjizz.com", @"naver.com", @"rediff.com", @"filestube.com", @"domaintools.com", @"slideshare.net", @"themeforest.net", @"download.com", @"zol.com.cn", @"ucoz.ru", @"google.be", @"free.fr", @"rapidshare.com", @"salesforce.com", @"archive.org", @"nicovideo.jp", @"google.com.vn", @"google.gr", @"soundcloud.com", @"people.com.cn", @"orange.fr", @"scribd.com", @"nbcnews.com", @"yieldmanager.com", @"it168.com", @"xinhuanet.com", @"cam4.com", @"w3schools.com", @"4399.com", @"isohunt.com", @"iminent.com", @"tagged.com", @"files.wordpress.com", @"hootsuite.com", @"espncricinfo.com", @"yelp.com", @"wp.pl", @"hardsextube.com", @"ameba.jp", @"google.com.tw", @"imageshack.us", @"tripadvisor.com", @"4dsply.com", @"web.de", @"rambler.ru", @"google.at", @"google.se", @"gmx.net", @"pof.com"];
@@ -2458,7 +2477,7 @@ static void _ScanSentence(NSScanner *scanner) {
 	 if (rounded == 1) { return [NSString stringWithFormat:@"1 %@", NSLocalizedString(@"year", nil)]; }
 	 return [NSString stringWithFormat:@"%1.f %@", interval, NSLocalizedString(@"years", nil)];*/
 }
-- (NSA*)spaceSeparatedComponents {
+- (NSA*) spaceSeparatedComponents {
 	return [[self stringByRemovingExtraneousWhitespace] componentsSeparatedByString:@" "];
 }
 + (NSS*)randomUUID {
@@ -3575,21 +3594,21 @@ static NSMD* cache;
   [self isEqual:self.class.newlineCharacterSet]               ? @"newlineCharacterSet" : nil;
 }
 
-+ (NSA*) alphanumericCharacters         { return [self.alphanumericCharacterSet arrayify]; }
-+ (NSA*) capitalizedLetterCharacters    { return [self.capitalizedLetterCharacterSet arrayify]; }
-+ (NSA*) controlCharacters              { return [self.controlCharacterSet arrayify]; }
-+ (NSA*) decimalDigitCharacters         { return [self.decimalDigitCharacterSet arrayify]; }
-+ (NSA*) decomposableCharacters         { return [self.decomposableCharacterSet arrayify]; }
-+ (NSA*) illegalCharacters              { return [self.illegalCharacterSet arrayify]; }
-+ (NSA*) letterCharacters               { return [self.letterCharacterSet arrayify]; }
-+ (NSA*) lowercaseLetterCharacters      { return [self.lowercaseLetterCharacterSet arrayify]; }
-+ (NSA*) newlineCharacters              { return [self.newlineCharacterSet arrayify]; }
-+ (NSA*) nonBaseCharacters              { return [self.nonBaseCharacterSet arrayify]; }
-+ (NSA*) punctuationCharacters          { return [self.punctuationCharacterSet arrayify]; }
-+ (NSA*) symbolCharacters               { return [self.symbolCharacterSet arrayify]; }
-+ (NSA*) uppercaseLetterCharacters      { return [self.uppercaseLetterCharacterSet arrayify]; }
-+ (NSA*) whitespaceAndNewlineCharacters { return [self.whitespaceAndNewlineCharacterSet arrayify]; }
-+ (NSA*) whitespaceCharacters           { return [self.whitespaceCharacterSet arrayify]; }
++ _List_ alphanumericCharacters         { return [self.alphanumericCharacterSet arrayify]; }
++ _List_ capitalizedLetterCharacters    { return [self.capitalizedLetterCharacterSet arrayify]; }
++ _List_ controlCharacters              { return [self.controlCharacterSet arrayify]; }
++ _List_ decimalDigitCharacters         { return [self.decimalDigitCharacterSet arrayify]; }
++ _List_ decomposableCharacters         { return [self.decomposableCharacterSet arrayify]; }
++ _List_ illegalCharacters              { return [self.illegalCharacterSet arrayify]; }
++ _List_ letterCharacters               { return [self.letterCharacterSet arrayify]; }
++ _List_ lowercaseLetterCharacters      { return [self.lowercaseLetterCharacterSet arrayify]; }
++ _List_ newlineCharacters              { return [self.newlineCharacterSet arrayify]; }
++ _List_ nonBaseCharacters              { return [self.nonBaseCharacterSet arrayify]; }
++ _List_ punctuationCharacters          { return [self.punctuationCharacterSet arrayify]; }
++ _List_ symbolCharacters               { return [self.symbolCharacterSet arrayify]; }
++ _List_ uppercaseLetterCharacters      { return [self.uppercaseLetterCharacterSet arrayify]; }
++ _List_ whitespaceAndNewlineCharacters { return [self.whitespaceAndNewlineCharacterSet arrayify]; }
++ _List_ whitespaceCharacters           { return [self.whitespaceCharacterSet arrayify]; }
 //
 //+ (void)printAlphanumericCharacterSet {
 //	NSCharacterSet *charSet = [];
@@ -3854,7 +3873,7 @@ static NSUInteger levenshteinDistanceBetweenStrings(char *string, char *otherStr
 
 @implementation NSString (NSStringAdditions)
 
-+ (NSS*) locallyUniqueString {
++ _Text_ locallyUniqueString {
 	struct timeval tv;
 	gettimeofday( &tv, NULL );
 
@@ -4233,7 +4252,7 @@ static NSUInteger levenshteinDistanceBetweenStrings(char *string, char *otherStr
 - (BOOL) hasCaseInsensitiveSubstring:(NSS*) substring {
 	return [self rangeOfString:substring options:NSCaseInsensitiveSearch range:NSMakeRange( 0, self.length )].location != NSNotFound;
 }
-+ (NSS*) stringByReversingString:(NSS*) normalString {
++ _Text_ stringByReversingString:(NSS*) normalString {
 	NSMutableString *reversedString = [[NSMutableString alloc] initWithCapacity:normalString.length];
 
 	for (NSInteger index = normalString.length - 1; index >= 0; index--)

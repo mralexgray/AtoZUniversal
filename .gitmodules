@@ -32,3 +32,12 @@
 	ignore = all
 	update = rebase
 	fetchRecurseSubmodules = true
+[submodule "FunSize"]
+	path = FunSize
+	url = https://github.com/mralexgray/FunSize.git
+[submodule "GCDTask"]
+	path = GCDTask
+	url = https://github.com/reliablehosting/GCDTask.git
+[submodule "NTBTask"]
+	path = NTBTask
+	url = https://github.com/kareman/NTBTask.git

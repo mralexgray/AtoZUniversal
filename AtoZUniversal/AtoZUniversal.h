@@ -50,6 +50,7 @@
 #import <AtoZUniversal/OrderedDictionary.h>
 #import <AtoZUniversal/AZTalker.h>
 #import <AtoZUniversal/DatabaseStorage.h>
+#import <AtoZUniversal/NTBTask.h>
 
 
 FOUNDATION_EXPORT              double AtoZUniversalVersionNumber;   //! Project version number

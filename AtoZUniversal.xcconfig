@@ -1,16 +1,16 @@
 
 
 
-SUPPORTED_PLATFORMS      = iphoneos iphonesimulator macosx
+//SUPPORTED_PLATFORMS      = iphoneos iphonesimulator macosx
 
-VALID_ARCHS[sdk=macosx*] = x86_64
+//VALID_ARCHS[sdk=macosx*] = x86_64
 
 // PACKAGING
                                                 ARCHS = $(ARCHS_STANDARD)
                                          PRODUCT_NAME = $(TARGET_NAME)
                                  COMBINE_HIDPI_IMAGES = YES
-                      CODE_SIGN_IDENTITY[sdk=macosx*] = MrGray.com
-                      CODE_SIGN_IDENTITY[sdk=iphone*] = -
+//                      CODE_SIGN_IDENTITY[sdk=macosx*] = MrGray.com
+//                      CODE_SIGN_IDENTITY[sdk=iphone*] = -
 
 // COMPILING
 //                                        VALID_ARCHS = x86_64
@@ -27,10 +27,10 @@ VALID_ARCHS[sdk=macosx*] = x86_64
 
 // LINKING
                                  CLANG_ENABLE_MODULES = YES
-CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES
+//CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES
 
 
-                                        OTHER_LDFLAGS = -ObjC -all_load $(OTHER_LDFLAGS)
+//                                        OTHER_LDFLAGS = -ObjC -all_load $(OTHER_LDFLAGS)
                                FRAMEWORK_SEARCH_PATHS = $(USER_LIBRARY_DIR)/Frameworks
                               LD_RUNPATH_SEARCH_PATHS = $(USER_LIBRARY_DIR)/Frameworks
                              ALWAYS_SEARCH_USER_PATHS = NO
@@ -62,12 +62,9 @@ WARNING_CFLAGS = -Wno-implicit-int -Wno-incomplete-umbrella -Wno-pointer-sign -W
 ENABLE_STRICT_OBJC_MSGSEND                = NO
 
 
-
-
-
                 DYLIB_INSTALL_NAME_BASE = @path
-GCC_INCREASE_PRECOMPILED_HEADER_SHARING = YES
-           GCC_PRECOMPILE_PREFIX_HEADER = YES
+//GCC_INCREASE_PRECOMPILED_HEADER_SHARING = YES
+//           GCC_PRECOMPILE_PREFIX_HEADER = YES
 
 
                       VERSIONING_SYSTEM = apple-generic
@@ -83,22 +80,20 @@ GCC_INCREASE_PRECOMPILED_HEADER_SHARING = YES
                       DEFINES_MODULE    = YES
 
 
-
-
-SDKROOT[sdk=iphoneos*] = iphoneos
-SDKROOT[sdk=iphonesimulator*] = iphoneos
-
-//SUPPORTED_PLATFORMS[sdk=iphone*]  = iphoneos iphonesimulator
-
-VALID_ARCHS[sdk=iphonesimulator*] = x86_64
-VALID_ARCHS[sdk=iphoneos*] = armv7 armv7s arm64
-
-CODE_SIGN_IDENTITY[sdk=iphonesimulator*] = -
-CODE_SIGN_IDENTITY[sdk=iphoneos*] = -
-
-FRAMEWORK_SEARCH_PATHS[sdk=iphone*]  = $(CONFIGURATION_BUILD_DIR) // $(USER_FWKS)
-FRAMEWORK_SEARCH_PATHS[sdk=iphonesimulator*] = $(THEOS)/Frameworks $(FRAMEWORK_SEARCH_PATHS)
-FRAMEWORK_SEARCH_PATHS[sdk=iphoneos*] = $(THEOS)/Frameworks $(FRAMEWORK_SEARCH_PATHS)
+//SDKROOT[sdk=iphoneos*] = iphoneos
+//SDKROOT[sdk=iphonesimulator*] = iphoneos
+//
+////SUPPORTED_PLATFORMS[sdk=iphone*]  = iphoneos iphonesimulator
+//
+//VALID_ARCHS[sdk=iphonesimulator*] = x86_64
+//VALID_ARCHS[sdk=iphoneos*] = armv7 armv7s arm64
+//
+//CODE_SIGN_IDENTITY[sdk=iphonesimulator*] = -
+//CODE_SIGN_IDENTITY[sdk=iphoneos*] = -
+//
+//FRAMEWORK_SEARCH_PATHS[sdk=iphone*]  = $(CONFIGURATION_BUILD_DIR) // $(USER_FWKS)
+//FRAMEWORK_SEARCH_PATHS[sdk=iphonesimulator*] = $(THEOS)/Frameworks $(FRAMEWORK_SEARCH_PATHS)
+//FRAMEWORK_SEARCH_PATHS[sdk=iphoneos*] = $(THEOS)/Frameworks $(FRAMEWORK_SEARCH_PATHS)
 
 // LD_RUNPATH_SEARCH_PATHS[sdk=iphone*]  = @loader_path/Frameworks @executable_path/Frameworks $(inherited)
 

@@ -31,6 +31,8 @@ _RO  _Rnge    range;
 - _Text_ justifyRight: _UInt_ col;
 - _Text_   withFormat: _Text_ format,...;
 
+_RO id JSONFromURLString;
+
 #pragma mark - Parsing / Cleaning
 @prop_RO _Text JSONRepresentation,
 							 stringByDecodingXMLEntities,

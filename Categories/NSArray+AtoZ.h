@@ -13,7 +13,6 @@
 @end
 
 
-
 /* Adapted from QA1133:http://developer.apple.com/mac/library/qa/qa2001/qa1133.html */
 
 FOUNDATION_EXPORT NSString * AZCurrentUser();
@@ -65,6 +64,8 @@ VOID(addObjectIfMissing: x);
 VOID(addObjectsIfMissing:(id<NSFastEnumeration>)x);
 @end
 @interface NSArray (AtoZ)
+
++ _Kind_ array _ anything;
 
 - reduce:initial withBlock:(id(^)(id sum, id obj))block;
 
