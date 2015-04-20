@@ -4,6 +4,14 @@
 
 @XtraPlan(Colr,AtoZUniversal)
 
++ _Kind_ r:_Flot_ r g:_Flot_ g b:_Flot_ b a:_Flot_ a {  return
+#if MAC_ONLY
+  [self colorWithDeviceRed:r green:g blue:b alpha:a];
+#else
+  [self colorWithRed:r green:g blue:b alpha:a];
+#endif
+}
+
 SYNTHESIZE_ASC_OBJ(name, setName);
 
 - (NSComparisonResult)compare:(id)object {

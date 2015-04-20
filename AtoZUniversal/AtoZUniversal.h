@@ -2,21 +2,39 @@
 #ifndef AtoZ_AtoZUniversal_h
 #define AtoZ_AtoZUniversal_h
 
-@import FunSize;
+/*    ___                       ___           ___
+     /  /\          ___        /  /\         /  /\
+    /  /::\        /  /\      /  /::\       /  /::|   
+   /  /:/\:\      /  /:/     /  /:/\:\     /  /:/:|   
+  /  /:/~/::\    /  /:/     /  /:/  \:\   /  /:/|:|__ 
+ /__/:/ /:/\:\  /  /::\    /__/:/ \__\:\ /__/:/ |:| /\
+ \  \:\/:/__\/ /__/:/\:\   \  \:\ /  /:/ \__\/  |:|/:/
+  \  \::/      \__\/  \:\   \  \:\  /:/      |  |:/:/ 
+   \  \:\           \  \:\   \  \:\/:/       |  |::/  
+    \  \:\           \__\/    \  \::/        |  |:/   
+     \__\/                     \__\/         |__|/
 
-#import <AtoZUniversal/JREnum.h>
-#import <AtoZUniversal/metamacros.h>
-#import <AtoZUniversal/_ObjC.h>
-
-
-#import <AtoZUniversal/AtoZMacroDefines.h>
-#import <AtoZUniversal/AtoZTypes.h>
+*/
 
 #import <AtoZUniversal/EXTSynthesize.h>
 #import <AtoZUniversal/EXTBlockMethod.h>
 #import <AtoZUniversal/EXTRuntimeExtensions.h>
 #import <AtoZUniversal/EXTConcreteProtocol.h>
 #import <AtoZUniversal/NSMethodSignature+EXT.h>
+
+#import <AtoZUniversal/_ObjC.h>
+#import <AtoZUniversal/JREnum.h>
+
+#import <FunSize/FunSize.h>
+
+#import <AtoZUniversal/AtoZMacroDefines.h>
+#import <AtoZUniversal/AtoZTypes.h>
+
+#import <AtoZUniversal/metamacros.h>
+#import <AtoZUniversal/Protocols.h>
+
+
+
 
 #import <AtoZUniversal/ObjcAssociatedObjectHelpers.h>
 #import <AtoZUniversal/objswitch.h>
@@ -26,7 +44,6 @@
 #import <AtoZUniversal/Functions.h>
 #import <AtoZUniversal/AtoZGeometry.h>
 
-#import <AtoZUniversal/Protocols.h>
 #import <AtoZUniversal/SubscriptProtocols.h>
 #import <AtoZUniversal/BoundingObject.h>
 
@@ -49,9 +66,9 @@
 #import <AtoZUniversal/AZRange.h>
 #import <AtoZUniversal/OrderedDictionary.h>
 #import <AtoZUniversal/AZTalker.h>
-#import <AtoZUniversal/DatabaseStorage.h>
 #import <AtoZUniversal/NTBTask.h>
-
+#import <AtoZUniversal/DatabaseStorage.h>
+#import <AtoZUniversal/NamedPipe.h>
 
 FOUNDATION_EXPORT              double AtoZUniversalVersionNumber;   //! Project version number
 FOUNDATION_EXPORT const unsigned char AtoZUniversalVersionString[]; //! Project version string

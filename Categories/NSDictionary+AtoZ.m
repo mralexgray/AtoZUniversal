@@ -725,15 +725,22 @@ static void DynamicDictionarySetter(id self, SEL _cmd, id value)	{
 }
 @implementation NSDictionary (DynamicAccessors)
 
-+ (BOOL) resolveInstanceMethod:(SEL)sel	{	
+
++ (BOOL) resolveInstanceMethod_DISABLED:(SEL)sel	{
 
 		// Only handle selectors with no colon.
-		return  [NSStringFromSelector(sel) rangeOfString:@":"].location == NSNotFound
-		?	fprintf(stdout,"Generating dynamic NSD object accessor for key %s.\n",NSStringFromSelector(sel).UTF8String),
-			class_addMethod(self, sel, (IMP)DynamicDictionaryGetter, @encode(id(*)(id, SEL)))
-		:	fprintf(stdout,"Couldn't resove:%s Leaving this one to super!\n",NSStringFromSelector(sel).UTF8String), 
-      [super resolveInstanceMethod:sel];
+		return  ![NSStringFromSelector(sel) contains:@":"]
+
+            ? printf("Generating dynamic NSD object accessor for key %s.\n",NSStringFromSelector(sel).UTF8String),
+
+              class_addMethod(self, sel, (IMP)DynamicDictionaryGetter, @encode(id(*)(id, SEL)))
+
+            :	fprintf(stdout,"Couldn't resove:%s Leaving this one to super!\n",NSStringFromSelector(sel).UTF8String),
+
+              [super resolveInstanceMethod:sel];
 }
+
++ (BOOL) resolveInstanceMethod :(SEL)sel	{ return [super resolveInstanceMethod:sel]; }
 @end
 /**
  @interface NSDictionary (MyProperties)

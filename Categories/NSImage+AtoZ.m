@@ -1,15 +1,16 @@
-//@import QuickLook;
+//#import <QuickLook/QuickLook.h>
 //#import "AZSizer.h"
-//@import SVGKit;
+//#import <SVGKit/SVGKit.h>
 
 #if MAC_ONLY
-@import Quartz;
+#import <Quartz/Quartz.h>
 #else
-@import QuartzCore;
+#import <QuartzCore/QuartzCore.h>
 #endif
 
 #import <AtoZUniversal/AtoZGeometry.h>
 #import <AtoZUniversal/AtoZUniversal.h>
+#import <objc/message.h>
 
 _IMPL CIFilter (WithDefaults)
 
@@ -5313,7 +5314,7 @@ static void BitmapReleaseCallback(void *info, const void *data, size_t size) {
 
 
 //- (NSBitmapImageRep*) bitmap;
-//@prop_RO NSBIR * quantizerRepresentation;
+//_RONSBIR * quantizerRepresentation;
 //- (NSIMG*) coloredWithColor:		(NSC*) inColor	composite:(NSCompositingOperation)comp;
 
 @end

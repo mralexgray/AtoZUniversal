@@ -5,7 +5,7 @@
 
 + (NSN*) randomFloatBetween:(CGF)min :(CGF)max;
 
-@prop_RO NSS* hexString;
+_RO NSS* hexString;
 
 
 - _Void_ do:(void(^)(int ctr))block;
@@ -44,19 +44,19 @@
 */
 - (CFNumberType) type;
 
-@prop_RO NSS* prettyBytes;
+_RO NSS* prettyBytes;
 
 + (INST) zero;
 + (INST) one;
 + (INST) two;
 
-@prop_RO NSN * increment, * abs, *negate, * transpose;
+_RO NSN * increment, * abs, *negate, * transpose;
 
 - (NSA*) times:(id (^)(void))block;
 - (NSA*) ntimes:(id (^)(int index))block;
 
-@prop_RO NSA* toArray;
-@prop_RO NSS* sVal;
+_RO NSA* toArray;
+_RO NSS* sVal;
 
 - (NSA*) to:(NSNumber*) to;
 - (NSA*) to:(NSNumber*) to by:(NSNumber*) by;

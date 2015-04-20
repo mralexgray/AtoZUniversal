@@ -1,7 +1,7 @@
 
 
 #import <AtoZUniversal/AZObserversAndBinders.h>
-@import ObjectiveC;
+#import <objc/runtime.h>
 
 #if TARGET_OS_IPHONE
 @interface NSObject (Name) - (NSString *) className; @end
@@ -118,8 +118,8 @@ typedef void(^bSelf)(id _self);
 - _Void_ triggerKVO:(NSS*)k 
               block:(bSelf)blk;
 
-@prop_RO NSAS *attributedDescription;
-@prop_RO const char *cDesc;
+_RO NSAS *attributedDescription;
+_RO const char *cDesc;
 
 - (NSString*) descriptionForKey:(NSS*)k;
 
@@ -162,6 +162,7 @@ typedef void(^bSelf)(id _self);
 	-> Apple is Whatever!	-> Apple is Sexy	-> Apple is fruitful */
 - _Void_ performBlockEachVararg:(void(^)(NSO*_self,id obj))block, ... NS_REQUIRES_NIL_TERMINATION;
 
+_VD performSelector __Meth_ s withObjects __List_ doWithEach ___
 
 -filterKeyPath:(NSS*)kp recursively:(id(^)(id))mayReturnOtherObjectOrNil;
 
@@ -194,7 +195,14 @@ typedef void(^bSelf)(id _self);
 
 //- (NSS*) instanceMethods;
 //- (NSA*) instanceMethodArray;
-- (NSA*) instanceMethodNames;
+
+_RC _List methodNames ___
+
++ _List_ instanceMethodNames ___
+
++ _Text_ instanceMethodsInColumns;
+- _Text_ methodsInColumns;
+
 //+ (NSA*) instanceMethods;
 //- (NSS*) instanceMethodsInColumns;
 
@@ -382,7 +390,7 @@ BOOL respondsToString(id obj,NSS* string);
 
 #if !TARGET_OS_IPHONE
 
-@prop_RO NSS* segmentLabel;
+_RO NSS* segmentLabel;
 
 - (IBAction)increment:i ___
 - (IBAction)setFromSegmentLabel:l ___
@@ -411,11 +419,11 @@ BOOL respondsToString(id obj,NSS* string);
 - _Void_ fire:	(NSString*) notificationName userInfo:	(NSDictionary*) userInfo;
 
 
-- observeName:(NSString*)noteName usingBlock:(void(^)(NSNotification*n))blk;
+- _Void_ observeObject __NObj_ object forName __Text_ noteName calling __Meth_ sel ___
 
-- _Void_ observeObject:	(NSObject*) object
-			 forName:	(NSString*) notificationName
-			 calling:	(SEL) selector;
+- observeName:(NSString*)noteName objectBlock:(void(^)(id))blk;
+
+- observeName:(NSString*)noteName usingBlock:(void(^)(NSNotification*n))blk;
 
 -(void)observeName:(NSS*) notificationName
 		   calling:(SEL)selector;
@@ -473,11 +481,11 @@ _Pragma("clang diagnostic pop") \
 
 #pragma mark - SetClass
 - _Void_ setClass:	(Class) aClass;	// In your custom class
-+ (instancetype) customClassWithProperties:(NSD*) properties;
-- (instancetype) initWithProperties:		 (NSD*) properties;
-- (instancetype) initWithDictionary:		 (NSD*) properties;
-+ (instancetype) instanceWithDictionary:	 (NSD*) properties;
-+ (instancetype) newFromDictionary:			 (NSD*) properties;
++ _Kind_ customClassWithProperties __Dict_ propes ___
+- _Kind_ initWithProperties        __Dict_ propes ___
+- _Kind_ initWithDictionary 		   __Dict_ propes ___
++ _Kind_ instanceWithDictionary    __Dict_ propes ___
++ _Kind_ newFromDictionary         __Dict_ propes ___
 
 
 @end
@@ -512,9 +520,11 @@ _Pragma("clang diagnostic pop") \
 + (NSA*)     ivarList;     // Return an array of all an object's properties
 + (NSA*) protocolList; // Return an array of all an object's properties
 
++ (NSD*) protocols;
+
 /*
 // Return all superclasses of object
-@prop_RO NSA* superclasses;
+_RO NSA* superclasses;
 // Selector Utilities
 - (NSInvocation *) invocationWithSelectorAndArguments: (SEL) selector,...;
 - (BOOL) performSelector: (SEL) selector withReturnValueAndArguments: (void *) result, ...;
@@ -549,7 +559,7 @@ _Pragma("clang diagnostic pop") \
 //+ (BOOL)          classExists:(NSS*)cName;
 +   instanceOfClassNamed:(NSS*)cName;
 // Access to object essentials for run-time checks. Stored by class in dictionary.
-@prop_RO NSD * selectors, 
+_RO NSD * selectors, 
                       * properties, // a dictionary with class/selectors entries, all the way up to NSObject
                       * ivars, 
                       * protocols;

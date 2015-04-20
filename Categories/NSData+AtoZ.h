@@ -1,7 +1,10 @@
 
 
 
-@Xtra(Data,AtoZ) _RO _Text UTF8String, UTF16String, ASCIIString; @end
+@Xtra(Data,AtoZ) _RO _Text toUTF8String, toUTF16String, toASCIIString;
+
+_RO _ObjC JSONSerialization ___
+@end
 
 @Xtra(Text,FromAtoZ)
 
@@ -22,9 +25,6 @@ _RO _IsIt  isIntegerNumber, isFloatNumber ___
 + _PStl_ defaultParagraphStyleWithDictionary: _Dict_ d ___
 
 @end
-
-@Xtra(Colr,AtoZRefugee) + _Kind_ r:_Flot_ r g:_Flot_ g b:_Flot_ b a:_Flot_ a ___ @end
-
 
 
 JREnumDeclare(AZChecksumType, AZChecksumTypeMD5,

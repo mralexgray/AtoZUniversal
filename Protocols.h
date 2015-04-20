@@ -3,7 +3,7 @@
 
 #import <AtoZUniversal/Rectlike.h>
 
-@Vows TypedArray <NObj> @concrete _P Class objectClass;
+@Vows TypedArray <NObj> @concrete _AT Class objectClass;
 @Stop
 
 @Vows Random   <NObj>
@@ -16,28 +16,33 @@ _Type struct  { _SInt rangeMin; _SInt rangeMax; _SInt currentIndex; } _Indx;
 
 @Vows Indexed   <NSO>
 
-@concrete  _RO P(NSFastEnumeration) backingStore;
+@concrete  _RO Ｐ(NSFastEnumeration) backingStore;
 //           _RO                NSUI  indexMax,
 //                                    index;
 ￭
 
-@Vows FakeArray <NSO,NSFastEnumeration>
+@Vows FakeArray <NObj,Fast>
+@Reqd
 
-@Reqd _RO P(NSFastEnumeration) enumerator;
+_RO // Ｐ(Fast)
+    NSEnumerator* objectEnumerator ___
+_UT             indexOfObject _ x ___
 
-  - _UInt_ indexOfObject _ x ___
+@concrete
 
-@concrete - _UInt_ countByEnumeratingWithState:(NSFastEnumerationState*)state
-                                       objects:(_ObjC __unsafe_unretained [])buffer
-                                          count:_UInt_ len;
+_UT countByEnumeratingWithState _ (NSFastEnumerationState*)state
+                        objects _ (_ObjC __unsafe_unretained [])buffer
+                          count __UInt_ len;
 
-- _Void_ eachWithIndex:_ObjIntBlk_ b;     // Dep's on indexOffObject:
-- _Void_            do:_ObjBlk_ b;        // Dep's on <NSFastEnumeration>
+_VD eachWithIndex ＾IDST_ b ___     // Dep's on indexOffObject:
+_VD            do ＾ObjC_ b ___      // Dep's on <NSFastEnumeration>
 ￭
 
-@Vows ArrayLike <NSO,NSFastEnumeration>
+DECLARECONFORMANCE(List,FakeArray)
 
-@concrete _P   List <Indexed> *storage;
+@Vows ArrayLike <NSO,Fast>
+
+@concrete _AT   List <Indexed> *storage;
           _RO _UInt count;
 
 - _Void_     addObject _ x ___
@@ -47,21 +52,44 @@ _Type struct  { _SInt rangeMin; _SInt rangeMax; _SInt currentIndex; } _Indx;
 
 @Stop
 
-DECLARECONFORMANCE(List, FakeArray)
 
 @Vows PrimitiveAccess <NObj>
 
-- _Void_       setBool:_IsIt_ b forKey:_Text_ k;
-- _IsIt_    boolForKey:_Text_ k;
-- _Void_    setInteger:_SInt_ i forKey:_Text_ k;
-- _SInt_ integerForKey:_Text_ k;
-- _Void_     setDouble:_Flot_ f forKey:_Text_ k;
-- _Flot_   floatForKey:_Text_ k;
-- _Void_     setString:_Text_ s forKey:_Text_ k;
-- _Text_  stringForKey:_Text_ k;
-- _Void_       setData:_Data_ d forKey:_Text_ k;
-- _Data_    dataForKey:_Text_ k;
+#define SYNTHESIZE_GET_SET(get,Set,KIND) \
+  _VD        set##Set _##KIND##_ x \
+               forKey __Ｐ(Code) k ___ \
+  - KIND##_ get##ForKey __Ｐ(Code) k ___
 
-- _Void_          setObject:(P(NSCoding))v forKey:_Text_ k;
-- (P(NSCoding))objectForKey:_Text_ k;
+SYNTHESIZE_GET_SET(bool,    Bool,    _IsIt)
+SYNTHESIZE_GET_SET(integer, Integer, _SInt)
+SYNTHESIZE_GET_SET(float,   Float,   _Flot)
+SYNTHESIZE_GET_SET(string,  String,  _Text)
+SYNTHESIZE_GET_SET(data,    Data,    _Data)
+
+
+_VD            setObject __ObjC_ v
+                  forKey __Ｐ(Code) k ___
+- __ObjC_ objectForKey __Ｐ(Code) k ___
+
 ￭
+
+
+//_VD       setBool __IsIt_ b
+//           forKey __Text_ k ___
+//_IT    boolForKey __Text_ k ___
+
+//_VD    setInteger __SInt_ i
+//           forKey __Text_ k ___
+//_ST integerForKey __Text_ k ___
+
+//_VD     setDouble __Flot_ f
+//           forKey __Text_ k ___
+//_FT   floatForKey __Text_ k ___
+
+//_VD     setString __Text_ s
+//           forKey __Text_ k ___
+//_TT  stringForKey __Text_ k ___
+
+//_VD       setData __Data_ d
+//           forKey __Text_ k ___
+//_DA    dataForKey __Text_ k ___

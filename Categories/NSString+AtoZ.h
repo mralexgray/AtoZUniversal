@@ -22,7 +22,7 @@ _RO Class classified;
 
 _RO  _IsIt    isInteger,
               isValidURL;
-_P   _Rnge	  subRange;
+_AT  _Rnge	  subRange;
 _RO  _Rnge    range;
 
 - _Void_ openInTextMate;
@@ -34,7 +34,7 @@ _RO  _Rnge    range;
 _RO id JSONFromURLString;
 
 #pragma mark - Parsing / Cleaning
-@prop_RO _Text JSONRepresentation,
+_RO _Text JSONRepresentation,
 							 stringByDecodingXMLEntities,
 							 stringByCleaningJSONUnicode,
 							 stringByStrippingHTML,
@@ -50,9 +50,9 @@ _RO id JSONFromURLString;
 							 MD5String,
                humanReadableEncoding;
 
-@prop_RO const char * ASCIIString;
+_RO const char * ASCIIString;
 
-@prop_RO _Data UTF8Data;
+_RO _Data UTF8Data;
 
 - _Text_ parseXMLTag: _Text_ tag;
 
@@ -120,7 +120,7 @@ _RO _Text wikiDescription;
 
 - _Text_ withExtIfMissing:(NSS*)ext;
 
-@prop_RO _Text sansComponent, sansExtension;
+_RO _Text sansComponent, sansExtension;
 
 - _IsIt_ loMismo:	_Text_ s;
 
@@ -135,33 +135,37 @@ _RO _Text wikiDescription;
 
 - (NSN*) numberValue;
 
-_RC _Text firstLetter,
-          lastLetter,
-          language,
-          substringToLastCharacter,
-          trim,           // Returns the string cleaned from leading and trailing whitespaces */
-          reversed,       // Returns the reverse version of the string */
-          shifted,        // Returns the substring after the first character in this string */
-          popped,         // Returns the substring not containing the last character of this string */
-          chopped,        // Combination of shifted and popped, removes the first and last character */
-          camelized,      // Returns a CamelCase Version of this string */
-          hyphonized,
-          underscored;
+_RC _Text firstLetter
+__        lastLetter
+__        language
+__        substringToLastCharacter
+__        trim           // Returns the string cleaned from leading and trailing whitespaces */
+__        reversed       // Returns the reverse version of the string */
+__        shifted        // Returns the substring after the first character in this string */
+__        popped         // Returns the substring not containing the last character of this string */
+__        chopped        // Combination of shifted and popped, removes the first and last character */
+__        camelized      // Returns a CamelCase Version of this string */
+__        hyphonized
+__        underscored
+___
 
-@prop_RO BOOL   isHexString,
-                         isEmpty;		/*** Returns YES if this string is nil or contains nothing but whitespaces */
-@prop_RO NSUI   indentationLevel;									/*** Counts the whitespace chars that prefix this string */
-- (NSUI)count:(NSS*)aString;														/*** Counts occurrences of a given string */
-- (NSUI)count:(NSS*)aString options:(NSStringCompareOptions)flags; 	/*** Cunts occurrences of a given string with sone compare options */
+_RO _IsIt   isHexString
+__          isEmpty;		/*** Returns YES if this string is nil or contains nothing but whitespaces */
+
+_RO _UInt   indentationLevel;									/*** Counts the whitespace chars that prefix this string */
+_UT count __Text_ aString;														/*** Counts occurrences of a given string */
+_UT count __Text_ aString options:(NSStringCompareOptions)flags; 	/*** Cunts occurrences of a given string with sone compare options */
 
 /* NOTICE nil and @"" are never part of any compared string */
-- _IsIt_      contains:(NSS*)s; /*! YES when aString is part of the this string. */
-- _IsIt_ containsAnyOf:(NSA*)a;	/*! YES when this string contains ANY of the strings defined in the array */
-- _IsIt_ containsAllOf:(NSA*)a; /*! YES when this string contains ALL of the strings defined in the array */
-- _IsIt_    startsWith:(NSS*)s;	/*! YES when this string starts with aString, just a synonym for hasPrefix */
-- _IsIt_      endsWith:(NSS*)s;	/*! YES when this string ends with aString, just a synonym for hasSuffix */
-- _IsIt_     hasPrefix:(NSS*)p
-             andSuffix:(NSS*)s; /*! YES when this string has both given prefix and suffix */
+    _IT     containsI __Text_ s
+___ _IT      contains __Text_ s /*! YES when aString is part of the this string. */
+___ _IT containsAnyOf __List_ a	/*! YES when this string contains ANY of the strings defined in the array */
+___ _IT containsAllOf __Text_ a /*! YES when this string contains ALL of the strings defined in the array */
+___ _IT      endsWith __Text_ s	/*! YES when this string ends with aString, just a synonym for hasSuffix */
+___ _IT    startsWith __Text_ s	/*! YES when this string starts with aString, just a synonym for hasPrefix */
+___ _IT     hasPrefix __Text_ p
+            andSuffix __Text_ s /*! YES when this string has both given prefix and suffix */
+___
 
 /*** Substring between prefix and suffix. If either prefix or suffix cannot be matched nil will be returned */
 - _Text_ substringBetweenPrefix:(NSS*)p andSuffix:(NSS*)s;
@@ -179,11 +183,11 @@ _RC _List lines,    // this string splitted by lines. * Shortcut for componentsS
           wordsWithRanges;
 
 /*** Returns a set with all unique elements of this String, separated by whitespaces */
-@prop_RO NSSet *wordSet;
+_RO NSSet *wordSet;
 
 - _List_ trimmedComponentsSeparatedByString:(NSS*) delimiter;
 
-@prop_RO NSA *decolonize, *splitByComma;
+_RO NSA *decolonize, *splitByComma;
 
 + (INST) fromFile:_Text_ file;
 
@@ -194,16 +198,16 @@ _RC _List lines,    // this string splitted by lines. * Shortcut for componentsS
 - _IsIt_ splitAt:(NSS*)delimiter head:(NSS**)head tail:(NSS**)tail;
 
 // excuse the pun, but it divides the string into a head and body word, trimmed
-@prop_RO  NSA * decapitate;
+_RO NSA * decapitate;
 // TBD whether they belong here or elsewhere
-@prop_RO  NSP   pointValue;
-@prop_RO NSUI   minutesValue, secondsValue;
+_RO NSP   pointValue;
+_RO NSUI   minutesValue, secondsValue;
 
 @prop_RC NSURL * url, * fileURL;
 
-@prop_RO NSS * ucfirst, * lcfirst,  *fileContents;
+_RO NSS * ucfirst, * lcfirst,  *fileContents;
 
-@prop_RO NSAS * attributedWithDefaults;
+_RO NSAS * attributedWithDefaults;
 
 
 + (INST)   stringWithCGFloat: (CGF)f		 maxDigits: (NSUI)numDigits;
@@ -229,7 +233,7 @@ _RC _Text tidyHTML;
 - _Flot_ widthWithFont: _Font_ font;
 - (NSR)frameWithFont: _Font_ font;
 
-//@prop_RO NSC *colorValue;
+//_RONSC *colorValue;
 - _Void_ drawInRect:(NSR)r withFontNamed:(NSS*) fontName andColor: _Colr_ color;
 // new way
 - _Void_ drawInRect:(NSR)r withFont: _Font_ font andColor: _Colr_ color;
@@ -272,11 +276,12 @@ NSS *   StringByTruncatingStringWithAttributesForWidth(NSS *s, NSD *attrs, float
 - _Void_ resizeTo:_Flot_ size;
 - _Void_ setFont:(NSFont*)f;
 
+_VD removeAttributes __List_ a inRange __Rnge_ r ___
+
 @XtraStop(NSMAS,AtoZ)
 
 @Xtra(NSAS, AtoZ)
 
-_RO _Rnge range;
 _RO _Font font;
 _RO NSMD * attributes;
 
@@ -425,8 +430,8 @@ extern int gNSStringGeometricsTypesetterBehavior;
 - _Text_ stringByReplacingPrefix:(NSS*) prefix withString:(NSS*) string;
 - _Text_ stringByReplacingSuffix:(NSS*) suffix withString:(NSS*) string;
 
-@prop_RO NSA *sentences;
-@prop_RO NSS *firstSentence;
+_RO NSA *sentences;
+_RO NSS *firstSentence;
 @end
 
 @interface NSMutableString (Extensions)
@@ -560,7 +565,7 @@ extern int gNSStringGeometricsTypesetterBehavior;
  *  @see [NSRangeFromString][0]
  *	  [0]: https://developer.apple.com/library/mac/documentation/Cocoa/Reference/Foundation/Miscellaneous/Foundation_Functions/Reference/reference.html#//apple_ref/c/func/NSRangeFromString
  */
-@property (readonly) NSRange range;
+@property (readonly) NSRange rangeValue;
 
 /*!
  *  @brief Returns a new string containing the characters of the receiver from the one at a given index with a given length.
@@ -645,7 +650,7 @@ extern int gNSStringGeometricsTypesetterBehavior;
 @end
 
 @interface NSString (SNRAdditions)
-@prop_RO NSS * stringWithoutSpaces,  * stringByRemovingExtraneousWhitespace, * MD5, * URLEncodedString,
+_RO NSS * stringWithoutSpaces,  * stringByRemovingExtraneousWhitespace, * MD5, * URLEncodedString,
                       * normalizedString,     * upperBoundsString,                    * spaceSeparatedComponents;
 
 - _Text_ stringByFilteringToCharactersInSet:(NSCharacterSet *)set;
@@ -678,7 +683,7 @@ extern int gNSStringGeometricsTypesetterBehavior;
 /** Count lines.
  * @returns The number of lines in the string.
  */
-@prop_RO NSI numberOfLines;
+_RO NSI numberOfLines;
 
 /** Count occurrences of a character.
  * @param ch The character to search for.
@@ -708,7 +713,7 @@ _RO _List keyCodes;
 /**
  * @returns YES if the string is in uppercase.
  */
-@prop_RO BOOL isUppercase,
+_RO BOOL isUppercase,
 
 /*** @returns YES if the string is in lowercase */
                         isLowercase;
@@ -773,7 +778,7 @@ _RO _UInt size,           // `length`.
  */
 - (NSA*)split:(NSS*)separator rule:(HFSplitRule)rule;
 
-@prop_RO NSIMG * iconForFile;
+_RO NSIMG * iconForFile;
 
 /** Return the last path component with or without the file extension.
  @param ext A `BOOL` value which decide whether show the file extension or not.
@@ -827,11 +832,11 @@ _RO _UInt size,           // `length`.
 
 @interface NSString (Similiarity)
 
-/*
- Returns 0.0 <= x <= 1.0.  0.0 == not equal (or error), 1.0 == equal.
- Uses Search Kit (a.k.a. AIAT, V-Twin) technology.
+/*! Returns 0.0 <= x <= 1.0.  0.0 == not equal (or error), 1.0 == equal.
+    @note Uses Search Kit (a.k.a. AIAT, V-Twin) technology.
  */
-- _Flot_ isSimilarToString:(NSS*)aString;
+
+_FT similarityTo __Text_ aString;
 
 @end
 #endif
@@ -974,8 +979,8 @@ BOOL isValidUTF8( const char *string, NSUInteger length );
 @interface NSMutableString (NSMutableStringAdditions)
 - _Void_ encodeXMLSpecialCharactersAsEntities;
 - _Void_ decodeXMLSpecialCharacterEntities;
-- _Void_ escapeCharactersInSet:(NSCharacterSet *) set;
-- _Void_ replaceCharactersInSet:(NSCharacterSet *) set withString:(NSS*) string;
+- _Void_ escapeCharactersInSet __CSet_ set;
+- _Void_ replaceCharactersInSet __CSet_ set withString:(NSS*) string;
 - _Void_ encodeIllegalURLCharacters;
 - _Void_ decodeIllegalURLCharacters;
 - _Void_ stripIllegalXMLCharacters;

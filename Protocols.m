@@ -8,42 +8,43 @@
 
 #import <AtoZUniversal/AtoZUniversal.h>
 
+CONFORM(List,FakeArray)
+
 @concreteprotocol(TypedArray)
-- (Class)objectClass { return objc_getAssociatedObject(self, _cmd); }
-- _Void_ setObjectClass:(Class)objectClass { objc_setAssociatedObject(self, _cmd, objectClass, OBJC_ASSOCIATION_RETAIN_NONATOMIC); }
-@end
+SYNTHESIZE_ASC_OBJ(objectClass, setObjectClass)
+￭
 
 @concreteprotocol(Random)
-+ (INST) random { return [NSException raise:@"YOU need to implement this yo damned self!" format:@"%@",nil], (id)nil; }
-+ (NSA*) random:(NSUInteger)ct { return [@(ct) mapTimes:^id(NSNumber *num) { return [self random]; }]; }
-@end
++ _Kind_ random            { return [NSException raise:@"YOU need to implement this yo damned self!" format:@"%@",nil], (id)nil; }
++ _List_ random __UInt_ ct { return [@(ct) mapTimes:^id(_Numb n) { return [self random]; }]; }
+￭
 
-@implementation NSObject (Indexed)  // @dynamic backingStore;
+@XtraPlan(NObj,Indexed)  // @dynamic backingStore;
 
--   (id) backingStore { return FETCH; }
-- (NSUI) index        { NSAssert (self.backingStore && [self.backingStore count], @""); return [(NSA*)self.backingStore indexOfObject:self]; }
-- (NSUI) indexMax     { NSAssert (self.backingStore && [self.backingStore count], @""); return [self.backingStore count] -1; }//NSUI max = NSNotFound; id x; return !(x = [self backingStore]) ? max : (!(max = [x count])) ?: max - 1; }
+- backingStore        { return FETCH; }
+- (NSUI) index        { NSAssert(self.backingStore && [self.backingStore count], @""); return [(NSA*)self.backingStore indexOfObject:self]; }
+- (NSUI) indexMax     { NSAssert(self.backingStore && [self.backingStore count], @""); return [self.backingStore count] -1; }//NSUI max = NSNotFound; id x; return !(x = [self backingStore]) ? max : (!(max = [x count])) ?: max - 1; }
 
-@end
+@XtraStop(NObj,Indexed)
 
-@concreteprotocol(FakeArray)
+@concreteprotocol(FakeArray) @dynamic objectEnumerator;
 
 - _UInt_ countByEnumeratingWithState:(NSFastEnumerationState*)state objects:(id __unsafe_unretained [])buffer count:_UInt_ len {
 
-  return [self.enumerator countByEnumeratingWithState:state objects:buffer count:len];
+  return [self.objectEnumerator countByEnumeratingWithState:state objects:buffer count:len];
 }
 
-- (P(NSFastEnumeration))enumerator { DEMAND_CONFORMANCE; return _ObjC_ nil; }
+//- _Ｐ(Fast) enumerator     { DEMAND_CONFORMANCE; return _ObjC_ nil; }
 
 - _UInt_ indexOfObject _ x { DEMAND_CONFORMANCE; return NSNotFound; }
 
 /// @note @required - (int) idexOfObject:(id)x;
 
-- _Void_ eachWithIndex:(ObjIntBlk)block {
+- _Void_ eachWithIndex ＾IDST_ block {
 
-    for (_ObjC x in self) { _UInt idx;  if ((idx = [self indexOfObject:x]) != NSNotFound) block(x,idx); }
-}
-- _Void_ do:(void(^)(id obj))block { for (id z in self) block(z); }
+  _SInt idx = 0;       for (id x in self) { block(x,idx) ___ idx++ ___ } }
+
+_VD do ＾ObjC_ block { for (id z in self)   block(z);                    }
 
 @end
 

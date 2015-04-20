@@ -2,17 +2,18 @@
 //  NSFileManager+AtoZ.m  Created by Alex Gray on 8/28/12.
 
 #import <AtoZUniversal/AtoZUniversal.h>
-@import os;
-@import Darwin;
-//#include <glob.h>
+//#import <os.h>
+//#import <Darwin/Darwin.h>
 #import <sys/xattr.h>
 #include <sys/types.h>
 #include <dirent.h>
-//#import <sys/sysctl.h>
-//#import <unistd.h>
-//#import <dirent.h>
-//#import <sys/stat.h>
-//#include <assert.h>
+
+#import <sys/sysctl.h>
+#include <glob.h>
+#import <unistd.h>
+#import <dirent.h>
+#import <sys/stat.h>
+#include <assert.h>
 
 
 NSS * NSDocumentsFolder() { return [NSHomeDirectory() withPath:@"Documents"]; }

@@ -21,26 +21,28 @@
 
 
 @Xtra (NObj, AZAZA)
-   _P _ObjC owner ___
-   _P _IsIt expanded,
-            selected,
-            hovered ___
-   _P _UInt orientation ___
+
+_AT _ObjC owner       ___
+_AT _UInt orientation ___
+_AT _IsIt expanded
+__        selected
+__        hovered     ___
 ￭
 
 
 @Vows Drawable <RectLike>
 
-  _CP ObjRectBlock /*ObjRectBlock*/ drawObjectBlock;
+_CP ObjRectBlock drawObjectBlock ___
 
 @concrete
 
-  _RO _Flot  span,
-             expansionDelta ___
-   _P _Flot  spanExpanded,
-             spanCollapsed ___
+_RO _Flot  span
+__         expansionDelta ___
+_AT _Flot  spanExpanded
+__         spanCollapsed ___
 
-- _Void_ setSpanCollapsed:_Flot_ c expanded:_Flot_ x ___
+_VD setSpanCollapsed __Flot_ c expanded __Flot_ x ___
+
 ￭
 
 
@@ -97,7 +99,7 @@
 //@concrete
 //@property        NSSZ   size; 
 //@property         CGF   width, height, w, h;
-//@prop_RO CGP   mid;
+//_ROCGP   mid;
 //@property         CGF   midX, midY, maxX, maxY;
 
 //@pcategoryinterface (SizeLike,Aliases) @property CGF w, h; @end

@@ -11,6 +11,8 @@ _RO _List plugins;
 
 @Xtra(NSBundle,AtoZ)
 
+_RO _ObjC version ___
+
 #if MAC_ONLY
 /*! @see __TEXT", "__info_plist etc */ + infoPlist;
 
@@ -99,31 +101,24 @@ NS_INLINE NSA *        BundlesFromStdin() {
   return [bundles copy];
 }
 
-NS_INLINE NSA *       FilesAt(_Text p) {   NSMutableArray *ps = NSMutableArray.new;
-  [[FM contentsOfDirectoryAtPath:p error:nil]
-    enumerateObjectsUsingBlock:^(id obj, _UInt idx, BOOL *stop) { [ps addObject:[p stringByAppendingPathComponent:obj]]; }]; return ps;
-}
-NS_INLINE NSA * BundlePlugins(NSBundle*b) {   NSMutableArray *bundles = NSMutableArray.new;
+NS_INLINE _List FilesAt(_Text p) {
 
-  [FilesAt(b.builtInPlugInsPath) enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-    NSBundle *bndl = [NSBundle bundleWithPath:obj];
-    if (bndl) [bundles addObject:bndl];
-  }]; return bundles;
+  return [[FM contentsOfDirectoryAtPath:p error:nil] map:^id(_ObjC x){ return [p stringByAppendingPathComponent:x]; }];
 }
-NS_INLINE NSA * BundlePluginsConformingTo(NSBundle*b,    Protocol*p) { NSMutableArray *bundles = NSMutableArray.new;
+NS_INLINE _List BundlePlugins(_Bndl b) {
 
-  [BundlePlugins(b) enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-    Class x = [obj principalClass];
-    if ([x conformsToProtocol:p]) [bundles addObject:x];
-  }];return bundles;
+  return [FilesAt(b.builtInPlugInsPath) map:^id(id x) { return [Bndl bundleWithPath:x]; }];
 }
-NS_INLINE NSA * BundlesAtPathConformingTo(NSString*path, Protocol*p) { NSMutableArray *bundles = NSMutableArray.new;
-  [FilesAt(path) enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-    NSBundle *tryB = [NSBundle bundleWithPath:obj];
-    if (!tryB) return;
-    Class x = [tryB principalClass];
-    if ([x conformsToProtocol:p]) [bundles addObject:tryB];
-  }];return bundles;
+NS_INLINE _List BundlePluginsConformingTo(_Bndl b, Protocol*p) {
+
+  return [BundlePlugins(b) map:^id(id obj){ Class x = [obj principalClass]; return [x conformsToProtocol:p] ? x : nil; }];
+}
+
+NS_INLINE _List BundlesAtPathConformingTo(_Text path, Protocol*p) {
+
+  return [FilesAt(path) map:^id(id obj){ _Bndl tryB = [NSBundle bundleWithPath:obj];
+    return !tryB ? nil : [[tryB principalClass] conformsToProtocol:p] ? tryB : nil;
+  }];
 }
 
 

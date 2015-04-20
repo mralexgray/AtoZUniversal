@@ -4,19 +4,15 @@
 
 
 @interface NSArray (AtoZCLI)
-- (NSS*) stringValueInColumnsCharWide:(NSUI)characters;
-- (NSS*)      formatAsListWithPadding:(NSUI)characters;
+
+_TT stringValueInColumnsCharWide __UInt_ charCt ___
+_TT      formatAsListWithPadding __UInt_ charCt ___
+_TT      stringValuesMaxLineCols __UInt_ charCt ___
+_LT            splitIntoGroupsOf __UInt_ itemCt ___
+
 @end
 
-@interface NSO (AtoZCLI)
-- (NSS*) instanceMethodsInColumns;
-@end
 
-
-/* Adapted from QA1133:http://developer.apple.com/mac/library/qa/qa2001/qa1133.html */
-
-FOUNDATION_EXPORT NSString * AZCurrentUser();
-FOUNDATION_EXPORT     NSUI   AZCurrentUserID();
 
 
 @interface AZSparseArray : NSO <FakeArray>
@@ -79,7 +75,7 @@ VOID(addObjectsIfMissing:(id<NSFastEnumeration>)x);
 -              reduce:initial
                  with:(AZIndexedAccumulationBlock)block;
 
-@prop_RO NSA* jumbled, *splitByParity;
+_RO NSA* jumbled, *splitByParity;
 
 /*! @param secondVal the array to be "mixed in"
     @code   [@[@1, @2, @3] pairedWith:@[@"a", @"b", @"c"]] -> @[@[@1,@"a"],@[@2,@"b"],@[@3,@"c"]]
@@ -97,7 +93,7 @@ VOID(addObjectsIfMissing:(id<NSFastEnumeration>)x);
 
 + (instancetype) arrayWithCopies:(NSUI)copies of:(id<NSCopying>)obj;
 
-@prop_RO NSS * joinedByNewlines, * joinedWithSpaces, * joined;
+_RO NSS * joinedByNewlines, * joinedWithSpaces, * joined;
 
 - (NSS*) joinedBy:(NSS*)x;
 
@@ -121,7 +117,7 @@ VOID(addObjectsIfMissing:(id<NSFastEnumeration>)x);
 -  (int) createArgv:(char***)argv;
 + (NSA*) from:(NSI)from to:(NSI)to;       // shortcut for [@(from) to:@(to)], I think
 
-@prop_RO id nextObject,          // keeps tack, ad returns the "next" object from an array.  until it runs out, then trurns nil.
+_RO id nextObject,          // keeps tack, ad returns the "next" object from an array.  until it runs out, then trurns nil.
                       nextNormalObject;   // same as "nextObject", but is a everlasting font of normalized, looping vals
 
 - (NSA*) arrayByAddingAbsentObjectsFromArray:(NSA*)otherArray;
@@ -139,16 +135,16 @@ VOID(addObjectsIfMissing:(id<NSFastEnumeration>)x);
 - (NSA*) withMinItems:(NSUI)items usingFiller:(id) fill;
 - _Void_ setStringsToNilOnbehalfOf: entity;  // FIX:  DOCUMENT!!
 
-@prop_RO CSET * countedSet;
-@prop_RO  NSN * maxNumberInArray, * minNumberInArray;
-@prop_RO  NSA * shifted, * popped, * reversed,
+_RO CSET * countedSet;
+_RO NSN * maxNumberInArray, * minNumberInArray;
+_RO NSA * shifted, * popped, * reversed,
                        * ascending, * descending,
                        * URLsForPaths,
                        * colorValues,
                        * arrayWithEach,
                        * allKeysInChildDictionaries,
                        * allvaluesInChildDictionaries;
-@prop_RO NSMA * mutableCopies;  // Make each object mutable, if possible. Returns mutable itself.
+_RO NSMA * mutableCopies;  // Make each object mutable, if possible. Returns mutable itself.
 
 //- (NSA<NSN>*) ascending; - (NSA<NSN>*) descending;
 
@@ -173,7 +169,7 @@ _RO NSA * sorted;
 - (NSA*) arrayUsingIndexedBlock:(id(^)(id o,NSUI idx))b;
 - (NSA*)          sortedWithKey:(NSS*)k ascending:(BOOL)ascending;
 
-@prop_RO NSA* sortedColors;
+_RO NSA* sortedColors;
 //- (NSA*)sortedArrayUsingArray:(NSA*)otherArray;
 /*** Returns an NSArray containing a number of NSNumber elements that have been initialized with NSInteger values. As this method takes a variadic argument list you have to terminate the input with a NSNotFound entry This is done automatically via the $ints(...) macro */
 + (NSA*) arrayWithInts:(NSI)i,...;
@@ -182,7 +178,7 @@ _RO NSA * sorted;
 + (NSA*) arrayWithDoubles:(double)d,...;
 
 /*** Returns an NSSet containing the same elements as the array (unique of course, as the set does not keep doubled entries) */
-@prop_RO NSET *asSet;
+_RO NSET *asSet;
 
 /*** Returns an array of the same size as the original one with the result of calling the keyPath on each object */
 - (NSA*)arrayWithKey:(NSS*)keyPath;
@@ -278,11 +274,11 @@ _RO NSA * sorted;
 /*** Returns a subArray with all members of the original array that pass the isKindOfClass test with the given Class */
 - (NSA*)elementsOfClass:(Class)aClass;
 /*** Shortcut for elementsOfClass:NSNumber.class */
-@prop_RO NSArray *numbers;
+_RO NSArray *numbers;
 /*** Shortcut for elementsOfClass:NSString.class */
-@prop_RO NSArray *strings;
+_RO NSArray *strings;
 /*** Returns a subArray with all NSString members and calls trim on each before returning */
-@prop_RO NSArray *trimmedStrings;
+_RO NSArray *trimmedStrings;
 
 - (NSA*)             after:(NSUI)subarrayFromIndex; /* subarrayFromIndex alias; */
 - (NSA*)  subarrayFromIndex:(NSUI)start;
@@ -291,11 +287,11 @@ _RO NSA * sorted;
 - (NSA*) subarrayWithIndexes:(NSIS*)idxs;
 
 /*** Returns a random element from this array */
-@prop_RO id randomElement;
+_RO id randomElement;
 /*** Returns a random subArray of this array with up to 'size' elements */
 - (NSA*)randomSubarrayWithSize:(NSUI)size;
 /*** Returns a shuffeled version of this array */
-@prop_RO NSArray *shuffeled;
+_RO NSArray *shuffeled;
 /*** A failsave version of objectAtIndex When the given index is outside the bounds of the array it will be projected onto the bounds of the array Just imagine the array to be a ring  that will have its first and last element connected to each other */
 - objectAtNormalizedIndex:(NSI)index;
 - (NSUI) normalizedIndex:(NSI)index;  // Gives the normalized index for an out of range index.
@@ -306,9 +302,9 @@ _RO NSA * sorted;
 /*** Will at least return nil in case the index does not fit the array */
 - objectOrNilAtIndex:(NSUI)index;
 
-@prop_RO NSA * alphabetized, * sum, * uniqueObjects, * uniqueStrings, *alphaGrouped;
-//@prop_RO IndexedKeyMap * alphaMap;
-@prop_RO  id   first, second, thrid, fourth, fifth, sixth, last, firstObject;
+_RO NSA * alphabetized, * sum, * uniqueObjects, * uniqueStrings, *alphaGrouped;
+//_ROIndexedKeyMap * alphaMap;
+_RO id   first, second, thrid, fourth, fifth, sixth, last, firstObject;
 
 - (NSI)              sumIntWithKey:(NSS*)keyPath;
 - (CGF)            sumFloatWithKey:(NSS*)keyPath;
@@ -368,11 +364,11 @@ _RO NSA * sorted;
 
 @interface NSMutableArray (AG)
 
-@prop_RO NSMA * alphabetize;
+_RO NSMA * alphabetize;
 -  (void) addPoint:(NSP)p;
 -  (void)  addRect:(NSR)r;
 
-@prop_RO id advance;  /* returns first object.. moves it to last. */
+_RO id advance;  /* returns first object.. moves it to last. */
 -  (void) firstToLast;
 -  (void) lastToFirst;
 
@@ -382,7 +378,7 @@ _RO NSA * sorted;
     they will return the removed objects removes and returns the first object in the array \
     if no elements are present, nil will be returned
 
-@prop_RO id shift;
+_RO id shift;
 
 - _Void_ shove:x; // insert at index: 0
 
@@ -395,14 +391,14 @@ _RO NSA * sorted;
 	Internally the method sends the receiver `removeLastObject` and returns the removed object.
 	@return Returns the object removed from the receiver.
 	@exception if no elements are present, nil will be returned   FALSE: NSException Raised if the receiver is an empty array.	*/
-@prop_RO id pop;
+_RO id pop;
 
 /**	Helper method for looking at the last object in the receiver.
  	Internally, the method sends the receiver `lastObject` message and returns the result. If the receiver is an empty array, `nil` is returned.
  	@return Returns the last object in the receiver.	 */
-@prop_RO id peek;
+_RO id peek;
 
-@prop_RO NSMA * sort,        // shortcut for the default sortUsingSelector:@selector(compare:)
+_RO NSMA * sort,        // shortcut for the default sortUsingSelector:@selector(compare:)
                        * az_reverse,  // reverses the whole array
                        * shuffle;     // randomizes the order of the array
 
@@ -490,10 +486,10 @@ _RO NSA * sorted;
 @end
 
 @interface NSArray (StringExtensions)
-@prop_RO NSA * reversedArray, *sortedStrings, * uniqueMembers,
+_RO NSA * reversedArray, *sortedStrings, * uniqueMembers,
                       * unionOfObjects; //  valueForKeyPath:@"@unionOfObjects"]
-@prop_RO NSS * stringValue;
-@prop_RO  id   firstObject;
+_RO NSS * stringValue;
+_RO id   firstObject;
 
 - (NSA*)        unionWithArray:(NSA*)a;
 - (NSA*) intersectionWithArray:(NSA*)a;
@@ -522,7 +518,7 @@ _RO NSA * sorted;
 - (NSMA*)        push: o; // aka pushObject
 - (NSMA*) pushObjects: o,...;
 
-@prop_RO id popObject, pop, pullObject, pull; // With Synonyms for traditional use
+_RO id popObject, pop, pullObject, pull; // With Synonyms for traditional use
 @end
 
 @interface NSArray (FilterByProperty)

@@ -6,8 +6,8 @@
 //  Copyright (c) 2014 mrgray.com, inc. All rights reserved.
 //
 
-@import XCTest;
-@import AtoZUniversal;
+#import <XCTest/XCTest.h>
+#import <AtoZUniversal/AtoZUniversal.h>
 
 @interface RectLikeTests : XCTestCase @end
 

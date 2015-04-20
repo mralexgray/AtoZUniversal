@@ -7,7 +7,7 @@
 //  Released under the MIT license.
 //
 
-@import Foundation;
+#import <Foundation/Foundation.h>
 #import <objc/runtime.h>
 
 /**

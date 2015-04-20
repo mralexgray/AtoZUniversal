@@ -385,8 +385,12 @@ return [self.propertiesThatHaveBeenSet containsObject:key];	}
 	[[VARARGS subarrayFromIndex:1] each:^(id obj) { block(blockSelf, obj); }];
 }
 
+_VD performSelector __Meth_ s withObjects __List_ doWithEach {
 
--(id) filterKeyPath:(NSS*)kp recursively:(id(^)(id))mayReturnOtherObjectOrNil {
+  for (id x in doWithEach) [self performSelectorWithoutWarnings:s withObject:x];
+}
+
+- filterKeyPath:(NSS*)kp recursively:(id(^)(id))mayReturnOtherObjectOrNil {
 
 	__block	id found = nil;
 	if ((found = mayReturnOtherObjectOrNil(self))) return self;
@@ -458,14 +462,25 @@ return [self.propertiesThatHaveBeenSet containsObject:key];	}
 
 //static NSString * uninsteresting = @"cxx_destruct|init|dealloc";
 
-- (NSA*) instanceMethodNames { u_int count; Method *mthds = class_copyMethodList(self.class, &count);
++ _List_ instanceMethodNames {
 
-  return [@(count - 1) mapTimes:^id(NSNumber *num) { id m = $UTF8(sel_getName(method_getName(mthds[num.unsignedIntValue])));
-   return IS_IN_STATIC_SPLIT(m,cxx_destruct|init|dealloc) ? nil: m;
+  u_int count; Method *mthds = class_copyMethodList(self, &count);
+
+  return [@(count - 1) mapTimes:^id(_Numb num) {
+
+    id m = $UTF8(sel_getName(method_getName(mthds[num.unsignedIntValue])));
+    return !IS_IN_STATIC_SPLIT(m,cxx_destruct|init|dealloc) ? m : nil;
+
 	}];
+}
+_LT methodNames { return self.class.instanceMethodNames; }
+
+- (NSS*) methodsInColumns  { return [self.methodNames formatAsListWithPadding:30]; }
+
++ _Text_ instanceMethodsInColumns { return [self.instanceMethodNames formatAsListWithPadding:30]; }
+
 
 //	return [ns map:^id(id object) {return [object containsAnyOf:] ? nil : object;}];	free(	methods );	return  methodArray;
-}
 
 
 
@@ -1545,12 +1560,15 @@ static const char * getPropertyType(objc_property_t property) {
 - _Void_ fire:(NSS*) notificationName userInfo:(NSD *)context  {
 	[AZNOTCENTER postNotificationName:notificationName object:self userInfo:context];
 }
-- observeObject:(NSS*) notificationName usingBlock:(void (^)(NSNOT*n))block {
+- observeName:(NSS*) notificationName usingBlock:(void (^)(NSNOT *n))block {
 	return [AZNOTCENTER addObserverForName:notificationName object:self queue:NSOQ.mainQueue usingBlock:block];
 }
-- observeName:(NSS*) notificationName usingBlock:(void (^)(NSNOT *n))block {
-	return [AZNOTCENTER addObserverForName:notificationName object:nil queue:NSOQ.mainQueue usingBlock:block];
+- observeName:(NSString*)noteName objectBlock:(void(^)(id))blk {
+	return [AZNOTCENTER addObserverForName:noteName object:self queue:NSOQ.mainQueue usingBlock:^(NSNOT *n){
+    blk(n.object);
+  }];
 }
+
 - _Void_ observeObject:(NSObject *)object forName:(NSS*) notificationName calling:(SEL)selector {
 	[AZNOTCENTER addObserver:self selector:selector name:notificationName object:object];
 }
@@ -2212,15 +2230,26 @@ CG_EXTERN CFTimeInterval CGEventSourceSecondsSinceLastEventType(CGEventSourceSta
 //		return $UTF8(sel_getName(method_getName(methods [(u_int)index]) ));
 //	}];
 
-	NSMutableArray *protocolNames = [NSMutableArray array];
+	NSMutableArray *protocolNames = @[].mC;
 	unsigned int num;
 	__unsafe_unretained Protocol **protocols = class_copyProtocolList(self, &num);
-	for (int i = 0; i < num; i++) {
-		[protocolNames addObject:[NSString stringWithCString:protocol_getName(protocols[i]) encoding:NSUTF8StringEncoding]];
-	}
+	for (int i = 0; i < num; i++)
+		[protocolNames addObject:$UTF8(protocol_getName(protocols[i]))];
 	free(protocols);
 	return protocolNames;
 }
+
+
+// Return a dictionary with class/selectors entries, all the way up to NSObject
++ (NSD*) protocols {
+	NSMutableDictionary *dict = @{}.mutableCopy;
+	[dict setObject:[self protocolList] forKey:NSStringFromClass(self)];
+	for (Class cl in [self superclasses]) {
+		[dict setObject:[cl protocolList] forKey:NSStringFromClass(cl)];
+	}
+	return dict;
+}
+
 // Return a dictionary with class/selectors entries, all the way up to NSObject
 - (NSD*) protocols {
 	NSMutableDictionary *dict = @{}.mutableCopy;

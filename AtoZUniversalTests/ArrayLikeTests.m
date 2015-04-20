@@ -1,7 +1,7 @@
 
 //#import <GHUnit/GHUnit.h>
 #import <XCTest/XCTest.h>
-#import <AtoZ/AtoZ.h>
+#import <AtoZUniversal/AtoZUniversal.h>
 
 @interface      ArrayLikeClass : NSO <ArrayLike> @end
 CLANG_IGNORE_PROTOCOL
@@ -10,7 +10,7 @@ CLANG_IGNORE_PROTOCOL
 CLANG_POP
 
 @Kind_(ArrayLikeTests,XCTestCase)
-   _P  ArrayLikeClass *arrayLike; ￭
+_AT    ArrayLikeClass *arrayLike; ￭
 @Plan  ArrayLikeTests
 
 - (void) setUp { [super setUp]; _arrayLike = ArrayLikeClass.new; }

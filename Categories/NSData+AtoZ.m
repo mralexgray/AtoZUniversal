@@ -3,37 +3,38 @@
 
 @XtraPlan(NSData,AtoZ)
 
-- _Text_ UTF16String  { return INIT_(NSS,WithData:self encoding:NSUTF16StringEncoding); }
-- _Text_ UTF8String   { return INIT_(NSS,WithData:self encoding: NSUTF8StringEncoding); }
-- _Text_ ASCIIString  { return INIT_(NSS,WithData:self encoding:NSASCIIStringEncoding); }
+_ID JSONSerialization { return [NSJSONSerialization JSONObjectWithData:self options:0 error:NULL]; }
+_TT toUTF16String  { return INIT_(Text,WithData:self encoding:NSUTF16StringEncoding); }
+_TT toUTF8String   { return INIT_(Text,WithData:self encoding: NSUTF8StringEncoding); }
+_TT toASCIIString  { return INIT_(Text,WithData:self encoding:NSASCIIStringEncoding); }
 
 @end
 
 @XtraPlan(Text,FromAtoZ)
 
-+ _Kind_ stringFromArray:_List_ a       {	return [self stringFromArray:a withDelimeter:@"" last:@""]; }
++ _Kind_ stringFromArray __List_ a       {	return [self stringFromArray:a withDelimeter:@"" last:@""]; }
 
-+ _Kind_ stringFromArray:_List_ a
-              withSpaces:_IsIt_ spaces
-              onePerline:_IsIt_ newl 		{
++ _Kind_ stringFromArray __List_ a
+              withSpaces __IsIt_ spaces
+              onePerline __IsIt_ newl 		{
 
 	return [self stringFromArray:a withDelimeter:spaces ? @" " : newl ? @"\n" : @"" last:spaces ? @" " : newl ? @"\n" : @""];
 }
 
-+ _Kind_ stringFromArray:_List_ a
-           withDelimeter:_Text_ del
-                    last:_Text_ last    {	if (!a.count) return nil;
++ _Kind_ stringFromArray __List_ a
+           withDelimeter __Text_ del
+                    last __Text_ last    {	if (!a.count) return nil;
 
-	NSMS* outString = @"".mutableCopy;
-  for (id x in a) [outString appendFormat:@"%@%@",x,del];
+	mText outString = @"".mC;
+  for (id x in a) [outString appendFormat:@"%@%@", x, del];
   [outString replaceCharactersInRange:NSMakeRange(outString.length-1,1) withString:last];
   return outString.copy;
 }
 
-- _IsIt_   isFloatNumber {
+_IT isFloatNumber { return !self.length ? NO :
 
-  return !self.length ? NO : [[NSCharacterSet characterSetWithCharactersInString:@"0123456789."]
-            isSupersetOfSet:  [NSCharacterSet characterSetWithCharactersInString:self]];
+  [[CSet characterSetWithCharactersInString:@"0123456789."] isSupersetOfSet:
+   [CSet characterSetWithCharactersInString:self]];
 }
 
 - _IsIt_ isIntegerNumber { NSRange range = NSMakeRange(0, self.length);
@@ -65,18 +66,6 @@
 
 @end
 
-@XtraPlan(NSC,AtoZRefugee)
-
-+ _Kind_ r:_Flot_ r g:_Flot_ g b:_Flot_ b a:_Flot_ a {  return
-
-#if !TARGET_OS_IPHONE
-  [self colorWithDeviceRed:r green:g blue:b alpha:a];
-#else
-  [self colorWithRed:r green:g blue:b alpha:a];
-#endif
-}
-
-@end
 
 #import <CommonCrypto/CommonDigest.h>
 

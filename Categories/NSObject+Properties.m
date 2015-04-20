@@ -2,7 +2,7 @@
 
 
 #import <AtoZUniversal/AtoZUniversal.h>
-@import FunSize; // maptoDictionary
+#import <FunSize/FunSize.h> // maptoDictionary
 
        SEL	          property_getGetter (objc_property_t property) {
 	const char *attrs = property_getAttributes( property );
@@ -106,10 +106,21 @@ const char * property_getRetentionMethod (objc_property_t property) {
 
   [keyVals each:^(AZKP* obj) { [self sV:obj.value fK:obj.key]; }];
 }
-- (INST) withValuesForKeys: v,...     { azva_list_to_nsarray(v,vals); return [self objectBySettingVariadicPairs:vals]; }
-- (INST)            wVsfKs: v,...     { azva_list_to_nsarray(v,vals); return [self objectBySettingVariadicPairs:vals]; }
+- _Kind_ withValuesForKeys: v,...     { azva_list_to_nsarray(v,vals); return [self objectBySettingVariadicPairs:vals]; }
+- _Kind_            wVsfKs: v,...     { azva_list_to_nsarray(v,vals); return [self objectBySettingVariadicPairs:vals]; }
 
-- (INST) objectBySettingVariadicPairs:(NSA*)vsForKs { AZBlockSelf(x); [vsForKs eachWithVariadicPairs:^(id a,id b){ [x setValue:a forKey:b]; }]; return x; }
+- _Kind_ objectBySettingVariadicPairs __List_ vsForKs {
+
+
+  BOOL makeMCopy = ![NSStringFromClass([self classForCoder]) containsString:@"Mutable"] && [self respondsToString:@"mutableCopy"];
+  __block id x = makeMCopy ? [self mutableCopy] : self;
+  [vsForKs eachWithVariadicPairs:^(id a,id b){
+
+      ![x canSetValueForKey:b] ?: [x setValue:a forKey:b];
+  }];
+  return x;
+
+}
 
 static const char* getPropertyType    (objc_property_t property) 	{
 	const char *attributes = property_getAttributes(property);
@@ -330,7 +341,7 @@ static const char* getPropertyType    (objc_property_t property) 	{
 	}];
 }
 
-- (NSS*) properties_disabled	{ return [self.propertyNames formatAsListWithPadding:30]; }
+//- (NSS*) properties_disabled	{ return [self.propertyNames formatAsListWithPadding:30]; }
 
 - (NSA*) propertyNames									{
 	return self.class.propertyNames;
@@ -350,7 +361,8 @@ static const char* getPropertyType    (objc_property_t property) 	{
 
       [sum addObject:$(@"%@:%@ [%@]", obj, ISA(x,NSA)||ISA(x,NSD) ? $(@"@count.%lu", [x count]) : x, 
         
-          $UTF8([self typeOfPropertyNamed:obj]).humanReadableEncoding ).stringByRemovingReturns];
+          $UTF8(
+            [self typeOfPropertyNamed:obj]).humanReadableEncoding ).stringByRemovingReturns];
       return sum;
   }]; 
   return [props formatAsListWithPadding:props.lengthOfLongestMemberString + 3];// truncation + 3];
@@ -450,18 +462,14 @@ static const char* getPropertyType    (objc_property_t property) 	{
 	return ( [[self class] getterForPropertyNamed:name] );
 }
 -  (SEL) setterForPropertyNamed:		(NSS*)name	{
-	return ( [[self class] setterForPropertyNamed:name] );
+
+	return ( [self.class setterForPropertyNamed:name] );
 }
 - (NSA*) attributesOfProp:(NSS*)propName {
-	objc_property_t prop = class_getProperty(self.class, [propName UTF8String]);
-	if (!prop) {
-		// doesn't exist for object
-		return nil;
-	}
-	const char *propAttr = property_getAttributes(prop);
-	NSString *propString = [NSString stringWithUTF8String:propAttr];
-	NSArray *attrArray = [propString componentsSeparatedByString:@","];
-	return attrArray;
+
+  objc_property_t prop = class_getProperty(self.class, [propName UTF8String]);
+
+  return !prop ? nil : [$UTF8(property_getAttributes(prop)) componentsSeparatedByString:@","];
 }
 - (NSS*) retentionMethodOfPropertyNamed:(NSS*)name	{
 	return ( [[self class] retentionMethodOfPropertyNamed:name] );

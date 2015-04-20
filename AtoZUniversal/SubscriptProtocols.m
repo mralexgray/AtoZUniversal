@@ -1,5 +1,6 @@
 
 #import <AtoZUniversal/AtoZUniversal.h>
+#import <objc/message.h>
 
 //@concreteprotocol(KeyGet)
 //

@@ -3,6 +3,55 @@
 #define AtoZ_MacroDefines
 
 
+#pragma mark -  DATASOURCE
+
+#define TVMethod(RET_TYPE)   \
+      - (RET_TYPE) tableView:(_TblV)tv
+
+#if MAC_ONLY
+
+#define TVNumRows \
+      - (NSInteger) numberOfRowsInTableView:(NSTableView *)tableView;
+
+/* This method is required for the "Cell Based" TableView, and is optional for the "View Based" TableView. If implemented in the latter case, the value will be set to the view at a given row/column if the view responds to -setObjectValue: (such as NSControl and NSTableCellView).
+ */
+#define TVObj4ColRow    \
+        TVMethod(id) objectValueForTableColumn:(NSTableColumn*)tc row:(NSInteger)row
+
+#elif IOS_ONLY
+
+#define TVNumRowsInSection    \
+        TVMethod(NSInteger) numberOfRowsInSection:(NSInteger)section
+
+#define TVNumSections         \
+      - (NSInteger) numberOfSectionsInTableView:(UITableView*)tv
+
+#define TVCellForRowAtIP  \
+        TVMethod(UITableViewCell*) cellForRowAtIndexPath:(NSIndexPath *)ip
+#endif
+
+#pragma mark - TableView  DELEGATE
+
+#if MAC_ONLY
+
+#define TVWillDispCell4ColRow \
+        TVMethod(_Void) willDisplayCell:cell forTableColumn:(NSTableColumn *)tc row:(NSInteger)r
+
+#define TVSelectDidChange \
+      - (void)tableViewSelectionDidChange:(_Note)note 
+
+#define TVView4ColRow \
+        TVMethod(_View) viewForTableColumn:(NSTableColumn*)tc row:(NSInteger)r
+
+#else
+
+#define TVHeightForRowAtIP \
+        TVMethod(CGFloat) heightForRowAtIndexPath:(NSIndexPath*)ip
+
+#define TVDidSelectRowAtIP \
+        TVMethod(void) didSelectRowAtIndexPath:(NSIndexPath*)ip
+
+#endif
 
 //#define DECALREIT(orig,short) \
 //  _Type  orig * _#short;      \
@@ -73,7 +122,7 @@
 #define   prop_ property
 #define   prop__ property (STR)
 
-#define   _P @property
+#define   _PR @property
 
 
 
@@ -92,7 +141,6 @@
 
 #define   prop_RC  prop_ (RO,CP)
 
-#define P(...) id<__VA_ARGS__>
 #define INTERFACE(X,...)    @interface X : __VA_ARGS__ + (instancetype)
 
 #define PROP(...) property (__VA_ARGS__)
@@ -108,7 +156,6 @@
 
 #define SizeableObject SizeLike 
 #define BoundingObject RectLike
-#define DECLARECONFORMANCE(_CLASS_,_PROTOCOL_) @interface _CLASS_ (_PROTOCOL_) <_PROTOCOL_> @end
 
 #define  AZPROCINFO  NSProcessInfo.processInfo
 
@@ -442,7 +489,8 @@ X,OBJC_ASSOCIATION_COPY_NONATOMIC);
 
 #define YOU_DONT_BELONG return [NSException raise:@"ProtocolIsOverridingYourMethod" format:@"You already implement %@. why are you (%@) here?", AZSELSTR, self]
 
-#define DEMAND_CONFORMANCE	[NSException raise:@"NonConformantProtocolMethodFallThrough" format:@"This concrete protocol NEEDS YOU (%@) to implement this method,.. %@ elsewhere... for internal peace and traquility.",NSStringFromClass([self class]), AZSELSTR]
+#define DEMAND_CONFORMANCE	[NSException raise:@"NonConformantProtocolMethodFallThrough" format:\
+  $$$(@"This concrete protocol NEEDS YOU (", NSStringFromClass([self class]), @") to implement this method,.. ", AZSELSTR, @" elsewhere... for internal peace and traquility."), nil]
 
 #pragma mark - COLORS
 #define $RGBA(R,G,B,A) ((NSC*)[NSC r:R g:G b:B a:A])
@@ -612,29 +660,6 @@ OBJC_EXPORT BOOL AZEqualToAnyObject(id x, ...);
 //AZPROPASS(_kind_...) @property (NA,ASS) _kind_ __VA_ARGS__ //#QUALIFIER_FROM_BITMASK(_arc_)
 
 
-/// Also in AutoBox (redundancy needs fix)
-
-  #define NSStringifyWithoutExpandingMacros(x) @#x
-  #define NSStringify(x) NSStringifyWithoutExpandingMacros(x)
-  #define NSSTRINGIFY(z) NSStringify(z)
-
-  /*	CLANG_IGNORE(-Wuninitialized);
-    Shady Shit
-    CLANG_POP;
-  */
-
-  #define CLANG_IGNORE_HELPER0(x) #x
-  #define CLANG_IGNORE_HELPER1(x) CLANG_IGNORE_HELPER0(clang diagnostic ignored x)
-  #define CLANG_IGNORE_HELPER2(y) CLANG_IGNORE_HELPER1(#y)
-  #define CLANG_POP _Pragma("clang diagnostic pop")
-  #define CLANG_IGNORE(x)\
-    _Pragma("clang diagnostic push");\
-    _Pragma(CLANG_IGNORE_HELPER2(x))
-
-  #define CLANG_IGNORE_DEPRECATED CLANG_IGNORE(-Wdeprecated-declarations)
-  #define CLANG_IGNORE_PROTOCOL CLANG_IGNORE(-Wprotocol)
-
-// END Reducuntdamnt
 
 #define $point(A)     [NSValue valueWithPoint:A]
 #define $points(A,B)     [NSValue valueWithPoint:CGPointMake(A,B)]
@@ -688,7 +713,7 @@ OBJC_EXPORT BOOL AZEqualToAnyObject(id x, ...);
 		NSInteger c = 9;						 IS_OBJECT(a) ? @"YES" : @"NO" -" NO   */
 
 
-#define dispatch_uno(...) ((_Void)({ static dispatch_once_t u; dispatch_once(&u, ^{ ({ __VA_ARGS__; }); }); }))
+#define dispatch_uno(...) ((void)({ static dispatch_once_t u; dispatch_once(&u, ^{ ({ __VA_ARGS__; }); }); }))
 
 #define SYNTHESIZE_SINGLETON_FOR_CLASS(classname, accessorname) 		\
 + (classname *)accessorname {                                       \
@@ -794,11 +819,11 @@ id compareto = [metamacro_head(__VA_ARGS__) class];\
 #define                                         NSZeroRange NSMakeRange(0,0)
 
 #if TARGET_OS_IPHONE
-//@import UIKit.UIApplication;
+//#import <UIKit.UIApplication/UIKit.UIApplication.h>
 #define AZWORKSPACE UIApplication.sharedApplication
 #define PLATFORM_OPEN(url) [AZWORKSPACE openURL:url]
 #elif TARGET_OS_MAC
-//@import AppKit.NSWorkspace;
+//#import <AppKit.NSWorkspace/AppKit.NSWorkspace.h>
 #define AZWORKSPACE NSWorkspace.sharedWorkspace
 NS_INLINE void PLATFORM_OPEN(id url) { [AZWORKSPACE openURL:url]; }
 #endif
@@ -927,7 +952,8 @@ NS_INLINE void PLATFORM_OPEN(id url) { [AZWORKSPACE openURL:url]; }
 #define    AZCACMaxX AZConstRelSuper ( kCAConstraintMaxX   )
 
 #define    AZCACMinY AZConstRelSuper ( kCAConstraintMinY   )
-#define     AZLOGCMD LOGCOLORS($UTF8(__PRETTY_FUNCTION__), AZCLSSTR, RANDOMPAL, nil)
+#define     AZLOGCMD [$(@"%s\n",__PRETTY_FUNCTION__) printC:RANDOMCOLOR]
+// LOGCOLORS($UTF8(__PRETTY_FUNCTION__), AZCLSSTR, RANDOMPAL, nil)
 #define AZRANDOMICON [NSIMG randomMonoIcon]
 
 #pragma mark - VIEWS
@@ -1585,29 +1611,34 @@ typedef void (^AZVA_ArrayBlock)(NSArray* values);
 #define AZVA_ARRAYB void (^)(NSArray* values)
 #define AZVA_IDB void (^AZVA_Block)(id entry)
 
-/**	Iterate over a va_list, executing the specified code block for each entry.
- @param FIRST_ARG_NAME The name of the first argument in the vararg list.
- @param BLOCK A code block of type KSVA_Block.	 */
-#define azva_iterate_list(FIRST_ARG_NAME, BLOCK) { \
-	AZVA_Block azva_block = BLOCK;	va_list azva_args	;	va_start(azva_args,FIRST_ARG_NAME );							 \
-	for( id azva_arg = FIRST_ARG_NAME;	azva_arg != nil;  azva_arg = va_arg(azva_args, id ) )	azva_block(azva_arg); \
-	va_end(azva_args); }
+/*!	Iterate over a va_list, executing the specified code block for each entry.
+    @param FIRST_ARG_NAME The name of the first argument in the vararg list.
+    @param BLOCK          A code block of type KSVA_Block.
+ */
+
+#define azva_iterate_list(FIRST_ARG_NAME, BLOCK) {                                          \
+	AZVA_Block azva_block = BLOCK;	va_list azva_list	;	va_start(azva_list,FIRST_ARG_NAME );  \
+  id azva_arg = FIRST_ARG_NAME; azva_block(azva_arg);                                       \
+	while( (azva_arg = va_arg(azva_list,id)) ) azva_block(azva_arg);                          \
+	va_end(azva_list);                                                                        \
+}
 
 #define AZVA_ARRAY(FIRST_ARG_NAME,ARRAY_NAME) azva_list_to_nsarray(FIRST_ARG_NAME,ARRAY_NAME)
 
-/***	Convert a variable argument list into array. An autorel. NSMA will be created in current scope w/ the specified name.
- @param FIRST_ARG_NAME The name of the first argument in the vararg list.
- @param ARRAY_NAME The name of the array to create in the current scope.	 */
+/*!	Convert a variable argument list into array. An autorel. NSMA will be created in current scope w/ the specified name.
+    @param FIRST_ARG_NAME The name of the first argument in the vararg list.
+    @param ARRAY_NAME     The name of the array to create in the current scope.	 
+ */
 #define azva_list_to_nsarray(FIRST_ARG_NAME, ARRAY_NAME) \
 	NSMA* ARRAY_NAME = NSMA.new;  azva_iterate_list(FIRST_ARG_NAME, ^(id entry) { [ARRAY_NAME addObject:entry]; })
 
 #define azva_list_to_nsarrayBLOCKSAFE(FIRST_ARG_NAME, ARRAY_NAME) \
 	NSMA* ARRAY_NAME = NSMA.new;  azva_iterate_list(FIRST_ARG_NAME, ^(id entry) { __block __typeof__(entry) _x_ = entry; [ARRAY_NAME addObject:_x_]; })
 
-/*** 	Convert a variable argument list into a dictionary, interpreting the vararg list as object, key, object, key, ...
- An autoreleased NSMutableDictionary will be created in the current scope with the specified name.
- @param FIRST_ARG_NAME The name of the first argument in the vararg list.
- @param DICT_NAME The name of the dictionary to create in the current scope.		*/
+/*! 	Convert a variable argument list into a dictionary, interpreting the vararg list as object, key, object, key, ... An autoreleased NSMutableDictionary will be created in the current scope with the specified name.
+      @param FIRST_ARG_NAME  The name of the first argument in the vararg list.
+      @param DICT_NAME       The name of the dictionary to create in the current scope.
+ */
 #define azva_list_to_nsdictionary(FIRST_ARG_NAME, DICT_NAME) \
 	NSMD* DICT_NAME = NSMD.new; 	{						 														\
 		__block id azva_object = nil; 					 														\
@@ -1615,9 +1646,10 @@ typedef void (^AZVA_ArrayBlock)(NSArray* values);
 			if(azva_object == nil)  azva_object = entry; 													\
 			else {	[DICT_NAME setObject:azva_object forKey:entry]; azva_object = nil;  } 	}); }
 
-/*** 	Same as above... but KEY is first!
- @param FIRST_ARG_NAME The name of the first argument in the vararg list.
- @param DICT_NAME The name of the dictionary to create in the current scope.		*/
+/*! Same as above... but KEY is first!
+    @param FIRST_ARG_NAME The name of the first argument in the vararg list.
+    @param DICT_NAME The name of the dictionary to create in the current scope.
+ */
 #define azva_list_to_nsdictionaryKeyFirst(FIRST_KEY, DICT_NAME) \
 	NSMD* DICT_NAME = NSMD.new; 	{						 														\
 		__block id azva_object = nil; 					 														\

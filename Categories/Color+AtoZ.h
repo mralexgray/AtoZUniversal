@@ -3,6 +3,8 @@
 
 @Xtra(Colr,AtoZUniversal)
 
++ _Kind_ r __Flot_ r g __Flot_ g b __Flot_ b a __Flot_ a ___
+
 _RO _Text primaryColorName
       ___
 _AT _Text name; // settable, but auto_gets

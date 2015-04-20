@@ -10,6 +10,8 @@ _AT    int lastIndex;
 
 @implementation AZSparseArray
 
+- (NSEnumerator *) objectEnumerator { return _storage.objectEnumerator; }
+
 - (NSUInteger) countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(__unsafe_unretained id [])buffer count:(NSUInteger)le { DEMAND_CONFORMANCE; return NSNotFound; }
 
 - (id<NSFastEnumeration>) enumerator { return _storage.allValues; }
@@ -273,7 +275,7 @@ VOID(addObjectsIfMissing:(id<NSFastEnumeration>)x { for (id z in x) [self addObj
 	return result;
 }
 
--  (NSA*) alphabetized { return [self.mutableCopy alphabetize].copy; } /*! AOK */
+-  _List_ alphabetized { return [self.mutableCopy alphabetize].copy; } /*! AOK */
 
 +  (NSA*) arrayWithCopies:(NSUI)copies of:(id<NSCopying>)obj {
 
@@ -471,10 +473,10 @@ NSA* SortersForKeysAsc(NSString*sort, BOOL order, ...) {
 //  [self eachWithIndex:^(NSO* obj, NSI idx) { NSLog(@"%@", [obj properties]); }];
 //}
 
-- _Void_ logEach                  {
-  [self eachWithIndex:^(id obj, NSI idx) {                NSLog(@"Index %ld: %@", (long)idx, obj);  }];
-}
-+ (NSA*) arrayFromPlist:(NSS*) path {
+_VD logEach { [self eachWithIndex:^(id obj, _SInt idx) { NSLog(@"Index %ld: %@",idx, obj);  }]; }
+
++ _List_ arrayFromPlist __Text_ path {
+
 //  NSParameterAssert(path);
 //  NSParameterAssert([FM fileExistsAtPath:path]);
   id d = [NSData dataWithContentsOfFile:path];
@@ -482,25 +484,23 @@ NSA* SortersForKeysAsc(NSString*sort, BOOL order, ...) {
   return [NSPropertyListSerialization propertyListWithData:d options:NSPropertyListImmutable format:nil error:nil] ?: @[];
           //  mutabilityOption:NSPropertyListImmutable
 }
-- _Void_ saveToPlistAtPath:(NSS*) path {
+_VD saveToPlistAtPath __Text_ path {
   //	[HRCoder archiveRootObject:self toFile:path];
   //	[NSTask launchedTaskWithLaunchPath:@"/usr/bin/plutil" arguments:@[@"-convert", @"xml1", path]];
 }
-- (NSA*) arrayWithEach {
-  return [NSArray arrayWithArrays:self];
+_LT arrayWithEach { return [List arrayWithArrays:self]; }
+
++ _List_ arrayWithArrays __List_ arrays { return [self mutableArrayWithArrays:arrays].copy; }
+
++ mList_ mutableArrayWithArrays __List_ arrays {
+
+  return [arrays reduce:@[].mC withBlock:^id(id sum, NSArray *a) {
+    return [sum addObjectsFromArray:a], sum;
+  }];
 }
-+ (NSA*) arrayWithArrays:(NSA*) arrays {
-  return [[self mutableArrayWithArrays:arrays] copy];
-}
-+ (NSMA*) mutableArrayWithArrays:(NSA*)arrays {
-  NSMA*array = [NSMA arrayWithCapacity:0];
-  for (NSArray *a in arrays) {
-    [array addObjectsFromArray:a];
-  }
-  return array;
-}
-- (NSS*) stringWithEnum:(NSUI)anEnum                    { return self[anEnum];    }
-- (NSUI) enumFromString:(NSS*)aString default:(NSUI)def {
+_TT stringWithEnum __UInt_ anEnum                    { return self[anEnum];    }
+
+_UT enumFromString __Text_ aString default __UInt_ def {
   NSUI n = [self indexOfObject:aString];  IFNOT_RETURN(n != NSNotFound); if (n == NSNotFound) n = def; return n;
 }
 - (NSUI) enumFromString:(NSS*)aString                   {       return [self enumFromString:aString default:0]; }
@@ -1648,7 +1648,8 @@ static NSI comparatorForSortingUsingArray(id object1, id object2, void *context)
 //}
 
 - (NSUI) lengthOfLongestMemberString {
-	return [[[self subArrayWithMembersOfKind:NSS.class] sortedWithKey:@"length" ascending:NO][0]length];
+
+	return [[[self subArrayWithMembersOfKind:Text.class] sortedWithKey:@"length" ascending:NO][0]length];
 }
 - (NSA*)           filterByProperty:(NSS*) p
 {
@@ -1680,9 +1681,13 @@ static NSI comparatorForSortingUsingArray(id object1, id object2, void *context)
   [[self valueForKey:k] MTrecursiveValueForKey:k progress:prog];
 }
 @end
+
 @implementation NSArray (RecursiveKVC)
+
 - (NSA*)recursiveValueForKey:(NSS*)k {  return [super recursiveValueForKey:k]; }
+
 - _Void_ MTrecursiveValueForKey:(NSS*)key progress:(NSMA*)progress{
+
     for (id obj in self)[obj MTrecursiveValueForKey:key progress:progress];
 }
 
@@ -1706,63 +1711,46 @@ static NSI comparatorForSortingUsingArray(id object1, id object2, void *context)
 @end
 
 //id objects = @[@{@"color": @"blue"}, @{@"color": @"red"}, @{@"color": @"green"}, @"notacolor"];
-
 //[objects valueForKeyPath:@"@distinctUnionOfPresentObjects.color"] // -> @[@"blue", @"red", @"green"]. 
 
 
-#include <assert.h>
-#include <SystemConfiguration/SystemConfiguration.h>
+NSS * AZReadStdin () {
 
-#if !TARGET_OS_IPHONE 
-
-static NSString* _AZCurrentUser;
-static NSUI _AZCurrentUserID;
-
-void(^fillInTheBlanks)() = ^{
-
-//  char buf[256]; //BOOL ok;
-  uid_t _uid;
-  SCDynamicStoreRef store = SCDynamicStoreCreate(NULL, CFSTR("GetConsoleUser"), NULL, NULL);
-
-  assert(store != NULL);
-//  CFStringRef name =
-  _AZCurrentUser = (__bridge NSS*)SCDynamicStoreCopyConsoleUser(store, &_uid, NULL);
-  _AZCurrentUserID = _uid;
-//  CFRelease(store);
-// if (name != NULL) {
-//  ok = CFStringGetCString(name, buf, 256, kCFStringEncodingUTF8); //  assert(ok == true);
-//  CFRelease(name);
-//  } else  strcpy(buf, "<none>");
-//  _AZCurrentUser = [NSS stringWithUTF8String:buf];
-};
-
-
-NSUI   AZCurrentUserID() { return _AZCurrentUserID ? _AZCurrentUserID : (uid_t)(fillInTheBlanks(),_AZCurrentUserID); } // (dispatch_sync(dispatch_get_main_queue(), fillInTheBlanks), _AZCurrentUserID); }
- NSS *   AZCurrentUser() { return   _AZCurrentUser ? _AZCurrentUser : (NSS*)(fillInTheBlanks(),_AZCurrentUser); }// (dispatch_sync(dispatch_get_main_queue(), fillInTheBlanks), _AZCurrentUser); }
-
-#endif
-
-NSS * AZReadStdin () { NSFileHandle *input = NSFileHandle.fileHandleWithStandardInput;  NSData *inData = input.availableData;
-	return [[NSS stringWithUTF8Data:inData] stringByTrimmingCharactersInSet:NSCharacterSet.newlineCharacterSet];
+	return [NSFileHandle.fileHandleWithStandardInput.availableData.toUTF8String
+                              stringByTrimmingCharactersInSet:NSCharacterSet.newlineCharacterSet];
 }
 
-@implementation NSO (AtoZCLI)
-
-- (NSS*) instanceMethodsInColumns  { return [self.instanceMethodNames formatAsListWithPadding:30]; }
-@end
 
 @implementation NSA (AtoZCLI)
-- (NSS*) stringValueInColumnsCharWide:(NSUI)characters {
+
+_LT splitIntoGroupsOf __UInt_ ct {
+
+  return [self reduce:@[].mC with:^id(id sum, id obj, NSUInteger idx) {
+    idx % ct ? [sum addObject:@[obj].mC] : [[sum lastObject] addObject:obj]; return sum;
+  }];
+}
+
+_TT stringValuesMaxLineCols __UInt_ charCt {
+
+  NSUInteger longest = self.lengthOfLongestMemberString;
+
+  return [[[self splitIntoGroupsOf:floor(charCt/longest)] map:^id(id x) {
+    return [x paddedTo:longest];
+  }]joinedByNewlines];
+}
+
+_TT stringValueInColumnsCharWide __UInt_ charCt {
+
   return [self reduce:^id (id memo, id obj) {
-    __unused NSUI min = MAX(characters - [obj length], 0);
-    return [memo withString:[obj stringByPaddingToLength:characters withString:@" " startingAtIndex:0]];
+
+    __unused NSUI min = MAX(charCt - [obj length], 0);
+    return [memo withString:[obj justifyRight:charCt]];
+
   } withInitialMemo:@""];
 }
-- (NSS*) formatAsListWithPadding:(NSUI)characters	{
+_TT formatAsListWithPadding __UInt_ charCt	{
 
-	return [self.alphabetized map:^id (id obj) { return [obj justifyRight:characters];
-
-  }].joinedWithSpaces;
+	return [[self.alphabetized map:^id(id o) { return [o justifyRight: charCt]; }] joinedWithSpaces];
 
 // /*$(@"\n%@", return [obj stringByPaddingToLength:characters withString:@" " startingAtIndex:0]; }].joinedWithSpaces; // );
 }

@@ -9,7 +9,7 @@
 
 #import <objc/runtime.h>
 #import <stdio.h>
-@import Foundation;
+#import <Foundation/Foundation.h>
 #import "metamacros.h"
 
 /**

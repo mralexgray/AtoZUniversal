@@ -15,6 +15,9 @@
 
 @XtraPlan(NSBundle,AtoZ)
 
+_OC version { return self.infoDictionary[(NSString *)kCFBundleVersionKey]; }
+
+
 + resourceOfClass:(Class)rClass inBundleWithClass:(Class)k withName:(NSString*)n init:(SEL)method {
 
   _Bndl b = [self bundleForClass:k];
@@ -31,12 +34,12 @@
 #endif
   if (!(__info_plist = getsectbyname("__TEXT", "__info_plist")))  return nil;
   
-	DTA    * plist = [DTA dataWithBytesNoCopy:(void*)__info_plist->addr length:__info_plist->size freeWhenDone:NO],
-  * xmlSignature = [DTA dataWithBytesNoCopy:"<?xml"                   length:5                  freeWhenDone:NO];
+	_Data plist = [Data dataWithBytesNoCopy:(void*)__info_plist->addr length:__info_plist->size freeWhenDone:NO],
+ xmlSignature = [Data dataWithBytesNoCopy:"<?xml"                   length:5                  freeWhenDone:NO];
   
   return [[plist subdataWithRange:NSMakeRange(0, xmlSignature.length)] isEqualToData:xmlSignature]
 
-  ? plist.UTF8String
+  ? plist.toUTF8String
 
   : [NSPropertyListSerialization propertyListFromData:plist mutabilityOption:NSPropertyListImmutable
                                                format:NULL  errorDescription:NULL];

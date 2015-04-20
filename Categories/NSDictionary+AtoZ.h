@@ -83,8 +83,8 @@ _RO NSEnumerator* reverseKeyEnumerator, *keyEnumerator;
 //	items are separated by . and array indices in []
 //	example: a.b[N][M].c.d
 @interface  NSMutableDictionary (GetObjectForKeyPath)
-- objectForKeyPath:(NSS*)inKeyPath;
--(void)setObject: inValue forKeyPath:(NSS*)inKeyPath;
+- objectForKeyPath __Text_ inKeyPath;
+_VD setObject _ inValue forKeyPath __Text_ inKeyPath;
 @end
 
 @interface  NSObject  (BagofKeysValue)
@@ -93,14 +93,14 @@ _RO NSEnumerator* reverseKeyEnumerator, *keyEnumerator;
 
 @interface NSDictionary (Types)
 
-- (NSS*)stringForKey: key;
-- (NSS*)stringForKey: key default:(NSS*)defaultValue;
+_TT stringForKey _ k ___
+_TT stringForKey _ k default __Text_ defaultValue ___
 
-- (NSN*)numberForKey: key default:(NSN*)defaultValue;
-- (NSN*)numberForKey: key;
+_NB numberForKey _ k default __Numb_ defaultValue ___
+_NB numberForKey _ k ___
 
-- (NSA*)arrayForKey: key default:(NSA*)defaultValue;
-- (NSA*)arrayForKey: key;
+_LT  arrayForKey _ k default __List_ defaultValue ___
+_LT  arrayForKey _ k ___
 
 @end 
 
@@ -134,28 +134,30 @@ typedef void(^KeyValueIteratorBlock)(id key, id obj);
 @interface NSDictionary (AtoZ)
 
 
-@prop_RO id randomValue, randomKey;
+_RO id randomValue, randomKey;
 
-+ (NSD*) withFile:(NSS*)p;
-@prop_RO VAL* oldVal, *newVal;
-@prop_RO NSN* oldNum, *newNum;
++ _Kind_ withFile __Text_ p;
+_RO _Valu oldVal
+__        newVal ___
+_RO _Numb oldNum
+__        newNum ___
 
-@prop_RO NSS* flattenedString;
+_RO NSS* flattenedString;
 
-- (NSA*) mapToArray:(KeyValueToObjectBlock)block;
+_LT mapToArray:(KeyValueToObjectBlock)block;
 
-- (NSS*) keyForValueOfClass:(Class)klass;
+_TT keyForValueOfClass:(Class)klass;
 
-- _Void_ eachWithIndex:(KeyValueIndexAbortBlock)block;
+_VD eachWithIndex:(KeyValueIndexAbortBlock)block;
 
--  (id) recursiveObjectForKey:(NSS*)k; /* fierce */  //- (NSA*) recursiveObjectsForKey:(NSS*)key;
+- recursiveObjectForKey:(NSS*)k; /* fierce */  //- (NSA*) recursiveObjectsForKey:(NSS*)key;
 
-- (NSD*) findDictionaryWithValue: value;
+_DT findDictionaryWithValue: value;
 + (NSD*) dictionaryWithValue: value forKeys:(NSA*)keys;
-- (NSD*) dictionaryWithValue: value forKeys:(NSA*)keys;
-- (NSD*) dictionaryWithValue: value forKey: key;
-- (NSD*) dictionaryWithoutKey: key;
-- (NSD*) dictionaryWithKey: newKey replacingKey: oldKey;
+_DT dictionaryWithValue: value forKeys:(NSA*)keys;
+_DT dictionaryWithValue: value forKey: key;
+_DT dictionaryWithoutKey: key;
+_DT dictionaryWithKey: newKey replacingKey: oldKey;
 
 - _Void_ enumerateEachKeyAndObjectUsingBlock:(KeyValueIteratorBlock)block;
 
@@ -174,9 +176,11 @@ typedef void(^KeyValueIteratorBlock)(id key, id obj);
 //- (NSD*)dictionaryByAddingObjectsFromDictionary:(NSD*)otherDictionary;
 
 - anyObject;
-- (NSS*)keyForObjectEqualTo: anObj;
 
-- (NSS*)stringForKey:(NSS*)key defaultValue:(NSS*)defaultValue;
+_TT keyForObjectEqualTo _ x ___
+
+_TT stringForKey __Text_ k defaultValue __Text_ defaultValue ___
+
 //- (NSS*)stringForKey:(NSS*)key;
 
 - (NSA*)stringArrayForKey:(NSS*)key defaultValue:(NSA*)defaultValue;
@@ -208,8 +212,9 @@ typedef void(^KeyValueIteratorBlock)(id key, id obj);
 - (NSInteger)integerForKey:(NSS*)key defaultValue:(NSInteger)defaultValue;
 - (NSInteger)integerForKey:(NSS*)key;
 
-- (unsigned long long int)unsignedLongLongForKey:(NSS*)key defaultValue:(unsigned long long int)defaultValue;
-- (unsigned long long int)unsignedLongLongForKey:(NSS*)key;
+- (unsigned long long int) unsignedLongLongForKey:(NSS*)key defaultValue:(unsigned long long int)defaultValue;
+- (unsigned long long int) unsignedLongLongForKey:(NSS*)key;
+
 	// This seems more convenient than having to write your own if statement a zillion times
 //-- objectForKey:(NSS*)key defaultObject: defaultObject;
 
@@ -224,13 +229,10 @@ typedef void(^KeyValueIteratorBlock)(id key, id obj);
 @end
 
 @interface NSCountedSet (Votes)
-/*!
- @brief	Returns the member of the receiver which has the
- highest count
- @details  Returns nil if there is more than one member with
- the highest count (a "tie").&nbsp;  Also returns nil if
- the receiver is empty.	*/
-- winner  ;
+/*! @brief	Returns the member of the receiver which has the highest count
+  @details  Returns nil if there is more than one member with the highest count (a "tie") or if receiver is empty.
+ */
+_RO _ObjC winner ___
 @end
 
 //@interface NSArray (Subdictionaries)
@@ -257,23 +259,14 @@ typedef void(^KeyValueIteratorBlock)(id key, id obj);
 @end
 @interface NSDictionary (SimpleMutations)
 /*!
- @brief	Returns a new dictionary, equal to the receiver
- except with a single key/value pair updated or removed.
-
- @details  Convenience method for mutating a single key/value
- pair in a dictionary without having to make a mutable copy,
- blah, blah...  Of course, if you have many mutations to make
- it would be more efficient to make a mutable copy and then do
- all your mutations at once in the normal way.
- @param	value  The new value for the key.  May be nil.
- If it is nil, the key is removed from the receiver if it exists.
- If it is non-nil and the key already exists, the existing
- value is overwritten with the new value
- @param	key  The key to be mutated.  May be nil; this method
- simply returns a copy of the receiver.
- @result   The new dictionary	*/
-- (NSDictionary*)dictionaryBySettingValue: value
-								   forKey: key ;
+ @brief	Returns a new dictionary, equal to the receiver except with a single key/value pair updated or removed.
+ @details  Convenience method for mutating a single key/value pair in a dictionary without having to make a mutable copy, blah, blah...  Of course, if you have many mutations to make it would be more efficient to make a mutable copy and then do all your mutations at once in the normal way.
+ @param	v   The new value for the key.  May be nil.
+                If it is nil, the key is removed from the receiver if it exists.
+                If it is non-nil and the key already exists, the existing value is overwritten with the new value
+ @param	k     The key to be mutated.  May be nil; this method simply returns a copy of the receiver.
+*/
+- _Kind_ dictionaryBySettingValue _ v forKey _ k ___
 
 /*!
  @brief	Returns a new dictionary, equal to the receiver
@@ -338,43 +331,44 @@ extern const int jsonDoNotIndent;
 
 @interface NSDictionary (BSJSONAdditions)
 
-+ (NSD*)dictionaryWithJSONString:(NSS*)jsonString;
-- (NSS*)jsonStringValue;
++ _Dict_ dictionaryWithJSONString __Text_ jsonString;
+
+_RC _Text jsonStringValue;
 
 @end
 
 
 @interface NSDictionary (PrivateBSJSONAdditions)
 
-- (NSS*)jsonStringValueWithIndentLevel:(int)level;
-- (NSS*)jsonStringForValue: value withIndentLevel:(int)level;
-- (NSS*)jsonStringForArray:(NSA*)array withIndentLevel:(int)level;
-- (NSS*)jsonStringForString:(NSS*)string;
-- (NSS*)jsonIndentStringForLevel:(int)level;
+_TT jsonStringValueWithIndentLevel:(int)level;
+_TT             jsonStringForValue: value withIndentLevel:(int)level;
+_TT             jsonStringForArray:(NSA*)array withIndentLevel:(int)level;
+_TT            jsonStringForString:(NSS*)string;
+_TT       jsonIndentStringForLevel:(int)level;
 
 @end
 
-extern NSString *jsonObjectStartString,*jsonObjectEndString,*jsonArrayStartString,*jsonArrayEndString;
-extern NSString *jsonKeyValueSeparatorString, *jsonValueSeparatorString, *jsonStringDelimiterString;
-extern NSString *jsonStringEscapedDoubleQuoteString, *jsonStringEscapedSlashString;
-extern NSString *jsonTrueString, *jsonFalseString, *jsonNullString;
+extern NSString *jsonObjectStartString,*jsonObjectEndString,*jsonArrayStartString,*jsonArrayEndString,
+                *jsonKeyValueSeparatorString, *jsonValueSeparatorString, *jsonStringDelimiterString,
+                *jsonStringEscapedDoubleQuoteString, *jsonStringEscapedSlashString,
+                *jsonTrueString, *jsonFalseString, *jsonNullString;
 
 
 @interface NSScanner (PrivateBSJSONAdditions)
 
-- (BOOL)scanJSONObject:(NSDictionary **)dictionary;
-- (BOOL)scanJSONArray:(NSArray **)array;
-- (BOOL)scanJSONString:(NSString **)string;
-- (BOOL)scanJSONValue:(id *)value;
-- (BOOL)scanJSONNumber:(NSNumber **)number;
+_IT scanJSONObject:(_Dict *)dictionary;
+_IT  scanJSONArray:(_List *)array;
+_IT scanJSONString:(_Text *)string;
+_IT  scanJSONValue:(_ObjC *)value;
+_IT scanJSONNumber:(_Numb *)number;
 
-- (BOOL)scanJSONWhiteSpace;
-- (BOOL)scanJSONKeyValueSeparator;
-- (BOOL)scanJSONValueSeparator;
-- (BOOL)scanJSONObjectStartString;
-- (BOOL)scanJSONObjectEndString;
-- (BOOL)scanJSONArrayStartString;
-- (BOOL)scanJSONArrayEndString;
-- (BOOL)scanJSONStringDelimiterString;
+_RO _IsIt scanJSONWhiteSpace,
+          scanJSONKeyValueSeparator,
+          scanJSONValueSeparator,
+          scanJSONObjectStartString,
+          scanJSONObjectEndString,
+          scanJSONArrayStartString,
+          scanJSONArrayEndString,
+          scanJSONStringDelimiterString;
 
 @end

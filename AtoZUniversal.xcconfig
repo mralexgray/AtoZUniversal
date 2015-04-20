@@ -62,7 +62,7 @@ WARNING_CFLAGS = -Wno-implicit-int -Wno-incomplete-umbrella -Wno-pointer-sign -W
 ENABLE_STRICT_OBJC_MSGSEND                = NO
 
 
-                DYLIB_INSTALL_NAME_BASE = @path
+                DYLIB_INSTALL_NAME_BASE = @rpath
 //GCC_INCREASE_PRECOMPILED_HEADER_SHARING = YES
 //           GCC_PRECOMPILE_PREFIX_HEADER = YES
 

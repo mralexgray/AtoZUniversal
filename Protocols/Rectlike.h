@@ -42,12 +42,12 @@ _NA _Cord minXmaxY, midXmaxY, maxXmaxY,
 
 _RO _Flot perimeter, area;              // 2 * (width + height)
 
-- _IsIt_      isLargerThan:(P(RectLike))r ___
-- _IsIt_     isSmallerThan:(P(RectLike))r ___
-- _IsIt_         isRectLke:(P(RectLike))r ___
-- _IsIt_  isLargerThanRect:_Rect_ r ___
-- _IsIt_ isSmallerThanRect:_Rect_ r ___
-- _IsIt_        isSameRect:_Rect_ r ___
+- _IsIt_      isLargerThan __Ｐ(RectLike) r ___
+- _IsIt_     isSmallerThan __Ｐ(RectLike) r ___
+- _IsIt_         isRectLke __Ｐ(RectLike) r ___
+- _IsIt_  isLargerThanRect __Rect_ r ___
+- _IsIt_ isSmallerThanRect __Rect_ r ___
+- _IsIt_        isSameRect __Rect_ r ___
 
 /*! Protocol factory methods for all conformant classes! */
 
@@ -58,8 +58,8 @@ _RO _Flot perimeter, area;              // 2 * (width + height)
          h:_Flot_ h ___
 
 // 0 - 4 * NSNumber.. dims + optional NSValue rect for superframe.
-+ _Kind_ rectLike:_Numb_ d1, ... NS_REQUIRES_NIL_TERMINATION ___
-+ _Kind_ withRect:_Rect_ r ___                     /*! NSV *r = [NSV withRect:AZRectBy(100,200)];  */
++ _Kind_ rectLike __Numb_ d1, ... NS_REQUIRES_NIL_TERMINATION ___
++ _Kind_ withRect __Rect_ r ___                     /*! NSV *r = [NSV withRect:AZRectBy(100,200)];  */
 
 
 - _Void_ iterate:(CordBlk)b;
@@ -94,10 +94,10 @@ DECLARECONFORMANCE( NSIMG,   RectLike )
 #define AZRUNDERMENU     AZR.screenFrameUnderMenu
 
 // {  CGF width, height;	}
-//@prop_RO NSR r;
+//_RONSR r;
 #ifdef UNIMPLENETED 
-+ (INST) screnFrameUnderMenu;
-@prop_RO CGF 	area;
++ _Kind_ screnFrameUnderMenu;
+_RO CGF 	area;
 - (BOOL)     contains:(id)obj;
 //- (BOOL)    contaiNSP:(NSP)p;
 - (BOOL) containsRect:(NSR)r;

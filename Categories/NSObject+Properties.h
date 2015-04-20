@@ -33,11 +33,11 @@
 + (NSD*) classPropertiesAndTypes;
 + (NSA*) objcPropertiesWithoutSuperclass;
 + (NSA*) objcProperties;
-@prop_RO NSD* propertiesPlease, * pp, * propertyNamesAndTypes;
-@prop_RO NSS * ppString; // PRIMARY PROPERTY LISTER
+_RO NSD* propertiesPlease, * pp, * propertyNamesAndTypes;
+_RO NSS * ppString; // PRIMARY PROPERTY LISTER
                       //* properties;
-@prop_RO NSA * propertyNames;
-@prop_RO BOOL hasProperties;
+_RO NSA * propertyNames;
+_RO BOOL hasProperties;
 - (NSD*) propertiesSans:						(NSS*)someKey;
 - (NSD*) propertiesSansKeys: 					(NSA*)someKeys;
 + (BOOL) hasProperties;
@@ -54,46 +54,43 @@
 - (NSArray*) attributesOfProp:(NSString*)propName;
 
 // instance convenience accessors for above routines (who likes to type [myObj class] all the time ?)
-- (BOOL) hasPropertyNamed: 			 		    _Text_ name;
-- (BOOL) hasPropertyNamed: 			 		    _Text_ name ofType: (const char *) type;
-- (BOOL) hasPropertyForKVCKey: 	 	      _Text_ key;
-- (const char*) typeOfPropertyNamed:    _Text_ name;
--  (SEL) getterForPropertyNamed: 	      _Text_ name;
--  (SEL) setterForPropertyNamed:        _Text_ name;
-- _Text_ retentionMethodOfPropertyNamed:_Text_ name;
+_IT hasPropertyNamed                __Text_ name ___
+_IT hasPropertyNamed                __Text_ name ofType: (const char *) type ___
+_IT hasPropertyForKVCKey            __Text_ key  ___
+- _CChr_ typeOfPropertyNamed        __Text_ name ___
+_MH getterForPropertyNamed          __Text_ name ___
+_MH setterForPropertyNamed          __Text_ name ___
+_TT retentionMethodOfPropertyNamed  __Text_ name ___
 
-+ (NSA*) az_propertyNames;
-+ (NSD*) az_propertyNamesAndTypes;
-- (NSA*) az_properties;
++ _List_ az_propertyNames;
++ _Dict_ az_propertyNamesAndTypes;
 + _Text_ az_getPropertyType:(NSS*)attributeString;
 
-_RO _List objectKeys, primitiveKeys;
+_RO _List az_properties
+__        objectKeys
+__        primitiveKeys
+___
 
 @end
 
-/// USAGE:  [someDictionary mapPropertiesToObject: someObject];
 @interface NSDictionary  (PropertyMap)
 
-- _Void_ mapPropertiesToObject:	instance;
+_VD mapPropertiesToObject:	x; ///   USAGE: [someDict mapPropertiesToObject: someObject];
 
 @end
 
-
-/*! Pure C API addition to the existing API in objc/runtime.h.
-    The functions above are implemented in terms of these. 
-    
+/*! Pure C API addition to the existing API in objc/runtime.h. The functions above are implemented in terms of these.
     @return a static buffer 
     @note copy the string to retain it, as it will be overwritten on the next call to this function
  */
 const char * property_getTypeString( objc_property_t property );
 
 /// getter/setter functions: unlike those above, these return NULL unless a getter/setter is EXPLICITLY defined
-SEL property_getGetter( objc_property_t p );
-SEL property_getSetter( objc_property_t p );
+SEL property_getGetter(objc_property_t p);
+SEL property_getSetter(objc_property_t p);
 
 /// this returns a static (data-segment) string, so the caller does not need to call free() on the result
 const char * property_getRetentionMethod( objc_property_t property );
-
 
 /*	Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions  are met: Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.	*  Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.	*  Neither the name of this project's author nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.	* THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.	*/
 

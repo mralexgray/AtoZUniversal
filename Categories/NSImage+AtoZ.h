@@ -69,7 +69,7 @@ CGF                     distance (    _Cord aPnt );				// Just one function to d
 @interface NSImage (AtoZ) <ClassKeyGet,
                           AZDynamicImages>
 
-@prop_RO _Data PNGRepresentation;
+_RO _Data PNGRepresentation;
 
 + (NSIMG*) gravatarForEmail:(NSS*)e;
 
@@ -81,7 +81,7 @@ CGF                     distance (    _Cord aPnt );				// Just one function to d
 
 //+ objectForKeyedSubscript: k;
 //@property (NA) CGF width, height;
-@prop_RO NSAS *attributedString;
+_RO NSAS *attributedString;
 
 + (NSIMG*) imageFromLockedFocusSize:(NSSZ)sz lock:(NSIMG*(^)(NSIMG*))block;
 - (NSIMG*) lockFocusBlockOut:(NSIMG*(^)(NSIMG*))block;
@@ -169,7 +169,7 @@ CGF                     distance (    _Cord aPnt );				// Just one function to d
 - (NSIMG*) resizeWhenScaledImage;
 + (NSIMG*) prettyGradientImage;  // Generates a 256 by 256 pixel image with a complicated gradient in it.
 
-@prop_RO NSC * quantized;
+_RO NSC * quantized;
 
 
 - (NSA*)   quantize;
@@ -177,7 +177,7 @@ CGF                     distance (    _Cord aPnt );				// Just one function to d
 + (NSIMG*) desktopImage;
 - (void) openInPreview;
 
-@prop_RO NSS * asTempFile,
+_RO NSS * asTempFile,
 
 /// htmlEncodedImg  a full, HTML tagged,base 64 image..  ready to be appended.\
 \
@@ -337,7 +337,7 @@ CGF                     distance (    _Cord aPnt );				// Just one function to d
 - (NSData *)JFIFData:(float) compressionValue;
 @end
 
-@import QuartzCore;
+#import <QuartzCore/QuartzCore.h>
 @interface CIFilter (Subscript)
 - objectForKeyedSubscript:(NSS*)key;
 - _Void_ setObject: object forKeyedSubscript:(NSS*)key;

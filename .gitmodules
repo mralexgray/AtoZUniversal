@@ -1,7 +1,7 @@
 [submodule "BaseModel"]
 	  path = BaseModel
 	   url = https://github.com/mralexgray/BaseModel.git
-[submodule "Modules/_ObjC"]
+[submodule "_ObjC"]
 	  path = _ObjC
 	   url = https://github.com/mralexgray/_ObjC.git
 [submodule "DatabaseStorage"]
@@ -28,10 +28,6 @@
 [submodule "ObjectMatcher"]
     path = ObjectMatcher
      url = https://github.com/mralexgray/ObjectMatcher.git
-[submodule "_ObjC"]
-	ignore = all
-	update = rebase
-	fetchRecurseSubmodules = true
 [submodule "FunSize"]
 	path = FunSize
 	url = https://github.com/mralexgray/FunSize.git
