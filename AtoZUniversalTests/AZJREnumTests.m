@@ -6,7 +6,8 @@
 //  Copyright (c) 2014 mrgray.com, inc. All rights reserved.
 //
 
-#import <XCTest; @import AtoZUniversal/XCTest; @import AtoZUniversal.h>
+@import XCTest;
+@import AtoZUniversal;
 
 JREnumDeclare(SplitEnumWith1ConstantSansExplicitValues, SplitEnumWith1ConstantSansExplicitValues_Constant1);
 JREnumDeclare(SplitEnumWith1ConstantWithExplicitValues, SplitEnumWith1ConstantWithExplicitValues_Constant1 = 42);

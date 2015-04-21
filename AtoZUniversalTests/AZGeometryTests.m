@@ -1,6 +1,6 @@
 
-#import <XCTest/XCTest.h>
-#import <AtoZUniversal/AtoZUniversal.h>
+@import XCTest;
+@import AtoZUniversal;
 
 
 AZTESTCASE(AZGeometryTests) { 
@@ -57,7 +57,7 @@ JREnumDefine(AZTestCase);
 
 	if (![self.class hasSharedInstance]) {
 		[self.class setSharedInstance:self];
-		_testD = [self.instanceMethodNames map:^id(id obj) {
+		_testD = [self.methodNames map:^id(id obj) {
 			return @{obj:@{@"result" : @(AZTestUnset)}.mutableCopy};
 		}].mutableCopy;
 	}
@@ -71,11 +71,13 @@ JREnumDefine(AZTestCase);
 }
 
 @end
+
 @implementation AZFavIconTests
 
 - (AZTestCase) testiconForURL	{
 
 	__block AZTestCase test = AZTestUnset;
+  /* HERE BY MISATKE
 	NSA* urls = NSS.testDomains;
 	[urls each:^(id obj) {
 		if (test == AZTestFailed) return;
@@ -89,6 +91,7 @@ JREnumDefine(AZTestCase);
 
 		}];
 	}];
+*/
 	return test;
 }
 
@@ -143,15 +146,17 @@ JREnumDefine(AZTestCase);
 	NSUI hardCodeColumns;
 }
 
-- (void) setUp {  objects = NSIMG.monoIcons;  number = @([objects count]);  frame = AZScreenFrameUnderMenu(); 
-						hardCodeColumns = 10;  hardCodeItemSize = AZSizeFromDim(50); 	}
+//- (void) setUp {  objects = NSIMG.monoIcons;  number = @([objects count]);  frame = AZScreenFrameUnderMenu(); 
+//						hardCodeColumns = 10;  hardCodeItemSize = AZSizeFromDim(50); 	}
 
-- (AZCLITest) forQuantityQofSizeWithColumnsTest {
+//- (AZCLITest) forQuantityQofSizeWithColumnsTest {
+//
+//	return ^{  id s = [AZSizer forQuantity:number.unsignedIntegerValue ofSize:hardCodeItemSize withColumns:hardCodeColumns]; 
+//					NSLog(@"%p: %@", _cmd, s);
+//	};
+//}
 
-	return ^{  id s = [AZSizer forQuantity:number.unsignedIntegerValue ofSize:hardCodeItemSize withColumns:hardCodeColumns]; 
-					NSLog(@"%p: %@", _cmd, s);
-	};
-}
+
 //+ (AZSizer*)   forObjects: (NSA*)objects  withFrame:(NSR)aFrame arranged:(AZOrient)arr;
 //+ (AZSizer*)  forQuantity: (NSUI)aNumber aroundRect:(NSR)aFrame;
 //+ (AZSizer*)  forQuantity: (NSUI)aNumber	 inRect:(NSR)aFrame;

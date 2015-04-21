@@ -110,13 +110,6 @@
 			remoteGlobalIDString = 4311A74413D7429E00820313;
 			remoteInfo = FunSize;
 		};
-		7B5EEB3B1AE32B6C00A72BE7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 7B5EEB341AE32B6B00A72BE7 /* FunSize.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 4339C607142222D300C21E14;
-			remoteInfo = "FunSize-Static";
-		};
 		7B5EEB3F1AE32B8900A72BE7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 7B5EEB341AE32B6B00A72BE7 /* FunSize.xcodeproj */;
@@ -385,7 +378,6 @@
 			isa = PBXGroup;
 			children = (
 				7B5EEB3A1AE32B6C00A72BE7 /* FunSize.framework */,
-				7B5EEB3C1AE32B6C00A72BE7 /* libFunSize.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -694,13 +686,6 @@
 			remoteRef = 7B5EEB391AE32B6C00A72BE7 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		7B5EEB3C1AE32B6C00A72BE7 /* libFunSize.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libFunSize.a;
-			remoteRef = 7B5EEB3B1AE32B6C00A72BE7 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		7BFDE1A71AE28BD70012A607 /* _ObjC_Tool */ = {
 			isa = PBXReferenceProxy;
 			fileType = "compiled.mach-o.executable";
@@ -731,7 +716,8 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#gistphase -g INSTALL_FW_ON_DEVICE.zsh -u mralexgray\n\n[[ -a \"${SCRIPT_INPUT_FILE_0}\" ]] && \"${SCRIPT_INPUT_FILE_0}\"\n";
+			shellScript = "#gistphase -g INSTALL_FW_ON_DEVICE.zsh -u mralexgray\n\ndestscript=/tmp/INSTALL.FW.zsh\n\nif [[ -z \"$destscript\" ]]; then\n\n    url=\"https://gist.githubusercontent.com/mralexgray/9fc0e1f531df38aed349/raw/4627f295d5dc9f4091999c9a82d996d90af72d0f/INSTALL.FW.zsh\"\n\n    /bin/curl \"$url\" >! \"$destscript\"\nfi\n\nchmod +x \"$destscript\"\n$destscript\n\n#[[ -a \"${SCRIPT_INPUT_FILE_0}\" ]] && \"${SCRIPT_INPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 

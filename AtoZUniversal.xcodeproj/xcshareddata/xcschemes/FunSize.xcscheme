@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "7B582BC41AA6A4F300C450C3"
-               BuildableName = "AtoZUniversal.framework"
-               BlueprintName = "AtoZUniversal"
-               ReferencedContainer = "container:AtoZUniversal.xcodeproj">
+               BlueprintIdentifier = "4311A74313D7429E00820313"
+               BuildableName = "FunSize.framework"
+               BlueprintName = "FunSize"
+               ReferencedContainer = "container:FunSize/FunSize.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -28,36 +28,7 @@
       shouldUseLaunchSchemeArgsEnv = "YES"
       buildConfiguration = "Debug">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "7B9B40321AC14EB6002EDD01"
-               BuildableName = "_ObjC_Tests.xctest"
-               BlueprintName = "_ObjC_Tests"
-               ReferencedContainer = "container:_ObjC/_ObjC.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "7B5DC27D1AC932CA0063D701"
-               BuildableName = "AtoZUniversal Tests.xctest"
-               BlueprintName = "AtoZUniversal Tests"
-               ReferencedContainer = "container:AtoZUniversal.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "7B582BC41AA6A4F300C450C3"
-            BuildableName = "AtoZUniversal.framework"
-            BlueprintName = "AtoZUniversal"
-            ReferencedContainer = "container:AtoZUniversal.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
    </TestAction>
    <LaunchAction
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
@@ -71,10 +42,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "7B582BC41AA6A4F300C450C3"
-            BuildableName = "AtoZUniversal.framework"
-            BlueprintName = "AtoZUniversal"
-            ReferencedContainer = "container:AtoZUniversal.xcodeproj">
+            BlueprintIdentifier = "4311A74313D7429E00820313"
+            BuildableName = "FunSize.framework"
+            BlueprintName = "FunSize"
+            ReferencedContainer = "container:FunSize/FunSize.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -89,10 +60,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "7B582BC41AA6A4F300C450C3"
-            BuildableName = "AtoZUniversal.framework"
-            BlueprintName = "AtoZUniversal"
-            ReferencedContainer = "container:AtoZUniversal.xcodeproj">
+            BlueprintIdentifier = "4311A74313D7429E00820313"
+            BuildableName = "FunSize.framework"
+            BlueprintName = "FunSize"
+            ReferencedContainer = "container:FunSize/FunSize.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>

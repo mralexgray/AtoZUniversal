@@ -29,11 +29,8 @@
     path = ObjectMatcher
      url = https://github.com/mralexgray/ObjectMatcher.git
 [submodule "FunSize"]
-	path = FunSize
-	url = https://github.com/mralexgray/FunSize.git
-[submodule "GCDTask"]
-	path = GCDTask
-	url = https://github.com/reliablehosting/GCDTask.git
+    path = FunSize
+     url = https://github.com/mralexgray/FunSize.git
 [submodule "NTBTask"]
-	path = NTBTask
-	url = https://github.com/kareman/NTBTask.git
+   	path = NTBTask
+	   url = https://github.com/kareman/NTBTask.git

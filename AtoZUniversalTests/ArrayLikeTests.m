@@ -1,7 +1,7 @@
 
-//#import <GHUnit/GHUnit.h>
-#import <XCTest/XCTest.h>
-#import <AtoZUniversal/AtoZUniversal.h>
+
+@import XCTest;
+@import AtoZUniversal;
 
 @interface      ArrayLikeClass : NSO <ArrayLike> @end
 CLANG_IGNORE_PROTOCOL
@@ -26,11 +26,11 @@ _AT    ArrayLikeClass *arrayLike; ￭
   __block NSS* a = @"A";
   __block id __arrayLike = _arrayLike;
   __block BOOL observationHappened = NO, doesContain = NO, wasArrayLike = NO;
-  [_arrayLike addObserverForKeyPath:@"storage" task:^(id sender) {
-    observationHappened = YES;
-    wasArrayLike = [sender isEqual:__arrayLike];
-    doesContain = [[sender vFK:@"storage"] containsObject:a];
-  }];
+//  [_arrayLike addObserverForKeyPath:@"storage" task:^(id sender) {
+//    observationHappened = YES;
+//    wasArrayLike = [sender isEqual:__arrayLike];
+//    doesContain = [[sender vFK:@"storage"] containsObject:a];
+//  }];
   XCTAssertNoThrow([_arrayLike addObject:a], @"can add");
   XCTAssertTrue(observationHappened, @"Observation should have happened");
   XCTAssertTrue(wasArrayLike, @"sender should have bee _arraylike");
@@ -40,7 +40,7 @@ _AT    ArrayLikeClass *arrayLike; ￭
 
 - (void) testFastEnumeration {
 
-  NSA* colors = RANDOMPAL;
+  NSA* colors = @[RED,BLUE,ORANGE];
   NSUI ctr = 0;
   XCTAssertNoThrow([_arrayLike addObjects:colors], @"can add");
   XCTAssertTrue(_arrayLike.count == colors.count, @"count should equal added array object count");
