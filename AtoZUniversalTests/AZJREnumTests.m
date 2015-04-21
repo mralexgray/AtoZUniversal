@@ -24,13 +24,13 @@ JREnumDefine(TestClassState);
 JREnum(EnumWith1ConstantSansExplicitValues, EnumWith1ConstantSansExplicitValues_Constant1);
 JREnum(EnumWith1ConstantWithExplicitValues, EnumWith1ConstantWithExplicitValues_Constant1 = 42);
 
-AZTESTCASE(AZJREnumTests)  {    EnumWith1ConstantSansExplicitValues       a;
+_XCTCase(AZJREnumTests)  {    EnumWith1ConstantSansExplicitValues       a;
                               SplitEnumWith1ConstantSansExplicitValues  b;
                               SplitEnumWith1ConstantWithExplicitValues  c; }
 
-- (void) setUp { [super setUp]; a = 0; b = 0; c = 42; }
+_XCTUp( a = 0; b = 0; c = 42; )
 
-- (void) testExample {
+_XCTest(Example,
 
   XCTAssertTrue(EnumWith1ConstantSansExplicitValuesByLabel().count == 1, @"");
   XCTAssertEqualObjects([EnumWith1ConstantSansExplicitValuesByLabel() objectForKey:@"EnumWith1ConstantSansExplicitValues_Constant1"], @0, @"");
@@ -48,8 +48,8 @@ AZTESTCASE(AZJREnumTests)  {    EnumWith1ConstantSansExplicitValues       a;
   XCTAssertTrue([@"<unknown EnumWith1ConstantSansExplicitValues: 1>" isEqualToString:EnumWith1ConstantSansExplicitValuesToString(a)], @"");
   XCTAssertTrue(!EnumWith1ConstantSansExplicitValuesFromString(@"foo", &a), @"");
 
-}
-- (void) splitEnumTests {
+)
+_XCTest(splitEnumTests,
 
   XCTAssertTrue(SplitEnumWith1ConstantSansExplicitValues_Constant1 == b, @"");
   XCTAssertTrue([@"SplitEnumWith1ConstantSansExplicitValues_Constant1" isEqualToString:SplitEnumWith1ConstantSansExplicitValuesToString(b)], @"");
@@ -58,8 +58,8 @@ AZTESTCASE(AZJREnumTests)  {    EnumWith1ConstantSansExplicitValues       a;
   b++;
   XCTAssertTrue([@"<unknown SplitEnumWith1ConstantSansExplicitValues: 1>" isEqualToString:SplitEnumWith1ConstantSansExplicitValuesToString(b)], @"");
   XCTAssertTrue(!SplitEnumWith1ConstantSansExplicitValuesFromString(@"foo", &b), @"");
-}
-- (void) testExplicit {
+)
+_XCTest(Explicit,
 
   XCTAssertTrue(SplitEnumWith1ConstantWithExplicitValues_Constant1 == c, @"");
   XCTAssertTrue([@"SplitEnumWith1ConstantWithExplicitValues_Constant1" isEqualToString:SplitEnumWith1ConstantWithExplicitValuesToString(c)], @"");
@@ -68,7 +68,7 @@ AZTESTCASE(AZJREnumTests)  {    EnumWith1ConstantSansExplicitValues       a;
   c++;
   XCTAssertTrue([@"<unknown SplitEnumWith1ConstantWithExplicitValues: 43>" isEqualToString:SplitEnumWith1ConstantWithExplicitValuesToString(c)], @"");;
   XCTAssertTrue(!SplitEnumWith1ConstantWithExplicitValuesFromString(@"foo", &c), @"");
-}
+)
 
 
 /* reference 
@@ -88,19 +88,19 @@ JREnumDeclare( AZAlign, AZAlignUnset     		= 0x00000000,
 
 */
 
-- (void) testOptions { AZA unset;
+_XCTest(Options, AZA unset;
 
   XCTAssertEqual( unset, AZUnset,                  @"uninitialized Alignments should be Unset!");
   XCTAssertEqual( unset,  (AZA)NO,                  @"aka NO");
   XCTAssertEqual( AZAlignByValue().count, (NSUI)15, @"Should be 12 positions");
-  XCTAssertTrue  ( AZAlignTop | AZAlignLeft                                == AZAlignTopLeft,    @"Combining Bitmasks works");
-  XCTAssertTrue  ( AZAlignTop | AZAlignLeft | AZAlignRight | AZAlignBottom == AZAlignCenter,     @"Allsides totals center");
+  XCTAssertTrue  ( (AZAlignTop | AZAlignLeft)                              == AZAlignTopLeft,    @"Combining Bitmasks works");
+  XCTAssertTrue  ( (AZAlignTop | AZAlignLeft | AZAlignRight | AZAlignBottom) == AZAlignCenter,     @"Allsides totals center");
   
 //  AZAlignByValue().allKeys.nextObject
   XCTAssertFalse ( AZAlignOutside & (AZAlignTop|AZAlignLeft|AZAlignRight|AZAlignBottom),  @"No sides is outside  ");
   XCTAssertTrue  ( AZAlignTop&AZAlignCenter,   @"Align Cneter includes top");
 
-}
+)
 //- (void) testDecoding { AZA zTop = AZTop;
 //
 //  STAssertTrue( AZAIsVertical ), <#description, ...#>

@@ -650,9 +650,6 @@ OBJC_EXPORT BOOL AZEqualToAnyObject(id x, ...);
 #define          AZINTERFACEIMPLEMENTED(_name_) AZNSIFACE(_name_) AZIMPDECL(_name_) @end
 #define AZINTERFACEIMPLEMENTEDWITHBLOCK(_name_,_super_,_BLOCK__) AZIFACE(_name_,_super_) _BLOCK__(); @end @implementation _name_ @end
 
-#define AZTESTCASE(_name_)  @interface _name_ : XCTestCase @end @implementation _name_
-
-#define AZTEST(_methodname_, _actions_)   - _Void_ test##_methodname_ { ({ _actions_; }); }
 
 //#define AZINTERFACE(_name_,...) @interface _name_ : __VA_ARGS__ ?: NSObject   // AZINTERFACE(NSMA,Alex) -> @interface Alex : NSMutableArray
 

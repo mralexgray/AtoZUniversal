@@ -9,11 +9,9 @@
 #import <XCTest/XCTest.h>
 #import <AtoZUniversal/AtoZUniversal.h>
 
-@interface RectLikeTests : XCTestCase @end
+_XCTCase(RectLikeTests) { NSWindow *w; AZR *azr; CAL* l; NSV* v; }
 
-@implementation RectLikeTests { NSWindow *w; AZR *azr; CAL* l; NSV* v; }
-
-- (void)setUp {  [super setUp];
+_XCTUp(
 
   w   = [NSW x:100 y:100 w:200 h:200];
 
@@ -26,13 +24,17 @@
   [@[w, azr, v, l] do:^(id obj) {
     XCTAssertNotNil(obj, @"test obects should exist, but %@ didnt", [obj className]);
   }];
-}
+)
 
 #define TesteeWas @"%@ was %f", [_NObj_ testee className]
 
-- (void) miniSuite:(id<RectLike>)testee {
+- (void) miniSuite:(NSO<RectLike>*)testee {
+
+  XCTAssertTrue([testee respondsToString:@"frame"], @"must respond!");
+  XCTAssertTrue(NSEqualRects(testee.frame,_Rect_ {100, 100, 200, 200}), "Test rect:%@!", NSStringFromRect(testee.frame));
 
   XCTAssertTrue(testee.width     == 200,   TesteeWas, testee.width);
+  if (testee.width    != 200) [NSException raise:@"oh girl" format:@""];
   XCTAssertTrue(testee.height    == 200,   TesteeWas, testee.height);
   XCTAssertTrue(testee.h         == 200,   TesteeWas, testee.h);
   XCTAssertTrue(testee.w         == 200,   TesteeWas, testee.w);
@@ -44,7 +46,7 @@
   XCTAssertTrue(testee.perimeter == 800,   TesteeWas, testee.perimeter);
 }
 
-- (void)testExistenceAndEquality {
+_XCTest(ExistenceAndEquality,
 
   XCTAssertTrue(w && azr && v && l, @"none may be nil!");
   XCTAssertTrue(NSEqualRects(w.r, azr.r), @"%@ %@", AZString(w.r),AZString(azr.r));
@@ -53,23 +55,15 @@
 
    XCTAssertTrue(AZEqualRects(w.r, azr.r, v.r, l.r), @"%@ %@ %@ %@",
         AZString(w.r),AZString(azr.r),AZString(v.r),AZString(l.r));
-}
+)
 
-- (void) testWindowConformance {
-  [self miniSuite:w];
-}
-- (void) testLayerConformance {
-  [self miniSuite:l];
-}
-- (void) testViewConformance {
-  [self miniSuite:v];
-}
-- (void) testAZRConformance {
-  [self miniSuite:azr];
-}
+_XCTest( WindowConformance,  [self miniSuite:w];    )
+_XCTest( LayerConformance,   [self miniSuite:l];    )
+_XCTest( ViewConformance,    [self miniSuite:v];    )
+_XCTest( AZRConformance,     [self miniSuite:azr];  )
 
 
-- (void) testSupeframe {
+_XCTest(Supeframe,
 
   [w setSuperframe:AZScreenFrameUnderMenu()];
 
@@ -81,9 +75,9 @@
 //  printf("\n\n%s\n\n%s", w.insideEdgeHex.UTF8String, AZAlignByHex().cDesc);
 //  printf("\n\n%s\n\n%s", w.insideEdgeHex.UTF8String, AZAlignByValue().cDesc);
 
-}
+)
 
-- (void) testIteration {   __block int ctr = 0;
+_XCTest(Iteration,  __block int ctr = 0;
 
   [AZRBy(4,4) iterate:^(_Cord p) {
 
@@ -95,6 +89,6 @@
     if (ctr++ == 16) XCTAssert(NSEqualPoints(AZPt(4,4), p), @"last pt fhould be 4,4?");
   }];
   XCTAssert(ctr == 16, @"should iterate 16 times., got %i", ctr);
-}
+)
 
-@end
+￭

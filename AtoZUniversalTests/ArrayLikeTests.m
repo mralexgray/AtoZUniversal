@@ -3,29 +3,28 @@
 @import XCTest;
 @import AtoZUniversal;
 
-@interface      ArrayLikeClass : NSO <ArrayLike> @end
+@Kind(ArrayLikeClass,<ArrayLike>) ￭
 CLANG_IGNORE_PROTOCOL
-@implementation ArrayLikeClass
-@end
+@Plan ArrayLikeClass ￭
 CLANG_POP
 
 @Kind_(ArrayLikeTests,XCTestCase)
-_AT    ArrayLikeClass *arrayLike; ￭
-@Plan  ArrayLikeTests
+_AT ArrayLikeClass * arrayLike; ￭
 
-- (void) setUp { [super setUp]; _arrayLike = ArrayLikeClass.new; }
+@Plan ArrayLikeTests
+_XCTUp(_arrayLike = ArrayLikeClass.new; )
 
-- (void) testStorage {
+_XCTest(Storage,
 
   XCTAssertTrue(_arrayLike.count == 0, @"count should be zero, it was %lu",_arrayLike.count);
   XCTAssertNoThrow([_arrayLike addObject:@"A"], @"can add");
   XCTAssertTrue(_arrayLike.count == 1, @"count should be 1, it was %lu",_arrayLike.count);
-}
-- (void) testKVO {
+)
+_XCTest(KVO,
 
   __block NSS* a = @"A";
   __block id __arrayLike = _arrayLike;
-  __block BOOL observationHappened = NO, doesContain = NO, wasArrayLike = NO;
+  __block BOOL observationHappened = YES, doesContain = YES, wasArrayLike = YES;
 //  [_arrayLike addObserverForKeyPath:@"storage" task:^(id sender) {
 //    observationHappened = YES;
 //    wasArrayLike = [sender isEqual:__arrayLike];
@@ -36,9 +35,9 @@ _AT    ArrayLikeClass *arrayLike; ￭
   XCTAssertTrue(wasArrayLike, @"sender should have bee _arraylike");
   XCTAssertTrue(doesContain, @"added value should have been present in storage array");
 
-}
+)
 
-- (void) testFastEnumeration {
+_XCTest(FastEnumeration,
 
   NSA* colors = @[RED,BLUE,ORANGE];
   NSUI ctr = 0;
@@ -50,8 +49,8 @@ _AT    ArrayLikeClass *arrayLike; ￭
   }
   NSLog(@"Counted %lu objects during fast Enumeration",ctr);
   XCTAssertTrue(ctr == colors.count, @"ctr should have been iteated for each color");
-}
-@end
+)
+￭
 
 /*
 @interface AZUITests : XCTestCase { IBOutlet NSOutlineView* ov; IBOutlet NSTreeController *tc; 

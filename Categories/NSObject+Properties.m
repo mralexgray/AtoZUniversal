@@ -112,11 +112,12 @@ const char * property_getRetentionMethod (objc_property_t property) {
 - _Kind_ objectBySettingVariadicPairs __List_ vsForKs {
 
 
-  BOOL makeMCopy = ![NSStringFromClass([self classForCoder]) containsString:@"Mutable"] && [self respondsToString:@"mutableCopy"];
+  BOOL makeMCopy = [NSStringFromClass(self.classForCoder) containsString:@"Mutable"] && [self respondsToString:@"mutableCopy"];
   __block id x = makeMCopy ? [self mutableCopy] : self;
-  [vsForKs eachWithVariadicPairs:^(id a,id b){
+  [vsForKs eachWithVariadicPairs:^(id val,id key){
 
-      ![x canSetValueForKey:b] ?: [x setValue:a forKey:b];
+//      ![x canSetValueForKey:b] ?:
+      [x setValue:val forKey:key];
   }];
   return x;
 

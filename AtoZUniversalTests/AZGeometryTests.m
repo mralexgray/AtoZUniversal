@@ -2,13 +2,12 @@
 @import XCTest;
 @import AtoZUniversal;
 
-
-AZTESTCASE(AZGeometryTests) { 
+_XCTCase(AZGeometryTests) {
 
   NSR rect0, rect100; NSP pt0, pt100; NSSZ sz0, sz100; AZRect *azR0, *azR100; 
 }
 
-- (void) setUp { [super setUp];
+_XCTUp(
 
   rect0 = NSZeroRect;
 rect100 = AZRectFromDim(100);
@@ -17,20 +16,19 @@ rect100 = AZRectFromDim(100);
     sz0 = NSZeroSize;
   sz100 = AZSizeFromDim(100);
     sz0 = NSZeroSize;    azR100 = AZRDim(100);             
-}
+)
 
-AZTEST(PointIsInInsetRects,
+_XCTest(PointIsInInsetRects,
 
   XCTAssertTrue  (AZPointIsInInsetRects(pt0, rect100, AZSizeFromDim(10)), @"{0, 0} SHOULD technically be inside insets of size {10,10} inside {0,0,100,100}");
   XCTAssertFalse (AZPointIsInInsetRects(AZPointFromDim(-10),rect100,AZSizeFromDim(10)), @"{-10, -10} should NOT be inside insets of size {10,10} inside {0,0,100,100}");
   XCTAssertFalse (AZPointIsInInsetRects(AZPointFromDim( 20),rect100,AZSizeFromDim(10)), @"{20,20} should NOT be in edges of size {10,10} inside {0,0,100,100}");
   XCTAssertThrows(AZPointIsInInsetRects(AZPointFromDim(101),rect100,AZSizeFromDim(100)), @"Should complain inset is too big!");
 )
+￭
 
-@end
 
-
-JREnumDeclare(AZTestCase, AZTestFailed, AZTestPassed, AZTestUnset, AZTestNoFailures);
+JREnum(AZTestCase, AZTestFailed, AZTestPassed, AZTestUnset, AZTestNoFailures);
 
 typedef  void (^AZCLITest)(void);
 
@@ -44,8 +42,6 @@ typedef  void (^AZCLITest)(void);
 @interface   AZFavIconTests  : AZTestNode @end
 @interface     NSImageTests :AZTestNode  @end
 
-
-JREnumDefine(AZTestCase);
 
 @interface AZTestNode ()
 @property (strong) NSMD *testD;
@@ -129,7 +125,7 @@ JREnumDefine(AZTestCase);
 		AZA e = AZAlignmentInsideRect([obj rectValue],testRect);
 		NSLog(@"%@'s Alignment in %@: %@", AZStringFromRect(r), AZStringFromRect(testRect), AZAlignToString(e));
 	}];
-  return (id) nil;
+  return test;//(id) nil;
 //	NSLog(@"%@",AZAlignByValue(AZAlignTop));
 //	NSLog(@"%@",AZAlignToString(AZAlignBottomLeft));
 

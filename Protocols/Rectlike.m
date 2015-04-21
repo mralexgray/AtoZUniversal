@@ -4,6 +4,9 @@
 #define SHOULDBERECTLIKEALREADY if(EQUAL2ANYOF(self.class,CAL.class,NSV.class,nil)) COMPLAIN;
 #define SHOULDBESIZEABLE if(EQUAL2ANYOF(self.class,CAL.class,NSV.class,nil)) COMPLAIN;
 
+CONFORM( View,    RectLike )
+CONFORM( CAL,     RectLike )
+
 #if MAC_ONLY
 
 @XtraPlan(Pict, RectLike) @dynamic bounds; // /*! @todo */ anchorPoint;
@@ -151,7 +154,7 @@ SetKPfVA(InsideEdge, @"frame", @"superframe");
   return [self.class withRect:[NSNumber rectBy:rectParts]];
 }
 
-+ (INST) withRect:(NSR)r            { return [self.new wVsfKs:AZVrect(r),@"frame", nil]; }
++ (INST) withRect:(NSR)r            { return [self.new wVsfKs:V_Rect(r),@"frame", nil]; }
 + (INST)        x:(CGF)x y:(CGF)y
                 w:(CGF)w h:(CGF)h   { return [self withRect:(NSR){x,y,w,h}]; }
 
@@ -207,11 +210,11 @@ SetKPfVA(InsideEdge, @"frame", @"superframe");
 
 
 
-@implementation AZRect { NSR _rect; } // @synthesize rect =
-@synthesize frame = _rect;
+@implementation AZRect // { NSR _rect; } // @synthesize rect =
+@synthesize frame;// = _rect;
 // STOPGAP  BELOW
-- (NSR) bounds { return AZRectFromSizeOfRect(_rect); }
-- (void) setBounds:(NSR)bounds { _rect = AZRectExceptSize(_rect,bounds.size); }
+- (NSR) bounds { return AZRectFromSizeOfRect(frame); }
+- (void) setBounds:(NSR)bounds { self.frame = AZRectExceptSize(frame,bounds.size); }
 
 //- (NSR) frame { return _rect; }
 //- (void) setFrame:(NSR)frame { _rect = frame; }
@@ -224,7 +227,7 @@ SetKPfVA(InsideEdge, @"frame", @"superframe");
 
 -(INST) shiftedX:(CGF)xx y:(CGF)yy w:(CGF)w h:(CGF)h {
 
-	NSR r = _rect;
+	NSR r = self.frame;
 	r.origin.x +=xx;
 	r.origin.y +=yy;
 	r.size.width +=w;
@@ -238,15 +241,15 @@ SetKPfVA(InsideEdge, @"frame", @"superframe");
 
 //-  (NSP)    position            { return AZCenter(self.frame); }  // (NSP){self.originX + (self.width/2), self.originY + (self.height/2));
 //- (void) setPosition:(NSP)p     { /*! @todo */ NSAssertFail(@"neeed to fix");  }        //	frame.origin = NSMakePoint(midpoint.x - (frame.size.width/2), midpoint.y - (frame.size.height/2));
-@XtraPlan(CALayer,RectLike) //@dynamic alignment;
+//@XtraPlan(CALayer,RectLike) //@dynamic alignment;
 //-  (NSP)     origin {return self.frame.origin; }
 //- (void) setOrigin:(NSP)p { self.frame = (NSR){p, self.bounds.size}; }
-￭
-@implementation NSV   (RectLike) //@dynamic alignment, position,anchorPoint;
+//￭
+//@implementation NSV   (RectLike) //@dynamic alignment, position,anchorPoint;
 //-  (NSP)    origin        {return self.frame.origin; }
 //- (void) setOrigin:(NSP)p { self.frame = (NSR){p, self.bounds.size}; }
 //-  (NSR) superframe       { return self.superview.bounds; }
-￭
+//￭
 
 
 //+ (void) initialize {
