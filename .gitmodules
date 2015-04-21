@@ -17,10 +17,6 @@
     path = ObjcAssociatedObjectHelpers
      url = https://github.com/mralexgray/ObjcAssociatedObjectHelpers.git
           branch = master
-[submodule "libextobjc"]
-	  path = libextobjc
-   	 url = https://github.com/mralexgray/libextobjc.git
-          branch = master
 [submodule "OrderedDictionary"]
 	  path = OrderedDictionary
    	 url = https://github.com/nicklockwood/OrderedDictionary.git
