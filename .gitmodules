@@ -1,36 +1,51 @@
 [submodule "BaseModel"]
 	  path = BaseModel
 	   url = https://github.com/mralexgray/BaseModel.git
+     branch = master
 [submodule "_ObjC"]
 	  path = _ObjC
 	   url = https://github.com/mralexgray/_ObjC.git
+          branch = master
+	update = rebase
+	fetchRecurseSubmodules = true
+	ignore = all
 [submodule "DatabaseStorage"]
 	  path = DatabaseStorage
 	   url = https://github.com/mralexgray/DatabaseStorage.git
+          branch = master
 [submodule "ObjcAssociatedObjectHelpers"]
     path = ObjcAssociatedObjectHelpers
      url = https://github.com/mralexgray/ObjcAssociatedObjectHelpers.git
+          branch = master
 [submodule "libextobjc"]
 	  path = libextobjc
    	 url = https://github.com/mralexgray/libextobjc.git
+          branch = master
 [submodule "OrderedDictionary"]
 	  path = OrderedDictionary
    	 url = https://github.com/nicklockwood/OrderedDictionary.git
+          branch = master
 [submodule "Functional"]
 	  path = Functional
 	   url = https://github.com/mralexgray/Functional.m.git
+          branch = master
 [submodule "THObserversAndBinders"]
     path = THObserversAndBinders
      url = https://github.com/mralexgray/THObserversAndBinders.git
+          branch = master
 [submodule "JREnum"]
  	  path = JREnum
  	   url = https://github.com/mralexgray/JREnum.git
+          branch = master
 [submodule "ObjectMatcher"]
     path = ObjectMatcher
      url = https://github.com/mralexgray/ObjectMatcher.git
+          branch = master
 [submodule "FunSize"]
     path = FunSize
      url = https://github.com/mralexgray/FunSize.git
+          branch = master
 [submodule "NTBTask"]
    	path = NTBTask
 	   url = https://github.com/kareman/NTBTask.git
+          branch = master
