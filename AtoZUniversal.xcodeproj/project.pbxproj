@@ -280,7 +280,7 @@
 		7BEA69141ABCA09C0040B76A /* Dicksonisms.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; name = Dicksonisms.plist; path = Resources/Dicksonisms.plist; sourceTree = SOURCE_ROOT; };
 		7BF46B511AB0CEFB0029068F /* NSFileManager+AtoZ.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = "NSFileManager+AtoZ.m"; path = "Categories/NSFileManager+AtoZ.m"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		7BF46B521AB0CEFB0029068F /* NSFileManager+AtoZ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSFileManager+AtoZ.h"; path = "Categories/NSFileManager+AtoZ.h"; sourceTree = "<group>"; wrapsLines = 1; };
-		7BF46B571AB1D8A90029068F /* black.people.sweat.aif */ = {isa = PBXFileReference; lastKnownFileType = file; name = black.people.sweat.aif; path = ../black.people.sweat.aif; sourceTree = "<group>"; };
+		7BF46B571AB1D8A90029068F /* black.people.sweat.aif */ = {isa = PBXFileReference; lastKnownFileType = file; name = black.people.sweat.aif; path = ../Resources/black.people.sweat.aif; sourceTree = "<group>"; };
 		7BF6EB9C1AC5DD8B003E21DF /* DatabaseStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DatabaseStorage.h; sourceTree = "<group>"; };
 		7BF6EB9D1AC5DD8B003E21DF /* DatabaseStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DatabaseStorage.m; sourceTree = "<group>"; };
 		7BFDE1831AE145240012A607 /* _ObjC.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = _ObjC.xcodeproj; path = _ObjC/_ObjC.xcodeproj; sourceTree = SOURCE_ROOT; };
