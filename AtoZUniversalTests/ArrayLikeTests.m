@@ -23,7 +23,7 @@ _XCTest(Storage,
 _XCTest(KVO,
 
   __block NSS* a = @"A";
-  __block id __arrayLike = _arrayLike;
+  __block __unused id __arrayLike = _arrayLike;
   __block BOOL observationHappened = YES, doesContain = YES, wasArrayLike = YES;
 //  [_arrayLike addObserverForKeyPath:@"storage" task:^(id sender) {
 //    observationHappened = YES;
