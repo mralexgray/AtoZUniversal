@@ -6,9 +6,6 @@
 	  path = _ObjC
 	   url = https://github.com/mralexgray/_ObjC.git
           branch = master
-	update = rebase
-	fetchRecurseSubmodules = true
-	ignore = all
 [submodule "DatabaseStorage"]
 	  path = DatabaseStorage
 	   url = https://github.com/mralexgray/DatabaseStorage.git
