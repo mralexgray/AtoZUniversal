@@ -3,3 +3,8 @@ language: objective-c
 notifications:
   webhooks:
     - http://simonwesterlund.se/travis.php
+    
+xcode_project: AtoZUniversal.xcodeproj
+
+xcode_scheme: AtoZUniversal
+    
