@@ -25,29 +25,29 @@ _Type _Void (^CordBlk)     (_Cord p);
 #define _ObjIntBlk_ (ObjIntBlk)
 
 
-typedef void (^ObjObjBlk)   (id x1, id x2);
-typedef void (^ObjIntBlk)   (id x, NSI i);
+_Type void (^ObjObjBlk)   (id x1, id x2);
+_Type void (^ObjIntBlk)   (id x, NSI i);
 
-typedef id (^Obj_Blk)       (            );
-typedef id (^Obj_VBlk)      (void        );
-typedef id (^Obj_ObjBlk)    (id x        );
-typedef id (^Obj_ObjObjBlk) (id x1, id x2);
-typedef id (^Obj_IntBlk)    (NSI i       );
+_Type id (^Obj_Blk)       (            );
+_Type id (^Obj_VBlk)      (void        );
+_Type id (^Obj_ObjBlk)    (id x        );
+_Type id (^Obj_ObjObjBlk) (id x1, id x2);
+_Type id (^Obj_IntBlk)    (NSI i       );
 
-typedef id (^ReduceArrayBlock)(id memo, id obj);
-typedef id (^ReduceDictBlock)(id memo, id key, id value);
+_Type id (^ReduceArrayBlock)(id memo, id obj);
+_Type id (^ReduceDictBlock)(id memo, id key, id value);
 
-typedef BOOL (^Bool_ObjBlk)(id x);
-typedef BOOL (^Bool_ObjObjBlk)(id x1, id x2);
+_Type BOOL (^Bool_ObjBlk)(id x);
+_Type BOOL (^Bool_ObjObjBlk)(id x1, id x2);
 
-typedef NSComparisonResult (^CompareArrayBlock) (id a, id b);
-typedef NSComparisonResult (^CompareDictBlock) (id k1, id v1 , id k2, id v2);
+_Type NSComparisonResult (^CompareArrayBlock) (id a, id b);
+_Type NSComparisonResult (^CompareDictBlock) (id k1, id v1 , id k2, id v2);
 
 #if MAC_ONLY
-typedef void(^MItemBlk)     (NSMI* m);
+_Type void(^MItemBlk)     (NSMI* m);
 #endif
 
-typedef NSP AZAnchorPt;
+_Type NSP AZAnchorPt;
 #define AZR AZRect
 #define AZP AZPoint
 #define AZAP AZAnchorPt 
@@ -117,21 +117,21 @@ NS_INLINE NSString* AZEnumToBinary(int num) {  char str[9] = {0};
 #define 	AZPositionOutside       AZAlignOutside
 
 
-typedef _Void ( ^    RectBlock ) (_Rect rect);
-typedef _Void ( ^ ObjRectBlock ) (id _self, _Rect rect);
+_Type _Void ( ^    RectBlock ) (_Rect rect);
+_Type _Void ( ^ ObjRectBlock ) (id _self, _Rect rect);
 
-#if !TARGET_OS_IPHONE
+#if MAC_ONLY
 
 @class BLKVIEW;
-typedef void(^ViewBlock)(NSView *v);
-typedef void(^BlkViewRectBlock) (BLKVIEW *v, NSRect r);
-typedef void(^BlkViewLayerBlock) (BLKVIEW *v, CALayer *l);
+_Type void(^ViewBlock)(NSView *v);
+_Type void(^BlkViewRectBlock) (BLKVIEW *v, NSRect r);
+_Type void(^BlkViewLayerBlock) (BLKVIEW *v, CALayer *l);
 
 #endif
 
 //#define BLKVIEWRBLK BlkViewRectBlock
 
-JREnumDeclare( AZAlign,        AZUnset = 0x00000000,
+_EnumKind( AZAlign,        AZUnset = 0x00000000,
 
                                  AZTop = 0x00000001,   ///         1
                                  AZBtm = 0x00000010,   ///        1
@@ -157,7 +157,7 @@ NS_INLINE NSUI AZAlignToNormalBitmask(AZA a){ return a == AZLft ? 2U : a == AZRg
 
 #endif
 
-typedef NS_ENUM(NSUI, OSCornerType)         { OSTopLeftCorner = 1,
+_Type NS_ENUM(NSUI, OSCornerType)         { OSTopLeftCorner = 1,
                                               OSBottomLeftCorner,
                                               OSTopRightCorner = 4,
                                               OSBottomRightCorner = 8 };
@@ -175,15 +175,15 @@ NS_INLINE AZOrient AZOrientOpposite(AZOrient o) { return o == AZOrientHorizontal
 NS_INLINE     BOOL isVertical(AZOrient o) { return o == AZOrientVertical; }
 
 
-typedef NS_ENUM(unsigned short, AZArrow){ AZArrowLeft = 123, AZArrowRight = 124, AZArrowDown =  125, AZArrowUp = 126 };
-typedef NS_ENUM(NSUI,    AZOrder){ AZAscending, AZDescending, AZAlphabetically };
+_Type NS_ENUM(unsigned short, AZArrow){ AZArrowLeft = 123, AZArrowRight = 124, AZArrowDown =  125, AZArrowUp = 126 };
+_Type NS_ENUM(NSUI,    AZOrder){ AZAscending, AZDescending, AZAlphabetically };
 
 JREnumDeclare(azkColor, azkColorNone, azkColorRed, azkColorOrange, azkColorYellow, azkColorGreen, azkColorBlue, azkColorPurple, azkColorGray);
 
 /*** AtoZ Block Types */
 
-typedef void (^AZObjIdxStopBlock)         (id obj, NSUI idx, BOOL *stop);
-typedef   id (^AZIndexedAccumulationBlock)(id sum,   id obj, NSUI   idx);
+_Type void (^AZObjIdxStopBlock)         (id obj, NSUI idx, BOOL *stop);
+_Type   id (^AZIndexedAccumulationBlock)(id sum,   id obj, NSUI   idx);
 
 /*  @param NSControlActionBlock
     @code
@@ -192,10 +192,10 @@ typedef   id (^AZIndexedAccumulationBlock)(id sum,   id obj, NSUI   idx);
           
 */
 
-typedef void(^SenderEvent)               (id sender, NSEvent* e);
+_Type void(^SenderEvent)               (id sender, NSEvent* e);
 
-typedef void(^EventBlock)               (NSEvent* e);
-typedef void(^NSControlActionBlock)     (id sender);
+_Type void(^EventBlock)               (NSEvent* e);
+_Type void(^NSControlActionBlock)     (id sender);
 
 JREnumDeclare(AZEvent,  AZEventLeftMouseDown = 1, AZEventLeftMouseUp, AZEventRightMouseDown, AZEventRightMouseUp,
                         AZEventMouseMoved, AZEventLeftMouseDragged, AZEventRightMouseDragged, AZEventMouseEntered, AZEventMouseExited,
@@ -207,14 +207,14 @@ JREnumDeclare(AZEvent,  AZEventLeftMouseDown = 1, AZEventLeftMouseUp, AZEventRig
                         AZEventEventTypeBeginGesture, AZEventTypeEndGesture);
 
 
-typedef void(^NSControlEventActionBlock)(AZEvent e,id sender);
-typedef void(^NSControlVoidActionBlock) (void);
-typedef void(^ReverseAnimationBlock)    (void);
-typedef void(^LayerBlock)               (CALayer *l);
+_Type void(^NSControlEventActionBlock)(AZEvent e,id sender);
+_Type void(^NSControlVoidActionBlock) (void);
+_Type void(^ReverseAnimationBlock)    (void);
+_Type void(^LayerBlock)               (CALayer *l);
 
 
 
-typedef NS_ENUM(NSUI, AMTriangleOrientation){ AMTriangleUp,   AMTriangleDown,
+_Type NS_ENUM(NSUI, AMTriangleOrientation){ AMTriangleUp,   AMTriangleDown,
                                               AMTriangleLeft, AMTriangleRight };
 
 JREnumDeclare(AZParity, AZEven, AZOdd, AZUndefined);
@@ -257,17 +257,17 @@ JREnumDeclare(AZCompass,
   AZCompassSE         = 0x00001010,
 );
 
-typedef NS_ENUM(int, CharacterSet) {
+_Type NS_ENUM(int, CharacterSet) {
 	kCharacterSet_Newline, kCharacterSet_WhitespaceAndNewline, kCharacterSet_WhitespaceAndNewline_Inverted,
 	kCharacterSet_UppercaseLetters, kCharacterSet_DecimalDigits_Inverted, kCharacterSet_WordBoundaries,
 	kCharacterSet_SentenceBoundaries, kCharacterSet_SentenceBoundariesAndNewlineCharacter,kNumCharacterSets
 };
 
-typedef NS_ENUM (int, AGImageResizingMethod) {	AGImageResizeCrop,AGImageResizeCropStart,	AGImageResizeCropEnd, AGImageResizeScale };
+_Type NS_ENUM (int, AGImageResizingMethod) {	AGImageResizeCrop,AGImageResizeCropStart,	AGImageResizeCropEnd, AGImageResizeScale };
 
 
 
-typedef NS_ENUM(int, PXListViewDropHighlight) { PXListViewDropNowhere, PXListViewDropOn,	PXListViewDropAbove, PXListViewDropBelow };
+_Type NS_ENUM(int, PXListViewDropHighlight) { PXListViewDropNowhere, PXListViewDropOn,	PXListViewDropAbove, PXListViewDropBelow };
 
 
 
@@ -283,7 +283,7 @@ typedef NS_ENUM(int, PXListViewDropHighlight) { PXListViewDropNowhere, PXListVie
 
 /*  expanded....
 
- typedef enum AZAlign : NSUInteger AZAlign;
+ _Type enum AZAlign : NSUInteger AZAlign;
  enum AZAlign : NSUInteger { AZAlignLeft 			= 0x00000001,
  AZAlignRight 			= 0x00000010,
  AZAlignTop 				= 0x00000100,
@@ -334,10 +334,10 @@ __unused static OSSpinLock _formattersSpinLock = 0;
 __unused static OSSpinLock _staticSpinLock = 0;
 #endif
 
-typedef NS_ENUM(NSUInteger, BindType) {BindTypeIfNil, BindTypeTransform, BindTypeSelector, BindTypeNotFound = NSNotFound };
+_Type NS_ENUM(NSUInteger, BindType) {BindTypeIfNil, BindTypeTransform, BindTypeSelector, BindTypeNotFound = NSNotFound };
 
 
-typedef NS_ENUM(NSUInteger, AppCat) {
+_Type NS_ENUM(NSUInteger, AppCat) {
 	Games, Education, Entertainment,
 	Books, Lifestyle, Utilities, Business,
 	Travel, Music, Reference, Sports,
@@ -350,7 +350,7 @@ typedef NS_ENUM(NSUInteger, AppCat) {
 
 #if !TARGET_OS_IPHONE
 
-typedef NS_ENUM(NSInteger,  AZStatus) { AZMIXED = NSMixedState, AZOFF =  NSOffState, AZON = NSOnState };
+_Type NS_ENUM(NSInteger,  AZStatus) { AZMIXED = NSMixedState, AZOFF =  NSOffState, AZON = NSOnState };
 #endif
 
 JREnumDeclare(AZState, AZOff, AZOn, AZModifyingState, AZIdleState, AZCreatingState, AZDeletingState);
@@ -359,25 +359,25 @@ JREnumDeclare(AZSectionState, AZCollapsed, AZExpanded);
 JREnumDeclare(AZSelectState, AZDeselected, AZSelected);
 
 
-//typedef NSInteger NSCellStateValue;
+//_Type NSInteger NSCellStateValue;
 
-typedef NS_ENUM(NSUInteger,    AZSlideState ) { AZIn, AZOut, AZToggle																						};
+_Type NS_ENUM(NSUInteger,    AZSlideState ) { AZIn, AZOut, AZToggle																						};
 
-typedef NS_ENUM(NSUInteger,    AZTrackState ) { LeftOn, LeftOff, TopOn, TopOff, RightOn, RightOff, BottomOn, BottomOff						};
-typedef NS_ENUM(NSUInteger,      AZDockSort ) { AZDockSortNatural, AZDockSortColor, AZDockSortPoint, AZDockSortPointNew						};
-typedef NS_ENUM(NSUInteger,      AZSearchBy ) { AZSearchByCategory, AZSearchByColor, AZSearchByName, AZSearchByRecent						};
-typedef NS_ENUM(NSUInteger,  AZMenuPosition ) { AZMenuN, AZMenuS, AZMenuE, AZMenuW, AZMenuPositionCount											};
-typedef NS_ENUM(NSUInteger, AZTrackPosition ) { AZTrackN, AZTrackS, AZTrackE, AZTrackW, AZTrackPositionCount									};
-typedef NS_ENUM(NSUInteger,  	AZInfiteScale ) { AZInfiteScale0X, AZInfiteScale1X, AZInfiteScale2X, AZInfiteScale3X, AZInfiteScale10X	};
+_Type NS_ENUM(NSUInteger,    AZTrackState ) { LeftOn, LeftOff, TopOn, TopOff, RightOn, RightOff, BottomOn, BottomOff						};
+_Type NS_ENUM(NSUInteger,      AZDockSort ) { AZDockSortNatural, AZDockSortColor, AZDockSortPoint, AZDockSortPointNew						};
+_Type NS_ENUM(NSUInteger,      AZSearchBy ) { AZSearchByCategory, AZSearchByColor, AZSearchByName, AZSearchByRecent						};
+_Type NS_ENUM(NSUInteger,  AZMenuPosition ) { AZMenuN, AZMenuS, AZMenuE, AZMenuW, AZMenuPositionCount											};
+_Type NS_ENUM(NSUInteger, AZTrackPosition ) { AZTrackN, AZTrackS, AZTrackE, AZTrackW, AZTrackPositionCount									};
+_Type NS_ENUM(NSUInteger,  	AZInfiteScale ) { AZInfiteScale0X, AZInfiteScale1X, AZInfiteScale2X, AZInfiteScale3X, AZInfiteScale10X	};
 
 
-typedef struct AZWhatever {
+_Type struct AZWhatever {
 	NSUInteger position;
 	char *aString;
 	int  anInt;
 } AZWhatever;
 
-typedef struct {	CGFloat tlX; CGFloat tlY;
+_Type struct {	CGFloat tlX; CGFloat tlY;
 	CGFloat trX; CGFloat trY;
 	CGFloat blX; CGFloat blY;
 	CGFloat brX; CGFloat brY;
@@ -388,7 +388,7 @@ typedef struct {	CGFloat tlX; CGFloat tlY;
 // NSLog(@"%@", FormatTypeName[XML]);
 //NSString *const FormatTypeName[FormatTypeCount] = { [JSON]=@"JSON", [XML]=@"XML", [Atom] = @"Atom", [RSS] = @"RSS", };
 
-typedef NS_ENUM(NSUInteger, SandBox) {	ReadAccess = R_OK,	WriteAccess = W_OK,	ExecuteAccess = X_OK,	PathExists = F_OK };
+_Type NS_ENUM(NSUInteger, SandBox) {	ReadAccess = R_OK,	WriteAccess = W_OK,	ExecuteAccess = X_OK,	PathExists = F_OK };
 
 
 NS_INLINE void AZPrintEncodingTypes(){
@@ -447,7 +447,7 @@ JREnumDeclare( AZOutlineCellStyle, 	AZOutlineCellStyleToggleHeader,
 \
 @protocol __className <NSObject> @end             \
 @class    __className;                            \
-typedef NSComparisonResult(^__className##Comparator)(__className* obj1, __className* obj2); \
+_Type NSComparisonResult(^__className##Comparator)(__className* obj1, __className* obj2); \
 \
 @interface NSEnumerator (__className##_NSEnumerator_Generics) <__className>                 \
 - (__className*) nextObject;  - (NSArray<__className>*)allObjects;  @end                    \
@@ -628,12 +628,12 @@ typedef NSComparisonResult(^__className##Comparator)(__className* obj1, __classN
  );
 
  ++++ ---->
- typedef struct Person_ {
+ _Type struct Person_ {
  	__unsafe_unretained NSString *name;
 	 float age;
  } Person;
 
- typedef Person(^PersonRecord)(void);
+ _Type Person(^PersonRecord)(void);
 ________.
 
  The creation function must return a Record. All object fields must be captured inside the returned block.
@@ -676,8 +676,8 @@ ________.
 #define RECORD_FIELD_PRM(FIELD_TYPE_AND_NAME...) FIELD_TYPE_AND_NAME;
 
 #define RECORD(RECORD_NAME, FIELDS...) \/*Typedef for struct returned by Record */ \
-typedef struct RECORD_NAME ## _ {	FIELDS	} RECORD_NAME; \
-typedef RECORD_NAME(^RECORD_NAME ## Record)(void);	/*typedef of Rec. that returns struct*/
+_Type struct RECORD_NAME ## _ {	FIELDS	} RECORD_NAME; \
+_Type RECORD_NAME(^RECORD_NAME ## Record)(void);	/*_Type of Rec. that returns struct*/
 
 
 //static NSA *_pos = nil;

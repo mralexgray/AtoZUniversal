@@ -1,44 +1,40 @@
 [submodule "BaseModel"]
-	  path = BaseModel
+	path = Vendor/BaseModel
 	   url = https://github.com/mralexgray/BaseModel.git
      branch = master
 [submodule "_ObjC"]
-	  path = _ObjC
+	path = Vendor/_ObjC
 	   url = https://github.com/mralexgray/_ObjC.git
           branch = master
 [submodule "DatabaseStorage"]
-	  path = DatabaseStorage
+	path = Vendor/DatabaseStorage
 	   url = https://github.com/mralexgray/DatabaseStorage.git
           branch = master
 [submodule "ObjcAssociatedObjectHelpers"]
-    path = ObjcAssociatedObjectHelpers
+	path = Vendor/ObjcAssociatedObjectHelpers
      url = https://github.com/mralexgray/ObjcAssociatedObjectHelpers.git
           branch = master
 [submodule "OrderedDictionary"]
-	  path = OrderedDictionary
+	path = Vendor/OrderedDictionary
    	 url = https://github.com/nicklockwood/OrderedDictionary.git
           branch = master
 [submodule "Functional"]
-	  path = Functional
+	path = Vendor/Functional
 	   url = https://github.com/mralexgray/Functional.m.git
           branch = master
 [submodule "THObserversAndBinders"]
-    path = THObserversAndBinders
+	path = Vendor/THObserversAndBinders
      url = https://github.com/mralexgray/THObserversAndBinders.git
           branch = master
-[submodule "JREnum"]
- 	  path = JREnum
- 	   url = https://github.com/mralexgray/JREnum.git
-          branch = master
 [submodule "ObjectMatcher"]
-    path = ObjectMatcher
+	path = Vendor/ObjectMatcher
      url = https://github.com/mralexgray/ObjectMatcher.git
           branch = master
 [submodule "FunSize"]
-    path = FunSize
+	path = Vendor/FunSize
      url = https://github.com/mralexgray/FunSize.git
           branch = master
 [submodule "NTBTask"]
-   	path = NTBTask
+	path = Vendor/NTBTask
 	   url = https://github.com/kareman/NTBTask.git
           branch = master
