@@ -1,7 +1,7 @@
 
-#ifndef AtoZ_MacroDefines
-#define AtoZ_MacroDefines
+#pragma once
 
+#import <AtoZUniversal/_ObjC.h>
 
 #pragma mark -  DATASOURCE
 
@@ -640,8 +640,6 @@ OBJC_EXPORT BOOL AZEqualToAnyObject(id x, ...);
 */
 #define CLASS(X) interface X : NSO
 
-#define ENUM(x) JREnumDeclare(x)
-
 #define      AZIFACE(_name_,_super_)  AZIFACEDECL(_name_,_super_) @end
 #define    AZNSIFACE(_name_)          AZIFACE(_name_,NSObject)
 
@@ -1236,7 +1234,7 @@ _SELFBLK_(self); [NSProcessInfo.processInfo enableSuddenTermination];
 
 //#define STRONG ((nonatomic,strong) )
 //#define ASSIGN ((nonatomic,assign) )
-#define AZWindowPositionToString AZAlignToString
+#define AZWindowPosition2Text AZAlign2Text
 #define CGSUPRESSINTERVAL(x) CGEventSourceSetLocalEventsSuppressionInterval(nil,x)
 #define AZPOS AZA// AZWindowPosition
 //
@@ -1653,9 +1651,6 @@ typedef void (^AZVA_ArrayBlock)(NSArray* values);
 		azva_iterate_list(FIRST_KEY, ^(id entry) { 															\
 			if(azva_object == nil)  azva_object = entry; 													\
 			else {	[DICT_NAME setObject:entry forKey:azva_object]; azva_object = nil;  } 	}); }
-
-#endif /* END AtoZ_AtoZMacroDefines_h */
-
 
 
 #if IOS_ONLY
