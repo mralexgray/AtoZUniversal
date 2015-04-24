@@ -154,7 +154,7 @@ SetKPfVA(InsideEdge, @"frame", @"superframe");
   return [self.class withRect:[NSNumber rectBy:rectParts]];
 }
 
-+ (INST) withRect:(NSR)r            { return [self.new wVsfKs:V_Rect(r),@"frame", nil]; }
++ (INST) withRect:(NSR)r            { return [self.class instancesRespondToSelector:@selector(initWithFrame:)] ? [self.alloc initWithFrame:r] : [self.new wVsfKs:V_Rect(r),@"frame", nil]; }
 + (INST)        x:(CGF)x y:(CGF)y
                 w:(CGF)w h:(CGF)h   { return [self withRect:(NSR){x,y,w,h}]; }
 

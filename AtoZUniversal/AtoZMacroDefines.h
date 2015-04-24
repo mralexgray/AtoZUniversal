@@ -668,8 +668,7 @@ OBJC_EXPORT BOOL AZEqualToAnyObject(id x, ...);
 #define $SEL(A)    NSSelectorFromString(A)
 #define AZStringFromSet(A) [NSS stringFromArray:A.allObjects]
 
-#define     $(...)    ((NSS*)[NSS stringWithFormat:__VA_ARGS__,nil])
-#define    $$(...)    ((NSS*)[NSS stringWithFormat:@__VA_ARGS__,nil])
+
 #define $JOIN(...)    ((NSS*)[@[__VA_ARGS__] componentsJoinedByString:@" "])
 #define  $set(...)    ((NSSet *)[NSSet setWithObjects:__VA_ARGS__,nil])
 #define  $map(...)    ((NSD*)[NSD dictionaryWithObjectsAndKeys:__VA_ARGS__,nil])

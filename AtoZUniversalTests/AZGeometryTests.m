@@ -28,7 +28,7 @@ _XCTest(PointIsInInsetRects,
 ￭
 
 
-JREnum(AZTestCase, AZTestFailed, AZTestPassed, AZTestUnset, AZTestNoFailures);
+_Enum(AZTestCase, AZTestFailed, AZTestPassed, AZTestUnset, AZTestNoFailures);
 
 typedef  void (^AZCLITest)(void);
 
@@ -62,7 +62,7 @@ typedef  void (^AZCLITest)(void);
 //	LOGCOLORS($(@"TESTS in %@", AZCLSSTR), [, [NSC.randomPalette withMinItems:_tests.count + 10], nil);
 //	_results =	[_tests nmap:^id(id obj, NSUInteger index) {
 //		NSLog(@"Running test %ld of %ld", index, _tests.count);
-//		return AZTestCaseToString( (int) [self performSelectorWithoutWarnings:NSSelectorFromString(obj)] );
+//		return AZTestCase2Text( (int) [self performSelectorWithoutWarnings:NSSelectorFromString(obj)] );
 //	}];
 }
 
@@ -118,16 +118,16 @@ typedef  void (^AZCLITest)(void);
 	[[NSA arrayWithRects:a,b, nil] each:^(id obj) {
 		NSR oRect = [obj rectValue];
 		AZA e = AZAlignmentInsideRect(oRect,testRect);
-		NSLog(@"%@'s Alignment in %@: %@", AZStringFromRect(oRect), AZStringFromRect(testRect), AZAlignToString(e));
+		NSLog(@"%@'s Alignment in %@: %@", AZStringFromRect(oRect), AZStringFromRect(testRect), AZAlign2Text(e));
 	}];
 	[[@0 to:@3] each:^(id obj) {
 		NSR r = quadrant(testRect, [obj integerValue]);
 		AZA e = AZAlignmentInsideRect([obj rectValue],testRect);
-		NSLog(@"%@'s Alignment in %@: %@", AZStringFromRect(r), AZStringFromRect(testRect), AZAlignToString(e));
+		NSLog(@"%@'s Alignment in %@: %@", AZStringFromRect(r), AZStringFromRect(testRect), AZAlign2Text(e));
 	}];
   return test;//(id) nil;
 //	NSLog(@"%@",AZAlignByValue(AZAlignTop));
-//	NSLog(@"%@",AZAlignToString(AZAlignBottomLeft));
+//	NSLog(@"%@",AZAlign2Text(AZAlignBottomLeft));
 
 }
 @end

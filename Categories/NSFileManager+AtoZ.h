@@ -16,6 +16,11 @@ _Text    NSBundleFolder _Void_;
 
 @interface NSFileManager (AtoZ)
 
+_IT               isDirectory __Text_ p;
+_TT lastModifiedStringForPath __Text_ p;
+- (unsigned long long int)   folderSize __Text_ p;
+_TT          prettySizeForPath __Text_ p;
+
 -                     tagForFileAtPath:pathorurl;
 - _Void_ setTag _ _UInt_ t forFileAtPath:pathorurl;
 

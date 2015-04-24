@@ -222,7 +222,7 @@ static id addMethodTrampoline(id self, SEL _cmd) 			{
 
 	if ([self isKindOfClass:NSURL.class])
 
-    theURL = Same([(NSURL *)self scheme], @"http") ? (NSURL *)self : $URL($(@"http://%@", [(NSURL*)self path]));
+    theURL = [[_NUrl_ self scheme] isEqualToString: @"http"] ? _NUrl_ self : $URL($(@"http://%@", [_NUrl_ self path]));
 
 	return theURL;
 }
@@ -1325,7 +1325,7 @@ static char windowPosition;
 	id (^idBlock)(id) = doBlock;
 	return [self respondsToSelector:NSSelectorFromString(selStr)] ? idBlock(bSelf) ?: nil : nil;
 }
-BOOL respondsToString(id obj, NSS *string) {
+BOOL responds2Text(id obj, NSS *string) {
 	return [obj respondsToString:string];
 }
 
@@ -2325,7 +2325,7 @@ CG_EXTERN CFTimeInterval CGEventSourceSecondsSinceLastEventType(CGEventSourceSta
 */
 @end
 /*
-//JREnumDefine(AZBOOLEAN);
+//_EnumPlan(AZBOOLEAN);
 @implementation AZBool {  privateValue; }
 - (instancetype) init { return self = super.init ? privateValue =
 //To accomplish this, we'll add forward invocation to NSDictionary to redirect zero parameter calls to call valueForKey: and one parameter calls (starting with set) to setValue:forKey:.

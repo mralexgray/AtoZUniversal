@@ -5202,7 +5202,7 @@ CGImageRef CreateCGImageFromData(NSData* data) {
 
 @end
 
-JREnumDefine(AIBitmapImageFileType);
+_EnumPlan(AIBitmapImageFileType);
 
 */
 static void BitmapReleaseCallback(void *info, const void *data, size_t size) {

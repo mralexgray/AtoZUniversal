@@ -92,7 +92,7 @@
 + (NSDictionary *)       localhosts;
 + (NSArray*)       interfaces;
 
-+   (NSData*)               JSONify:__ ;
++   (NSData*)               JSONify:x ___
 +      (BOOL)    connectedToNetwork;
 +      (BOOL)         hostAvailable:(NSString*)theHost;
 + (NSString*)            mimeForExt:(NSString*)ext; // MIMEHelper

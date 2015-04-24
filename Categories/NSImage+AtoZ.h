@@ -522,7 +522,7 @@ extern NSString *kXML_Base64ReferenceAttribute;
 + (NSIMG*)  imageInFrame:(NSR)frame withBlock:(RBlk)drawBlockwithFrame;	@end // (AtoZDrawBlock)
 
 
-JREnumDeclare(AIBitmapImageFileType,
+_EnumKind(AIBitmapImageFileType,
     AIUnknownFileType = -9999,
     AITIFFFileType    = NSTIFFFileType,
     AIBMPFileType     = NSBMPFileType,

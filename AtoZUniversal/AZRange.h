@@ -54,7 +54,7 @@
 
 //FOUNDATION_EXPORT  RNG          AZUnionRange(RNG r1, RNG r2);
 //FOUNDATION_EXPORT  RNG   AZIntersectionRange(RNG r1, RNG r2);
-//FOUNDATION_EXPORT NSString *     AZRangeToString(RNG r);
+//FOUNDATION_EXPORT NSString *     AZRange2Text(RNG r);
 //FOUNDATION_EXPORT  RNG     AZRangeFromString(NSString *s);
 //FOUNDATION_EXPORT  void     AZRangeElongate(RNG r);
 

@@ -60,6 +60,7 @@
 #import <AtoZUniversal/NSString+AtoZ.h>
 #import <AtoZUniversal/NSString-Utilities.h>
 
+#import <AtoZUniversal/NetworkHelpers.h>
 #import <AtoZUniversal/BaseModel.h>
 #import <AtoZUniversal/NSBag.h>
 #import <AtoZUniversal/AZRange.h>

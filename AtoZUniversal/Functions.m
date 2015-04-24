@@ -6,18 +6,18 @@
 
 @Plan _ObjC_Load @end
 
-JREnumDefine(azkColor);
-JREnumDefine(AZEvent);
-JREnumDefine(AZParity);
-JREnumDefine(AZQuad);
-JREnumDefine(AZConstraintMask);
-JREnumDefine(AZAlign);
-JREnumDefine(AZOrient);
-JREnumDefine(AZCompass);
-JREnumDefine(AZState);
-JREnumDefine(AZSectionState);
-JREnumDefine(AZSelectState);
-JREnumDefine(AZOutlineCellStyle);
+_EnumPlan(azkColor);
+_EnumPlan(AZEvent);
+_EnumPlan(AZParity);
+_EnumPlan(AZQuad);
+_EnumPlan(AZConstraintMask);
+_EnumPlan(AZAlign);
+_EnumPlan(AZOrient);
+_EnumPlan(AZCompass);
+_EnumPlan(AZState);
+_EnumPlan(AZSectionState);
+_EnumPlan(AZSelectState);
+_EnumPlan(AZOutlineCellStyle);
 
 
 NSCharacterSet * _GetCachedCharacterSet(CharacterSet set) {
@@ -109,7 +109,7 @@ NSS * AZToStringFromTypeAndValue(const char *typeCode, void *val) {
   //  Compare
   return  SameChar(typeCode, @encode(  NSP)) ? AZStringFromPoint(*(NSP*)   val)
   : SameChar(typeCode, @encode(NSRNG)) ? NSStringFromRange(*(NSRNG*) val)
-  // 		    : SameChar(typeCode, @encode(  RNG)) ?   AZRangeToString(*(RNG*)   val)
+  // 		    : SameChar(typeCode, @encode(  RNG)) ?   AZRange2Text(*(RNG*)   val)
   : SameChar(typeCode, @encode( NSSZ)) ?  AZStringFromSize(*(NSSZ*)  val)
   : SameChar(typeCode, @encode(  NSR)) ?  AZStringFromRect(*(NSR*)   val)
   : SameChar(typeCode, @encode( BOOL)) ?    $B(*(BOOL*)  val)

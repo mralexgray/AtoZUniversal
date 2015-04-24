@@ -1,5 +1,9 @@
 
 #import <AtoZUniversal/AtoZUniversal.h>
+#import <CommonCrypto/CommonDigest.h>
+
+_EnumPlan(AZChecksumType)
+
 
 @XtraPlan(NSData,AtoZ)
 
@@ -7,6 +11,38 @@ _ID JSONSerialization { return [NSJSONSerialization JSONObjectWithData:self opti
 _TT toUTF16String  { return INIT_(Text,WithData:self encoding:NSUTF16StringEncoding); }
 _TT toUTF8String   { return INIT_(Text,WithData:self encoding: NSUTF8StringEncoding); }
 _TT toASCIIString  { return INIT_(Text,WithData:self encoding:NSASCIIStringEncoding); }
+
+#pragma mark sha
+
++ _Text_ hexForDigest:(unsigned char*)ret ofLength:(int)l {
+
+  if(!ret || !l) return nil;
+
+  NSMutableString* output = [NSMutableString stringWithCapacity:l * 2];
+
+  for(int i = 0; i < l; i++) [output appendFormat:@"%02x", ret[i]]; return output;
+}
+
+- _Text_ checksum:(AZChecksumType)type {
+
+  unsigned char *ret = nil;   int l = 0;
+
+  type == AZChecksumTypeSha512 ? ({
+
+    l = CC_SHA512_DIGEST_LENGTH;
+    unsigned char digest[CC_SHA512_DIGEST_LENGTH];
+    ret = CC_SHA512([self bytes], (CC_LONG)[self length], digest);
+
+   }) : type == AZChecksumTypeMD5 ? ({
+
+    l = CC_MD5_DIGEST_LENGTH;
+    unsigned char digest[CC_MD5_DIGEST_LENGTH];
+    ret = CC_MD5(self.bytes, (CC_LONG)self.length, digest);
+
+  }) : nil;
+
+  return [self.class hexForDigest:ret ofLength:l];
+}
 
 @end
 
@@ -66,44 +102,4 @@ _IT isFloatNumber { return !self.length ? NO :
 
 @end
 
-
-#import <CommonCrypto/CommonDigest.h>
-
-JREnumDefine(AZChecksumType)
-
-@XtraPlan(Data,AZChecksum)
-
-#pragma mark sha
-
-+ _Text_ hexForDigest:(unsigned char*)ret ofLength:(int)l {
-
-  if(!ret || !l) return nil;
-
-  NSMutableString* output = [NSMutableString stringWithCapacity:l * 2];
-
-  for(int i = 0; i < l; i++) [output appendFormat:@"%02x", ret[i]]; return output;
-}
-
-- _Text_ checksum:(AZChecksumType)type {
-
-  unsigned char *ret = nil;   int l = 0;
-
-  type == AZChecksumTypeSha512 ? ({
-
-    l = CC_SHA512_DIGEST_LENGTH;
-    unsigned char digest[CC_SHA512_DIGEST_LENGTH];
-    ret = CC_SHA512([self bytes], (CC_LONG)[self length], digest);
-
-   }) : type == AZChecksumTypeMD5 ? ({
-
-    l = CC_MD5_DIGEST_LENGTH;
-    unsigned char digest[CC_MD5_DIGEST_LENGTH];
-    ret = CC_MD5(self.bytes, (CC_LONG)self.length, digest);
-
-  }) : nil;
-
-  return [self.class hexForDigest:ret ofLength:l];
-}
-
-@XtraStop(AZChecksum)
 

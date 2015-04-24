@@ -25,11 +25,50 @@ NSS * NSDCIMFolder()      {	return @"/var/mobile/Media/DCIM";                 }
 
 @implementation NSFileManager (AtoZ)
 
-- _IsIt_ isSymlink:(NSString*)ln to:(NSString*)p { return [self isSymlink:ln] &&
+static mDict cache ___
+
+#define IS_DIR @"isDirectory"
+#define DIR_SZ @"directorySize"
+
+_IT isDirectory:(NSString*)p { // Lookup and cache "folderess"
+
+  _Numb cached = (cache = cache ?: @{}.mutableCopy)[p][IS_DIR];
+
+  if (cached) return cached.boolValue; _IsIt isDir = NO;
+  [self fileExistsAtPath:p isDirectory:&isDir] && isDir;
+  cache[p][IS_DIR] = @(isDir); return isDir;
+}
+
+_TT lastModifiedStringForPath __Text_ p {
+
+  return [[self attributesOfItemAtPath:p error:nil] ?: @{}[NSFileModificationDate] description] ?: @"-";
+}
+
+- (unsigned long long int) folderSize __Text_ p {
+
+  _Numb cached = (cache = cache ?: @{}.mutableCopy)[p][DIR_SZ];
+  if (cached) return [cached unsignedLongValue];
+
+  __block unsigned long long int fileSize = 0;
+  [[self subpathsOfDirectoryAtPath:p error:nil] each:^(NSString * fileName){
+    NSDictionary * fileDictionary = [self attributesOfItemAtPath:[p withPath:fileName] error:nil];
+    fileSize += fileDictionary.fileSize;
+  }];
+  cached[p][DIR_SZ] = @(fileSize);
+  return fileSize;
+}
+- _Text_  prettySizeForPath  __Text_ p {
+
+  return [self isDirectory:p] ?
+         [NetworkHelpers prettyBytes:[self folderSize:p]] :
+         [NetworkHelpers prettyBytes:[[self attributesOfItemAtPath:p error:nil][NSFileSize] floatValue]] ?: @"-";
+}
+
+- _IsIt_ isSymlink __Text_ ln to __Text_ p { return [self isSymlink:ln] &&
                                                          [[self destinationOfSymbolicLinkAtPath:ln error:nil] isEqualToString:p];
 }
 
-- _IsIt_ isSymlink:(NSString*)ln { return [self attributesOfItemAtPath:ln error:nil][NSFileType] == NSFileTypeSymbolicLink; }
+- _IsIt_ isSymlink __Text_ ln { return [self attributesOfItemAtPath:ln error:nil][NSFileType] == NSFileTypeSymbolicLink; }
 
 - tagForFileAtPath:pathorurl {
 
@@ -62,7 +101,7 @@ NSS * NSDCIMFolder()      {	return @"/var/mobile/Media/DCIM";                 }
 
 }
 
-- (NSA*) pathsOfContentsOfDirectory:(NSS*) dir {
+_LT pathsOfContentsOfDirectory __Text_ dir {
 
 	return [[AZFILEMANAGER contentsOfDirectoryAtPath:dir.stringByStandardizingPath error:nil] map:^id(id obj) {
                                             return [dir stringByAppendingPathComponent:obj].stringByStandardizingPath;
@@ -71,7 +110,7 @@ NSS * NSDCIMFolder()      {	return @"/var/mobile/Media/DCIM";                 }
 
 #pragma mark - Globbing
 
-- (NSA*) arrayWithFilesMatchingPattern:(NSS*)pattern inDirectory:(NSS*) directory {
+_LT arrayWithFilesMatchingPattern __Text_ pattern inDirectory __Text_ directory {
 
 	NSMutableArray* files = NSMutableArray.array;	glob_t gt;
 
@@ -93,7 +132,7 @@ NSS * NSDCIMFolder()      {	return @"/var/mobile/Media/DCIM";                 }
  iPhone Developer's Cookbook, 3.0 Edition
  BSD License, Use at your own risk	*/
 
-- (NSS*) pathForItemNamed:(NSS*)fname inFolder:(NSS*)path {
+_TT pathForItemNamed __Text_ fname inFolder __Text_ path {
 
 	NSString *file;
 	NSDirectoryEnumerator *dirEnum = [self enumeratorAtPath:path];

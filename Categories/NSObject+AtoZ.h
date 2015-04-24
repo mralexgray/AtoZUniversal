@@ -378,7 +378,7 @@ typedef void (^caseBlock)();
 - responds:(NSS*)selStr do: doBlock;
 
 BOOL respondsTo(id obj, SEL selector);
-BOOL respondsToString(id obj,NSS* string);
+BOOL responds2Text(id obj,NSS* string);
 
 -(SEL) firstResponsiveSelFromStrings:(NSA*)selectors;
 -(NSS*) firstResponsiveString:(NSA*)selectors;

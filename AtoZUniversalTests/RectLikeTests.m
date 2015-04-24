@@ -70,7 +70,7 @@ _XCTest(Supeframe,
   XCTAssertTrue(w.insideEdge &
                   AZTop | AZRgt,
                   @"should be at bottom left, was %@",
-                  AZAlignToString(w.insideEdge)
+                  AZAlign2Text(w.insideEdge)
   );
 //  printf("\n\n%s\n\n%s", w.insideEdgeHex.UTF8String, AZAlignByHex().cDesc);
 //  printf("\n\n%s\n\n%s", w.insideEdgeHex.UTF8String, AZAlignByValue().cDesc);

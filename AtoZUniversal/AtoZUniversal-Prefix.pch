@@ -4,20 +4,20 @@
 
   #ifdef __OBJC__
 
-    #import "_ObjC.h"
+    #import <_ObjC.h>
 //    #import <AtoZUniversal/ObjcAssociatedObjectHelpers.h>
-    #import "ObjcAssociatedObjectHelpers.h"
-    #import "metamacros.h"
-    #import "AtoZMacroDefines.h"
-    #import "EXTConcreteProtocol.h"
-    #import "AtoZTypes.h"
+    #import <ObjcAssociatedObjectHelpers.h>
+    #import <metamacros.h>
+    #import <AtoZMacroDefines.h>
+    #import <EXTConcreteProtocol.h>
+    #import <AtoZTypes.h>
 
-    #import "F.h"
-    #import "EXTConcreteProtocol.h"
-    #import "objswitch.h"
-    #import "AtoZGeometry.h"
+    #import <F.h>
+    #import <EXTConcreteProtocol.h>
+    #import <objswitch.h>
+    #import <AtoZGeometry.h>
 
-    #import "Protocols.h"
+    #import <Protocols.h>
     
   #endif // __OBJC__
 

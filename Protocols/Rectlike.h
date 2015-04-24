@@ -3,9 +3,11 @@
     and that can be genuinely represented in those terms.
  */
 
-@Vows RectLike
+@Vows RectLike <NObj>
 @Reqd _RO _Rect frame ___  // MUST be implemented (in a category is OK)
 @Optn
+
+_ID initWithFrame __Rect_ r ___
 
 //- _Void_ setFrame:_Rect_ r; ///     -frame  & -setFrame:
 

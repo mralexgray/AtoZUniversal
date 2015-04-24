@@ -1,10 +1,7 @@
 
-#ifndef AtoZ_Types_h
-#define AtoZ_Types_h
+#pragma once
 
-#ifndef AtoZ_MacroDefines_h
 #import <AtoZUniversal/AtoZMacroDefines.h>
-#endif
 
 _Type _Void (^Blk)         ();
 _Type _Void (^VBlk)        _Void_;
@@ -100,7 +97,7 @@ NS_INLINE NSString* AZEnumToBinary(int num) {  char str[9] = {0};
 #define AZTW AZTrackingWindow
 #define iC iCarousel
 
-#define AZPositionToString AZAlignToString
+#define AZPosition2Text AZAlign2Text
 #define AZPosition AZAlign
 #define AZWindowPosition AZPosition
 
@@ -165,7 +162,7 @@ _Type NS_ENUM(NSUI, OSCornerType)         { OSTopLeftCorner = 1,
 NS_INLINE OSCornerType AZAlignToCorner(AZA a) {  return a == AZTopLft ? 1 : a == AZBtmLft ? 2 : AZTopRgt ? 4 :  8; }
 
 
-JREnumDeclare( AZOrient,  AZOrientVertical, AZOrientHorizontal,  
+_EnumKind( AZOrient,  AZOrientVertical, AZOrientHorizontal,  
                           AZOrientTop, AZOrientLeft, AZOrientBottom, AZOrientRight,
                           AZOrientGrid, AZOrientPerimeter, AZOrientFiesta );
 
@@ -178,7 +175,7 @@ NS_INLINE     BOOL isVertical(AZOrient o) { return o == AZOrientVertical; }
 _Type NS_ENUM(unsigned short, AZArrow){ AZArrowLeft = 123, AZArrowRight = 124, AZArrowDown =  125, AZArrowUp = 126 };
 _Type NS_ENUM(NSUI,    AZOrder){ AZAscending, AZDescending, AZAlphabetically };
 
-JREnumDeclare(azkColor, azkColorNone, azkColorRed, azkColorOrange, azkColorYellow, azkColorGreen, azkColorBlue, azkColorPurple, azkColorGray);
+_EnumKind(azkColor, azkColorNone, azkColorRed, azkColorOrange, azkColorYellow, azkColorGreen, azkColorBlue, azkColorPurple, azkColorGray);
 
 /*** AtoZ Block Types */
 
@@ -197,7 +194,7 @@ _Type void(^SenderEvent)               (id sender, NSEvent* e);
 _Type void(^EventBlock)               (NSEvent* e);
 _Type void(^NSControlActionBlock)     (id sender);
 
-JREnumDeclare(AZEvent,  AZEventLeftMouseDown = 1, AZEventLeftMouseUp, AZEventRightMouseDown, AZEventRightMouseUp,
+_EnumKind(AZEvent,  AZEventLeftMouseDown = 1, AZEventLeftMouseUp, AZEventRightMouseDown, AZEventRightMouseUp,
                         AZEventMouseMoved, AZEventLeftMouseDragged, AZEventRightMouseDragged, AZEventMouseEntered, AZEventMouseExited,
                         AZEventKeyDown, AZEventKeyUp, AZEventFlagsChanged, 
                         AZEventAppKitDefined, AZEventSystemDefined, AZEventApplicationDefined, AZEventPeriodic, AZEventCursorUpdate,
@@ -217,11 +214,11 @@ _Type void(^LayerBlock)               (CALayer *l);
 _Type NS_ENUM(NSUI, AMTriangleOrientation){ AMTriangleUp,   AMTriangleDown,
                                               AMTriangleLeft, AMTriangleRight };
 
-JREnumDeclare(AZParity, AZEven, AZOdd, AZUndefined);
+_EnumKind(AZParity, AZEven, AZOdd, AZUndefined);
 
-JREnumDeclare(AZQuad, AZQuadTopLeft, AZQuadTopRight, AZQuadBotRight, AZQuadBotLeft);
+_EnumKind(AZQuad, AZQuadTopLeft, AZQuadTopRight, AZQuadBotRight, AZQuadBotLeft);
 
-JREnumDeclare( AZConstraintMask,  AZConstraintMaskMinX    = 1 << 0,
+_EnumKind( AZConstraintMask,  AZConstraintMaskMinX    = 1 << 0,
                                   AZConstraintMaskMidX    = 1 << 1,
                                   AZConstraintMaskMaxX    = 1 << 2,
                                   AZConstraintMaskWidth   = 1 << 3,
@@ -246,7 +243,7 @@ JREnumDeclare( AZConstraintMask,  AZConstraintMaskMinX    = 1 << 0,
 
 
 
-JREnumDeclare(AZCompass,
+_EnumKind(AZCompass,
   AZCompassW          = 0x00000001,
   AZCompassE          = 0x00000010,
   AZCompassN	        = 0x00000100,
@@ -279,7 +276,7 @@ _Type NS_ENUM(int, PXListViewDropHighlight) { PXListViewDropNowhere, PXListViewD
 
 
 
-//JREnumDeclare(AZAlign,AZAlignLeft,// = 0x00000001),
+//_EnumKind(AZAlign,AZAlignLeft,// = 0x00000001),
 
 /*  expanded....
 
@@ -294,7 +291,7 @@ _Type NS_ENUM(int, PXListViewDropHighlight) { PXListViewDropNowhere, PXListViewD
  AZAlignBottomRight 	= 0x00001010 };
  extern NSDictionary* AZAlignByValue();
  extern NSDictionary* AZAlignByLabel();
- extern NSString* AZAlignToString(int enumValue);
+ extern NSString* AZAlign2Text(int enumValue);
  extern BOOL AZAlignFromString(NSString *enumLabel, AZAlign *enumValue);
  static NSString *_AZAlign_constants_string = @"" "AZAlignLeft = 0x00000001, AZAlignRight = 0x00000010, AZAlignTop = 0x00000100, AZAlignBottom = 0x00001000, AZAlignTopLeft = 0x00000101, AZAlignBottomLeft = 0x00001001, AZAlignTopRight = 0x00000110, AZAlignBottomRight = 0x00001010";;
 
@@ -353,10 +350,10 @@ _Type NS_ENUM(NSUInteger, AppCat) {
 _Type NS_ENUM(NSInteger,  AZStatus) { AZMIXED = NSMixedState, AZOFF =  NSOffState, AZON = NSOnState };
 #endif
 
-JREnumDeclare(AZState, AZOff, AZOn, AZModifyingState, AZIdleState, AZCreatingState, AZDeletingState);
+_EnumKind(AZState, AZOff, AZOn, AZModifyingState, AZIdleState, AZCreatingState, AZDeletingState);
 
-JREnumDeclare(AZSectionState, AZCollapsed, AZExpanded);
-JREnumDeclare(AZSelectState, AZDeselected, AZSelected);
+_EnumKind(AZSectionState, AZCollapsed, AZExpanded);
+_EnumKind(AZSelectState, AZDeselected, AZSelected);
 
 
 //_Type NSInteger NSCellStateValue;
@@ -408,7 +405,7 @@ NS_INLINE void AZPrintEncodingTypes(){
 	NSLog(@"%15s: %s",  "NSA", @encode(   NSArray ));
 }
 
-JREnumDeclare( AZOutlineCellStyle, 	AZOutlineCellStyleToggleHeader,
+_EnumKind( AZOutlineCellStyle, 	AZOutlineCellStyleToggleHeader,
 												AZOutlineCellStyleScrollList,
 												AZOutlineCellStyleScrollListItem );
 
@@ -708,4 +705,4 @@ _Type RECORD_NAME(^RECORD_NAME ## Record)(void);	/*_Type of Rec. that returns st
  static int flagbit8 		= 128;  	// 2^^7    000...10000000
 
 */
-#endif /*END AtoZ_Types_h */
+

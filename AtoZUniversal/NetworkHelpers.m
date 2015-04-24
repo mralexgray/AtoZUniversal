@@ -1661,7 +1661,7 @@ static NSMutableDictionary *isps = nil;
 }
 
 
-- (void)locationManager:(CLLocationManager*)_	didUpdateToLocation:(CLLocation *)newL fromLocation:(CLLocation *)oldL {
+- (void)locationManager:(CLLocationManager*)lm	didUpdateToLocation:(CLLocation *)newL fromLocation:(CLLocation *)oldL {
 
 	// Ignore updates where nothing we care about changed
 	if (newL.coordinate.longitude == oldL.coordinate.longitude &&
