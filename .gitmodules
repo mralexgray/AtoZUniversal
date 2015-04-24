@@ -1,40 +1,32 @@
-[submodule "BaseModel"]
-	path = Vendor/BaseModel
-	   url = https://github.com/mralexgray/BaseModel.git
-     branch = master
-[submodule "_ObjC"]
-	path = Vendor/_ObjC
-	   url = https://github.com/mralexgray/_ObjC.git
-          branch = master
-[submodule "DatabaseStorage"]
-	path = Vendor/DatabaseStorage
-	   url = https://github.com/mralexgray/DatabaseStorage.git
-          branch = master
-[submodule "ObjcAssociatedObjectHelpers"]
-	path = Vendor/ObjcAssociatedObjectHelpers
-     url = https://github.com/mralexgray/ObjcAssociatedObjectHelpers.git
-          branch = master
-[submodule "OrderedDictionary"]
-	path = Vendor/OrderedDictionary
-   	 url = https://github.com/nicklockwood/OrderedDictionary.git
-          branch = master
-[submodule "Functional"]
-	path = Vendor/Functional
-	   url = https://github.com/mralexgray/Functional.m.git
-          branch = master
-[submodule "THObserversAndBinders"]
-	path = Vendor/THObserversAndBinders
-     url = https://github.com/mralexgray/THObserversAndBinders.git
-          branch = master
-[submodule "ObjectMatcher"]
-	path = Vendor/ObjectMatcher
-     url = https://github.com/mralexgray/ObjectMatcher.git
-          branch = master
-[submodule "FunSize"]
+
+[submodule "Vendor/FunSize"]
 	path = Vendor/FunSize
-     url = https://github.com/mralexgray/FunSize.git
-          branch = master
-[submodule "NTBTask"]
+	 url = https://github.com/mralexgray/FunSize.git
+[submodule "Vendor/_ObjC"]
+	path = Vendor/_ObjC
+   url = https://github.com/mralexgray/_ObjC.git
+
+[submodule "Vendor/NTBTask"]
 	path = Vendor/NTBTask
-	   url = https://github.com/kareman/NTBTask.git
-          branch = master
+	 url = https://github.com/kareman/NTBTask.git
+[submodule "Vendor/BaseModel"]
+	path = Vendor/BaseModel
+	 url = https://github.com/mralexgray/BaseModel.git
+[submodule "Vendor/Functional"]
+	path = Vendor/Functional
+	 url = https://github.com/mralexgray/Functional.m.git
+[submodule "Vendor/ObjectMatcher"]
+	path = Vendor/ObjectMatcher
+	 url = https://github.com/mralexgray/ObjectMatcher.git
+[submodule "Vendor/DatabaseStorage"]
+	path = Vendor/DatabaseStorage
+	 url = https://github.com/mralexgray/DatabaseStorage.git
+[submodule "Vendor/OrderedDictionary"]
+	path = Vendor/OrderedDictionary
+	 url = https://github.com/nicklockwood/OrderedDictionary.git
+[submodule "Vendor/THObserversAndBinders"]
+	path = Vendor/THObserversAndBinders
+	 url = https://github.com/mralexgray/THObserversAndBinders.git
+[submodule "Vendor/ObjcAssociatedObjectHelpers"]
+	path = Vendor/ObjcAssociatedObjectHelpers
+	 url = https://github.com/mralexgray/ObjcAssociatedObjectHelpers.git
