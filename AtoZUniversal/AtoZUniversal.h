@@ -1,6 +1,5 @@
 
-#ifndef AtoZ_AtoZUniversal_h
-#define AtoZ_AtoZUniversal_h
+#pragma once
 
 /*    ___                       ___           ___
      /  /\          ___        /  /\         /  /\
@@ -16,15 +15,14 @@
 
 */
 
+#import <FunSize/FunSize.h>
+
 #import <AtoZUniversal/EXTSynthesize.h>
 #import <AtoZUniversal/EXTBlockMethod.h>
 #import <AtoZUniversal/EXTRuntimeExtensions.h>
 #import <AtoZUniversal/EXTConcreteProtocol.h>
 #import <AtoZUniversal/NSMethodSignature+EXT.h>
 
-#import <AtoZUniversal/_ObjC.h>
-
-#import <FunSize/FunSize.h>
 
 #import <AtoZUniversal/AtoZMacroDefines.h>
 #import <AtoZUniversal/AtoZTypes.h>
@@ -46,6 +44,7 @@
 #import <AtoZUniversal/SubscriptProtocols.h>
 #import <AtoZUniversal/BoundingObject.h>
 
+#import <AtoZUniversal/NSObject+AtoZ.h>
 #import <AtoZUniversal/Color+AtoZ.h>
 #import <AtoZUniversal/NSArray+AtoZ.h>
 #import <AtoZUniversal/NSBundle+AtoZ.h>
@@ -55,7 +54,7 @@
 #import <AtoZUniversal/NSFont+AtoZ.h>
 #import <AtoZUniversal/NSImage+AtoZ.h>
 #import <AtoZUniversal/NSNumber+AtoZ.h>
-#import <AtoZUniversal/NSObject+AtoZ.h>
+
 #import <AtoZUniversal/NSObject+Properties.h>
 #import <AtoZUniversal/NSString+AtoZ.h>
 #import <AtoZUniversal/NSString-Utilities.h>
@@ -73,4 +72,3 @@
 FOUNDATION_EXPORT              double AtoZUniversalVersionNumber;   //! Project version number
 FOUNDATION_EXPORT const unsigned char AtoZUniversalVersionString[]; //! Project version string
 
-#endif /// AtoZ_AtoZUniversal_h

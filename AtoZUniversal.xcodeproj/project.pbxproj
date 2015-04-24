@@ -18,6 +18,7 @@
 		7B0A4F0E1AA947A6008FB45A /* Functions.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B0A4F0C1AA947A6008FB45A /* Functions.m */; };
 		7B0A4F111AA94D94008FB45A /* NSBag.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B0A4F0F1AA94D94008FB45A /* NSBag.m */; };
 		7B0A4F121AA94D94008FB45A /* NSBag.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B0A4F101AA94D94008FB45A /* NSBag.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7B0E20891AEA95F400C955CF /* FunSize.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B60D8181AE723320005120D /* FunSize.framework */; };
 		7B2EF3EA1AB0319600382535 /* OrderedDictionary.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B2EF3E81AB0319600382535 /* OrderedDictionary.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7B2EF3EE1AB032CE00382535 /* NSString-Utilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B2EF3EC1AB032CE00382535 /* NSString-Utilities.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7B2EF3EF1AB032CE00382535 /* NSString-Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B2EF3ED1AB032CE00382535 /* NSString-Utilities.m */; };
@@ -41,12 +42,10 @@
 		7B582C3A1AA6DCDF00C450C3 /* SubscriptProtocols.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B582C351AA6DCDF00C450C3 /* SubscriptProtocols.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7B582C3B1AA6DCDF00C450C3 /* SubscriptProtocols.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B582C361AA6DCDF00C450C3 /* SubscriptProtocols.m */; };
 		7B5DC2DA1AC933CB0063D701 /* RectLikeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B5DC2D91AC933CB0063D701 /* RectLikeTests.m */; };
-		7B60D8271AE724E30005120D /* FunSize.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B60D8181AE723320005120D /* FunSize.framework */; };
 		7B7D963B1AC2A18200F5504D /* BoundingObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B7D96391AC2A18200F5504D /* BoundingObject.m */; };
 		7B7D963C1AC2A18200F5504D /* BoundingObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B7D963A1AC2A18200F5504D /* BoundingObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7B89AE9C1AA9666C0036EC09 /* AZRange.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B89AE9A1AA9666C0036EC09 /* AZRange.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7B89AE9D1AA9666C0036EC09 /* AZRange.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B89AE9B1AA9666C0036EC09 /* AZRange.m */; };
-		7B9244E91AD75E6D00EE6262 /* UnitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B380C861ACA559900285B4E /* UnitTests.m */; };
 		7B9244F81AD79EF400EE6262 /* NTBTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B9244F21AD79EF400EE6262 /* NTBTask.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7B9244F91AD79EF400EE6262 /* NTBTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B9244F31AD79EF400EE6262 /* NTBTask.m */; };
 		7B92459B1AD82B0D00EE6262 /* ArrayLikeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B9245971AD82B0D00EE6262 /* ArrayLikeTests.m */; };
@@ -99,37 +98,22 @@
 		7BF46B541AB0CEFB0029068F /* NSFileManager+AtoZ.h in Headers */ = {isa = PBXBuildFile; fileRef = 7BF46B521AB0CEFB0029068F /* NSFileManager+AtoZ.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7BF6EB9F1AC5DD8B003E21DF /* DatabaseStorage.h in Headers */ = {isa = PBXBuildFile; fileRef = 7BF6EB9C1AC5DD8B003E21DF /* DatabaseStorage.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7BF6EBA01AC5DD8B003E21DF /* DatabaseStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF6EB9D1AC5DD8B003E21DF /* DatabaseStorage.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		7BFDE1AD1AE28C140012A607 /* _ObjC.h in Headers */ = {isa = PBXBuildFile; fileRef = 7BFDE1AC1AE28C140012A607 /* _ObjC.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		7B0E208A1AEA969500C955CF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7B582BBC1AA6A4F300C450C3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7B582BC41AA6A4F300C450C3;
+			remoteInfo = AtoZUniversal;
+		};
 		7B60D8171AE723320005120D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 7B5EEB341AE32B6B00A72BE7 /* FunSize.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 4311A74413D7429E00820313;
 			remoteInfo = FunSize;
-		};
-		7B60D81F1AE723820005120D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 7BFDE1831AE145240012A607 /* _ObjC.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 7BC4594A1AD68DAA0097F508;
-			remoteInfo = _ObjC_Tool;
-		};
-		7B60D8211AE723820005120D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 7BFDE1831AE145240012A607 /* _ObjC.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 7B9B40331AC14EB6002EDD01;
-			remoteInfo = _ObjC_Tests;
-		};
-		7B60D8231AE724C30005120D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 7BFDE1831AE145240012A607 /* _ObjC.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 7BFDE18F1AE1483D0012A607;
-			remoteInfo = _ObjC;
 		};
 		7B60D8251AE724D60005120D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -184,6 +168,9 @@
 		7B380C861ACA559900285B4E /* UnitTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UnitTests.m; path = OrderedDictionary/Tests/UnitTests/UnitTests.m; sourceTree = SOURCE_ROOT; };
 		7B4B72601AE97CE600A6B02C /* BaseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaseModel.h; path = Vendor/BaseModel/BaseModel/BaseModel.h; sourceTree = SOURCE_ROOT; };
 		7B4B72611AE97CE600A6B02C /* BaseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BaseModel.m; path = Vendor/BaseModel/BaseModel/BaseModel.m; sourceTree = SOURCE_ROOT; };
+		7B4ECA1C1AEA399A00FB1023 /* Universal.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Universal.xcconfig; path = Vendor/XCodeHelpers/Universal.xcconfig; sourceTree = SOURCE_ROOT; };
+		7B4ECA1D1AEA399A00FB1023 /* XC_Install_Helper.zsh */ = {isa = PBXFileReference; lastKnownFileType = text; name = XC_Install_Helper.zsh; path = Vendor/XCodeHelpers/XC_Install_Helper.zsh; sourceTree = SOURCE_ROOT; };
+		7B4ECA211AEA3A5900FB1023 /* UniversalFW.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = UniversalFW.xcconfig; path = Vendor/XCodeHelpers/UniversalFW.xcconfig; sourceTree = SOURCE_ROOT; };
 		7B582BC51AA6A4F400C450C3 /* AtoZUniversal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AtoZUniversal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B582BC91AA6A4F400C450C3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7B582BCA1AA6A4F400C450C3 /* AtoZUniversal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = AtoZUniversal.h; path = AtoZUniversal/AtoZUniversal.h; sourceTree = "<group>"; wrapsLines = 1; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -208,8 +195,6 @@
 		7B7D963A1AC2A18200F5504D /* BoundingObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BoundingObject.h; path = Protocols/BoundingObject.h; sourceTree = "<group>"; };
 		7B89AE9A1AA9666C0036EC09 /* AZRange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = AZRange.h; path = AtoZUniversal/AZRange.h; sourceTree = "<group>"; wrapsLines = 1; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		7B89AE9B1AA9666C0036EC09 /* AZRange.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AZRange.m; path = AtoZUniversal/AZRange.m; sourceTree = "<group>"; };
-		7B9244EA1AD779CA00EE6262 /* GCDTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GCDTask.h; path = GCDTask/GCDTask.h; sourceTree = "<group>"; };
-		7B9244EB1AD779CA00EE6262 /* GCDTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GCDTask.m; path = GCDTask/GCDTask.m; sourceTree = "<group>"; };
 		7B9244EE1AD79EF400EE6262 /* NTBTask_ClassMethodsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = NTBTask_ClassMethodsTests.m; path = "NTBTask/NTBTask Tests/NTBTask_ClassMethodsTests.m"; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		7B9244EF1AD79EF400EE6262 /* NTBTask_Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NTBTask_Tests.m; path = "NTBTask/NTBTask Tests/NTBTask_Tests.m"; sourceTree = SOURCE_ROOT; };
 		7B9244F01AD79EF400EE6262 /* XCTestCase+AsyncTesting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "XCTestCase+AsyncTesting.h"; path = "NTBTask/NTBTask Tests/XCTestCase+AsyncTesting.h"; sourceTree = SOURCE_ROOT; };
@@ -267,8 +252,6 @@
 		7BF46B571AB1D8A90029068F /* black.people.sweat.aif */ = {isa = PBXFileReference; lastKnownFileType = file; name = black.people.sweat.aif; path = ../Resources/black.people.sweat.aif; sourceTree = "<group>"; };
 		7BF6EB9C1AC5DD8B003E21DF /* DatabaseStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DatabaseStorage.h; sourceTree = "<group>"; };
 		7BF6EB9D1AC5DD8B003E21DF /* DatabaseStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DatabaseStorage.m; sourceTree = "<group>"; };
-		7BFDE1831AE145240012A607 /* _ObjC.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = _ObjC.xcodeproj; path = Vendor/_ObjC/_ObjC.xcodeproj; sourceTree = SOURCE_ROOT; };
-		7BFDE1AC1AE28C140012A607 /* _ObjC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _ObjC.h; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -276,7 +259,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7B60D8271AE724E30005120D /* FunSize.framework in Frameworks */,
+				7B0E20891AEA95F400C955CF /* FunSize.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -297,8 +280,6 @@
 		7B582BBB1AA6A4F300C450C3 = {
 			isa = PBXGroup;
 			children = (
-				7BFDE1AC1AE28C140012A607 /* _ObjC.h */,
-				7BFDE1831AE145240012A607 /* _ObjC.xcodeproj */,
 				7B582BCA1AA6A4F400C450C3 /* AtoZUniversal.h */,
 				7B582C341AA6DCDF00C450C3 /* AtoZMacroDefines.h */,
 				7B60D8131AE722730005120D /* Vendor */,
@@ -314,6 +295,9 @@
 		7B582BC81AA6A4F400C450C3 /* Support */ = {
 			isa = PBXGroup;
 			children = (
+				7B4ECA1C1AEA399A00FB1023 /* Universal.xcconfig */,
+				7B4ECA211AEA3A5900FB1023 /* UniversalFW.xcconfig */,
+				7B4ECA1D1AEA399A00FB1023 /* XC_Install_Helper.zsh */,
 				7BE12B681AA918A6001AF7CE /* AtoZUniversal-Prefix.pch */,
 				7B5DC27F1AC932CA0063D701 /* AtoZUni Tests */,
 				7B582C7D1AA6F4FE00C450C3 /* UniversalFrameworkAggregate.sh */,
@@ -388,15 +372,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		7B60D8191AE723820005120D /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				7B60D8201AE723820005120D /* _ObjC_Tool */,
-				7B60D8221AE723820005120D /* _ObjC_Tests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		7B89AE9E1AA9A7670036EC09 /* Base */ = {
 			isa = PBXGroup;
 			children = (
@@ -418,15 +393,6 @@
 				7B9244F31AD79EF400EE6262 /* NTBTask.m */,
 			);
 			name = Base;
-			sourceTree = "<group>";
-		};
-		7B9244FA1AD7FE2300EE6262 /* Unused - Remove */ = {
-			isa = PBXGroup;
-			children = (
-				7B9244EA1AD779CA00EE6262 /* GCDTask.h */,
-				7B9244EB1AD779CA00EE6262 /* GCDTask.m */,
-			);
-			name = "Unused - Remove";
 			sourceTree = "<group>";
 		};
 		7BA729881AB703F900BFD612 /* Resources */ = {
@@ -474,7 +440,6 @@
 		7BC459571AD6BB250097F508 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				7B9244FA1AD7FE2300EE6262 /* Unused - Remove */,
 				7B5EEB341AE32B6B00A72BE7 /* FunSize.xcodeproj */,
 				7BF6EB9B1AC5DD8B003E21DF /* DatabaseStorage */,
 				7B582C3C1AA6DFF000C450C3 /* BaseModel */,
@@ -590,7 +555,6 @@
 				7B2EF4361AB0493400382535 /* ObjcAssociatedObjectHelpers.h in Headers */,
 				7BE12B661AA917DC001AF7CE /* NSBundle+AtoZ.h in Headers */,
 				7BE12BBC1AA9222F001AF7CE /* AZObserversAndBinders.h in Headers */,
-				7BFDE1AD1AE28C140012A607 /* _ObjC.h in Headers */,
 				7B582C2B1AA6DC9800C450C3 /* F+Private.h in Headers */,
 				7BBD2D861AA7536A00CD9477 /* NSMethodSignature+EXT.h in Headers */,
 			);
@@ -612,7 +576,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				7B60D8241AE724C30005120D /* PBXTargetDependency */,
 				7B60D8261AE724D60005120D /* PBXTargetDependency */,
 			);
 			name = AtoZUniversal;
@@ -629,6 +592,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				7B0E208B1AEA969500C955CF /* PBXTargetDependency */,
 			);
 			name = "AtoZUniversal Tests";
 			productName = "AtoZUniversal Tests";
@@ -664,10 +628,6 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 7B60D8191AE723820005120D /* Products */;
-					ProjectRef = 7BFDE1831AE145240012A607 /* _ObjC.xcodeproj */;
-				},
-				{
 					ProductGroup = 7B60D8141AE723320005120D /* Products */;
 					ProjectRef = 7B5EEB341AE32B6B00A72BE7 /* FunSize.xcodeproj */;
 				},
@@ -688,20 +648,6 @@
 			remoteRef = 7B60D8171AE723320005120D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		7B60D8201AE723820005120D /* _ObjC_Tool */ = {
-			isa = PBXReferenceProxy;
-			fileType = "compiled.mach-o.executable";
-			path = _ObjC_Tool;
-			remoteRef = 7B60D81F1AE723820005120D /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		7B60D8221AE723820005120D /* _ObjC_Tests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = _ObjC_Tests.xctest;
-			remoteRef = 7B60D8211AE723820005120D /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXShellScriptBuildPhase section */
@@ -716,7 +662,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/zsh;
-			shellScript = "#!/bin/zsh\n\nINSTALLER=/tmp/installer.zsh\n\n[[ -f $INSTALLER ]] && rm -f $INSTALLER\n\nURL='https://gist.githubusercontent.com/mralexgray/9fc0e1f531df38aed349/raw/XC_Install_Helper.zsh'\n\ncurl -s $URL -o $INSTALLER\n\n#[[ $? = 0 && -f $INSTALLER ]] || {say \"download failed\"; exit 9; }\n\nchmod +x $INSTALLER\n\n$INSTALLER\n\n#source <( echo \"$X\" )\n#finalize (){ rm -f $INSTALLER }\n\n#trap finalize EXIT\n\n#if zsh -n\n\n# || { say \"couldn't install ${PRODUCT_NAME}\" && exit 9 }\n\n\n#[[ -a \"${SCRIPT_INPUT_FILE_0}\" ]] && \"${SCRIPT_INPUT_FILE_0}\"\n#gistphase -g INSTALL_FW_ON_DEVICE.zsh -u mralexgray\n\n\n";
+			shellScript = "\n\n\n[[ -x ${X=./Vendor/XCodeHelpers/XC_Install_Helper.zsh} ]] || chmod +x $X\n\n$X\n\n\n\n\n\n#[[ $? = 0 && -f $INSTALLER ]] || {say \"download failed\"; exit 9; }\n\n#chmod +x $INSTALLER\n\n#$INSTALLER\n#source <( echo \"$X\" )\n#finalize (){ rm -f $INSTALLER }\n\n#trap finalize EXIT\n#if zsh -n\n# || { say \"couldn't install ${PRODUCT_NAME}\" && exit 9 }\n\n\n#[[ -a \"${SCRIPT_INPUT_FILE_0}\" ]] && \"${SCRIPT_INPUT_FILE_0}\"\n#gistphase -g INSTALL_FW_ON_DEVICE.zsh -u mralexgray\n\n\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -773,7 +719,6 @@
 			files = (
 				7B92459D1AD82B0D00EE6262 /* AZGeometryTests.m in Sources */,
 				7B92459E1AD82B0D00EE6262 /* AZJREnumTests.m in Sources */,
-				7B9244E91AD75E6D00EE6262 /* UnitTests.m in Sources */,
 				7B5DC2DA1AC933CB0063D701 /* RectLikeTests.m in Sources */,
 				7B92459B1AD82B0D00EE6262 /* ArrayLikeTests.m in Sources */,
 			);
@@ -782,10 +727,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		7B60D8241AE724C30005120D /* PBXTargetDependency */ = {
+		7B0E208B1AEA969500C955CF /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = _ObjC;
-			targetProxy = 7B60D8231AE724C30005120D /* PBXContainerItemProxy */;
+			target = 7B582BC41AA6A4F300C450C3 /* AtoZUniversal */;
+			targetProxy = 7B0E208A1AEA969500C955CF /* PBXContainerItemProxy */;
 		};
 		7B60D8261AE724D60005120D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -797,50 +742,24 @@
 /* Begin XCBuildConfiguration section */
 		7B582BD91AA6A4F800C450C3 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7B4ECA1C1AEA399A00FB1023 /* Universal.xcconfig */;
 			buildSettings = {
-				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
-				GCC_C_LANGUAGE_STANDARD = c11;
-				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
-				ONLY_ACTIVE_ARCH = YES;
 			};
 			name = Debug;
 		};
 		7B582BDA1AA6A4F800C450C3 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7B4ECA1C1AEA399A00FB1023 /* Universal.xcconfig */;
 			buildSettings = {
-				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
-				GCC_C_LANGUAGE_STANDARD = c11;
-				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 			};
 			name = Release;
 		};
 		7B582BDC1AA6A4F800C450C3 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7B4ECA211AEA3A5900FB1023 /* UniversalFW.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				COPY_PHASE_STRIP = NO;
-				DEFINES_MODULE = YES;
-				DEPLOYMENT_LOCATION = YES;
-				DSTROOT = /;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = YES;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AtoZUniversal/AtoZUniversal-Prefix.pch";
 				INFOPLIST_FILE = AtoZUniversal/Info.plist;
-				INFOPLIST_PREPROCESS = YES;
-				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
-				LD_RUNPATH_SEARCH_PATHS = "@loader_path/Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				OTHER_LDFLAGS = (
 					"-all_load",
 					"-ObjC",
@@ -850,34 +769,15 @@
 					"-sub_umbrella",
 					FunSize,
 				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				STRIP_INSTALLED_PRODUCT = NO;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
 		};
 		7B582BDD1AA6A4F800C450C3 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7B4ECA211AEA3A5900FB1023 /* UniversalFW.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				COPY_PHASE_STRIP = NO;
-				DEFINES_MODULE = YES;
-				DEPLOYMENT_LOCATION = YES;
-				DSTROOT = /;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = YES;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AtoZUniversal/AtoZUniversal-Prefix.pch";
 				INFOPLIST_FILE = AtoZUniversal/Info.plist;
-				INFOPLIST_PREPROCESS = YES;
-				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
-				LD_RUNPATH_SEARCH_PATHS = "@loader_path/Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				OTHER_LDFLAGS = (
 					"-all_load",
 					"-ObjC",
@@ -887,17 +787,12 @@
 					"-sub_umbrella",
 					FunSize,
 				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				STRIP_INSTALLED_PRODUCT = NO;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
 		};
 		7B5DC2871AC932CA0063D701 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -912,14 +807,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COMBINE_HIDPI_IMAGES = YES;
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(USER_LIBRARY_DIR)/Frameworks",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
+				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -935,18 +824,13 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_EXPAND_BUILD_SETTINGS = NO;
 				LD_RUNPATH_SEARCH_PATHS = "$(USER_LIBRARY_DIR)/Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
-				ONLY_ACTIVE_ARCH = YES;
-				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
 			};
 			name = Debug;
 		};
 		7B5DC2881AC932CA0063D701 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -961,15 +845,9 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COMBINE_HIDPI_IMAGES = YES;
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(USER_LIBRARY_DIR)/Frameworks",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
+				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -978,10 +856,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_EXPAND_BUILD_SETTINGS = NO;
 				LD_RUNPATH_SEARCH_PATHS = "$(USER_LIBRARY_DIR)/Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
-				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
 			};
 			name = Release;
 		};

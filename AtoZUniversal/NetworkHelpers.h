@@ -49,7 +49,16 @@
 
 @interface Interface : NSObject
 
-@property (readonly,copy) NSString *speed, *name, *ip, *externalIP, *ISP, *FQDN, *prettySpeed;
+#if MAC_ONLY
+_RC _Text speed,
+          FQDN;
+
+#endif
+_RC _Text name,
+          ip,
+          externalIP,
+          ISP,
+          prettySpeed;
 @property (readonly)          BOOL isPrivate, isPrimary;
 @property (readonly)        Locale *locale;
 //@property (readonly) NSUInteger speed;
@@ -66,17 +75,20 @@
 + (BOOL) isPrivate:(NSString*)ip;
 
 + (NSString*) curl:x;
-
 + (NSString*) externalIPOf:x;
-
-
-
 + (NSString*)  ISP;
 + (NSString*)  ISPof:(NSString*)ip;
 //+ (NSString*)  ISPon:(Interface*)__ ___
 + (NSString*)  ISPon:(NSString*)extip;
 
+#if MAC_ONLY
 + (NSString*) FQDNof:(NSString*)ip; // [NetworkHelpers FQDNof:@"70.208.76.172"] = 172.sub-70-208-76.myvzw.com
++ (NSString*) FQDN;
+
++      (BOOL)    connectedToNetwork;
++      (BOOL)         hostAvailable:(NSString*)theHost;
+
+#endif
 
 /*!
  @abstract		IPv4 address of the primary network interface.
@@ -93,8 +105,8 @@
 + (NSArray*)       interfaces;
 
 +   (NSData*)               JSONify:x ___
-+      (BOOL)    connectedToNetwork;
-+      (BOOL)         hostAvailable:(NSString*)theHost;
+
+
 + (NSString*)            mimeForExt:(NSString*)ext; // MIMEHelper
 + (NSString*)       hostAddyForPort:(int)chosenPort;
 
@@ -103,7 +115,7 @@
 + (NSString*)   localAddressForPort:(int)p;
 
 + (NSString*)           prettyBytes:(CGFloat)bytes;
-+ (NSString*)                  FQDN;
+
 + (NSString*)     createindexForDir:(NSString*)cwd;
 
 

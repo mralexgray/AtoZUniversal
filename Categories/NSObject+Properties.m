@@ -2,6 +2,7 @@
 
 
 #import <AtoZUniversal/AtoZUniversal.h>
+#import <AtoZUniversal/NSArray+AtoZ.h>
 #import <FunSize/FunSize.h> // maptoDictionary
 
        SEL	          property_getGetter (objc_property_t property) {

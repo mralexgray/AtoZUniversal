@@ -30,3 +30,6 @@
 [submodule "Vendor/ObjcAssociatedObjectHelpers"]
 	path = Vendor/ObjcAssociatedObjectHelpers
 	 url = https://github.com/mralexgray/ObjcAssociatedObjectHelpers.git
+[submodule "Vendor/XCodeHelpers"]
+	path = Vendor/XCodeHelpers
+	url = git@gist.github.com:/9fc0e1f531df38aed349.git

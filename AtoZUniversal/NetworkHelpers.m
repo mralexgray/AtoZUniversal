@@ -14,7 +14,7 @@
 
 #define FM NSFileManager.defaultManager
 
-NSString* runCommand          (NSString* c) {	NSString* outP = nil;	char buffer[BUFSIZ + 1];	int chars_read = 0;
+NSString* runCommand          (NSString* c) {	NSString* outP = nil;	char buffer[BUFSIZ + 1];	size_t chars_read = 0;
 
   memset(buffer, '\0', sizeof(buffer));
 
@@ -133,8 +133,9 @@ NSArray *      NetworkInterfaces(){
 
 @implementation Interface
 
-@synthesize isPrimary = _isPrimary, externalIP = _externalIP, FQDN = _FQDN, ISP = _ISP, speed = _speed, locale = _locale, isPrivate = _isPrivate;
-
+@synthesize isPrimary = _isPrimary, externalIP = _externalIP, ISP = _ISP, locale = _locale, isPrivate = _isPrivate;
+#if MAC_ONLY
+@synthesize speed = _speed, FQDN = _FQDN;
 - (NSString*) speed {
 
   if (self.isPrivate) return _speed = NOTAPPLICAPLE;
@@ -205,7 +206,7 @@ NSArray *      NetworkInterfaces(){
 //  });
   return _speed = @"Testing";
 }
-
+#endif
 //  [NSOperationQueue.mainQueue addOperationWithBlock:^{
 
 //    id x = runCommand(@"echo \"scale=2; `curl -s -w \"%%{speed_download}\" http://speedtest.wdc01.softlayer.com/downloads/test10.zip -o /dev/null` / 131072\" | bc | xargs -I {} echo {} mbps") ?: @"N/A";
@@ -233,7 +234,6 @@ NSArray *      NetworkInterfaces(){
     }], @"Pending";
 }
 //- (NSString*) externalIP { return self.isLoopback ? NOTAPPLICAPLE : [NET externalIPOf:self.name]; }
-- (NSString*) FQDN { return _FQDN = _FQDN ?: [NET FQDNof:_ip]; }
 - (NSString*) ISP {
 
 
@@ -242,7 +242,7 @@ NSArray *      NetworkInterfaces(){
   else [self setValue: [NET ISPon:self.externalIP] forKey:@"ISP"];
   return _ISP;
 }
-- (NSString*) description { return [NSString.alloc initWithFormat:@"<%@> IP:%@ Ext:%@ ISP:%@ FQDN:%@", _name, _ip, _externalIP, _ISP, _FQDN]; }
+- (NSString*) description { return [NSString.alloc initWithFormat:@"<%@> IP:%@ Ext:%@ ISP:%@ FQDN:%@", _name, _ip, _externalIP, _ISP, [self vFK:@"FQDN"]]; }
 - (BOOL) isPrivate { static dispatch_once_t onceToken; return dispatch_once(&onceToken, ^{ _isPrivate = [NET isPrivate:self.ip]; }), _isPrivate; }
 - (Locale*) locale { return _locale = _locale ?: ({ id x =  [Locale localeOfIP:self.externalIP];
 
@@ -290,6 +290,7 @@ static struct {UInt32 mask, value;} const kPrivateRanges[] = {
 
 + (NSString*) primaryIPv4Address {
 
+#if MAC_ONLY
   char hostname[400] = "";
 
   @autoreleasepool {
@@ -331,6 +332,9 @@ static struct {UInt32 mask, value;} const kPrivateRanges[] = {
     }
   }
   return [NSString.alloc initWithUTF8String:hostname];
+  #else
+  return @"N/A";
+  #endif
 }
 
 + (NSArray*)       interfaces {
@@ -344,6 +348,7 @@ static struct {UInt32 mask, value;} const kPrivateRanges[] = {
 
 + (NSString*) externalIPOf:x {
 
+#if MAC_ONLY
  NSTask *task = NSTask.new;
   task.launchPath = @"/usr/bin/curl";
   task.arguments = @[@"-L", @"-s",@"--interface", x, @"http://ip-api.com/line/?fields=query"];
@@ -356,6 +361,9 @@ static struct {UInt32 mask, value;} const kPrivateRanges[] = {
 //  return stringBetweenString([NSString.alloc initWithData:outputData encoding:NSUTF8StringEncoding],@"our Internet Service Provider (ISP) is '",@"'");
 //  return runCommand([NSString stringWithFormat:@"curl -L -s --interface %@ http://ip-api.com/line/?fields=query", x]);
   return [NSString.alloc initWithData:outputData encoding:NSUTF8StringEncoding];
+#else 
+  return runCommand($(@"/usr/bin/curl -L -s --interface %@ http://ip-api.com/line/?fields=query", x));
+#endif
 }
 
 + (NSString*) externalIP {
@@ -422,6 +430,7 @@ static NSMutableDictionary *isps = nil;
 
 + (NSString*)  ISPon:(NSString*)extip {
 
+#if MAC_ONLY
   if (!extip) return @"N/A";
   NSTask *task = NSTask.new;
   task.launchPath = @"/usr/bin/curl";
@@ -434,6 +443,9 @@ static NSMutableDictionary *isps = nil;
   NSData *outputData = outputPipe.fileHandleForReading.readDataToEndOfFile;
   NSString *stash = [NSString.alloc initWithData:outputData encoding:NSUTF8StringEncoding];
   return stash ? [stringBetweenString(stash,@"' is '",@"'")copy] : [@"" copy];
+#else
+  return @"N/A";
+#endif
 }
 
 //  NSTask *task=[NSTask new];
@@ -498,9 +510,13 @@ static NSMutableDictionary *isps = nil;
   return result;
 }
 
+#if MAC_ONLY
+//- (NSString*) FQDN { return _FQDN = _FQDN ?: [NET FQDNof:self.ip]; }
+
 + (NSString*) FQDNof:(NSString*)ip { return [NSHost hostWithAddress:ip].name; }
 
 + (NSString*) FQDN {  return NSHost.currentHost.name; }
+#endif
 
 // Return the hostname.local address for the iPhone
 + (NSString *) localAddressForPort: (int) chosenPort {
@@ -511,6 +527,7 @@ static NSMutableDictionary *isps = nil;
           chosenPort];
 }
 
+#if MAC_ONLY
 + (BOOL) connectedToNetwork {
 
   // Create zero addy
@@ -532,7 +549,7 @@ static NSMutableDictionary *isps = nil;
   needsConnection = flags & kSCNetworkFlagsConnectionRequired;
   return isReachable && !needsConnection;
 }
-
+#endif
 
 // Return the iPhone's IP address
 + (NSString *) localIPAddressForPort: (int) chosenPort {
@@ -613,7 +630,7 @@ static NSMutableDictionary *isps = nil;
 
   return YES;
 }
-
+#if MAC_ONLY
 + (BOOL) hostAvailable: (NSString *) theHost
 {
 
@@ -649,7 +666,7 @@ static NSMutableDictionary *isps = nil;
   BOOL needsConnection = flags & kSCNetworkFlagsConnectionRequired;
   return (isReachable && !needsConnection) ? YES : NO;
 }
-
+#endif
 + (NSString *) mimeForExt:(NSString *)ext
 {
   NSString *uc = [ext uppercaseString];

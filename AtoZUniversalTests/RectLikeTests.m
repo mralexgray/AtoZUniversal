@@ -6,8 +6,8 @@
 //  Copyright (c) 2014 mrgray.com, inc. All rights reserved.
 //
 
-#import <XCTest/XCTest.h>
-#import <AtoZUniversal/AtoZUniversal.h>
+@import XCTest;
+@import AtoZUniversal;
 
 _XCTCase(RectLikeTests) { NSWindow *w; AZR *azr; CAL* l; NSV* v; }
 

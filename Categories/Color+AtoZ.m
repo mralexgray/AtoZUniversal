@@ -76,6 +76,10 @@ SYNTHESIZE_ASC_OBJ(name, setName);
 
 double _fclamp(double lower, double value, double upper) { return fmin(fmax(lower, value), upper); }
 
+#if IOS_ONLY
+#define NSCalibratedRGBColorSpace @""
+_ID colorUsingColorSpaceName:x { return self; }
+#endif
 
 - _Kind_ withBrightnessOffset     __Flot_ offset {
 
@@ -83,6 +87,7 @@ double _fclamp(double lower, double value, double upper) { return fmin(fmax(lowe
   _Flot h,s,b,a;    [hsbaColor getHue:&h saturation:&s brightness:&b alpha:&a];
   return [self.class colorWithCalibratedHue:h saturation:s brightness:_fclamp(0.0, b+offset, 1.0) alpha:a];
 }
+
 - _Kind_ withBrightnessMultiplier __Flot_ factor {
 
     _Colr hsbaColor = [self colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
