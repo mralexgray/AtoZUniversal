@@ -8,7 +8,7 @@
 
 [submodule "Vendor/NTBTask"]
 	path = Vendor/NTBTask
-	 url = https://github.com/kareman/NTBTask.git
+	 url = https://github.com/mralexgray/NTBTask.git
 [submodule "Vendor/BaseModel"]
 	path = Vendor/BaseModel
 	 url = https://github.com/mralexgray/BaseModel.git
