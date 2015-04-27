@@ -89,10 +89,6 @@
 
 #define  🍎 SEXY
 
-#define APPLE_MAIN int main(int argc, char **argv, char **envp, char **apple)
-
-#define MAIN(...) APPLE_MAIN { int EXIT = 0; @autoreleasepool { ({ __VA_ARGS__; }); } return EXIT; }
-
 // START NEEDHOMES
 
 #define WORD definition
@@ -487,7 +483,9 @@ X,OBJC_ASSOCIATION_COPY_NONATOMIC);
 
 #define YOU_DONT_BELONG return [NSException raise:@"ProtocolIsOverridingYourMethod" format:@"You already implement %@. why are you (%@) here?", AZSELSTR, self]
 
-#define DEMAND_CONFORMANCE	[NSException raise:@"NonConformantProtocolMethodFallThrough" format:\
+/// Use when implementing Concrete protocols, or even just @required protocols.  If called, will indellibly reiterate that this method requires manual implementation by protocol conformers.
+#define DEMAND_CONFORMANCE \
+  [NSException raise:@"NonConformantProtocolMethodFallThrough" format:\
   $$$(@"This concrete protocol NEEDS YOU (", NSStringFromClass([self class]), @") to implement this method,.. ", AZSELSTR, @" elsewhere... for internal peace and traquility."), nil]
 
 #pragma mark - COLORS
@@ -708,11 +706,15 @@ OBJC_EXPORT BOOL AZEqualToAnyObject(id x, ...);
 #define dispatch_uno(...) ((void)({ static dispatch_once_t u; dispatch_once(&u, ^{ ({ __VA_ARGS__; }); }); }))
 
 #define SYNTHESIZE_SINGLETON_FOR_CLASS(classname, accessorname) 		\
-+ (classname *)accessorname {                                       \
-	static classname *accessorname = nil;                             \
-	static dispatch_once_t onceToken;                                 \
-	dispatch_once(&onceToken, ^{ accessorname = classname.new; });		\
-	return accessorname; 															\
+  SYNTHESIZE_SINGLETON(classname*, accessorname)
+
+#define SYNTHESIZE_SINGLETON(classname, accessorname)             \
++ (classname)accessorname {                                       \
+	static classname accessorname = nil;                             \
+	dispatch_uno( accessorname = [classname alloc]; \
+                accessorname = [accessorname init]; \
+  );                    \
+	return accessorname;                                              \
 }
 
 #define SYNTHESIZE_CLASS_FACTORY(accessorname) 		\

@@ -1,7 +1,9 @@
 
-
-
 #import <AtoZUniversal/Rectlike.h>
+
+🆅 Solo <NObj> @Reqd
++ _Kind_ shared ___
+￭
 
 @Vows TypedArray <NObj> @concrete _AT Class objectClass;
 @Stop
