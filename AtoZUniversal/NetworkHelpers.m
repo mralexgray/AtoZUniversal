@@ -2,17 +2,16 @@
 /// MIMEHelper   Copyright 2008, Erica Sadun All rights are retained. This code remains the trade secret and intellectual property of Erica Sadun.
 
 @import Darwin;
-@import ObjectiveC;
-@import Darwin.POSIX;
-@import Darwin.POSIX.net;
 @import Foundation;
+@import ObjectiveC;
+//@import Darwin.POSIX;
+//@import Darwin.POSIX.net;
 
-#import "NetworkHelpers.h"
+
+#import "AtoZUniversal.h"
 #import <ifaddrs.h>
 #import <netinet/in.h>
 #import <sys/socket.h>
-
-#define FM NSFileManager.defaultManager
 
 NSString* runCommand          (NSString* c) {	NSString* outP = nil;	char buffer[BUFSIZ + 1];	size_t chars_read = 0;
 
@@ -36,7 +35,8 @@ NSString* stringBetweenString (NSString*str, NSString* start, NSString *end) {
   return [scanner scanString:start intoString:NULL] && [scanner scanUpToString:end intoString:&result], result;
 }
 
-//  NetUtils.m  from Tabi Created by Vyacheslav Zakovyrya on 1/22/10.   Copyright 2010 __MyCompanyName__. All rights reserved.
+//  NetUtils.m  from Tabi Created by Vyacheslav Zakovyrya on 1/22/10.
+
 #import <arpa/inet.h>
 
 void *              InAddrStruct(struct sockaddr *sa) {
@@ -133,7 +133,12 @@ NSArray *      NetworkInterfaces(){
 
 @implementation Interface
 
-@synthesize isPrimary = _isPrimary, externalIP = _externalIP, ISP = _ISP, locale = _locale, isPrivate = _isPrivate;
+@synthesize  isPrimary = _isPrimary,
+            externalIP = _externalIP,
+                   ISP = _ISP,
+                locale = _locale,
+             isPrivate = _isPrivate;
+             
 #if MAC_ONLY
 @synthesize speed = _speed, FQDN = _FQDN;
 - (NSString*) speed {
@@ -402,9 +407,9 @@ static struct {UInt32 mask, value;} const kPrivateRanges[] = {
 
 + (NSString*)  ISP {
 
-  id x = objc_msgSend(NSString.class, NSSelectorFromString(@"curl"), @"whoismyisp.org");
-  x = objc_msgSend(x, NSSelectorFromString(@"substringAfter:"),@"Your Internet Service Provider (ISP) is '");
-  x = objc_msgSend(x, NSSelectorFromString(@"substringBefore:"), @"'");
+  id x = objc_msgSend(self, NSSelectorFromString(@"curl:"), @"whoismyisp.org");
+     x = objc_msgSend(x, NSSelectorFromString(@"substringAfter:"),@"Your Internet Service Provider (ISP) is '");
+     x = objc_msgSend(x, NSSelectorFromString(@"substringBefore:"), @"'");
   return x;
 }
 

@@ -705,12 +705,13 @@ OBJC_EXPORT BOOL AZEqualToAnyObject(id x, ...);
 
 #define dispatch_uno(...) ((void)({ static dispatch_once_t u; dispatch_once(&u, ^{ ({ __VA_ARGS__; }); }); }))
 
-#define SYNTHESIZE_SINGLETON_FOR_CLASS(classname, accessorname) 		\
-  SYNTHESIZE_SINGLETON(classname*, accessorname)
+// 		\ SYNTHESIZE_SINGLETON(classname*, accessorname)
+///#define SYNTHESIZE_SINGLETON(classname, accessorname)             \
 
-#define SYNTHESIZE_SINGLETON(classname, accessorname)             \
-+ (classname)accessorname {                                       \
-	static classname accessorname = nil;                             \
+#define SYNTHESIZE_SINGLETON_FOR_CLASS(classname, accessorname) \
+\
++ (classname*) accessorname {                                       \
+	static classname * accessorname = nil;                             \
 	dispatch_uno( accessorname = [classname alloc]; \
                 accessorname = [accessorname init]; \
   );                    \
