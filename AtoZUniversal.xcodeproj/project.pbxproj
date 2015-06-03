@@ -176,9 +176,9 @@
 		7B380C861ACA559900285B4E /* UnitTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UnitTests.m; path = OrderedDictionary/Tests/UnitTests/UnitTests.m; sourceTree = SOURCE_ROOT; };
 		7B4B72601AE97CE600A6B02C /* BaseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaseModel.h; path = Vendor/BaseModel/BaseModel/BaseModel.h; sourceTree = SOURCE_ROOT; };
 		7B4B72611AE97CE600A6B02C /* BaseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BaseModel.m; path = Vendor/BaseModel/BaseModel/BaseModel.m; sourceTree = SOURCE_ROOT; };
-		7B4ECA1C1AEA399A00FB1023 /* Universal.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Universal.xcconfig; path = Vendor/XCodeHelpers/Universal.xcconfig; sourceTree = SOURCE_ROOT; wrapsLines = 1; };
-		7B4ECA1D1AEA399A00FB1023 /* XC_Install_Helper.zsh */ = {isa = PBXFileReference; lastKnownFileType = text; name = XC_Install_Helper.zsh; path = Vendor/XCodeHelpers/XC_Install_Helper.zsh; sourceTree = SOURCE_ROOT; };
-		7B4ECA211AEA3A5900FB1023 /* UniversalFW.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = UniversalFW.xcconfig; path = Vendor/XCodeHelpers/UniversalFW.xcconfig; sourceTree = SOURCE_ROOT; };
+		7B4ECA1C1AEA399A00FB1023 /* Universal.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Universal.xcconfig; path = Vendor/_ObjC/Universal/Universal.xcconfig; sourceTree = SOURCE_ROOT; wrapsLines = 1; };
+		7B4ECA1D1AEA399A00FB1023 /* XC_Install_Helper.zsh */ = {isa = PBXFileReference; lastKnownFileType = text; name = XC_Install_Helper.zsh; path = Vendor/_ObjC/Universal/XC_Install_Helper.zsh; sourceTree = SOURCE_ROOT; };
+		7B4ECA211AEA3A5900FB1023 /* UniversalFW.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = UniversalFW.xcconfig; path = Vendor/_ObjC/Universal/UniversalFW.xcconfig; sourceTree = SOURCE_ROOT; };
 		7B582BC51AA6A4F400C450C3 /* AtoZUniversal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AtoZUniversal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B582BC91AA6A4F400C450C3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7B582BCA1AA6A4F400C450C3 /* AtoZUniversal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = AtoZUniversal.h; path = AtoZUniversal/AtoZUniversal.h; sourceTree = "<group>"; wrapsLines = 1; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -222,7 +222,7 @@
 		7B967E251ADB3021005E09B4 /* NamedPipe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NamedPipe.m; path = AtoZUniversal/NamedPipe.m; sourceTree = "<group>"; };
 		7BB3D0371B1CAB0C0001E9C3 /* Demo */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Demo; sourceTree = BUILT_PRODUCTS_DIR; };
 		7BB3D0391B1CAB0C0001E9C3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		7BB3D0711B1E46610001E9C3 /* recursive_commit.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = recursive_commit.sh; path = Vendor/XCodeHelpers/recursive_commit.sh; sourceTree = SOURCE_ROOT; };
+		7BB3D0711B1E46610001E9C3 /* recursive_commit.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = recursive_commit.sh; path = Vendor/_ObjC/Universal/recursive_commit.sh; sourceTree = SOURCE_ROOT; };
 		7BB3D0721B1E8AEE0001E9C3 /* .travis.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .travis.yml; sourceTree = SOURCE_ROOT; };
 		7BB3D0731B1ECC6D0001E9C3 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = SOURCE_ROOT; };
 		7BB3D0741B1ECC6D0001E9C3 /* .gitmodules */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitmodules; sourceTree = SOURCE_ROOT; };
