@@ -7,8 +7,10 @@ notifications:
   webhooks:
     - http://simonwesterlund.se/travis.php
     
-xcode_project: AtoZUniversal.xcodeproj
+# xcode_project: AtoZUniversal.xcodeproj
 
-xcode_scheme: AtoZUniversal
+# xcode_scheme: AtoZUniversal
 
 osx_image: beta-xcode6.3
+
+script: xctool -project AtoZUniversal.xcodeproj -scheme AtoZUniversal build  CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
