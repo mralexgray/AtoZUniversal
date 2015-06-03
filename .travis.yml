@@ -10,4 +10,5 @@ notifications:
 xcode_project: AtoZUniversal.xcodeproj
 
 xcode_scheme: AtoZUniversal
-    
+
+osx_image: beta-xcode6.3
