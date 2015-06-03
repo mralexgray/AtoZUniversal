@@ -33,3 +33,4 @@
 [submodule "Vendor/XCodeHelpers"]
 	path = Vendor/XCodeHelpers
 	url = https://github.com/mralexgray/Universal.git
+	ignore = all
