@@ -223,6 +223,7 @@
 		7BB3D0371B1CAB0C0001E9C3 /* Demo */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Demo; sourceTree = BUILT_PRODUCTS_DIR; };
 		7BB3D0391B1CAB0C0001E9C3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		7BB3D0711B1E46610001E9C3 /* recursive_commit.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = recursive_commit.sh; path = Vendor/XCodeHelpers/recursive_commit.sh; sourceTree = SOURCE_ROOT; };
+		7BB3D0721B1E8AEE0001E9C3 /* .travis.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .travis.yml; sourceTree = SOURCE_ROOT; };
 		7BBD2D741AA74C8700CD9477 /* EXTConcreteProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = EXTConcreteProtocol.h; sourceTree = "<group>"; wrapsLines = 1; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		7BBD2D751AA74C8700CD9477 /* EXTConcreteProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EXTConcreteProtocol.m; sourceTree = "<group>"; };
 		7BBD2D761AA74C8700CD9477 /* EXTRuntimeExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = EXTRuntimeExtensions.h; sourceTree = "<group>"; wrapsLines = 1; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -314,6 +315,7 @@
 		7B582BC81AA6A4F400C450C3 /* Support */ = {
 			isa = PBXGroup;
 			children = (
+				7BB3D0721B1E8AEE0001E9C3 /* .travis.yml */,
 				7B4ECA1C1AEA399A00FB1023 /* Universal.xcconfig */,
 				7B4ECA211AEA3A5900FB1023 /* UniversalFW.xcconfig */,
 				7B4ECA1D1AEA399A00FB1023 /* XC_Install_Helper.zsh */,
