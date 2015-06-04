@@ -1,15 +1,19 @@
 
 language:       objective-c
-xcode_project:  AtoZUniversal.xcodeproj
-xcode_scheme:   AtoZUniversal
+
 osx_image:      beta-xcode6.3
+
+script: xctool -project AtoZUniversal.xcodeproj -scheme AtoZUniversal build  CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
+
+
+# xcode_project:  AtoZUniversal.xcodeproj
+# xcode_scheme:   AtoZUniversal
 
 # notifications:
 #  webhooks:
 #    - http://simonwesterlund.se/travis.php
 
 
-#script: xctool -project AtoZUniversal.xcodeproj -scheme AtoZUniversal build  CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
 
 # disable the default submodule logic
 #git:
