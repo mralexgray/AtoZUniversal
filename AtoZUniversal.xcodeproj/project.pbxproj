@@ -700,7 +700,8 @@
 		7B60D8181AE723320005120D /* FunSize.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
-			path = FunSize.framework;
+			name = FunSize.framework;
+			path = .framework;
 			remoteRef = 7B60D8171AE723320005120D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
@@ -718,7 +719,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/zsh;
-			shellScript = "\n\n\n[[ -x ${X=./Vendor/XCodeHelpers/XC_Install_Helper.zsh} ]] || chmod +x $X\n\n$X\n\n\n\n\n\n#[[ $? = 0 && -f $INSTALLER ]] || {say \"download failed\"; exit 9; }\n\n#chmod +x $INSTALLER\n\n#$INSTALLER\n#source <( echo \"$X\" )\n#finalize (){ rm -f $INSTALLER }\n\n#trap finalize EXIT\n#if zsh -n\n# || { say \"couldn't install ${PRODUCT_NAME}\" && exit 9 }\n\n\n#[[ -a \"${SCRIPT_INPUT_FILE_0}\" ]] && \"${SCRIPT_INPUT_FILE_0}\"\n#gistphase -g INSTALL_FW_ON_DEVICE.zsh -u mralexgray\n\n\n";
+			shellScript = "\n\n\n[[ -x ${X=./Vendor/_ObjC/Universal/XC_Install_Helper.zsh} ]] || chmod +x $X\n\n$X\n\n\n\n\n\n#[[ $? = 0 && -f $INSTALLER ]] || {say \"download failed\"; exit 9; }\n\n#chmod +x $INSTALLER\n\n#$INSTALLER\n#source <( echo \"$X\" )\n#finalize (){ rm -f $INSTALLER }\n\n#trap finalize EXIT\n#if zsh -n\n# || { say \"couldn't install ${PRODUCT_NAME}\" && exit 9 }\n\n\n#[[ -a \"${SCRIPT_INPUT_FILE_0}\" ]] && \"${SCRIPT_INPUT_FILE_0}\"\n#gistphase -g INSTALL_FW_ON_DEVICE.zsh -u mralexgray\n\n\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1046,6 +1047,7 @@
 				7BB3D03C1B1CAB0C0001E9C3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 	};
