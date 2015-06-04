@@ -176,9 +176,7 @@
 		7B380C861ACA559900285B4E /* UnitTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UnitTests.m; path = OrderedDictionary/Tests/UnitTests/UnitTests.m; sourceTree = SOURCE_ROOT; };
 		7B4B72601AE97CE600A6B02C /* BaseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaseModel.h; path = Vendor/BaseModel/BaseModel/BaseModel.h; sourceTree = SOURCE_ROOT; };
 		7B4B72611AE97CE600A6B02C /* BaseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BaseModel.m; path = Vendor/BaseModel/BaseModel/BaseModel.m; sourceTree = SOURCE_ROOT; };
-		7B4ECA1C1AEA399A00FB1023 /* Universal.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Universal.xcconfig; path = Vendor/_ObjC/Universal/Universal.xcconfig; sourceTree = SOURCE_ROOT; wrapsLines = 1; };
 		7B4ECA1D1AEA399A00FB1023 /* XC_Install_Helper.zsh */ = {isa = PBXFileReference; lastKnownFileType = text; name = XC_Install_Helper.zsh; path = Vendor/_ObjC/Universal/XC_Install_Helper.zsh; sourceTree = SOURCE_ROOT; };
-		7B4ECA211AEA3A5900FB1023 /* UniversalFW.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = UniversalFW.xcconfig; path = Vendor/_ObjC/Universal/UniversalFW.xcconfig; sourceTree = SOURCE_ROOT; };
 		7B582BC51AA6A4F400C450C3 /* AtoZUniversal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AtoZUniversal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B582BC91AA6A4F400C450C3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7B582BCA1AA6A4F400C450C3 /* AtoZUniversal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = AtoZUniversal.h; path = AtoZUniversal/AtoZUniversal.h; sourceTree = "<group>"; wrapsLines = 1; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -247,6 +245,8 @@
 		7BD3CAEB1AB8469E00E05319 /* Rectlike.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Rectlike.m; path = Protocols/Rectlike.m; sourceTree = "<group>"; };
 		7BD3E4A21ABD4BF100552876 /* Color+AtoZ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Color+AtoZ.h"; path = "Categories/Color+AtoZ.h"; sourceTree = "<group>"; };
 		7BD3E4A31ABD4BF100552876 /* Color+AtoZ.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Color+AtoZ.m"; path = "Categories/Color+AtoZ.m"; sourceTree = "<group>"; };
+		7BD5C5911B20B8810057E1D7 /* Universal.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Universal.xcconfig; path = Vendor/_ObjC/Universal/Universal.xcconfig; sourceTree = SOURCE_ROOT; };
+		7BD5C5921B20B8810057E1D7 /* UniversalFW.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = UniversalFW.xcconfig; path = Vendor/_ObjC/Universal/UniversalFW.xcconfig; sourceTree = SOURCE_ROOT; };
 		7BE12B641AA917DC001AF7CE /* NSBundle+AtoZ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSBundle+AtoZ.h"; path = "Categories/NSBundle+AtoZ.h"; sourceTree = SOURCE_ROOT; wrapsLines = 1; };
 		7BE12B651AA917DC001AF7CE /* NSBundle+AtoZ.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSBundle+AtoZ.m"; path = "Categories/NSBundle+AtoZ.m"; sourceTree = SOURCE_ROOT; };
 		7BE12B681AA918A6001AF7CE /* AtoZUniversal-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AtoZUniversal-Prefix.pch"; sourceTree = "<group>"; };
@@ -317,11 +317,11 @@
 		7B582BC81AA6A4F400C450C3 /* Support */ = {
 			isa = PBXGroup;
 			children = (
+				7BD5C5911B20B8810057E1D7 /* Universal.xcconfig */,
+				7BD5C5921B20B8810057E1D7 /* UniversalFW.xcconfig */,
 				7BB3D0721B1E8AEE0001E9C3 /* .travis.yml */,
 				7BB3D0731B1ECC6D0001E9C3 /* .gitignore */,
 				7BB3D0741B1ECC6D0001E9C3 /* .gitmodules */,
-				7B4ECA1C1AEA399A00FB1023 /* Universal.xcconfig */,
-				7B4ECA211AEA3A5900FB1023 /* UniversalFW.xcconfig */,
 				7B4ECA1D1AEA399A00FB1023 /* XC_Install_Helper.zsh */,
 				7BB3D0711B1E46610001E9C3 /* recursive_commit.sh */,
 				7BE12B681AA918A6001AF7CE /* AtoZUniversal-Prefix.pch */,
@@ -812,21 +812,21 @@
 /* Begin XCBuildConfiguration section */
 		7B582BD91AA6A4F800C450C3 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7B4ECA1C1AEA399A00FB1023 /* Universal.xcconfig */;
+			baseConfigurationReference = 7BD5C5911B20B8810057E1D7 /* Universal.xcconfig */;
 			buildSettings = {
 			};
 			name = Debug;
 		};
 		7B582BDA1AA6A4F800C450C3 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7B4ECA1C1AEA399A00FB1023 /* Universal.xcconfig */;
+			baseConfigurationReference = 7BD5C5911B20B8810057E1D7 /* Universal.xcconfig */;
 			buildSettings = {
 			};
 			name = Release;
 		};
 		7B582BDC1AA6A4F800C450C3 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7B4ECA211AEA3A5900FB1023 /* UniversalFW.xcconfig */;
+			baseConfigurationReference = 7BD5C5921B20B8810057E1D7 /* UniversalFW.xcconfig */;
 			buildSettings = {
 				GCC_PREFIX_HEADER = "AtoZUniversal/AtoZUniversal-Prefix.pch";
 				INFOPLIST_FILE = AtoZUniversal/Info.plist;
@@ -844,7 +844,7 @@
 		};
 		7B582BDD1AA6A4F800C450C3 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7B4ECA211AEA3A5900FB1023 /* UniversalFW.xcconfig */;
+			baseConfigurationReference = 7BD5C5921B20B8810057E1D7 /* UniversalFW.xcconfig */;
 			buildSettings = {
 				GCC_PREFIX_HEADER = "AtoZUniversal/AtoZUniversal-Prefix.pch";
 				INFOPLIST_FILE = AtoZUniversal/Info.plist;
@@ -932,7 +932,6 @@
 		};
 		7BB3D03B1B1CAB0C0001E9C3 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7B4ECA1C1AEA399A00FB1023 /* Universal.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
