@@ -30,6 +30,3 @@
 [submodule "ObjcAssociatedObjectHelpers"]
 	path = Vendor/ObjcAssociatedObjectHelpers
 	 url = https://github.com/mralexgray/ObjcAssociatedObjectHelpers.git
-[submodule "XCodeHelpers"]
-	path = Vendor/XCodeHelpers
-	url = https://github.com/mralexgray/Universal.git
