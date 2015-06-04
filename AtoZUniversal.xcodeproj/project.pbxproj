@@ -722,7 +722,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/zsh;
-			shellScript = "\n\n\n[[ -x ${X=./Vendor/_ObjC/Universal/XC_Install_Helper.zsh} ]] || chmod +x $X\n\n$X\n\n\n\n\n\n#[[ $? = 0 && -f $INSTALLER ]] || {say \"download failed\"; exit 9; }\n\n#chmod +x $INSTALLER\n\n#$INSTALLER\n#source <( echo \"$X\" )\n#finalize (){ rm -f $INSTALLER }\n\n#trap finalize EXIT\n#if zsh -n\n# || { say \"couldn't install ${PRODUCT_NAME}\" && exit 9 }\n\n\n#[[ -a \"${SCRIPT_INPUT_FILE_0}\" ]] && \"${SCRIPT_INPUT_FILE_0}\"\n#gistphase -g INSTALL_FW_ON_DEVICE.zsh -u mralexgray\n\n\n";
+			shellScript = "\nX=\"Vendor/_ObjC/Universal/XC_Install_Helper.zsh\"\n\n[[ -z \"$X\" ]]   && exit 0\n[[ ! -x \"$X\" ]] && chmod +x \"$X\"\n\n\"$X\"\n\n\n\n\n#[[ $? = 0 && -f $INSTALLER ]] || {say \"download failed\"; exit 9; }\n\n#chmod +x $INSTALLER\n\n#$INSTALLER\n#source <( echo \"$X\" )\n#finalize (){ rm -f $INSTALLER }\n\n#trap finalize EXIT\n#if zsh -n\n# || { say \"couldn't install ${PRODUCT_NAME}\" && exit 9 }\n\n\n#[[ -a \"${SCRIPT_INPUT_FILE_0}\" ]] && \"${SCRIPT_INPUT_FILE_0}\"\n#gistphase -g INSTALL_FW_ON_DEVICE.zsh -u mralexgray\n\n\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
