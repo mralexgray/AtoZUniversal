@@ -6,22 +6,20 @@ osx_image:      beta-xcode6.3
 script: xctool -project AtoZUniversal.xcodeproj -scheme AtoZUniversal build  CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
 
 
+# disable the default submodule logic
+git:
+  submodules: false
+
+# use sed to replace the SSH URL with the public URL, then init and update submodules
+before_install:
+  - git submodule update --init --recursive
+
+
 # xcode_project:  AtoZUniversal.xcodeproj
 # xcode_scheme:   AtoZUniversal
 
 # notifications:
 #  webhooks:
 #    - http://simonwesterlund.se/travis.php
-
-
-
-# disable the default submodule logic
-#git:
-#  submodules: false
-
-# use sed to replace the SSH URL with the public URL, then init and update submodules
-#before_install:
-#  - git submodule update --init --recursive
-
 
 #  - sed -i 's/git@github.com:/https:\/\/github.com\//' .gitmodules

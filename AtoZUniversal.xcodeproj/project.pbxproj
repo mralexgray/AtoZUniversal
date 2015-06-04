@@ -78,6 +78,9 @@
 		7BD3CAED1AB8469E00E05319 /* Rectlike.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BD3CAEB1AB8469E00E05319 /* Rectlike.m */; };
 		7BD3E4A41ABD4BF100552876 /* Color+AtoZ.h in Headers */ = {isa = PBXBuildFile; fileRef = 7BD3E4A21ABD4BF100552876 /* Color+AtoZ.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7BD3E4A51ABD4BF200552876 /* Color+AtoZ.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BD3E4A31ABD4BF100552876 /* Color+AtoZ.m */; };
+		7BD5C5931B20BA340057E1D7 /* UnitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B380C861ACA559900285B4E /* UnitTests.m */; };
+		7BD5C5941B20BA450057E1D7 /* NTBTask_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B9244EF1AD79EF400EE6262 /* NTBTask_Tests.m */; };
+		7BD5C5951B20BA4B0057E1D7 /* XCTestCase+AsyncTesting.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B9244F11AD79EF400EE6262 /* XCTestCase+AsyncTesting.m */; };
 		7BE12B661AA917DC001AF7CE /* NSBundle+AtoZ.h in Headers */ = {isa = PBXBuildFile; fileRef = 7BE12B641AA917DC001AF7CE /* NSBundle+AtoZ.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7BE12B671AA917DC001AF7CE /* NSBundle+AtoZ.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BE12B651AA917DC001AF7CE /* NSBundle+AtoZ.m */; };
 		7BE12BB71AA91D0D001AF7CE /* NSObject+AtoZ.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BE12BB51AA91D0D001AF7CE /* NSObject+AtoZ.m */; };
@@ -173,7 +176,7 @@
 		7B313A281AADC0AD00179E72 /* objswitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = objswitch.h; sourceTree = "<group>"; wrapsLines = 1; };
 		7B313A291AADC0AD00179E72 /* README.markdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.markdown; sourceTree = "<group>"; };
 		7B380C841ACA2FC000285B4E /* OrderedDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OrderedDictionary.m; path = Vendor/OrderedDictionary/OrderedDictionary/OrderedDictionary.m; sourceTree = "<group>"; };
-		7B380C861ACA559900285B4E /* UnitTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UnitTests.m; path = OrderedDictionary/Tests/UnitTests/UnitTests.m; sourceTree = SOURCE_ROOT; };
+		7B380C861ACA559900285B4E /* UnitTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UnitTests.m; path = Vendor/OrderedDictionary/Tests/UnitTests/UnitTests.m; sourceTree = SOURCE_ROOT; };
 		7B4B72601AE97CE600A6B02C /* BaseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaseModel.h; path = Vendor/BaseModel/BaseModel/BaseModel.h; sourceTree = SOURCE_ROOT; };
 		7B4B72611AE97CE600A6B02C /* BaseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BaseModel.m; path = Vendor/BaseModel/BaseModel/BaseModel.m; sourceTree = SOURCE_ROOT; };
 		7B4ECA1D1AEA399A00FB1023 /* XC_Install_Helper.zsh */ = {isa = PBXFileReference; lastKnownFileType = text; name = XC_Install_Helper.zsh; path = Vendor/_ObjC/Universal/XC_Install_Helper.zsh; sourceTree = SOURCE_ROOT; };
@@ -201,10 +204,10 @@
 		7B7D963A1AC2A18200F5504D /* BoundingObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BoundingObject.h; path = Protocols/BoundingObject.h; sourceTree = "<group>"; };
 		7B89AE9A1AA9666C0036EC09 /* AZRange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = AZRange.h; path = AtoZUniversal/AZRange.h; sourceTree = "<group>"; wrapsLines = 1; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		7B89AE9B1AA9666C0036EC09 /* AZRange.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AZRange.m; path = AtoZUniversal/AZRange.m; sourceTree = "<group>"; };
-		7B9244EE1AD79EF400EE6262 /* NTBTask_ClassMethodsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = NTBTask_ClassMethodsTests.m; path = "NTBTask/NTBTask Tests/NTBTask_ClassMethodsTests.m"; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		7B9244EF1AD79EF400EE6262 /* NTBTask_Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NTBTask_Tests.m; path = "NTBTask/NTBTask Tests/NTBTask_Tests.m"; sourceTree = SOURCE_ROOT; };
-		7B9244F01AD79EF400EE6262 /* XCTestCase+AsyncTesting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "XCTestCase+AsyncTesting.h"; path = "NTBTask/NTBTask Tests/XCTestCase+AsyncTesting.h"; sourceTree = SOURCE_ROOT; };
-		7B9244F11AD79EF400EE6262 /* XCTestCase+AsyncTesting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "XCTestCase+AsyncTesting.m"; path = "NTBTask/NTBTask Tests/XCTestCase+AsyncTesting.m"; sourceTree = SOURCE_ROOT; };
+		7B9244EE1AD79EF400EE6262 /* NTBTask_ClassMethodsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = NTBTask_ClassMethodsTests.m; path = "Vendor/NTBTask/NTBTask Tests/NTBTask_ClassMethodsTests.m"; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		7B9244EF1AD79EF400EE6262 /* NTBTask_Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NTBTask_Tests.m; path = "Vendor/NTBTask/NTBTask Tests/NTBTask_Tests.m"; sourceTree = SOURCE_ROOT; };
+		7B9244F01AD79EF400EE6262 /* XCTestCase+AsyncTesting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "XCTestCase+AsyncTesting.h"; path = "Vendor/NTBTask/NTBTask Tests/XCTestCase+AsyncTesting.h"; sourceTree = SOURCE_ROOT; };
+		7B9244F11AD79EF400EE6262 /* XCTestCase+AsyncTesting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "XCTestCase+AsyncTesting.m"; path = "Vendor/NTBTask/NTBTask Tests/XCTestCase+AsyncTesting.m"; sourceTree = SOURCE_ROOT; };
 		7B9244F21AD79EF400EE6262 /* NTBTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NTBTask.h; path = Vendor/NTBTask/NTBTask.h; sourceTree = "<group>"; };
 		7B9244F31AD79EF400EE6262 /* NTBTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NTBTask.m; path = Vendor/NTBTask/NTBTask.m; sourceTree = "<group>"; };
 		7B9245971AD82B0D00EE6262 /* ArrayLikeTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = ArrayLikeTests.m; path = AtoZUniversalTests/ArrayLikeTests.m; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
@@ -775,9 +778,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				7B92459D1AD82B0D00EE6262 /* AZGeometryTests.m in Sources */,
+				7BD5C5931B20BA340057E1D7 /* UnitTests.m in Sources */,
 				7B92459E1AD82B0D00EE6262 /* AZJREnumTests.m in Sources */,
 				7B5DC2DA1AC933CB0063D701 /* RectLikeTests.m in Sources */,
+				7BD5C5951B20BA4B0057E1D7 /* XCTestCase+AsyncTesting.m in Sources */,
 				7B92459B1AD82B0D00EE6262 /* ArrayLikeTests.m in Sources */,
+				7BD5C5941B20BA450057E1D7 /* NTBTask_Tests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
