@@ -1,6 +1,21 @@
 
 #import <AtoZUniversal/AtoZUniversal.h>
 
+@concreteprotocol(Solo)
+
++ _Kind_ shared {
+
+  static _ObjC shared             ___
+
+  dispatch_uno(
+
+      shared = [self.class alloc] ___
+      shared = [shared      init] ___
+  )                               ___
+  return shared                   ___
+}
+￭
+
 CONFORM(List,FakeArray)
 
 🅒 (TypedArray)

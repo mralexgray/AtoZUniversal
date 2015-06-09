@@ -1,7 +1,7 @@
 
 #import <AtoZUniversal/Rectlike.h>
 
-🆅 Solo <NObj> @Reqd
+🆅 Solo <NObj> @concrete
 + _Kind_ shared ___
 ￭
 

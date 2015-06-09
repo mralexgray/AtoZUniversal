@@ -1670,6 +1670,7 @@ typedef void (^AZVA_ArrayBlock)(NSArray* values);
 //#import <CoreGraphics/CGGeometry.h>
 //#endif
 
+
 #if __LP64__ || TARGET_OS_EMBEDDED || TARGET_OS_IPHONE || TARGET_OS_WIN32 || NS_BUILD_32_LIKE_64
 
 typedef CGPoint NSPoint;
@@ -1934,4 +1935,5 @@ NS_INLINE NSEdgeInsets NSEdgeInsetsMake(CGFloat top, CGFloat left, CGFloat botto
 //
 //@end
 
-#endif
+#endif // #if IOS_ONLY -- line 1656
+

@@ -609,7 +609,7 @@
 				7B582BC21AA6A4F300C450C3 /* Headers */,
 				7B5EEB331AE32B2400A72BE7 /* Frameworks */,
 				7BEA69171ABCD44F0040B76A /* Copy Files */,
-				7BB555351AEA0CCE00A431E2 /* ShellScript */,
+				7BB555351AEA0CCE00A431E2 /* Run Script */,
 			);
 			buildRules = (
 			);
@@ -703,21 +703,21 @@
 		7B60D8181AE723320005120D /* FunSize.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
-			name = FunSize.framework;
-			path = .framework;
+			path = FunSize.framework;
 			remoteRef = 7B60D8171AE723320005120D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		7BB555351AEA0CCE00A431E2 /* ShellScript */ = {
+		7BB555351AEA0CCE00A431E2 /* Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "Run Script";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
