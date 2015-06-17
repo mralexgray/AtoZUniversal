@@ -259,6 +259,10 @@ typedef void (^caseBlock)();
 	// Finds all properties of an object, and prints each one out as part of a string describing the class.
 //+ (NSString*)  autoDescribeWithClassType:	(Class) classType;
 
++ _List_  ivars;
++ _List_  properties;
++ _List_  methods;
+
 + (NSString*)  autoDescribe;
 - (NSString*)  autoDescription;
 

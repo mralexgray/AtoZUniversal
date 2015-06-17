@@ -815,24 +815,45 @@ static char windowPosition;
 }
 - (NSS*) autoDescription {
 
-  Class clazz     = self.class;
+  return [[self.class properties] reduce:@"".mC withBlock:^id(id sum, id obj) {
+    [sum appendFormat:@"\n%@: %@", obj, [self vFK:obj]];
+    return sum;
+  }];
+
+//	return $(@"%@",    @{      @"ivars" : ivarArray, // formatAsListWithPadding:30],
+//			@"properties": propertyArray, // formatAsListWithPadding:30],
+//                             @"methods": methodArray }); // formatAsListWithPadding:30] });
+}
+
++ _List_ ivars {
+
 	u_int count;
-	Ivar *ivars     = class_copyIvarList(clazz, &count);
+	Ivar *ivars     = class_copyIvarList(self, &count);
 	NSMA *ivarArray = NSMA.new;
 	for (int i = 0; i < count; i++) {
 		const char *ivarName = ivar_getName(ivars[i]);
 		[ivarArray addObject:[NSS stringWithUTF8String:ivarName]];
 	}
 	free(ivars);
-	objc_property_t *properties = class_copyPropertyList(clazz, &count);
+  return ivarArray.copy;
+}
+
++ _List_ properties {
+	u_int count;
+	objc_property_t *properties = class_copyPropertyList(self, &count);
 	NSMA *propertyArray = NSMA.new;
 	for (int i = 0; i < count; i++) {
 		const char *propertyName = property_getName(properties[i]);
 		[propertyArray addObject:[NSS stringWithUTF8String:propertyName]];
 	}
 	free(properties);
+  return propertyArray.copy;
 
-	Method *methods = class_copyMethodList(clazz, &count);
+}
++ _List_ methods {
+
+  u_int count;
+	Method *methods = class_copyMethodList(self, &count);
 	NSMA *methodArray = NSMA.new;
 	for (int i = 0; i < count; i++) {
 		SEL selector = method_getName(methods[i]);
@@ -840,10 +861,9 @@ static char windowPosition;
     [methodArray addObject:NSStringFromSelector(selector)];//[NSS stringWithUTF8String:methodName]];
 	}
 	free(methods);
-	return $(@"%@",    @{      @"ivars" : ivarArray, // formatAsListWithPadding:30],
-			@"properties": propertyArray, // formatAsListWithPadding:30],
-                             @"methods": methodArray }); // formatAsListWithPadding:30] });
+  return  methodArray.copy;
 }
+
 - (DTA*) dataKey:(NSS*)def { id x = [self vFK:def];	return [x isKindOfClass:objc_lookUpClass("NSData")]       ? x : (id)nil; }
 - (NSS*)  strKey:(NSS*)def { id x = [self vFK:def];	return [x isKindOfClass:objc_lookUpClass("NSString")]     ? x : (id)nil; }
 - (NSA*)  arrKey:(NSS*)def { id x = [self vFK:def]; return [x isKindOfClass:objc_lookUpClass("NSArray")]      ? x : (id)nil; }
