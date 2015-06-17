@@ -3,7 +3,7 @@
 @import XCTest;
 @import AtoZUniversal;
 
-@Kind(ArrayLikeClass,<ArrayLike>) ￭
+@KIND(ArrayLikeClass,<ArrayLike>) ￭
 CLANG_IGNORE_PROTOCOL
 @Plan ArrayLikeClass ￭
 CLANG_POP

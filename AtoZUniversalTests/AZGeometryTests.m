@@ -2,21 +2,41 @@
 @import XCTest;
 @import AtoZUniversal;
 
-_XCTCase(AZGeometryTests) {
+#define GOOGLE_IP 173.194.123.46
 
-  NSR rect0, rect100; NSP pt0, pt100; NSSZ sz0, sz100; AZRect *azR0, *azR100; 
-}
+
+_XCTCase(LocaleTests) { Locale * locale; _List props; }
 
 _XCTUp(
 
-  rect0 = NSZeroRect;
-rect100 = AZRectFromDim(100);
-    pt0 = NSZeroPoint;
-  pt100 = AZPointFromDim(100);
-    sz0 = NSZeroSize;
-  sz100 = AZSizeFromDim(100);
-    sz0 = NSZeroSize;    azR100 = AZRDim(100);             
 )
+
+_XCTest(MyLocale,
+
+  locale  = [Locale localeOfIP:NET.externalIP];
+
+  [Locale.properties each:^(id x){
+
+    XCTAssertNotNil([locale vFK:x], @"Needs value for %@", x);
+  }];
+
+//  googleLocale = [Locale localeOfIP:GOOGLE_IP];
+)
+￭
+
+//+ _Kind_ localeOfIP __Text_ ip ___
+//
+//+ _Dict_ flags ___
+//
+//@property (readonly) NSImage *flag;
+//
+//_CP _Text city, postal_code, zip_code, metro_code,
+//          country_code, country_name, country_code3, country, continent_code,
+//          region_code, region_name,
+//          latitude, longitude, time_zone, timezone,
+//          ip, asn, isp,  message, code, dma_code, area_code;
+
+/*
 
 _XCTest(PointIsInInsetRects,
 
@@ -26,7 +46,6 @@ _XCTest(PointIsInInsetRects,
   XCTAssertThrows(AZPointIsInInsetRects(AZPointFromDim(101),rect100,AZSizeFromDim(100)), @"Should complain inset is too big!");
 )
 ￭
-
 
 _Enum(AZTestCase, AZTestFailed, AZTestPassed, AZTestUnset, AZTestNoFailures);
 
@@ -73,24 +92,7 @@ typedef  void (^AZCLITest)(void);
 - (AZTestCase) testiconForURL	{
 
 	__block AZTestCase test = AZTestUnset;
-  /* HERE BY MISATKE
-	NSA* urls = NSS.testDomains;
-	[urls each:^(id obj) {
-		if (test == AZTestFailed) return;
-			__block NSIMG* testIMG = nil;
-		NSS* stopwatchString = $(@"favicon test for:%@", [obj stringValue]);
-		[AZStopwatch start:stopwatchString];
-		[AZFavIconManager iconForURL:obj downloadHandler:^(NSImage *icon) {
-			testIMG = icon;
-			test = testIMG && [testIMG isKindOfClass:NSIMG.class] ? AZTestNoFailures : AZTestFailed;
-			[AZStopwatch stop:stopwatchString];
-
-		}];
-	}];
-*/
-	return test;
-}
-
+	
 @end
 
 //- (AZTestCase) colorNames	{
@@ -131,7 +133,8 @@ typedef  void (^AZCLITest)(void);
 
 }
 @end
-
+*/
+/*
 
 @implementation AZSizerTests
 {
@@ -162,3 +165,5 @@ typedef  void (^AZCLITest)(void);
 
 
 @end
+
+*/
