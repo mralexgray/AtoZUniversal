@@ -59,6 +59,7 @@
 		7B967E271ADB3021005E09B4 /* NamedPipe.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B967E251ADB3021005E09B4 /* NamedPipe.m */; };
 		7B9BC4F61ABA5FB300E381B4 /* NSImage+AtoZ.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BD3CAE11AB8350900E05319 /* NSImage+AtoZ.m */; };
 		7BB3D03A1B1CAB0C0001E9C3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BB3D0391B1CAB0C0001E9C3 /* main.m */; };
+		7BBB09FD1B317B0900BFEE6A /* NetworkHelpersTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BBB09FC1B317B0900BFEE6A /* NetworkHelpersTests.m */; };
 		7BBD2D781AA74C8700CD9477 /* EXTConcreteProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 7BBD2D741AA74C8700CD9477 /* EXTConcreteProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7BBD2D791AA74C8700CD9477 /* EXTConcreteProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BBD2D751AA74C8700CD9477 /* EXTConcreteProtocol.m */; };
 		7BBD2D7A1AA74C8700CD9477 /* EXTRuntimeExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 7BBD2D761AA74C8700CD9477 /* EXTRuntimeExtensions.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -227,6 +228,7 @@
 		7BB3D0721B1E8AEE0001E9C3 /* .travis.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .travis.yml; sourceTree = SOURCE_ROOT; };
 		7BB3D0731B1ECC6D0001E9C3 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = SOURCE_ROOT; };
 		7BB3D0741B1ECC6D0001E9C3 /* .gitmodules */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitmodules; sourceTree = SOURCE_ROOT; };
+		7BBB09FC1B317B0900BFEE6A /* NetworkHelpersTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NetworkHelpersTests.m; path = AtoZUniversalTests/NetworkHelpersTests.m; sourceTree = SOURCE_ROOT; };
 		7BBD2D741AA74C8700CD9477 /* EXTConcreteProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = EXTConcreteProtocol.h; sourceTree = "<group>"; wrapsLines = 1; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		7BBD2D751AA74C8700CD9477 /* EXTConcreteProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EXTConcreteProtocol.m; sourceTree = "<group>"; };
 		7BBD2D761AA74C8700CD9477 /* EXTRuntimeExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = EXTRuntimeExtensions.h; sourceTree = "<group>"; wrapsLines = 1; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -368,6 +370,7 @@
 				7B9245971AD82B0D00EE6262 /* ArrayLikeTests.m */,
 				7B9245981AD82B0D00EE6262 /* AZBaseModelTests.m */,
 				7B9245991AD82B0D00EE6262 /* AZGeometryTests.m */,
+				7BBB09FC1B317B0900BFEE6A /* NetworkHelpersTests.m */,
 				7B92459A1AD82B0D00EE6262 /* AZJREnumTests.m */,
 				7B9244EE1AD79EF400EE6262 /* NTBTask_ClassMethodsTests.m */,
 				7B9244EF1AD79EF400EE6262 /* NTBTask_Tests.m */,
@@ -777,6 +780,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7BBB09FD1B317B0900BFEE6A /* NetworkHelpersTests.m in Sources */,
 				7B92459D1AD82B0D00EE6262 /* AZGeometryTests.m in Sources */,
 				7BD5C5931B20BA340057E1D7 /* UnitTests.m in Sources */,
 				7B92459E1AD82B0D00EE6262 /* AZJREnumTests.m in Sources */,

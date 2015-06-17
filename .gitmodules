@@ -30,3 +30,7 @@
 [submodule "ObjcAssociatedObjectHelpers"]
 	path = Vendor/ObjcAssociatedObjectHelpers
 	 url = https://github.com/mralexgray/ObjcAssociatedObjectHelpers.git
+[submodule "Vendor/_ObjC"]
+	ignore = all
+	update = checkout
+	fetchRecurseSubmodules = true
