@@ -1,7 +1,6 @@
 
 
-#if !TARGET_OS_IPHONE
-#import <Foundation/Foundation.h>
+#if MAC_ONLY
 #import <SystemConfiguration/SystemConfiguration.h>
 #import <SystemConfiguration/SCNetworkReachability.h>
 #endif
@@ -12,38 +11,39 @@
 
 #define NET NetworkHelpers
 
-
 @interface Locale : NSObject
 
-+ (instancetype) localeOfIP:(NSString*)ip;
++ _Kind_ localeOfIP __Text_ ip ___
 
-+ (NSDictionary*) flags;
++ _Dict_ flags ___
 
-@property (readonly) NSImage *flag;
+_RO _Pict flag;
 
-@property (copy) NSString * city,
-                          * region_code,
-                          * region_name,
-                          * postal_code,
-                          * country_code,
+_CP _Text
 
-                          * latitude,
-                          * longitude,
-                          * time_zone,
-                          * zip_code,
-                          * metro_code,
-                          * country_name, *ip,
+ip,                 //  (Visitor IP address, or IP address specified as parameter)
+country_code,       //  (Two-letter ISO 3166-1 alpha-2 country code)
+country_code3,      //  (Three-letter ISO 3166-1 alpha-3 country code)
+country,            //  (Name of the country)
+region_code,        //  (Two-letter ISO-3166-2 state / region code)
+region,             //  (Name of the region)
+city,               //  (Name of the city)
+postal_code,        //  (Postal code / Zip code)
+continent_code,     //  (Two-letter continent code)
+latitude,           //  (Latitude)
+longitude,          //  (Longitude)
+dma_code,           //  (DMA Code)
+area_code,          //  (Area Code)
+asn,                //  (Autonomous System Number)
+isp,                //  (Internet service provider)
+timezone;           //  (Time Zone)
 
-                          * country_code3,
-                          * country,
-                          * continent_code,
-                          * dma_code,
-                          * area_code,
-                          * asn,
-                          * isp,
-                          * timezone,
-                          * message,
-                          * code;
+//city, postal_code, zip_code, metro_code,
+//          country_code, country_name, country_code3, country, continent_code,
+//          region_code, region_name,
+//          latitude, longitude, time_zone, timezone,
+//          ip, asn, isp,  message, code, dma_code, area_code;
+
 
 @end
 
@@ -232,6 +232,7 @@ NS_INLINE NSUInteger RandomPort() { return arc4random_uniform(9000) + 3000; }
 //#define OPTIONS_ALERT_TAG	5111
 //#define    TEXT_ALERT_TAG		5112
 //#define      LOG_VIEW_TAG		5113
+
 #import <sys/types.h>
 #import <sys/socket.h>
 #import <netdb.h>

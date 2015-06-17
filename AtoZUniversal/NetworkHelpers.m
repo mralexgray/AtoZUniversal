@@ -1,12 +1,9 @@
 
 /// MIMEHelper   Copyright 2008, Erica Sadun All rights are retained. This code remains the trade secret and intellectual property of Erica Sadun.
 
-@import Darwin;
+@import Darwin;       // Darwin.POSIX + Darwin.POSIX.net;
 @import Foundation;
 @import ObjectiveC;
-//@import Darwin.POSIX;
-//@import Darwin.POSIX.net;
-
 
 #import "AtoZUniversal.h"
 #import <ifaddrs.h>
@@ -39,11 +36,11 @@ NSString* stringBetweenString (NSString*str, NSString* start, NSString *end) {
 
 #import <arpa/inet.h>
 
-void *              InAddrStruct(struct sockaddr *sa) {
+_Void *             InAddrStruct(struct sockaddr *sa) {
 
   return AF_INET == sa->sa_family ? (void*)&(((struct sockaddr_in*)sa)->sin_addr) : &(((struct sockaddr_in6*)sa)->sin6_addr);
 }
-NSString *         AddressString(struct sockaddr *sa) {
+_Text              AddressString(struct sockaddr *sa) {
   void *if_in_addr = InAddrStruct(sa);
   char if_addr_buff[(sa->sa_family == AF_INET ? INET_ADDRSTRLEN : INET6_ADDRSTRLEN)];
   memset(if_addr_buff, 0, sizeof if_addr_buff);
@@ -52,12 +49,12 @@ NSString *         AddressString(struct sockaddr *sa) {
 
   return addressStr;
 }
-BOOL       processInetPTONStatus(NSUInteger status,    NSString *addressStr) {
+_IsIt      processInetPTONStatus(_UInt status,      _Text addressStr) {
   return !status ? NSLog(@"Address %@ is messed up", addressStr), NO :
     -1 == status ? NSLog(@"Could not PTON address %@: %s", addressStr, strerror(errno)), NO
                  : YES;
 }
-NSString *  NetworkOfIPv4Address(NSString *addressStr, NSString *maskStr)    {
+_Text       NetworkOfIPv4Address(_Text addressStr,  _Text maskStr)    {
   struct sockaddr_in addr;
   struct sockaddr_in mask;
   if (!processInetPTONStatus(inet_pton(AF_INET, [addressStr cStringUsingEncoding:NSUTF8StringEncoding], &(addr.sin_addr)), addressStr)) {
@@ -87,7 +84,7 @@ NSString *  NetworkOfIPv4Address(NSString *addressStr, NSString *maskStr)    {
 
   return AddressString((struct sockaddr *)&masked_addr);
 }
-NSArray *      NetworkInterfaces(){
+_List          NetworkInterfaces(){
   struct ifaddrs *if_addrs;
   int status = getifaddrs(&if_addrs);
   if (0 != status) {
@@ -1557,50 +1554,52 @@ static NSMutableDictionary *isps = nil;
 
 @implementation Locale
 
-+ (instancetype) localeOfIP:(NSString*)ip { if (!ip) return nil;
++ _Kind_ localeOfIP __Text_ ip { if (!ip) return nil;
 
-  static NSMutableDictionary *locales; locales = locales ?: @{}.mutableCopy;
+  static mDict locales; locales = locales ?: @{}.mutableCopy;
 
-  Locale* l; if ((l = [locales objectForKey:ip])) return l;
+  Locale * l; if ((l = [locales objectForKey:ip])) return l;
 
-  NSURLResponse * response = nil;
-  NSError  * responseError = nil;
-  NSData * data = [NSURLConnection sendSynchronousRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[service_url stringByAppendingString:ip]]]
-                                        returningResponse:&response error:&responseError];
+  _Errr responseError = nil, parsingError = nil;
 
-  if (responseError) {
-    NSLog(@"error: %@", [responseError localizedFailureReason]);
-    return (locales[ip] = NSNull.null);
-  }
+  _NRes response = nil;
+  _Data data = [NCon sendSynchronousRequest:
+                       [NReq requestWithURL:$URL([service_url withString:ip])]
+                          returningResponse:&response error:&responseError];
+
+  if (responseError)
+    return NSLog(@"error: %@", [responseError localizedFailureReason]), (locales[ip] = NSNull.null);
 
 
-  NSError *parsingError = nil;
-  NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:0 error:&parsingError];
+  _Dict dict = [Json JSONObjectWithData:data options:0 error:&parsingError];
 
-  if (parsingError) {
-    NSLog(@"JSON-parsing error: %@", [parsingError localizedFailureReason]);
-    return (locales[ip] = NSNull.null);
-  }
+  if (parsingError)
+    return NSLog(@"JSON-parsing error: %@", [parsingError localizedFailureReason]), (locales[ip] = NSNull.null);
 
   return !dict ? (id) nil : [l = self.class.new setValuesForKeysWithDictionary:dict], (locales[ip] = l);
 }
 
-- (void) setValue:(id)value forUndefinedKey:(NSString *)key  { }
+- _Void_ setValue _ value forUndefinedKey __Text_ key  { }
 
-- (NSImage *) flag { return self.class.flags[self.country_name]; }
+- _Pict_ flag { id component = self.class.flags[self.country] ?: $(@"%@.png",self.country_code3);
 
-+ (NSDictionary*) flags { static NSDictionary *f = nil; return f = f ?: ({
-
-  NSMutableDictionary *countries = @{}.mutableCopy;
-  NSDirectoryEnumerator *dirEnum = [NSFileManager.defaultManager enumeratorAtPath:kFlagsDirectory];
-  for (NSString *fileName in dirEnum) {
-    if (![fileName.pathExtension isEqualToString:@"png"]) continue;
-     countries[fileName.stringByDeletingPathExtension] = [NSImage.alloc initWithContentsOfFile:
-                                                            [kFlagsDirectory stringByAppendingPathComponent:fileName]];
-  }
-  countries;
-  });
+  return !component ? nil : INIT_(Pict,WithContentsOfFile:[kFlagsDirectory withPath:component]);
 }
+
++ _Dict_ flags { AZSTATIC_OBJ(Dict,f, [FM pathsForItemsInFolder:kFlagsDirectory withExtension:@"png"]); return f; }
+
+//  static _Dict  f = nil; return f = f ?: ({ ;
+//
+//    mDict countries = @{}.mutableCopy;
+//    NSDirectoryEnumerator *dirEnum = [NSFileManager.defaultManager enumeratorAtPath:];
+//    for (_Text fileName in dirEnum) {
+//      if (![fileName.pathExtension isEqualToString:@"png"]) continue;
+//      countries[fileName.stringByDeletingPathExtension] = fileName;
+//    }
+//    countries.copy;
+//  });
+//}
+
 @end
 
 
