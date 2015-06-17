@@ -14,7 +14,7 @@
 }
 @end
 
-@Kind (LoremIpsum) _RO _List words ___ ￭
+@KIND(LoremIpsum) _RO _List words ___ ￭
 @Plan  LoremIpsum
 
 -         init { if (!(self = [super init])) return nil;
@@ -43,7 +43,7 @@ _TT  sentences __UInt_ count {
 ￭
 
 #define kMaxFontSize 10000
-@Kind (NSString_stripHtml_XMLParsee) <NSXMLParserDelegate> ￭
+@KIND (NSString_stripHtml_XMLParsee) <NSXMLParserDelegate> ￭
 @Plan  NSString_stripHtml_XMLParsee { mList strings; }
 -  init 																		{	if (!(self = [super init])) return nil;	strings = NSMA.new;	return self;
 	//  Copyright 2011 Leigh McCulloch. Released under the MIT license.
