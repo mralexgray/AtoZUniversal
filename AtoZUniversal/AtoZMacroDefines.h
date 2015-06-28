@@ -448,6 +448,8 @@ X,OBJC_ASSOCIATION_COPY_NONATOMIC);
 
 #define ptmake(A,B)   CGPointMake(A,B)stringByAppendingPathComponent
 
+#define SAMECHECK(prop) if ( prop == _##prop ) return
+
 #define SUPERINIT        if (!(self = [super init])) return nil
 #define SUPERINITWITHFRAME(f)     if (!(self = [super initWithFrame:f])) return nil
 

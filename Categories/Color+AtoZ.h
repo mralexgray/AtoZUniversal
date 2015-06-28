@@ -30,5 +30,9 @@ _RO _Flot	relativeBrightness
 + _Kind_ randomDarkColor    ___
 + _Kind_ randomColor        ___
 
++ _Kind_ white __Flot_ x a __Flot_ a ___
+
+_RO _Flot r, g, b, a;
+
 @XtraStop()
 

@@ -4,6 +4,13 @@
 
 @XtraPlan(Colr,AtoZUniversal)
 
+- _Flot_ r { return self.redComponent;    }
+- _Flot_ g { return self.greenComponent;  }
+- _Flot_ b { return self.blueComponent;   }
+- _Flot_ a { return self.alphaComponent;  }
+
++ _Kind_ white __Flot_ x a __Flot_ a   { return [self colorWithCalibratedWhite:x alpha:a]; }
+
 + _Kind_ r:_Flot_ r g:_Flot_ g b:_Flot_ b a:_Flot_ a {  return
 #if MAC_ONLY
   [self colorWithDeviceRed:r green:g blue:b alpha:a];
