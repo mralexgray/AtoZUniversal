@@ -7,6 +7,7 @@
 + _List_ bundlesConformingTo:(Protocol*)p atPath:(NSS*)path;
 - _List_ pluginsConformingTo:(Protocol*)p;
 _RO _List plugins;
++ _List_ userBundlesWithExtensions __Text_ ext;
 ￭
 
 @Xtra(NSBundle,AtoZ)
@@ -40,8 +41,9 @@ _RO NSA* cacheImages;
 
 - _List_ definedClasses;
 
-/// ( ..., "/System/Library/Frameworks/AVFoundation.framework", \
+/*! ( ..., "/System/Library/Frameworks/AVFoundation.framework",
            "/Volumes/4X4/DerivedData/AtoZ-hfqteqfcvjfinlajqwkydsqyzpiz/Build/Products/Debug/Zangetsu.framework"
+*/
 
 + _List_ allFrameworkPaths;
 

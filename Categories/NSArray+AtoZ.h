@@ -374,9 +374,9 @@ _RO id advance;  /* returns first object.. moves it to last. */
 
 - _Void_ removeFirstObject; // like removeLastObject
 
-// shift & pop for stacklike operations \
-    they will return the removed objects removes and returns the first object in the array \
-    if no elements are present, nil will be returned
+/*! shift & pop for stacklike operations
+    they will return the removed objects removes and returns the first object in the array
+    if no elements are present, nil will be returned */
 
 _RO id shift;
 

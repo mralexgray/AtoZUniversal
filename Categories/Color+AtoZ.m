@@ -2,14 +2,34 @@
 
 #import "Color+AtoZ.h"
 
+
 @XtraPlan(Colr,AtoZUniversal)
+
+#if IOS_ONLY
+
+typedef enum { R, G, B, A } UIColorComponentIndices;
+
+_FT redComponent    { return CGColorGetComponents(self.CGColor)[R]; }
+_FT greenComponent  { return CGColorGetComponents(self.CGColor)[G]; }
+_FT blueComponent   { return CGColorGetComponents(self.CGColor)[B]; }
+_FT alphaComponent  { return CGColorGetComponents(self.CGColor)[A]; }
+
+#endif
+
 
 - _Flot_ r { return self.redComponent;    }
 - _Flot_ g { return self.greenComponent;  }
 - _Flot_ b { return self.blueComponent;   }
 - _Flot_ a { return self.alphaComponent;  }
 
-+ _Kind_ white __Flot_ x a __Flot_ a   { return [self colorWithCalibratedWhite:x alpha:a]; }
++ _Kind_ white __Flot_ x a __Flot_ a   { return
+#if MAC_ONLY
+  [self colorWithCalibratedWhite:x alpha:a];
+#else
+  [self colorWithWhite:x alpha:a];
+#endif
+
+}
 
 + _Kind_ r:_Flot_ r g:_Flot_ g b:_Flot_ b a:_Flot_ a {  return
 #if MAC_ONLY

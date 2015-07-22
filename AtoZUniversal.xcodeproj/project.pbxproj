@@ -44,6 +44,7 @@
 		7B5DC2DA1AC933CB0063D701 /* RectLikeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B5DC2D91AC933CB0063D701 /* RectLikeTests.m */; };
 		7B7D963B1AC2A18200F5504D /* BoundingObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B7D96391AC2A18200F5504D /* BoundingObject.m */; };
 		7B7D963C1AC2A18200F5504D /* BoundingObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B7D963A1AC2A18200F5504D /* BoundingObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7B7FAD691B4D991E007192D5 /* CategoryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B7FAD681B4D991E007192D5 /* CategoryTests.m */; };
 		7B89AE9C1AA9666C0036EC09 /* AZRange.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B89AE9A1AA9666C0036EC09 /* AZRange.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7B89AE9D1AA9666C0036EC09 /* AZRange.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B89AE9B1AA9666C0036EC09 /* AZRange.m */; };
 		7B9244F81AD79EF400EE6262 /* NTBTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B9244F21AD79EF400EE6262 /* NTBTask.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -139,7 +140,7 @@
 /* Begin PBXCopyFilesBuildPhase section */
 		7BEA69171ABCD44F0040B76A /* Copy Files */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 8;
+			buildActionMask = 12;
 			dstPath = "";
 			dstSubfolderSpec = 7;
 			files = (
@@ -150,7 +151,7 @@
 				7BEA691B1ABCD4600040B76A /* BadWords.plist in Copy Files */,
 			);
 			name = "Copy Files";
-			runOnlyForDeploymentPostprocessing = 1;
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
@@ -203,6 +204,7 @@
 		7B5EEB341AE32B6B00A72BE7 /* FunSize.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = FunSize.xcodeproj; path = Vendor/FunSize/FunSize.xcodeproj; sourceTree = "<group>"; };
 		7B7D96391AC2A18200F5504D /* BoundingObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BoundingObject.m; path = Protocols/BoundingObject.m; sourceTree = "<group>"; };
 		7B7D963A1AC2A18200F5504D /* BoundingObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BoundingObject.h; path = Protocols/BoundingObject.h; sourceTree = "<group>"; };
+		7B7FAD681B4D991E007192D5 /* CategoryTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CategoryTests.m; path = AtoZUniversalTests/CategoryTests.m; sourceTree = SOURCE_ROOT; };
 		7B89AE9A1AA9666C0036EC09 /* AZRange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = AZRange.h; path = AtoZUniversal/AZRange.h; sourceTree = "<group>"; wrapsLines = 1; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		7B89AE9B1AA9666C0036EC09 /* AZRange.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AZRange.m; path = AtoZUniversal/AZRange.m; sourceTree = "<group>"; };
 		7B9244EE1AD79EF400EE6262 /* NTBTask_ClassMethodsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = NTBTask_ClassMethodsTests.m; path = "Vendor/NTBTask/NTBTask Tests/NTBTask_ClassMethodsTests.m"; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
@@ -378,6 +380,7 @@
 				7B9244F11AD79EF400EE6262 /* XCTestCase+AsyncTesting.m */,
 				7B380C861ACA559900285B4E /* UnitTests.m */,
 				7B5DC2D91AC933CB0063D701 /* RectLikeTests.m */,
+				7B7FAD681B4D991E007192D5 /* CategoryTests.m */,
 			);
 			name = "AtoZUni Tests";
 			path = "AtoZUniversal Tests";
@@ -663,7 +666,7 @@
 		7B582BBC1AA6A4F300C450C3 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0630;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Alex Gray";
 				TargetAttributes = {
 					7B582BC41AA6A4F300C450C3 = {
@@ -725,7 +728,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/zsh;
-			shellScript = "\nX=\"Vendor/_ObjC/Universal/XC_Install_Helper.zsh\"\n\n[[ -z \"$X\" ]]   && exit 0\n[[ ! -x \"$X\" ]] && chmod +x \"$X\"\n\n\"$X\"\n\n\n\n\n#[[ $? = 0 && -f $INSTALLER ]] || {say \"download failed\"; exit 9; }\n\n#chmod +x $INSTALLER\n\n#$INSTALLER\n#source <( echo \"$X\" )\n#finalize (){ rm -f $INSTALLER }\n\n#trap finalize EXIT\n#if zsh -n\n# || { say \"couldn't install ${PRODUCT_NAME}\" && exit 9 }\n\n\n#[[ -a \"${SCRIPT_INPUT_FILE_0}\" ]] && \"${SCRIPT_INPUT_FILE_0}\"\n#gistphase -g INSTALL_FW_ON_DEVICE.zsh -u mralexgray\n\n\n";
+			shellScript = "\nX=\"Vendor/_ObjC/Universal/XC_Install_Helper.zsh\"\n\n[[ -z \"$X\" ]] && exit 0\n[[ -x \"$X\" ]] || chmod +x \"$X\"\n\n\"$X\"\n\n\n\n\n#[[ $? = 0 && -f $INSTALLER ]] || {say \"download failed\"; exit 9; }\n\n#chmod +x $INSTALLER\n\n#$INSTALLER\n#source <( echo \"$X\" )\n#finalize (){ rm -f $INSTALLER }\n\n#trap finalize EXIT\n#if zsh -n\n# || { say \"couldn't install ${PRODUCT_NAME}\" && exit 9 }\n\n\n#[[ -a \"${SCRIPT_INPUT_FILE_0}\" ]] && \"${SCRIPT_INPUT_FILE_0}\"\n#gistphase -g INSTALL_FW_ON_DEVICE.zsh -u mralexgray\n\n\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -783,6 +786,7 @@
 				7BBB09FD1B317B0900BFEE6A /* NetworkHelpersTests.m in Sources */,
 				7B92459D1AD82B0D00EE6262 /* AZGeometryTests.m in Sources */,
 				7BD5C5931B20BA340057E1D7 /* UnitTests.m in Sources */,
+				7B7FAD691B4D991E007192D5 /* CategoryTests.m in Sources */,
 				7B92459E1AD82B0D00EE6262 /* AZJREnumTests.m in Sources */,
 				7B5DC2DA1AC933CB0063D701 /* RectLikeTests.m in Sources */,
 				7BD5C5951B20BA4B0057E1D7 /* XCTestCase+AsyncTesting.m in Sources */,
@@ -824,6 +828,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7BD5C5911B20B8810057E1D7 /* Universal.xcconfig */;
 			buildSettings = {
+				ENABLE_TESTABILITY = YES;
+				ONLY_ACTIVE_ARCH = YES;
 			};
 			name = Debug;
 		};
@@ -838,17 +844,21 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7BD5C5921B20B8810057E1D7 /* UniversalFW.xcconfig */;
 			buildSettings = {
+				CLANG_MODULES_AUTOLINK = YES;
 				GCC_PREFIX_HEADER = "AtoZUniversal/AtoZUniversal-Prefix.pch";
 				INFOPLIST_FILE = AtoZUniversal/Info.plist;
 				OTHER_LDFLAGS = (
-					"-all_load",
 					"-ObjC",
 					"-lsqlite3",
 					"-framework",
 					FunSize,
 					"-sub_umbrella",
 					FunSize,
+					"-framework",
+					QuartzCore,
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mrgray.$(PRODUCT_NAME:rfc1034identifier)";
+				SDKROOT = macosx10.10;
 			};
 			name = Debug;
 		};
@@ -856,17 +866,21 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7BD5C5921B20B8810057E1D7 /* UniversalFW.xcconfig */;
 			buildSettings = {
+				CLANG_MODULES_AUTOLINK = YES;
 				GCC_PREFIX_HEADER = "AtoZUniversal/AtoZUniversal-Prefix.pch";
 				INFOPLIST_FILE = AtoZUniversal/Info.plist;
 				OTHER_LDFLAGS = (
-					"-all_load",
 					"-ObjC",
 					"-lsqlite3",
 					"-framework",
 					FunSize,
 					"-sub_umbrella",
 					FunSize,
+					"-framework",
+					QuartzCore,
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mrgray.$(PRODUCT_NAME:rfc1034identifier)";
+				SDKROOT = macosx10.10;
 			};
 			name = Release;
 		};

@@ -6,6 +6,15 @@
 
 @XtraPlan(NSBundle,AtoZBundles)
 
++ _List_ userBundlesWithExtensions __Text_ ext { AZSTATIC_OBJ(List, bundles,
+
+
+  [[FM pathsForItemsInFolder:[NSHomeDirectory() withPath:@"Library/Bundles"]
+               withExtension:ext] map:^(id o){ return [NSB bundleWithPath:o]; }]);
+
+  return bundles;
+}
+
 + _List_ bundlesFromStdin { return BundlesFromStdin(); }
 - _List_          plugins { return BundlePlugins(self); }
 - _List_ pluginsConformingTo:(Protocol*)p   { return BundlePluginsConformingTo(self, p); }

@@ -51,12 +51,13 @@
 
 #endif
 
-//#define DECALREIT(orig,short) \
-//  _Type  orig * _#short;      \
-//  #define orig short          \
-//  #define _#short#_ (_#short)
-//
-//DECLAREIT(NSMutableAttributedString,MATx)
+/*! #define DECALREIT(orig,short) \
+    _Type  orig * _#short;      \
+    #define orig short          \
+    #define _#short#_ (_#short)
+
+  DECLAREIT(NSMutableAttributedString,MATx)
+*/
 
 #define STR2CLS(S) NSClassFromString(NSSTRINGIFY(S))
 
@@ -665,6 +666,7 @@ OBJC_EXPORT BOOL AZEqualToAnyObject(id x, ...);
                       
 #define $SEL(A)    NSSelectorFromString(A)
 #define AZStringFromSet(A) [NSS stringFromArray:A.allObjects]
+#define AZString(_X_) ( { __typeof__(_X_) _Y_ = (_X_); AZToStringFromTypeAndValue(@encode(__typeof__(_X_)), &_Y_);})
 
 
 #define $JOIN(...)    ((NSS*)[@[__VA_ARGS__] componentsJoinedByString:@" "])
@@ -707,8 +709,9 @@ OBJC_EXPORT BOOL AZEqualToAnyObject(id x, ...);
 
 #define dispatch_uno(...) ((void)({ static dispatch_once_t u; dispatch_once(&u, ^{ ({ __VA_ARGS__; }); }); }))
 
-// 		\ SYNTHESIZE_SINGLETON(classname*, accessorname)
-///#define SYNTHESIZE_SINGLETON(classname, accessorname)             \
+/* 		SYNTHESIZE_SINGLETON(classname*, accessorname)
+ #define SYNTHESIZE_SINGLETON(classname, accessorname)             
+ */
 
 #define SYNTHESIZE_SINGLETON_FOR_CLASS(classname, accessorname) \
 \
@@ -1592,12 +1595,13 @@ _AZUnimplementedFunction(__PRETTY_FUNCTION__,__FILE__,__LINE__)
 
 #endif /* END if !TARGET_OS_IPHONE */
 
-// 	KSVarArgs is a set of macros designed to make dealing with variable arguments	easier in Objective-C.\
-    All macros assume that the varargs list contains only objective-c objects or \
-    object-like structures (assignable to type id). \
-    The base macro ksva_iterate_list() iterates over the variable arguments, \
-    invoking a block for each argument, until it encounters a terminating nil. \
-    The other macros are for convenience when converting to common collections.
+/*! 	KSVarArgs is a set of macros designed to make dealing with variable arguments	easier in Objective-C.
+
+ All macros assume that the varargs list contains only objective-c objects or object-like structures (assignable to type id).
+ The base macro ksva_iterate_list() iterates over the variable arguments, \
+ invoking a block for each argument, until it encounters a terminating nil.
+ The other macros are for convenience when converting to common collections.
+*/
 
 /*! Block type used by ksva_iterate_list.\
     @param entry The current argument in the vararg list. */

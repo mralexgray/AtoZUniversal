@@ -16,20 +16,23 @@ _Text    NSBundleFolder _Void_;
 
 @interface NSFileManager (AtoZ)
 
-_IT               isDirectory __Text_ p;
-_TT lastModifiedStringForPath __Text_ p;
-- (unsigned long long int)   folderSize __Text_ p;
-_TT          prettySizeForPath __Text_ p;
+_RC _List mountedVolumes ___
+_IT               isDirectory __Text_ p ___
+_TT lastModifiedStringForPath __Text_ p ___
+- (unsigned long long int)   folderSize __Text_ p ___
+_TT          prettySizeForPath __Text_ p ___
 
--                     tagForFileAtPath:pathorurl;
-- _Void_ setTag _ _UInt_ t forFileAtPath:pathorurl;
+_ID                 tagForFileAtPath _ pathorurl ___
+_VD   setTag __UInt_ t forFileAtPath _ pathorurl ___
 
-- _List_    pathsOfContentsOfDirectory: _Text_ dir;
-- _List_ arrayWithFilesMatchingPattern: _Text_ pattern inDirectory: _Text_ dir;
-- _Text_              pathForItemNamed: _Text_ fname      inFolder: _Text_ path;
+_VD setColor _ x       forFileAtPath _ pathorurl ___ // accepts @"RED" or RED!
+
+_LT    pathsOfContentsOfDirectory __Text_ dir ___
+_LT                 filesMatching __Text_ pattern in __Text_ dir ___
+_TT              pathForItemNamed __Text_ fname   int __Text_ path ___
 #if !TARGET_OS_IPHONE
-- _Text_          pathForDocumentNamed: _Text_ fname;
-- _Text_    pathForBundleDocumentNamed: _Text_ fname;
+_TT          pathForDocumentNamed __Text_ fname ___
+_TT    pathForBundleDocumentNamed __Text_ fname ___
 #endif
 
 /// non-resursive
@@ -90,7 +93,7 @@ _TT          prettySizeForPath __Text_ p;
 - _IsIt_        removeItemAtPathIfExists _ _Text_ p;
 - _Data_   extendedAttributeDataWithName _ _Text_ n    forFileAtPath _ _Text_ p;
 - _Text_ extendedAttributeStringWithName _ _Text_ n    forFileAtPath _ _Text_ p;  // Uses UTF8 encoding
-- _IsIt_       getExtendedAttributeBytes _       (_Void*)b    length _ _UInt_ l withName _ _Text_ n forFileAtPath _ _Text_ p;
+_IT       getExtendedAttributeBytes _       (_Void*)b    length _ _UInt_ l withName _ _Text_ n forFileAtPath _ _Text_ p;
 - _IsIt_       setExtendedAttributeBytes _ (const _Void*)b    length _ _UInt_ l withName _ _Text_ n forFileAtPath _ _Text_ p;
 - _IsIt_        setExtendedAttributeData _ _Data_ d         withName _ _Text_ n   forFileAtPath _ _Text_ p;
 - _IsIt_      setExtendedAttributeString _ _Text_ t         withName _ _Text_ n   forFileAtPath _ _Text_ p;  // Uses UTF8 encoding
@@ -112,10 +115,10 @@ _TT          prettySizeForPath __Text_ p;
 @end
 #if !TARGET_OS_IPHONE
 @interface NSString (CarbonUtilities)
-+ _Text_    stringWithFSRef:(const FSRef *)aFSRef;
-- _IsIt_         getFSRef:(FSRef *)aFSRef;
-- _Text_    resolveAliasFile;
-- _Text_ humanReadableFileTypeForFileExtension;
++ _Text_    stringWithFSRef:(const FSRef *)aFSRef ___
+- _IsIt_         getFSRef:(FSRef *)aFSRef ___
+- _Text_    resolveAliasFile ___
+- _Text_ humanReadableFileTypeForFileExtension ___
 @end
 
 @interface NSFileManager (UKVisibleDirectoryContents)

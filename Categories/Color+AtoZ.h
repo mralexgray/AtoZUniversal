@@ -19,7 +19,7 @@ _RO _Flot	relativeBrightness
        __ hue // universal hue component (0 - 360)
       ___
 
--  _Comp_ compare _ _Colr_ b ___
+-  _CRes_ compare _ _Colr_ b ___
 
 
 - _Kind_ withBrightnessOffset     _ _Flot_ offset;
@@ -33,6 +33,10 @@ _RO _Flot	relativeBrightness
 + _Kind_ white __Flot_ x a __Flot_ a ___
 
 _RO _Flot r, g, b, a;
+
+#if IOS_ONLY
+_RO _Flot redComponent __ greenComponent __ blueComponent __ alphaComponent ___
+#endif
 
 @XtraStop()
 

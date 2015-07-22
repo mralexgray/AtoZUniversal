@@ -102,9 +102,6 @@ BOOL IsEmpty(id obj) {
 //  ? : NO;
 //}
 
-
-
-
 NSS * AZToStringFromTypeAndValue(const char *typeCode, void *val) {
   //  Compare
   return  SameChar(typeCode, @encode(  NSP)) ? AZStringFromPoint(*(NSP*)   val)

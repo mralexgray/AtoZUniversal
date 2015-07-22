@@ -149,6 +149,7 @@ _LT mapToArray:(KeyValueToObjectBlock)block;
 _TT keyForValueOfClass:(Class)klass;
 
 _VD eachWithIndex:(KeyValueIndexAbortBlock)block;
+_VD eachAlphabetically:(KeyValueIteratorBlock)block;
 
 - recursiveObjectForKey:(NSS*)k; /* fierce */  //- (NSA*) recursiveObjectsForKey:(NSS*)key;
 

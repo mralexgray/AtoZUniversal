@@ -26,8 +26,8 @@ _AT  _Rnge	  subRange;
 _RO  _Rnge    range;
 
 - _Void_ openInTextMate;
-
-- _Comp_ compareNumberStrings: _Text_ str;
+_CS      compareVersions __Text_ ver ___
+_CS compareNumberStrings __Text_ str ___
 - _Text_ justifyRight: _UInt_ col;
 - _Text_   withFormat: _Text_ format,...;
 

@@ -1,6 +1,7 @@
 
 #import <CommonCrypto/CommonDigest.h>
 #import <AtoZUniversal/AtoZUniversal.h>
+@import CoreServices;
 
 #import <FunSize/FunSize.h> 
 
@@ -180,7 +181,9 @@ CLANG_IGNORE(-Wincomplete-implementation)
 
 -  (BOOL) isInteger { return self.isIntegerNumber; }
 
-- _Comp_ compareNumberStrings __Text_ str {  return [@([str intValue]) compare:@([self intValue])];	}
+- _CRes_ compareVersions __Text_ v2   { return [self compare:v2 options:NSNumericSearch]; }
+
+_CS compareNumberStrings __Text_ str {  return [@([str intValue]) compare:@([self intValue])];	}
 
 _TT justifyRight __UInt_ col {  if (self.length >= col) return self; NSUI add;
 
@@ -332,7 +335,10 @@ _TT justifyRight __UInt_ col {  if (self.length >= col) return self; NSUI add;
 }
 + _List_ dicksonPhrases {
 
-  AZSTATIC_OBJ(List, bible, [List arrayFromPlist:[[NSBundle bundleWithIdentifier:@"com.mrgray.AtoZUniversal"] pathForResource:@"Dicksonisms" ofType:@"plist"]]);
+  AZSTATIC_OBJ(List, bible,
+               [List arrayFromPlist:
+                [[Bndl bundleWithIdentifier:@"com.mrgray.AtoZUniversal"]
+                            pathForResource:@"Dicksonisms" ofType:@"plist"]] ?: @[]);
 	return bible; // [self.dicksonBible extractAllSentences];
 }
 + _List_ dicksonisms { AZSTATIC_OBJ(NSA,dicks,self.dicksonBible.sentences); return dicks;
@@ -409,15 +415,14 @@ _TT justifyRight __UInt_ col {  if (self.length >= col) return self; NSUI add;
 #endif
   return (id)nil;
 }
-+ _Text_ randomDicksonism 						{	return self.dicksonisms.randomElement;
-}
-+ _Text_ randomWords:		 (NSI)ct			{	return [LoremIpsum.new words:ct];     }
-+ _Text_ randomSentences:(NSI)ct      {	return [LoremIpsum.new sentences:ct];	}
++ _Text_ randomDicksonism 					{	return self.dicksonisms.randomElement;  }
++ _Text_ randomWords		 __SInt_ ct {	return [LoremIpsum.new words:ct];       }
++ _Text_ randomSentences __SInt_ ct {	return [LoremIpsum.new sentences:ct];   }
 
 #pragma mark - Coping with lenths.
 
-- (NSUI) longestWordLength 						{  return  [self words].lengthOfLongestMemberString; }
-- (NSS*) paddedRightTo:(NSUI)count 				{
+_UT longestWordLength 						{  return  [self words].lengthOfLongestMemberString; }
+_TT paddedRightTo __UInt_ count 				{
 
 if (self.length == count) return self;
 if (self.length > count)  return [self.copy substringToIndex:count];

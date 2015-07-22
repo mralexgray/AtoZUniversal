@@ -25,8 +25,9 @@
 @end
 
 
-//  Lookup the next implementation of the given selector after the default one. \
+/*! Lookup the next implementation of the given selector after the default one.
     Returns nil if no alternate implementation is found.
+*/
 
 #define invokeSupersequent(...) \
   ([self getImplementationOf:_cmd after:impOfCallingMethod(self, _cmd)]) (self, _cmd, ##__VA_ARGS__)

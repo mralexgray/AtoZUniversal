@@ -51,7 +51,7 @@ _XCTest(ExistenceAndEquality,
   XCTAssertTrue(w && azr && v && l, @"none may be nil!");
   XCTAssertTrue(NSEqualRects(w.r, azr.r), @"%@ %@", AZString(w.r),AZString(azr.r));
   XCTAssertTrue(NSEqualRects(v.r, azr.r), @"%@ %@", AZString(v.r),AZString(azr.r));
-  XCTAssertTrue(NSEqualRects(v.r, l.r), @"%@ %@", AZString(v.r),AZString(l.r));
+  XCTAssertTrue(NSEqualRects(v.r, l.r),   @"%@ %@", AZString(v.r),AZString(l.r));
 
    XCTAssertTrue(AZEqualRects(w.r, azr.r, v.r, l.r), @"%@ %@ %@ %@",
         AZString(w.r),AZString(azr.r),AZString(v.r),AZString(l.r));

@@ -477,8 +477,8 @@ _VD logEach { [self eachWithIndex:^(id obj, _SInt idx) { NSLog(@"Index %ld: %@",
 
 + _List_ arrayFromPlist __Text_ path {
 
-//  NSParameterAssert(path);
-//  NSParameterAssert([FM fileExistsAtPath:path]);
+  NSParameterAssert(path);
+  NSAssert([FM fileExistsAtPath:path], @"Plist don't exist, yo!");
   id d = [NSData dataWithContentsOfFile:path];
   NSAssert(d, @"couldnt get data from supposed plist, %@!", path);
   return [NSPropertyListSerialization propertyListWithData:d options:NSPropertyListImmutable format:nil error:nil] ?: @[];
@@ -1195,10 +1195,10 @@ static NSI comparatorForSortingUsingArray(id object1, id object2, void *context)
 }
 #if !(TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR)
 
-//	experimental method - \
-    like "find" but instead uses NSHashTable to store weak pointers to all objects passing the test of the bool block \
+/*~	experimental method -
+    like "find" but instead uses NSHashTable to store weak pointers to all objects passing the test of the bool block
     @note I don't particularly like this name but given objc's naming structure this is as good as I can do for now
-
+*/
 - (NSHashTable*) findAllIntoWeakRefsWithBlock:(BOOL (^)(id))block {
 
   NSHashTable *results = NSHashTable.weakObjectsHashTable;

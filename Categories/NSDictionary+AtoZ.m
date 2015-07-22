@@ -487,6 +487,11 @@ return  ISA(object,NSS)
 //	else {	for (id key in dict) {id obj = [dict objectForKey:key];[mutDict setValue:block(key, obj) forKey:key];	}}
 // [NSDictionary dictionaryWithDictionary:mutDict];
 
+_VD eachAlphabetically:(KeyValueIteratorBlock)block {
+
+  [self.allKeys.alphabetized do:^(_ObjC x) { block(x,self[x]); }];
+}
+
 -(void)eachWithIndex:(void (^)(id key, id value, NSUI idx, BOOL *stop))block;	{
 	[self.allKeys enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
 		block (obj, self[obj], idx, *stop);

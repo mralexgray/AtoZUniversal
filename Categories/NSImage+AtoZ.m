@@ -5159,6 +5159,7 @@ NSString *stringForBrightness( CGF brightness )	{	return
 
 #if MAC_ONLY
 
+
 ///	 from http://developer.apple.com/technotes/tn2005/tn2143.html
 
 CGImageRef CreateCGImageFromData(NSData* data) {

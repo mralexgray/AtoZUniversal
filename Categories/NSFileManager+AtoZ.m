@@ -22,8 +22,12 @@ NSS * NSTmpFolder()       {	return [NSHomeDirectory() withPath:@"tmp"];       }
 NSS * NSBundleFolder()    {	return NSBundle.mainBundle.bundlePath;            }
 NSS * NSDCIMFolder()      {	return @"/var/mobile/Media/DCIM";                 }
 
-
 @implementation NSFileManager (AtoZ)
+
+
+_LT mountedVolumes { return [self mountedVolumeURLsIncludingResourceValuesForKeys:@[NSURLPathKey] options:NSVolumeEnumerationSkipHiddenVolumes];
+}
+
 
 static mDict cache ___
 
@@ -89,12 +93,29 @@ _TT lastModifiedStringForPath __Text_ p {
 
 }
 
+NSUI intFromColorOrString(id x) {
+
+ //  0 none, 1 grey, 2 green, 3 purple, 4 blue, 5 yellow, 6 red, 7 orange
+  objswitch(x)
+    objcase(nil)
+      return 0;
+    objkind(Colr)
+      AZSTATIC_OBJ(List, colorCodes, @[AZNULL,GREY,GREEN,PURPLE,BLUE,YELLOW,RED,ORANGE]);
+      return colorCodes[x];
+    objkind(Text)
+      AZSTATIC_OBJ(List, stringCodes, @[AZNULL,@"GREY",@"GREEN",@"PURPLE",@"BLUE",@"YELLOW",@"RED",@"ORANGE"]);
+      return [stringCodes indexOfObject:x];
+  endswitch
+  return 0;
+}
+_VD setColor _ x forFileAtPath:pathorurl { [self setTag:intFromColorOrString(x) forFileAtPath:pathorurl]; }
+
 - (void) setTag:(NSUInteger)t forFileAtPath:pathorurl {
 
   NSURL * fileURL = ISA(pathorurl, NSURL) ? pathorurl : [NSURL fileURLWithPath:pathorurl];
 
  // NSURLLabelNumberKey values are:
-  //  0 none, 1 grey, 2 green, 3 purple, 4 blue, 5 yellow, 6 red, 7 orange
+ //  0 none, 1 grey, 2 green, 3 purple, 4 blue, 5 yellow, 6 red, 7 orange
 
 
   [fileURL setResourceValue:@(MIN(t,7)) forKey:NSURLLabelNumberKey error:nil];
@@ -110,12 +131,14 @@ _LT pathsOfContentsOfDirectory __Text_ dir {
 
 #pragma mark - Globbing
 
-_LT arrayWithFilesMatchingPattern __Text_ pattern inDirectory __Text_ directory {
+_LT                 filesMatching __Text_ pattern in __Text_ dir {
+
+//_LT arrayWithFilesMatchingPattern __Text_ pattern inDirectory __Text_ directory {
 
 	NSMutableArray* files = NSMutableArray.array;	glob_t gt;
 
 	NSString* globPathComponent = [NSString stringWithFormat: @"/%@", pattern];
-	NSString* expandedDirectory = directory.stringByExpandingTildeInPath;
+	NSString* expandedDirectory = dir.stringByExpandingTildeInPath;
 	const char* fullPattern = [expandedDirectory stringByAppendingPathComponent:globPathComponent].UTF8String;
 
 	if (!glob(fullPattern, 0, NULL, &gt)) {
@@ -132,7 +155,9 @@ _LT arrayWithFilesMatchingPattern __Text_ pattern inDirectory __Text_ directory 
  iPhone Developer's Cookbook, 3.0 Edition
  BSD License, Use at your own risk	*/
 
-_TT pathForItemNamed __Text_ fname inFolder __Text_ path {
+_TT              pathForItemNamed __Text_ fname   in __Text_ path {
+
+//_TT pathForItemNamed __Text_ fname inFolder __Text_ path {
 
 	NSString *file;
 	NSDirectoryEnumerator *dirEnum = [self enumeratorAtPath:path];
@@ -142,8 +167,8 @@ _TT pathForItemNamed __Text_ fname inFolder __Text_ path {
 	return nil;
 }
 #if !TARGET_OS_IPHONE
-- (NSS*)       pathForDocumentNamed:(NSS*)fname { return [self pathForItemNamed:fname inFolder:NSDocumentsFolder()];  }
-- (NSS*) pathForBundleDocumentNamed:(NSS*)fname {	return [self pathForItemNamed:fname inFolder:NSBundleFolder()];     }
+- (NSS*)       pathForDocumentNamed:(NSS*)fname { return [self pathForItemNamed:fname in:NSDocumentsFolder()];  }
+- (NSS*) pathForBundleDocumentNamed:(NSS*)fname {	return [self pathForItemNamed:fname in:NSBundleFolder()];     }
 #endif
 - (NSA*) filesInFolder:(NSS*)path {
 	NSString *file;
