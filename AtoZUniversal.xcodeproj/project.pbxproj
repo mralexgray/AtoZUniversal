@@ -182,7 +182,7 @@
 		7B4B72601AE97CE600A6B02C /* BaseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaseModel.h; path = Vendor/BaseModel/BaseModel/BaseModel.h; sourceTree = SOURCE_ROOT; };
 		7B4B72611AE97CE600A6B02C /* BaseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BaseModel.m; path = Vendor/BaseModel/BaseModel/BaseModel.m; sourceTree = SOURCE_ROOT; };
 		7B4ECA1D1AEA399A00FB1023 /* XC_Install_Helper.zsh */ = {isa = PBXFileReference; lastKnownFileType = text; name = XC_Install_Helper.zsh; path = Vendor/_ObjC/Universal/XC_Install_Helper.zsh; sourceTree = SOURCE_ROOT; };
-		7B582BC51AA6A4F400C450C3 /* AtoZUniversal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AtoZUniversal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7B582BC51AA6A4F400C450C3 /* .framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = .framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B582BC91AA6A4F400C450C3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7B582BCA1AA6A4F400C450C3 /* AtoZUniversal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = AtoZUniversal.h; path = AtoZUniversal/AtoZUniversal.h; sourceTree = "<group>"; wrapsLines = 1; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		7B582BD71AA6A4F800C450C3 /* AtoZUniversalTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = AtoZUniversalTests.m; path = AtoZUniversalTests/AtoZUniversalTests.m; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
@@ -476,7 +476,7 @@
 				7B582BC91AA6A4F400C450C3 /* Info.plist */,
 				7BC459611AD6D78C0097F508 /* AtoZUniversal.xcconfig */,
 				7B5DC27E1AC932CA0063D701 /* AtoZUniversal Tests.xctest */,
-				7B582BC51AA6A4F400C450C3 /* AtoZUniversal.framework */,
+				7B582BC51AA6A4F400C450C3 /* .framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -624,7 +624,7 @@
 			);
 			name = AtoZUniversal;
 			productName = AtoZUniversal;
-			productReference = 7B582BC51AA6A4F400C450C3 /* AtoZUniversal.framework */;
+			productReference = 7B582BC51AA6A4F400C450C3 /* .framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		7B5DC27D1AC932CA0063D701 /* AtoZUniversal Tests */ = {
