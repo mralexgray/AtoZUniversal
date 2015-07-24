@@ -315,7 +315,7 @@ static id addMethodTrampoline(id self, SEL _cmd) 			{
   id x = [self vFK:k]; if (!x) return nil;
   return [x respondsToSelector:@selector(boolValue)] && ISA(x,objc_getClass("__NSCFNumber")) && ([x integerValue] == 0 || [x integerValue] == 1) ? StringFromBOOL([self boolForKey:k]) : $(@"%@",x);
 }
-- _Void_ willChangeValueForKeysBlock:(void(^)(id _self))blk keys:(NSString*)keys, ... {
+- _Void_ willChangeValueForKeysBlock:(void(^)(id _self))blk keys __Text_ keys, ... {
 
   azva_list_to_nsarray(keys, allKeys);
   for (NSString *k in allKeys) [self willChangeValueForKey:k];
@@ -532,7 +532,7 @@ _LT methodNames { return self.class.instanceMethodNames; }
  return YES;
  }
 
- -(void) propagateValue: value forBinding:(NSString*)binding;
+ -(void) propagateValue: value forBinding __Text_ binding;
  {
  NSParameterAssert(binding != nil);
 
@@ -1583,7 +1583,7 @@ static const char * getPropertyType(objc_property_t property) {
 - observeName:(NSS*) notificationName usingBlock:(void (^)(NSNOT *n))block {
 	return [AZNOTCENTER addObserverForName:notificationName object:self queue:NSOQ.mainQueue usingBlock:block];
 }
-- observeName:(NSString*)noteName objectBlock:(void(^)(id))blk {
+- observeName __Text_ noteName objectBlock:(void(^)(id))blk {
 	return [AZNOTCENTER addObserverForName:noteName object:self queue:NSOQ.mainQueue usingBlock:^(NSNOT *n){
     blk(n.object);
   }];

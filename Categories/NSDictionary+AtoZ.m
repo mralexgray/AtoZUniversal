@@ -684,7 +684,7 @@ _VD eachAlphabetically:(KeyValueIteratorBlock)block {
 	}];
 }
 /*
-- _Void_ obtainKeyPaths: val intoArray:(NSMutableArray*)arr withString:(NSString*)s {
+- _Void_ obtainKeyPaths: val intoArray:(NSMutableArray*)arr withString __Text_ s {
     if ([val isKindOfClass:[NSDictionary class]]) {
         for (id aKey in [val allKeys]) {
             NSString* path = 

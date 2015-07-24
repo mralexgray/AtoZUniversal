@@ -1352,7 +1352,7 @@ static NSMutableDictionary *isps = nil;
   return outdata;
 }
 
-- (void) produceError: (NSString *) errorString forFD: (int) fd atPath:(NSString*)cwd {
+_VD produceError: (NSString *) errorString forFD: (int) fd atPath:(NSString*)cwd {
 
   NSString *outcontent = [NSString stringWithFormat:@"HTTP/1.0 200 OK\r\nContent-Type: text/html\r\n\r\n"];
   write (fd, outcontent.UTF8String, outcontent.length);
@@ -1379,7 +1379,7 @@ static NSMutableDictionary *isps = nil;
 
 // Serve files to GET requests
 
-- (void) handleWebRequest:(int) fd {
+_VD handleWebRequest:(int) fd {
 
   NSString *cwd;
 
@@ -1514,11 +1514,11 @@ static NSMutableDictionary *isps = nil;
 
 }
 
-+ (NSDictionary*) ipsForInterfaces { struct ifaddrs *list;
++ _Dict_ ipsForInterfaces {
+
+  struct ifaddrs *list, *cur; mDict d = @{}.mutableCopy;
 
   if(getifaddrs(&list) < 0) return perror("getifaddrs"), nil;
-
-  NSMutableDictionary *d = @{}.mutableCopy;	struct ifaddrs *cur;
 
   for(cur = list; cur != NULL; cur = cur->ifa_next) {
 
@@ -1529,28 +1529,22 @@ static NSMutableDictionary *isps = nil;
   return freeifaddrs(list), d;
 }
 
-+ (NSString*) prettyBytes:(CGFloat)bytes; { NSUInteger unit = 0;	if(bytes < 1) return @"-";
++ _Text_ prettyBytes __Flot_ bytes { _UInt unit = 0;	if(bytes < 1) return @"-";
 
-  while(bytes > 1024) { 	bytes = bytes / 1024.0;	unit++; }
+  while (bytes > 1024) { bytes = bytes / 1024.0;	unit++; }
 
-  return unit > 5 ? @"HUGE" : [NSString stringWithFormat:!unit ? @"%d %@" : @"%.2d %@", (int)bytes, @[@"Bytes", @"KB", @"MB", @"GB", @"TB", @"PB"][unit]];
+  return unit > 5 ? @"HUGE" : $(!unit ? @"%d %@" : @"%.2d %@", (int)bytes, @[@"Bytes", @"KB", @"MB", @"GB", @"TB", @"PB"][unit]);
 }
 
-+ (NSData*) JSONify:(id)x  {
++ _Data_ JSONify _ x  { x = ISA(x,Text) ? @{@"message": x} : x;
 
-  x = [x isKindOfClass:NSString.class] ? @{@"message": x} : x;
-
-  return [x isKindOfClass:NSDictionary.class] ?
-  [NSJSONSerialization dataWithJSONObject:x
-                                  options:NSJSONWritingPrettyPrinted error:nil]
-  :x;
+  return ISA(x,Dict) ? [Json dataWithJSONObject:x options:NSJSONWritingPrettyPrinted error:nil] : x;
 }
 
 @end
 
 #define kFlagsDirectory @"/Library/Application Support/Apple/iChat Icons/Flags/"
 #define service_url @"http://www.telize.com/geoip/" // @"http://freegeoip.net/json/"
-
 
 @implementation Locale
 
@@ -1698,7 +1692,7 @@ static NSMutableDictionary *isps = nil;
   if (_GotLocation) _GotLocation(@"N/A");
 }
 
-- (void) dealloc {[locationManager stopUpdatingLocation]; }
+_VD dealloc {[locationManager stopUpdatingLocation]; }
 
 - (NSString*) getAdrressFromLatLong : (CGFloat)lat lon:(CGFloat)lon {
 

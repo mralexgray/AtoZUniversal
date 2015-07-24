@@ -146,11 +146,11 @@ _RO NSAS *attributedString;
 
 - (NSIMG*) named:(NSS*)name;
 - (NSIMG*) scaledToMax:(CGF)f;
-- (void) draw;
-- (void) drawAtPoint:(NSP)point inRect:(NSR)rect;
-- (void) drawAtPoint:(NSP)point;
+_VD draw;
+_VD drawAtPoint:(NSP)point inRect:(NSR)rect;
+_VD drawAtPoint:(NSP)point;
 - (CAL*) imageLayerForRect:(NSR)rect;
-- (void) drawinQuadrant: (QUAD)quad inRect:(NSR)rect;
+_VD drawinQuadrant: (QUAD)quad inRect:(NSR)rect;
 + (void) drawInQuadrants:	  (NSA*)images inRect:(NSR)frame;
 
 + (NSIMG*) imagesInQuadrants:(NSA*)images inRect:(NSR)frame;
@@ -175,7 +175,7 @@ _RO NSC * quantized;
 - (NSA*)   quantize;
 
 + (NSIMG*) desktopImage;
-- (void) openInPreview;
+_VD openInPreview;
 
 _RO NSS * asTempFile,
 
@@ -192,10 +192,10 @@ _RO NSS * asTempFile,
              @return data:image/png;base64,iVBORw0KGgoAAAAN...JRU5ErkJggg==
 
   * dataURL;
-+ (NSIMG*) svg2png:(NSString*)inFile out:(NSString*)optionalOutFile;
++ (NSIMG*) svg2png __Text_ inFile out __Text_ optionalOutFile;
 /// ∂i!!(.3)/Volumes/2T/ServiceData/AtoZ.framework/screenshots/AtoZ.Categories.NSImage+AtoZ.openQuantizedSwatch.pngƒi
 
-- (void) 	  openQuantizedSwatch;
+_VD 	  openQuantizedSwatch;
 - (NSIMG*) generateQuantizedSwatch;
 + (void)   openQuantizeChartFor:(NSA*)images;
 
@@ -225,7 +225,7 @@ _RO NSS * asTempFile,
 
 //NOTE BROKEN
 - (NSIMG*) scaleImageToFillSize:	(NSSize) targetSize; //
-- (void) drawFloatingRightInFrame:(NSRect)aFrame;  //ACG FLOATIAMGE
+_VD drawFloatingRightInFrame:(NSRect)aFrame;  //ACG FLOATIAMGE
 // draws the passed image into the passed rect, centered and scaled appropriately.
 // note that this method doesn't know anything about the current focus, so the focus must be locked outside this method
 
@@ -301,7 +301,7 @@ _RO NSS * asTempFile,
 - _IsIt_ createRepresentationOfSize:(NSSize)newSize;
 - _IsIt_ shrinkToSize:(NSSize)newSize;
 - _IsIt_ createIconRepresentations;
-- (void) removeRepresentationsLargerThanSize:(NSSize)size;
+_VD removeRepresentationsLargerThanSize:(NSSize)size;
 //- (BOOL)shrinkToSize:(NSSize)newSize;
 - (NSIMG*)duplicateOfSize:(NSSize)newSize;
 @end
@@ -412,8 +412,8 @@ typedef enum {
 
 @interface NSImage (AIImageAdditions)
 
-+ (NSImage *)imageNamed:(NSString *)name forClass:(Class)inClass;
-+ (NSImage *)imageNamed:(NSString *)name forClass:(Class)inClass loadLazily:(BOOL)flag;
++ (NSImage *)imageNamed __Text_ name forClass:(Class)inClass;
++ (NSImage *)imageNamed __Text_ name forClass:(Class)inClass loadLazily:(BOOL)flag;
 
 + (NSImage *)imageForSSL;
 

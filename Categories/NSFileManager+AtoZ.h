@@ -14,22 +14,30 @@ _Text   NSLibraryFolder _Void_;
 _Text       NSTmpFolder _Void_;
 _Text    NSBundleFolder _Void_;
 
+
+@Xtra(Text,Size) _RO unsigned long long fsSize ___ ￭
+
+
 @interface NSFileManager (AtoZ)
 
 _RC _List mountedVolumes ___
+
 _IT               isDirectory __Text_ p ___
+
 _TT lastModifiedStringForPath __Text_ p ___
-- (unsigned long long int)   folderSize __Text_ p ___
-_TT          prettySizeForPath __Text_ p ___
+
+_UT        folderSize __Text_ p ___
+
+_TT prettySizeForPath __Text_ p ___
 
 _ID                 tagForFileAtPath _ pathorurl ___
-_VD   setTag __UInt_ t forFileAtPath _ pathorurl ___
 
-_VD setColor _ x       forFileAtPath _ pathorurl ___ // accepts @"RED" or RED!
+_VD   setTag __UInt_ t forFileAtPath _ pathorurl ___
+_VD setColor       _ x forFileAtPath _ pathorurl ___ // accepts @"RED" or RED!
 
 _LT    pathsOfContentsOfDirectory __Text_ dir ___
 _LT                 filesMatching __Text_ pattern in __Text_ dir ___
-_TT              pathForItemNamed __Text_ fname   int __Text_ path ___
+_TT              pathForItemNamed __Text_ fname   in __Text_ path ___
 #if !TARGET_OS_IPHONE
 _TT          pathForDocumentNamed __Text_ fname ___
 _TT    pathForBundleDocumentNamed __Text_ fname ___

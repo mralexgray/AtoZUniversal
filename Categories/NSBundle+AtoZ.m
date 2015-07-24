@@ -27,7 +27,7 @@
 _OC version { return self.infoDictionary[(NSString *)kCFBundleVersionKey]; }
 
 
-+ resourceOfClass:(Class)rClass inBundleWithClass:(Class)k withName:(NSString*)n init:(SEL)method {
++ resourceOfClass:(Class)rClass inBundleWithClass:(Class)k withName __Text_ n init:(SEL)method {
 
   _Bndl b = [self bundleForClass:k];
   _Text path = [b pathForResource:n ofType:nil];
@@ -390,7 +390,7 @@ _OC version { return self.infoDictionary[(NSString *)kCFBundleVersionKey]; }
 }
 
 
-+ (instancetype) calulatedBundleIDForExecutable:(NSString*)path { 
++ (instancetype) calulatedBundleIDForExecutable __Text_ path { 
 	
 	NSBundle *b = [self bundleWithPath:path]; 	if (b) return b;
 	NSString *pp = path.copy;

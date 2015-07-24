@@ -860,14 +860,14 @@ _RO _Text indentation;
  @return Returns the substring of the pattern.
  @exception NSException Thrown if the pattern is `nil` or empty.
  */
-- _Text_ matchForPattern:(NSString*)pattern;
+- _Text_ matchForPattern __Text_ pattern;
 
 /** Returns an array contianing the matches of a regular expression pattern.
  @param pattern The pattern to use for the match.
  @return An array of NSTextCheckingResult.
  @exception NSException Thrown if the pattern is `nil` or empty.
  */
-- _List_ matchesForPattern:(NSString*)pattern;
+- _List_ matchesForPattern __Text_ pattern;
 /// @name Derived from Ruby
 @end
 
@@ -989,7 +989,7 @@ BOOL isValidUTF8( const char *string, NSUInteger length );
 
 
 @interface NSRegularExpression (Additions)
-+ (NSRegularExpression *) cachedRegularExpressionWithPattern:(NSString *) pattern options:(NSRegularExpressionOptions) options error:(NSError *__autoreleasing*) error;
++ (NSRegularExpression *) cachedRegularExpressionWithPattern __Text_  pattern options:(NSRegularExpressionOptions) options error:(NSError *__autoreleasing*) error;
 @end
 
 

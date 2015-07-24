@@ -11,23 +11,23 @@
 - (void)getUTF8String:(char*)outString maxLength:(int)maxLength;
 
 
-- (NSString*)stringByReplacing:(NSString *)value with:(NSString *)newValue;
+- (NSString*)stringByReplacing __Text_ value with __Text_ newValue;
 - (NSString*)stringByReplacingValuesInArray:(NSArray *)values withValuesInArray:(NSArray *)newValues;
-- (NSString*)stringByDeletingSuffix:(NSString *)suffix;
-- (NSString*)stringByDeletingPrefix:(NSString *)prefix;
+- (NSString*)stringByDeletingSuffix __Text_ suffix;
+- (NSString*)stringByDeletingPrefix __Text_ prefix;
 - (BOOL)stringContainsValueFromArray:(NSArray *)theValues;
-- (BOOL)isEqualToStringCaseInsensitive:(NSString *)str;
+- (BOOL)isEqualToStringCaseInsensitive __Text_ str;
 
 // variants with caseSensitive option
-- (BOOL)isEqualToString:(NSString *)str caseSensitive:(BOOL)caseSensitive;
-- (BOOL)hasPrefix:(NSString *)str caseSensitive:(BOOL)caseSensitive;
-- (BOOL)hasSuffix:(NSString *)str caseSensitive:(BOOL)caseSensitive;
-- (NSString*)stringByDeletingSuffix:(NSString *)suffix caseSensitive:(BOOL)caseSensitive;
-- (NSString*)stringByDeletingPrefix:(NSString *)prefix caseSensitive:(BOOL)caseSensitive;
+- (BOOL)isEqualToString __Text_ str caseSensitive:(BOOL)caseSensitive;
+- (BOOL)hasPrefix __Text_ str caseSensitive:(BOOL)caseSensitive;
+- (BOOL)hasSuffix __Text_ str caseSensitive:(BOOL)caseSensitive;
+- (NSString*)stringByDeletingSuffix __Text_ suffix caseSensitive:(BOOL)caseSensitive;
+- (NSString*)stringByDeletingPrefix __Text_ prefix caseSensitive:(BOOL)caseSensitive;
 
 - (NSString*)stringInStringsFileFormat;
 - (NSString*)stringFromStringsFileFormat;  // reverse of above
-- (NSString*)stringPairInStringsFileFormat:(NSString*)right addNewLine:(BOOL)addNewLine;
+- (NSString*)stringPairInStringsFileFormat __Text_ right addNewLine:(BOOL)addNewLine;
 
 - (NSArray*)linesFromString:(NSString**)outRemainder;
 - (NSString*)getFirstLine;
@@ -45,8 +45,8 @@
 - (NSString *)stringByRemovingReturns;
 - (NSString *)stringByRemovingCharactersInCharacterSet:(NSCharacterSet *)removeSet;
 
-- (NSString *)stringByRemovingPrefix:(NSString *)prefix;
-- (NSString *)stringByRemovingSuffix:(NSString *)suffix;
+- (NSString *)stringByRemovingPrefix __Text_ prefix;
+- (NSString *)stringByRemovingSuffix __Text_ suffix;
 
 // converts a POSIX path to a Windows path
 - (NSString*)windowsPath;
@@ -68,7 +68,7 @@
 
 - (NSString*)stringByDeletingPercentEscapes;
 
-- (NSComparisonResult)filenameCompareWithString:(NSString *)string;
+- (NSComparisonResult)filenameCompareWithString __Text_ string;
 
 - (NSString*)slashToColon;
 - (NSString*)colonToSlash;
@@ -84,7 +84,7 @@
 // =======================================================================================
 
 @interface NSMutableString(Utilities)
-- (void)replace:(NSString *)value with:(NSString *)newValue;
+- (void)replace __Text_ value with __Text_ newValue;
 - (void)appendChar:(unichar)aCharacter;
 @end;
 

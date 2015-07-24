@@ -1541,7 +1541,7 @@ return i;	}];	 filter:^BOOL(id obj) {	return obj ? YES:  NO;	}];} */
   return u;
 }
 
-+ _Pict_ svg2png:(NSString*) inFile out:(NSString*) optionalOutFile;
++ _Pict_ svg2png __Text_  inFile out __Text_  optionalOutFile;
 {
   NSS *p = optionalOutFile ?: $(@"/tmp/atoztempimage.%@.png",
                                 [NSString newUniqueIdentifier]);
@@ -1565,7 +1565,7 @@ return i;	}];	 filter:^BOOL(id obj) {	return obj ? YES:  NO;	}];} */
   return NSLog(@"Saved temp image as: %@",p), p;
 }
 
-- (void) openInPreview { NSS *p = [self asTempFile];
+_VD openInPreview { NSS *p = [self asTempFile];
 
   if ([AZFILEMANAGER fileExistsAtPath:p])
     [NSTask launchedTaskWithLaunchPath:@"/usr/bin/open"
@@ -2744,7 +2744,7 @@ CGContextRef MyCreateBitmapContext(int pixelsWide, int pixelsHigh) {
 //  Created by Matt Gemmell on 29/10/2007.
 //@implementation NSImage (QuickLook)
 //
-//+ (NSImage*) imageWithPreviewOfFileAtPath:(NSString*) path
+//+ (NSImage*) imageWithPreviewOfFileAtPath __Text_  path
 //                                   ofSize:(NSSize)size
 //                                   asIcon:(BOOL)asIcon {
 //
@@ -4589,7 +4589,7 @@ CGImageRef CreateCGImageFromData(NSData *data) {
 
 @implementation NSImage (AIImageAdditions)
 
-+ (NSImage*) imageNamed:(NSString*) name
++ (NSImage*) imageNamed __Text_  name
                forClass:(Class)inClass
              loadLazily:(BOOL)flag {
   NSBundle *ownerBundle;
@@ -4612,7 +4612,7 @@ CGImageRef CreateCGImageFromData(NSData *data) {
 }
 
 // Returns an image from the owners bundle with the specified name
-+ (NSImage*) imageNamed:(NSString*) name forClass:(Class)inClass {
++ (NSImage*) imageNamed __Text_  name forClass:(Class)inClass {
   return [self imageNamed:name forClass:inClass loadLazily:NO];
 }
 
@@ -5094,7 +5094,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AZImageCache, sharedCache);
   return self;
 }
 
-- (void) removeAllObjects {
+_VD removeAllObjects {
 
   [AZFILEMANAGER removeItemAtPath:_cacheDirectory error:nil];
   MAKEDIR(_cacheDirectory);
@@ -5110,7 +5110,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AZImageCache, sharedCache);
 
 + (void) cacheImage:(NSIMG*)i { [i saveAs:[self.sharedCache pathForImage:i key:i.name ?: NSS.randomWord]]; }
 
-- (void) setImage:(NSIMG*)i forKey:(NSS*)k { IF_RETURNV(!i || !k);
+_VD setImage:(NSIMG*)i forKey:(NSS*)k { IF_RETURNV(!i || !k);
 
   [self setObject:i forKey:k];
   dispatch_async(_queue, ^{ [i saveAs:[self pathForImage:i key:k]];  }); // path

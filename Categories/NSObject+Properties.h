@@ -51,7 +51,7 @@ _RO BOOL hasProperties;
 + (NSS*) retentionMethodOfPropertyNamed: 	(NSS*) name;	// returns one of: copy, retain, assign
 + (NSA*) propertyNames;
 + (NSD*) propertyNamesAndTypes;
-- (NSArray*) attributesOfProp:(NSString*)propName;
+- (NSArray*) attributesOfProp __Text_ propName;
 
 // instance convenience accessors for above routines (who likes to type [myObj class] all the time ?)
 _IT hasPropertyNamed                __Text_ name ___

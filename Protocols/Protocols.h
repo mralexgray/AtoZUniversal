@@ -1,18 +1,18 @@
 
 #import <AtoZUniversal/Rectlike.h>
 
-🆅 Solo <NObj> @concrete
+🆅 Solo <NObj> @concrete /// Provides any class with a "shared" instance'
 + _Kind_ shared ___
 ￭
 
-@Vows TypedArray <NObj> @concrete _AT Class objectClass;
-@Stop
+🆅 TypedArray <NObj> @concrete
+_AT Class objectClass ___
+￭
 
-@Vows Random   <NObj>
-
-             + _Kind_ random;              // implement random and you get random:ct for free!
-@concrete    + _List_ random:_UInt_ ct;     // ie. +[NSColor random:10] -> 10 randos..
-@Stop
+🆅 Random   <NObj>
+@Reqd       + _Kind_ random ___               /// imp. random and you get random:ct for free!
+@concrete   + _List_ random __UInt_ ct ___    /// i.e. +[NSColor random:10] -> 10 randos..
+￭
 
 _Type struct  { _SInt rangeMin; _SInt rangeMax; _SInt currentIndex; } _Indx;
 

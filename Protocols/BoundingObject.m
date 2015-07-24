@@ -71,7 +71,7 @@ SYNTHESIZE_ASC_PRIMITIVE_BLOCK_KVO(    selected,    setSelected, BOOL ,
 SYNTHESIZE_ASC_PRIMITIVE_BLOCK_KVO( orientation, setOrientation,  NSUI,
                                             ^{},            ^{});
 - (NSO*) owner { return FETCH; }
-- (void) setOwner:(NSO*)o { SAVEREFERENCE(o); }
+_VD setOwner:(NSO*)o { SAVEREFERENCE(o); }
 @end
 
 #define WARN_NONCONFORMANT(p) if (![self conformsToProtocol:@protocol(p)]) printf("Warning: %s doesn't \"technically\" conform to %s", [self cDesc], NSStringFromProtocol(@protocol(p)))
@@ -82,7 +82,7 @@ SYNTHESIZE_ASC_CAST         ( drawObjectBlock, setDrawObjectBlock, ObjRectBlock)
 SYNTHESIZE_ASC_PRIMITIVE_KVO(    spanExpanded,    setSpanExpanded,             CGF);
 SYNTHESIZE_ASC_PRIMITIVE_KVO(   spanCollapsed,   setSpanCollapsed,             CGF);
 
-- (void) setSpanCollapsed:(CGF)c 
+_VD setSpanCollapsed:(CGF)c 
                  expanded:(CGF)x  { self.spanCollapsed = c; self.spanExpanded = x; }
 -  (CGF) span                     { return self.expanded ? self.spanExpanded : self.spanCollapsed; }
 -  (CGF) expansionDelta           { CGF delta = self.spanExpanded - self.spanCollapsed; return self.expanded ? delta : -delta; }
@@ -99,7 +99,7 @@ SYNTHESIZE_ASC_PRIMITIVE_KVO(   spanCollapsed,   setSpanCollapsed,             C
 //+ (BOOL) instancesRespondToSelector:(SEL)s { return YES; }
 
 /*
-- (void) setValue:(id)v forUndefinedKey:(NSString *)k { AZLOGCMD;
+_VD setValue:(id)v forUndefinedKey __Text_ k { AZLOGCMD;
 
   [k isEqualToString:@"rows"] ? [self setDimensions:(NSSZ){self.cols,[v unsignedIntegerValue]}] :
   [k isEqualToString:@"cols"] ? [self setDimensions:(NSSZ){[v unsignedIntegerValue], self.rows}] : ({
@@ -107,7 +107,7 @@ SYNTHESIZE_ASC_PRIMITIVE_KVO(   spanCollapsed,   setSpanCollapsed,             C
     objc_msgSendSuper(&superInfo, _cmd, v, k); });
 }
 
-- (id) valueForUndefinedKey:(NSString *)k { AZLOGCMD; // AZSTACKTRACE;
+- (id) valueForUndefinedKey __Text_ k { AZLOGCMD; // AZSTACKTRACE;
 
   return  SameString(k, @"rows") ? @(self.dimensions.height) :
           SameString(k, @"cols") ? @(self.dimensions.width)  :
@@ -130,42 +130,42 @@ SYNTHESIZE_ASC_PRIMITIVE_KVO(   spanCollapsed,   setSpanCollapsed,             C
 
 
 
-//- (void)   setOriginX:(CGF)x  {	self.frameMinX = x; }
-//- (void)   setOriginY:(CGF)y  {	self.frameMinY = y; }
+//_VD   setOriginX:(CGF)x  {	self.frameMinX = x; }
+//_VD   setOriginY:(CGF)y  {	self.frameMinY = y; }
 
 //                            CONFORMS(BoundingObject) ? ISA(self,NSW) ? ((NSW*)self).frame.size.width  : ((id<BoundingObject>)self).bounds.size.width : self.size.width;   }
 //                              CONFORMS(BoundingObject) ? ISA(self,NSW) ? [((NSW*)self) setFrame:AZRectExceptWide(((NSW*)self).frame, w) display:YES animate:YES] : [(id<BoundingObject>)self setBoundsWidth:w]  : [self setSize:(NSSZ){w, self.height}]; }
 //-  (CGF)    height        { return CONFORMS(BoundingObject) ? ISA(self,NSW) ? ((NSW*)self).frame.size.height : ((id<BoundingObject>)self).bounds.size.height : self.size.height; }
-//b- (void) setHeight:(CGF)h { CONFORMS(BoundingObject) ? ISA(self,NSW) ? [((NSW*)self) setFrame:AZRectExceptHigh(((NSW*)self).frame, h) display:YES animate:YES] : [(id<BoundingObject>)self setBoundsHeight:h] : [self setSize:(NSSZ){self.width,  h}]; }
+//b_VD setHeight:(CGF)h { CONFORMS(BoundingObject) ? ISA(self,NSW) ? [((NSW*)self) setFrame:AZRectExceptHigh(((NSW*)self).frame, h) display:YES animate:YES] : [(id<BoundingObject>)self setBoundsHeight:h] : [self setSize:(NSSZ){self.width,  h}]; }
 //- (BOOL) isVertical  { return self.orientation == AZOrientVertical; }
-//- (void) setVertical:(BOOL)x { [self sV:@(AZOrientVertical) fK:@"orientation"]; }
+//_VD setVertical:(BOOL)x { [self sV:@(AZOrientVertical) fK:@"orientation"]; }
 
 //-  (NSR) frame              { COMPLAIN; }
-//- (void) setFrame:(NSR)r    { COMPLAIN; }
+//_VD setFrame:(NSR)r    { COMPLAIN; }
 //-  (NSR) bounds             { COMPLAIN; }
-//- (void) setBounds:(NSR)r   { COMPLAIN; }
+//_VD setBounds:(NSR)r   { COMPLAIN; }
 //-  (NSP) position           { COMPLAIN; }
-//- (void) setPosition:(NSP)p { COMPLAIN; }
+//_VD setPosition:(NSP)p { COMPLAIN; }
 
-//- (void) w:(CGF)x h:(CGF)y        { self.boundsWidth = x;  self.boundsHeight = y;     }
+//_VD w:(CGF)x h:(CGF)y        { self.boundsWidth = x;  self.boundsHeight = y;     }
 
 //-  (CGF) positionX  { return self.position.x; }
 //-  (CGF) positionY  { return self.position.y; }
-//- (void) setPositionX:(CGF)x  { self.position = (NSP){x, self.positionY}; }
-//- (void) setPositionY:(CGF)y  { self.position = (NSP){self.positionX, y}; }
+//_VD setPositionX:(CGF)x  { self.position = (NSP){x, self.positionY}; }
+//_VD setPositionY:(CGF)y  { self.position = (NSP){self.positionX, y}; }
 
 //-  (CGF) boundsWidth  {	return self.bounds.size.width;  }
 //-  (CGF) boundsHeight {	return self.bounds.size.height; }
 //-  (CGF) frameWidth   {	return self.frame.size.width;   }
 //-  (CGF) frameHeight  {	return self.frame.size.height;  }
 
-//- (void)   setFrameSize:(CGSZ)b   { self.frame  = AZRectExceptSize(self.frame,b);  }
-//- (void)  setFrameWidth:(CGF)w    { self.frame  = AZRectExceptWide(self.frame,w);  }
-//- (void) setFrameHeight:(CGF)h    { self.frame  = AZRectExceptHigh(self.frame,h);  }
+//_VD   setFrameSize:(CGSZ)b   { self.frame  = AZRectExceptSize(self.frame,b);  }
+//_VD  setFrameWidth:(CGF)w    { self.frame  = AZRectExceptWide(self.frame,w);  }
+//_VD setFrameHeight:(CGF)h    { self.frame  = AZRectExceptHigh(self.frame,h);  }
 //
-//- (void)   setBoundsSize:(CGSZ)b  { self.bounds = AZRectExceptSize(self.bounds,b); }
-//- (void)  setBoundsWidth:(CGF)w   { self.bounds = AZRectExceptWide(self.bounds,w); }
-//- (void) setBoundsHeight:(CGF)h   {	self.bounds = AZRectExceptHigh(self.bounds,h); }
+//_VD   setBoundsSize:(CGSZ)b  { self.bounds = AZRectExceptSize(self.bounds,b); }
+//_VD  setBoundsWidth:(CGF)w   { self.bounds = AZRectExceptWide(self.bounds,w); }
+//_VD setBoundsHeight:(CGF)h   {	self.bounds = AZRectExceptHigh(self.bounds,h); }
 
 //+ (NSSet*) keyPathsForValuesAffectingBoundsHeight { return NSSET(@"bounds"); }
 
@@ -176,18 +176,18 @@ SYNTHESIZE_ASC_PRIMITIVE_KVO(   spanCollapsed,   setSpanCollapsed,             C
 //-  (CGF) originX      {	return self.frameMinX; }
 //-  (CGF) originY      {	return self.frameMinY; }
 
-- (void)  setFrameOrigin:(CGP)o { self.frame  = AZRectExceptOrigin(self.frame, o); }
-- (void) setBoundsOrigin:(CGP)o {	self.bounds = AZRectExceptOrigin(self.bounds,o); }
+_VD  setFrameOrigin:(CGP)o { self.frame  = AZRectExceptOrigin(self.frame, o); }
+_VD setBoundsOrigin:(CGP)o {	self.bounds = AZRectExceptOrigin(self.bounds,o); }
 
 / * CENTER * /
 
 -  (CGP) boundsCenter { return AZCenterOfRect(self.bounds); }
 -  (CGP) frameCenter  { return AZCenterOfRect(self.frame);  }
 
-- (void) setBoundsCenter:(NSP)p { self.bounds = AZCenterRectOnPoint(self.bounds,p); }
-- (void)  setFrameCenter:(NSP)p { self.frame  = AZCenterRectOnPoint(self.frame, p); }
+_VD setBoundsCenter:(NSP)p { self.bounds = AZCenterRectOnPoint(self.bounds,p); }
+_VD  setFrameCenter:(NSP)p { self.frame  = AZCenterRectOnPoint(self.frame, p); }
 */
-//- (void) setFrameMaxY:(CGF)y  { self.frameMinY = y - self.height;               }
+//_VD setFrameMaxY:(CGF)y  { self.frameMinY = y - self.height;               }
 //-  (CGF) boundsMinX { return NSMinX(self.bounds);  }
 //-  (CGF) boundsMidX { return NSMidX(self.bounds);  }
 //-  (CGF) boundsMaxX {	return NSMaxX(self.bounds);  }
@@ -195,7 +195,7 @@ SYNTHESIZE_ASC_PRIMITIVE_KVO(   spanCollapsed,   setSpanCollapsed,             C
 //-  (CGF) boundsMidY {	return NSMidY(self.bounds);  }
 //-  (CGF) boundsMaxY {	return NSMaxY(self.bounds);  }
 //-  (NSR) bounds             { return AZRectFromSizeOfRect(self.frame); }
-//- (void) setBounds:(NSR)b   { self.frame = AZRectExceptSize(self.frame, b.size); }
+//_VD setBounds:(NSR)b   { self.frame = AZRectExceptSize(self.frame, b.size); }
 
 
 
@@ -229,7 +229,7 @@ SYNTHESIZE_ASC_PRIMITIVE_KVO(   spanCollapsed,   setSpanCollapsed,             C
   setBackingStore(x,self.storage);
   return (id<Indexed>)x;
 
-- (void) setCenter:(NSP)center  {
+_VD setCenter:(NSP)center  {
 	[self setFrameOrigin:NSMakePoint(floorf(center.x - (NSWidth([self bounds])) / 2),
 												floorf(center.y - (NSHeight([self bounds])) / 2))];
 }
@@ -243,7 +243,7 @@ SYNTHESIZE_ASC_PRIMITIVE_KVO(   spanCollapsed,   setSpanCollapsed,             C
 	return NSMakePoint(floorf(self.frame.origin.x + (self.frame.size.width / 2)),
 							 floorf(self.frame.origin.y + (self.frame.size.height / 2)));
 }
-- (void) maximize{
+_VD maximize{
 	NSR r = [self.window.contentView bounds];
 	self.autoresizesSubviews = YES;
 	self.autoresizingMask = NSSIZEABLE;
@@ -258,10 +258,10 @@ SYNTHESIZE_ASC_PRIMITIVE_KVO(   spanCollapsed,   setSpanCollapsed,             C
 	return NSMakeRect(pt.x-(width/2.0), pt.y - (height/2.0), width, height);
 }
 
-- (void) centerOriginInBounds { [self centerOriginInRect:[self bounds]];  }
-- (void) centerOriginInFrame { [self centerOriginInRect:[self convertRect:[self frame] fromView:[self superview]]];  }
-- (void) centerOriginInRect:(NSR) aRect  { [self translateOriginToPoint:NSMakePoint(NSMidX(aRect), NSMidY(aRect))]; }
-- (void) slideDown    {
+_VD centerOriginInBounds { [self centerOriginInRect:[self bounds]];  }
+_VD centerOriginInFrame { [self centerOriginInRect:[self convertRect:[self frame] fromView:[self superview]]];  }
+_VD centerOriginInRect:(NSR) aRect  { [self translateOriginToPoint:NSMakePoint(NSMidX(aRect), NSMidY(aRect))]; }
+_VD slideDown    {
 	
 	NSR newViewFrame;
 	if ([self valueForKeyPath:@"dictionary.visibleRect"] ) {
@@ -298,38 +298,38 @@ SYNTHESIZE_ASC_PRIMITIVE_KVO(   spanCollapsed,   setSpanCollapsed,             C
 
 /*
 -  (CGP)    frameTopLeftPt         {	return (NSP){ self.frameMinX, self.frameMinY}; }
-- (void) setFrameTopLeftPt: (CGP)p {	self.frameMinX = p.x; self.frameMinY = p.y;    }
+_VD setFrameTopLeftPt: (CGP)p {	self.frameMinX = p.x; self.frameMinY = p.y;    }
 -  (CGP)    frameTopMidPt          {	return (NSP){ self.frameMidX, self.frameMinY}; }
-- (void) setFrameTopMidPt:  (CGP)p { self.frameMidX = p.x;	self.frameMinY = p.y;    }
+_VD setFrameTopMidPt:  (CGP)p { self.frameMidX = p.x;	self.frameMinY = p.y;    }
 -  (CGP)    frameTopRightPt        {	return (NSP){ self.frameMaxX, self.frameMinY}; }
-- (void) setFrameTopRightPt:(CGP)p {	self.frameMaxX = p.x;	self.frameMinY = p.y;    }
+_VD setFrameTopRightPt:(CGP)p {	self.frameMaxX = p.x;	self.frameMinY = p.y;    }
 -  (CGP)    frameMidRightPt        {	return (NSP){ self.frameMaxX, self.frameMidY}; }
-- (void) setFrameMidRightPt:(CGP)p {	self.frameMaxX = p.x;	self.frameMidY = p.y;    }
+_VD setFrameMidRightPt:(CGP)p {	self.frameMaxX = p.x;	self.frameMidY = p.y;    }
 -  (CGP)    frameBotRightPt        {	return (NSP){ self.frameMaxX, self.frameMaxY}; }
-- (void) setFrameBotRightPt:(CGP)p {	self.frameMaxX = p.x;	self.frameMaxY = p.y;    }
+_VD setFrameBotRightPt:(CGP)p {	self.frameMaxX = p.x;	self.frameMaxY = p.y;    }
 -  (CGP)    frameBotMidPt          {	return (NSP){ self.frameMidX, self.frameMaxY}; }
-- (void) setFrameBotMidPt:  (CGP)p { self.frameMidX = p.x;	self.frameMaxY = p.y;    }
+_VD setFrameBotMidPt:  (CGP)p { self.frameMidX = p.x;	self.frameMaxY = p.y;    }
 -  (CGP)    frameBotLeftPt         {	return (NSP){ self.frameMinX, self.frameMaxY}; }
-- (void) setFrameBotLeftPt: (CGP)p {	self.frameMinX = p.x; self.frameMaxY = p.y;    }
+_VD setFrameBotLeftPt: (CGP)p {	self.frameMinX = p.x; self.frameMaxY = p.y;    }
 -  (CGP)    frameMidLeftPt         { return (NSP){ self.frameMinX, self.frameMidY}; }
-- (void) setFrameMidLeftPt: (CGP)p { self.frameMinX = p.x; self.frameMidY = p.y;    }
+_VD setFrameMidLeftPt: (CGP)p { self.frameMinX = p.x; self.frameMidY = p.y;    }
 
 -  (CGP)    boundsTopLeftPt            {	return CGPointMake(self.boundsMinX, self.boundsMinY);   }
-- (void) setBoundsTopLeftPt:   (CGP)p  { self.boundsMinX = p.x; self.boundsMinY = p.y;           }
+_VD setBoundsTopLeftPt:   (CGP)p  { self.boundsMinX = p.x; self.boundsMinY = p.y;           }
 -  (CGP)    boundsTopMidPt             {	return CGPointMake(self.boundsMidX, self.boundsMinY);   }
-- (void) setBoundsTopMidPt:    (CGP)p  { self.boundsMidX = p.x; self.boundsMinY = p.y;           }
+_VD setBoundsTopMidPt:    (CGP)p  { self.boundsMidX = p.x; self.boundsMinY = p.y;           }
 -  (CGP)    boundsTopRightPt           {	return CGPointMake(self.boundsMaxX, self.boundsMinY);   }
-- (void) setBoundsTopRightPt:  (CGP)p  { self.boundsMaxX = p.x; self.boundsMinY = p.y;           }
+_VD setBoundsTopRightPt:  (CGP)p  { self.boundsMaxX = p.x; self.boundsMinY = p.y;           }
 -  (CGP)    boundsMidRightPt           {	return CGPointMake(self.boundsMaxX, self.boundsMidY);   }
-- (void) setBoundsMidRightPt:  (CGP)p  { self.boundsMaxX = p.x; self.boundsMidY = p.y;           }
+_VD setBoundsMidRightPt:  (CGP)p  { self.boundsMaxX = p.x; self.boundsMidY = p.y;           }
 -  (CGP)    boundsBotRightPt           {	return CGPointMake(self.boundsMaxX, self.boundsMaxY);   }
-- (void) setBoundsBotRightPt:  (CGP)p  {	self.boundsMaxX = p.x; self.boundsMaxY = p.y;           }
+_VD setBoundsBotRightPt:  (CGP)p  {	self.boundsMaxX = p.x; self.boundsMaxY = p.y;           }
 -  (CGP)    boundsBotMidPt             {	return CGPointMake(self.boundsMidX, self.boundsMaxY);   }
-- (void) setBoundsBotMidPt:    (CGP)p  {	self.boundsMidX = p.x; self.boundsMaxY = p.y;           }
+_VD setBoundsBotMidPt:    (CGP)p  {	self.boundsMidX = p.x; self.boundsMaxY = p.y;           }
 -  (CGP)    boundsBotLeftPt            {	return CGPointMake(self.boundsMinX, self.boundsMaxY);   }
-- (void) setBoundsBotLeftPt:   (CGP)p  {	self.boundsMinX = p.x; self.boundsMaxY = p.y;           }
+_VD setBoundsBotLeftPt:   (CGP)p  {	self.boundsMinX = p.x; self.boundsMaxY = p.y;           }
 -  (CGP)    boundsMidLeftPt            { return CGPointMake(self.boundsMinX, self.boundsMidY);   }
-- (void) setBoundsMidLeftPt:   (CGP)p  {	self.boundsMinX = p.x; self.boundsMidY = p.y;           }
+_VD setBoundsMidLeftPt:   (CGP)p  {	self.boundsMinX = p.x; self.boundsMidY = p.y;           }
 */
 
 /*
@@ -341,11 +341,11 @@ SYNTHESIZE_ASC_PRIMITIVE_KVO(   spanCollapsed,   setSpanCollapsed,             C
 
 -  (CGF) centerX {	return ([self frame].origin.x + [self width]/2) ;	}
 
-- (void) setLeftEdge:(CGF)t {	NSR frame = [self frame] ;	frame.origin.x = t ;	[self setFrame:frame] ;	}
+_VD setLeftEdge:(CGF)t {	NSR frame = [self frame] ;	frame.origin.x = t ;	[self setFrame:frame] ;	}
 
-- (void) setRightEdge:(CGF)t {	NSR frame = [self frame] ;	frame.origin.x = t - [self width] ;	[self setFrame:frame];	}
+_VD setRightEdge:(CGF)t {	NSR frame = [self frame] ;	frame.origin.x = t - [self width] ;	[self setFrame:frame];	}
 
-- (void) setCenterX:(CGF)t {	float center = [self centerX] ;	float adjustment = t - center ;
+_VD setCenterX:(CGF)t {	float center = [self centerX] ;	float adjustment = t - center ;
 	NSR frame = [self frame] ;	frame.origin.x += adjustment ;	[self setFrame:frame];
 }
 
@@ -353,10 +353,10 @@ SYNTHESIZE_ASC_PRIMITIVE_KVO(   spanCollapsed,   setSpanCollapsed,             C
 -  (CGF) top      {	return self.frame.origin.y + self.height;	}
 -  (CGF) centerY  {	return (self.frame.origin.y + (self.height/2)); }
 
-- (void) setBot:(CGF)t {	NSR frame = [self frame] ;	frame.origin.y = t ;	[self setFrame:frame] ;	}
-- (void) setTop:(CGF)t {	NSR frame = [self frame] ;	frame.origin.y = t - [self height] ;	[self setFrame:frame] ;	}
+_VD setBot:(CGF)t {	NSR frame = [self frame] ;	frame.origin.y = t ;	[self setFrame:frame] ;	}
+_VD setTop:(CGF)t {	NSR frame = [self frame] ;	frame.origin.y = t - [self height] ;	[self setFrame:frame] ;	}
 
-- (void) setCenterY:(CGF)t {		float center = [self centerY] ;		float adjustment = t - center ;
+_VD setCenterY:(CGF)t {		float center = [self centerY] ;		float adjustment = t - center ;
 	NSR frame = [self frame] ;	frame.origin.y += adjustment ;		[self setFrame:frame] ;
 }
 
@@ -370,7 +370,7 @@ SYNTHESIZE_ASC_PRIMITIVE_KVO(   spanCollapsed,   setSpanCollapsed,             C
 
 
 
-- (void) setSize:(NSSZ)z {
+_VD setSize:(NSSZ)z {
 
 	NSR frame = self.frame ;
 	frame.size.width  = size.width ;
@@ -380,41 +380,41 @@ SYNTHESIZE_ASC_PRIMITIVE_KVO(   spanCollapsed,   setSpanCollapsed,             C
 - (NSSZ) frameSize             { return self.frame.size; }
 
 -  (CGF)    frameX                {	return self.frame.origin.x; }
-- (void) setFrameX:     (CGF)x    { self.frame = AZRectExceptOriginX(self.frame,x); }
+_VD setFrameX:     (CGF)x    { self.frame = AZRectExceptOriginX(self.frame,x); }
 -  (CGF)    frameY                {	return self.frame.origin.y; }
-- (void) setFrameY:     (CGF)y    { self.frame = AZRectExceptOriginY(self.frame,y); }
+_VD setFrameY:     (CGF)y    { self.frame = AZRectExceptOriginY(self.frame,y); }
 
 -  (CGF) boundsX  {	return self.bounds.origin.x; }
-- (void) setBoundsX:(CGF)boundsX { CGR bounds = self.bounds; bounds.origin.x = boundsX;	self.bounds = bounds; }
+_VD setBoundsX:(CGF)boundsX { CGR bounds = self.bounds; bounds.origin.x = boundsX;	self.bounds = bounds; }
 -  (CGF) boundsY  {	return self.bounds.origin.y;}
-- (void) setBoundsY:(CGF)boundsY { CGR bounds = self.bounds; bounds.origin.y = boundsY; self.bounds = bounds; }
+_VD setBoundsY:(CGF)boundsY { CGR bounds = self.bounds; bounds.origin.y = boundsY; self.bounds = bounds; }
 -  (CGF) boundsWidth      { return self.bounds.size.width; }
 -  (CGF) boundsHeight           { return self.bounds.size.height; }
 -  (CGF)    frameWidth            {	return self.frame.size.width; }
-- (void) setBoundsMinX:   (CGF)x  {	self.boundsOrigin = (NSP){x, self.boundsMinY}; }
-- (void) setBoundsMidX:   (CGF)x  { self.boundsMinX = (x - (self.width / 2.0f));   }
-- (void) setBoundsMaxX:   (CGF)x  {	self.boundsMinX = (x - self.boundsWidth); }
-- (void) setBoundsMinY:(CGF)boundsMinY   {	self.boundsY = boundsMinY; }
-- (void) setBoundsMidY:(CGF)boundsMidY   { self.boundsY = (boundsMidY - (self.boundsHeight / 2.0f)); }
-- (void) setBoundsMaxY:(CGF)boundsMaxY   {	self.boundsY = (boundsMaxY - self.boundsHeight); }
+_VD setBoundsMinX:   (CGF)x  {	self.boundsOrigin = (NSP){x, self.boundsMinY}; }
+_VD setBoundsMidX:   (CGF)x  { self.boundsMinX = (x - (self.width / 2.0f));   }
+_VD setBoundsMaxX:   (CGF)x  {	self.boundsMinX = (x - self.boundsWidth); }
+_VD setBoundsMinY:(CGF)boundsMinY   {	self.boundsY = boundsMinY; }
+_VD setBoundsMidY:(CGF)boundsMidY   { self.boundsY = (boundsMidY - (self.boundsHeight / 2.0f)); }
+_VD setBoundsMaxY:(CGF)boundsMaxY   {	self.boundsY = (boundsMaxY - self.boundsHeight); }
 -  (CGF)    frameHeight           {	return self.frame.size.height; }
 
 
 
-- (void) setWidth:(CGF)w {
+_VD setWidth:(CGF)w {
 	if (w != self.width) [self setFrame:AZRectExceptWide(self.frame,w)], ISA(self,NSV) ? [[(NSV*)self superview] setNeedsDisplay:YES]: nil;
 //	NSR frame = [self frame] ;
 //	frame.size.width = t ;
 //	[self setFrame:frame] ;
 //   [[self superview] setNeedsDisplay:YES];
 }
-- (void) setHeight:(CGF)t 	{
+_VD setHeight:(CGF)t 	{
 //self.frame = AZRectExceptHigh(self.frame, t); [[self superview] setNeedsDisplay:YES];}
 	if (t != self.height) [self setFrame:AZRectExceptHigh(self.frame,t)], ISA(self,NSV) ? [[(NSV*)self superview] setNeedsDisplay:YES]: nil;
 }
 -  (CGF) originX { return self.frame.origin.x; }
 -  (CGF) originY { return self.frame.origin.y; }
-- (void) setOriginX:(CGF)x {
+_VD setOriginX:(CGF)x {
 
 	if (x != self.originX) [self setFrame:AZRectExceptOriginX(self.frame,x)], ISA(self,NSV) ? [[(NSV*)self superview] setNeedsDisplay:YES]: nil;
 //    if (aFloat != [self originX]) {
@@ -424,7 +424,7 @@ SYNTHESIZE_ASC_PRIMITIVE_KVO(   spanCollapsed,   setSpanCollapsed,             C
 //        [self setNeedsDisplay:YES];
 //    }
 }
-- (void) setOriginY:(CGF)y {
+_VD setOriginY:(CGF)y {
 	if (y != self.originY) [self setFrame: AZRectExceptOriginY(self.frame,y)], ISA(self,NSV) ? [[(NSV*)self superview] setNeedsDisplay:YES]: nil;
 
 @implementation NSO (ExtendWithProtocol)
@@ -539,8 +539,8 @@ _RO NSMA<Indexed>*storage;
   return [((id<ArrayLike>)self).storage countByEnumeratingWithState:state objects:buffer count:len];
 }
 @end
-- (void) setWidth: (CGF)t 				{ NSR f = self.frame;	f.size.width  	= t; 	[self setFrame:f display:YES animate:YES] ;	}
-- (void) setHeight:(CGF)t				{ NSR f = self.frame;	f.size.height 	= t; 	[self setFrame:f display:YES animate:YES] ; 	}
+_VD setWidth: (CGF)t 				{ NSR f = self.frame;	f.size.width  	= t; 	[self setFrame:f display:YES animate:YES] ;	}
+_VD setHeight:(CGF)t				{ NSR f = self.frame;	f.size.height 	= t; 	[self setFrame:f display:YES animate:YES] ; 	}
 */
 
 //@property NSR   bounds, frame; @property  CGP   position, anchorPoint;  NSSZ   supersize;

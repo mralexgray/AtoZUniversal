@@ -78,7 +78,7 @@ typedef NSString*(* string_IMP)(id,SEL,...);
 //	FSGetHFSUniStrFromString((CFStringRef)self, hfsString);
 //}
 
-- (NSString*)stringByReplacing:(NSString *)value with:(NSString *)newValue;
+- (NSString*)stringByReplacing __Text_ value with __Text_ newValue;
 {
     NSMutableString *newString = [NSMutableString stringWithString:self];
 
@@ -129,7 +129,7 @@ typedef NSString*(* string_IMP)(id,SEL,...);
     return NO;
 }
 
-- (BOOL)isEqualToString:(NSString *)str caseSensitive:(BOOL)caseSensitive;
+- (BOOL)isEqualToString __Text_ str caseSensitive:(BOOL)caseSensitive;
 {
 	if (caseSensitive)
 		return [self isEqualToString:str];
@@ -137,7 +137,7 @@ typedef NSString*(* string_IMP)(id,SEL,...);
 	return [self isEqualToStringCaseInsensitive:str];
 }
 
-- (BOOL)hasPrefix:(NSString *)prefix caseSensitive:(BOOL)caseSensitive;
+- (BOOL)hasPrefix __Text_ prefix caseSensitive:(BOOL)caseSensitive;
 {
 	if (caseSensitive)
 		return [self hasPrefix:prefix];
@@ -145,7 +145,7 @@ typedef NSString*(* string_IMP)(id,SEL,...);
 	return [[self lowercaseString] hasPrefix:[prefix lowercaseString]];
 }
 
-- (BOOL)hasSuffix:(NSString *)suffix caseSensitive:(BOOL)caseSensitive;
+- (BOOL)hasSuffix __Text_ suffix caseSensitive:(BOOL)caseSensitive;
 {
 	if (caseSensitive)
 		return [self hasSuffix:suffix];
@@ -153,7 +153,7 @@ typedef NSString*(* string_IMP)(id,SEL,...);
 	return [[self lowercaseString] hasSuffix:[suffix lowercaseString]];
 }
 
-- (NSString*)stringByDeletingSuffix:(NSString *)suffix caseSensitive:(BOOL)caseSensitive;
+- (NSString*)stringByDeletingSuffix __Text_ suffix caseSensitive:(BOOL)caseSensitive;
 {
 	if ([self hasSuffix:suffix caseSensitive:caseSensitive])
         return [self substringToIndex:([self length]-[suffix length])];
@@ -161,7 +161,7 @@ typedef NSString*(* string_IMP)(id,SEL,...);
     return self;	
 }
 
-- (NSString*)stringByDeletingPrefix:(NSString *)prefix caseSensitive:(BOOL)caseSensitive;
+- (NSString*)stringByDeletingPrefix __Text_ prefix caseSensitive:(BOOL)caseSensitive;
 {
 	if ([self hasPrefix:prefix caseSensitive:caseSensitive])
         return [self substringFromIndex:[prefix length]];
@@ -169,17 +169,17 @@ typedef NSString*(* string_IMP)(id,SEL,...);
     return self;	
 }
 
-- (NSString*)stringByDeletingSuffix:(NSString *)suffix;
+- (NSString*)stringByDeletingSuffix __Text_ suffix;
 {
 	return [self stringByDeletingSuffix:suffix caseSensitive:YES];
 }
 
-- (NSString*)stringByDeletingPrefix:(NSString *)prefix;
+- (NSString*)stringByDeletingPrefix __Text_ prefix;
 {
 	return [self stringByDeletingPrefix:prefix caseSensitive:YES];
 }
 
-- (BOOL)isEqualToStringCaseInsensitive:(NSString *)str
+- (BOOL)isEqualToStringCaseInsensitive __Text_ str
 {
     // returns - NSOrderedAscending, NSOrderedSame, NSOrderedDescending
     return ([self caseInsensitiveCompare:str] == NSOrderedSame);
@@ -412,7 +412,7 @@ typedef NSString*(* string_IMP)(id,SEL,...);
 	return [self stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
 }
 
-- (NSString *)stringByRemovingPrefix:(NSString *)prefix;
+- (NSString *)stringByRemovingPrefix __Text_ prefix;
 {
     NSRange aRange;
 	
@@ -422,7 +422,7 @@ typedef NSString*(* string_IMP)(id,SEL,...);
     return [self substringFromIndex:aRange.location + aRange.length];
 }
 
-- (NSString *)stringByRemovingSuffix:(NSString *)suffix;
+- (NSString *)stringByRemovingSuffix __Text_ suffix;
 {
     if (![self hasSuffix:suffix])
         return self;
@@ -629,7 +629,7 @@ typedef NSString*(* string_IMP)(id,SEL,...);
     return self;
 }
 
-- (NSComparisonResult)filenameCompareWithString:(NSString *)rightString;
+- (NSComparisonResult)filenameCompareWithString __Text_ rightString;
 {
 #if SNOWLEOPARD
 	return [self localizedStandardCompare:rightString];
@@ -664,7 +664,7 @@ typedef NSString*(* string_IMP)(id,SEL,...);
 	return result;
 }
 
-- (NSString*)stringPairInStringsFileFormat:(NSString*)right addNewLine:(BOOL)addNewLine;
+- (NSString*)stringPairInStringsFileFormat __Text_ right addNewLine:(BOOL)addNewLine;
 {
 	NSString *selfie = [self stringInStringsFileFormat];
 	right = [right stringInStringsFileFormat];
@@ -688,13 +688,14 @@ typedef NSString*(* string_IMP)(id,SEL,...);
 // Split on slashes and chop out '.' and '..' correctly.
 - (NSString *)normalizedPath;
 {
+  id x = self.stringByStandardizingPath.stringByResolvingSymlinksInPath;
 	char resolved[PATH_MAX];
-	char* result = realpath([self fileSystemRepresentation], resolved);
+	char* result = realpath([x fileSystemRepresentation], resolved);
 	
 	if (!result)
 		return [NSString stringWithFileSystemRepresentation:result];
 	
-	return self;	
+	return x;
 }
 
 @end
@@ -703,7 +704,7 @@ typedef NSString*(* string_IMP)(id,SEL,...);
 
 @implementation NSMutableString(Utilities)
 
-- (void)replace:(NSString *)value with:(NSString *)newValue;
+- (void)replace __Text_ value with __Text_ newValue;
 {    
     [self replaceOccurrencesOfString:value withString:newValue options:NSLiteralSearch range:NSMakeRange(0, [self length])];
 }

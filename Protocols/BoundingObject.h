@@ -52,12 +52,12 @@ _VD setSpanCollapsed __Flot_ c expanded __Flot_ x ___
 //_RO AZTable  table;
 //@protocol     GridLike <NSO> @concrete
 //@prop_CP SizeChange sizeChanged;
-//- (void) setSizeChanged:(void(^)(NSSZ oldSz,NSSZ newSz))c;
+//_VD setSizeChanged:(void(^)(NSSZ oldSz,NSSZ newSz))c;
 //
 //@prop_NA          NSSZ  dimensions;
 //@prop_NA          NSUI  rows, cols;  
 //
-//- (void) iterateGrid:(GridIterator)b;
+//_VD iterateGrid:(GridIterator)b;
 //@end
 
 
@@ -136,23 +136,23 @@ _VD setSpanCollapsed __Flot_ c expanded __Flot_ x ___
 //typedef struct _AZDistance { CGF horizontal; CGF vertical; } AZDistance;
 
 
-//boundsHeight,   boundsWidth,frameHeight,    frameWidth, - (void) setBoundsSize:(NSSZ)sz; - (void)  setFrameSize:(NSSZ)sz;
+//boundsHeight,   boundsWidth,frameHeight,    frameWidth, _VD setBoundsSize:(NSSZ)sz; _VD  setFrameSize:(NSSZ)sz;
 
 
 //                         boundsMinX,     boundsMidX,   boundsMaxX,
 //                      boundsMinY,     boundsMidY,   boundsMaxY;
-//- (void)     w:(CGF)x h:(CGF)y;
+//_VD     w:(CGF)x h:(CGF)y;
 //- (NSSZ)  scaleWithSize:(NSSZ)z;  - (NSSZ) resizeWithSize:(NSSZ)z;    @end
 
 //@protocol     Moveable   <NSObject>     @end
-//- (void) moveBy:(NSP)distance;
+//_VD moveBy:(NSP)distance;
 
 //@property (readonly) NSSZ size;
 
-//- (void) setBoundsHeight: (CGF)h;
-//- (void) setBoundsWidth:  (CGF)w;
-//- (void) setFrameHeight:  (CGF)h;
-//- (void) setFrameWidth:   (CGF)w;
+//_VD setBoundsHeight: (CGF)h;
+//_VD setBoundsWidth:  (CGF)w;
+//_VD setFrameHeight:  (CGF)h;
+//_VD setFrameWidth:   (CGF)w;
 
                 frameTopLeftPt,  frameTopMidPt,   frameTopRightPt,
                 frameMidLeftPt,  frameMidPt,      frameMidRightPt,
@@ -165,8 +165,8 @@ _VD setSpanCollapsed __Flot_ c expanded __Flot_ x ___
   StrongTypedArrayLikeProtocol(DrawableObjectArrayLike,DrawableObject)
 #define StrongTypedArrayLikeProtocol(_NewProtocolName_,_ObjectsAdhereToProtocol_)\
 @protocol _NewProtocolName_ <ArrayLike> @concrete\
-- (void) addObject:(id<_ObjectsAdhereToProtocol_>)x; \
-- (void)    addObjects:(NSA<_ObjectsAdhereToProtocol_>*)x;  @end
+_VD addObject:(id<_ObjectsAdhereToProtocol_>)x; \
+_VD    addObjects:(NSA<_ObjectsAdhereToProtocol_>*)x;  @end
 @interface NSO (DrawableObject) <Drawable> @end
 
 

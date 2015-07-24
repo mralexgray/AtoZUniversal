@@ -3208,7 +3208,7 @@ catch_error:
   return NSMakeRange(0, self.length);
 }
 
-- (NSString*)matchForPattern:(NSString*)pattern {
+- (NSString*)matchForPattern __Text_ pattern {
   NSRegularExpression *regex = [NSRegularExpression
                                 regularExpressionWithPattern:pattern
                                 options:0
@@ -3219,7 +3219,7 @@ catch_error:
   return [self substringWithRange:match.range];
 }
 
-- (NSArray*)matchesForPattern:(NSString*)pattern {
+- (NSArray*)matchesForPattern __Text_ pattern {
   NSRegularExpression *regex = [NSRegularExpression
                                 regularExpressionWithPattern:pattern
                                 options:0
@@ -3242,7 +3242,7 @@ catch_error:
   return YES;
 }
 
--(BOOL)contains:(NSString *)string {
+-(BOOL)contains __Text_ string {
   NSRange range = [self rangeOfString:string];
   return (range.location != NSNotFound);
 }
@@ -3286,7 +3286,7 @@ catch_error:
   return [rightPart substringToIndex:to-from];
 }
 
-- (NSString *)stringByCompressingWhitespaceTo:(NSString *)seperator {
+- (NSString *)stringByCompressingWhitespaceTo __Text_ seperator {
 
 /// Adapted: http://www.cocoanetics.com/2009/04/nsstring-category-compressing-whitespace
 
@@ -3321,7 +3321,7 @@ catch_error:
   return ([self rangeOfCharacterFromSet:set].location != NSNotFound);
 }
 
-- (BOOL)writeToPathIfNeeded:(NSString*)path {
+- (BOOL)writeToPathIfNeeded __Text_ path {
   NSString *saved = [NSString stringWithContentsOfFile:path
                                               encoding:NSUTF8StringEncoding
                                                  error:nil];
@@ -3334,11 +3334,11 @@ catch_error:
                      error:nil];
 }
 
-- (BOOL)containsString:(NSString *)aString {
+- (BOOL)containsString __Text_ aString {
   return [self containsString:aString ignoringCase:NO];
 }
 
-- (BOOL)containsString:(NSString *)aString ignoringCase:(BOOL)flag {
+- (BOOL)containsString __Text_ aString ignoringCase:(BOOL)flag {
   unsigned mask = (flag ? NSCaseInsensitiveSearch : 0);
   NSRange range = [self rangeOfString:aString options:mask];
   return (range.length > 0);
@@ -4459,7 +4459,7 @@ static NSUInteger levenshteinDistanceBetweenStrings(char *string, char *otherStr
 		}
 	}
 }
-- _Void_ replaceCharactersInSet:(NSCharacterSet*)set withString:(NSString*)string {
+- _Void_ replaceCharactersInSet:(NSCharacterSet*)set withString __Text_ string {
 	NSRange range = NSMakeRange(0, self.length);
 	NSUInteger stringLength = string.length;
 

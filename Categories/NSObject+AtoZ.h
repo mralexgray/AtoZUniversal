@@ -124,7 +124,7 @@ _RO const char *cDesc;
 
 - (NSString*) descriptionForKey:(NSS*)k;
 
-- _Void_ willChangeValueForKeysBlock:(ObjBlk)blk keys:(NSString*)keys, ...;
+- _Void_ willChangeValueForKeysBlock:(ObjBlk)blk keys __Text_ keys, ...;
 
 - _Void_ sVs:(NSA*)v fKs:(NSA*)k;
 -(void) setValues:(NSA*)x forKeys:(NSA*)ks;
@@ -177,7 +177,7 @@ _VD performSelector __Meth_ s withObjects __List_ doWithEach ___
 
 - (NSURL*)urlified;
 
-//-(void) propagateValue: value forBinding:(NSString*)binding;
+//-(void) propagateValue: value forBinding __Text_ binding;
 
 //-(void) 	DDLogError;
 //-(void) 	DDLogWarn;
@@ -213,7 +213,7 @@ _RC _List methodNames ___
 	NSColor* newColor = //mouse down changes the color somehow (view-driven change)
 	self.color = newColor;
 	[self propagateValue:newColor forBinding:@"color"];  } */
-//-(void) propagateValue: value forBinding:(NSString*)binding;
+//-(void) propagateValue: value forBinding __Text_ binding;
 //- (NSA*) settableKeys;
 //- (NSA*) keysWorthReading;
 //-(void) setWithDictionary:(NSD*)dic;
@@ -426,9 +426,9 @@ _RO NSS* segmentLabel;
 
 - _Void_ observeObject __NObj_ object forName __Text_ noteName calling __Meth_ sel ___
 
-- observeName:(NSString*)noteName objectBlock:(void(^)(id))blk;
+- observeName __Text_ noteName objectBlock:(void(^)(id))blk;
 
-- observeName:(NSString*)noteName usingBlock:(void(^)(NSNotification*n))blk;
+- observeName __Text_ noteName usingBlock:(void(^)(NSNotification*n))blk;
 
 -(void)observeName:(NSS*) notificationName
 		   calling:(SEL)selector;

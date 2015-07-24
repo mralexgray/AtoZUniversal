@@ -58,7 +58,7 @@ _RO NSA* cacheImages;
   
 + _Kind_ bundleForExecutable:(NSS*)path;
 
-+ resourceOfClass:(Class)rClass inBundleWithClass:(Class)k withName:(NSString*)n init:(SEL)method;
++ resourceOfClass:(Class)rClass inBundleWithClass:(Class)k withName __Text_ n init:(SEL)method;
 - (NSA*) recursivePathsForResourcesOfType:(NSS*)type inDirectory:(NSS*)directoryPath;
 - (NSS*) recursiveSearchForPathOfResourceNamed:(NSS*)name;
 

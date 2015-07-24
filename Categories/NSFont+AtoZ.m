@@ -6,7 +6,7 @@
 
 - _Flot_ size { return self.pointSize; } // [[self.fontDescriptor objectForKey:NSFontSizeAttribute] floatValue]; }
 
-//- (void) setSize:(CGF) size {  [
+//_VD setSize:(CGF) size {  [
 #if MAC_ONLY
 - _Font_ fontWithSize:_Flot_ z { return [Font fontWithName:self.fontName size:z]; }
 #endif

@@ -2,9 +2,15 @@
 //  NSFileManager+AtoZ.m  Created by Alex Gray on 8/28/12.
 
 #import <AtoZUniversal/AtoZUniversal.h>
-//#import <os.h>
-//#import <Darwin/Darwin.h>
-#import <sys/xattr.h>
+
+@import Darwin;
+
+#import <sys/xattr.h> /// for getxattr
+
+/*
+#import <os.h>
+#import <Darwin/Darwin.h>
+
 #include <sys/types.h>
 #include <dirent.h>
 
@@ -14,33 +20,36 @@
 #import <dirent.h>
 #import <sys/stat.h>
 #include <assert.h>
+*/
 
+_Text NSDocumentsFolder() { return [NSHomeDirectory() withPath:@"Documents"]; }
+_Text NSLibraryFolder()   { return [NSHomeDirectory() withPath:@"Library"];   }
+_Text NSTmpFolder()       {	return [NSHomeDirectory() withPath:@"tmp"];       }
+_Text NSBundleFolder()    {	return NSBundle.mainBundle.bundlePath;            }
+_Text NSDCIMFolder()      {	return @"/var/mobile/Media/DCIM";                 }
 
-NSS * NSDocumentsFolder() { return [NSHomeDirectory() withPath:@"Documents"]; }
-NSS * NSLibraryFolder()   { return [NSHomeDirectory() withPath:@"Library"];   }
-NSS * NSTmpFolder()       {	return [NSHomeDirectory() withPath:@"tmp"];       }
-NSS * NSBundleFolder()    {	return NSBundle.mainBundle.bundlePath;            }
-NSS * NSDCIMFolder()      {	return @"/var/mobile/Media/DCIM";                 }
+@XtraPlan(NSFileManager,AtoZ)
 
-@implementation NSFileManager (AtoZ)
+_LT mountedVolumes { return
 
-
-_LT mountedVolumes { return [self mountedVolumeURLsIncludingResourceValuesForKeys:@[NSURLPathKey] options:NSVolumeEnumerationSkipHiddenVolumes];
+  [self mountedVolumeURLsIncludingResourceValuesForKeys:@[NSURLPathKey]
+                                                options:NSVolumeEnumerationSkipHiddenVolumes][@"path"];
 }
 
+_IT testMountedVolumes { return [self.mountedVolumes containsAll:@[@"/",@"5T"]]; }
 
 static mDict cache ___
 
-#define IS_DIR @"isDirectory"
-#define DIR_SZ @"directorySize"
+#define IS_DIR  @"isDirectory"
+#define DIR_SZ  @"directorySize"
 
-_IT isDirectory:(NSString*)p { // Lookup and cache "folderess"
+_IT isDirectory __Text_ p { // Lookup and cache "folderess"
 
   _Numb cached = (cache = cache ?: @{}.mutableCopy)[p][IS_DIR];
 
   if (cached) return cached.boolValue; _IsIt isDir = NO;
   [self fileExistsAtPath:p isDirectory:&isDir] && isDir;
-  cache[p][IS_DIR] = @(isDir); return isDir;
+  return [cache[p][IS_DIR] = @(isDir) bV] ___
 }
 
 _TT lastModifiedStringForPath __Text_ p {
@@ -48,12 +57,13 @@ _TT lastModifiedStringForPath __Text_ p {
   return [[self attributesOfItemAtPath:p error:nil] ?: @{}[NSFileModificationDate] description] ?: @"-";
 }
 
-- (unsigned long long int) folderSize __Text_ p {
+
+_UT folderSize __Text_ p {
 
   _Numb cached = (cache = cache ?: @{}.mutableCopy)[p][DIR_SZ];
   if (cached) return [cached unsignedLongValue];
 
-  __block unsigned long long int fileSize = 0;
+  __block _UInt fileSize = 0;
   [[self subpathsOfDirectoryAtPath:p error:nil] each:^(NSString * fileName){
     NSDictionary * fileDictionary = [self attributesOfItemAtPath:[p withPath:fileName] error:nil];
     fileSize += fileDictionary.fileSize;
@@ -110,7 +120,7 @@ NSUI intFromColorOrString(id x) {
 }
 _VD setColor _ x forFileAtPath:pathorurl { [self setTag:intFromColorOrString(x) forFileAtPath:pathorurl]; }
 
-- (void) setTag:(NSUInteger)t forFileAtPath:pathorurl {
+_VD setTag:(NSUInteger)t forFileAtPath:pathorurl {
 
   NSURL * fileURL = ISA(pathorurl, NSURL) ? pathorurl : [NSURL fileURLWithPath:pathorurl];
 
@@ -155,22 +165,21 @@ _LT                 filesMatching __Text_ pattern in __Text_ dir {
  iPhone Developer's Cookbook, 3.0 Edition
  BSD License, Use at your own risk	*/
 
-_TT              pathForItemNamed __Text_ fname   in __Text_ path {
-
-//_TT pathForItemNamed __Text_ fname inFolder __Text_ path {
+_TT pathForItemNamed __Text_ fname   in __Text_ path {
 
 	NSString *file;
 	NSDirectoryEnumerator *dirEnum = [self enumeratorAtPath:path];
-	while (file = [dirEnum nextObject])
-		if ([[file lastPathComponent] isEqualToString:fname])
-			return [path stringByAppendingPathComponent:file];
+	while ((file = dirEnum.nextObject))
+		if ([file.lastPathComponent isEqualToString:fname]) return [path stringByAppendingPathComponent:file];
 	return nil;
 }
+
 #if !TARGET_OS_IPHONE
-- (NSS*)       pathForDocumentNamed:(NSS*)fname { return [self pathForItemNamed:fname in:NSDocumentsFolder()];  }
-- (NSS*) pathForBundleDocumentNamed:(NSS*)fname {	return [self pathForItemNamed:fname in:NSBundleFolder()];     }
+_TT       pathForDocumentNamed __Text_ fname { return [self pathForItemNamed:fname in:NSDocumentsFolder()];  }
+_TT pathForBundleDocumentNamed __Text_ fname {	return [self pathForItemNamed:fname in:NSBundleFolder()];     }
 #endif
-- (NSA*) filesInFolder:(NSS*)path {
+
+_LT filesInFolder __Text_ path {
 	NSString *file;
 	NSMutableArray *results = [NSMutableArray array];
 	NSDirectoryEnumerator *dirEnum = [self enumeratorAtPath:path];
@@ -183,7 +192,7 @@ _TT              pathForItemNamed __Text_ fname   in __Text_ path {
 	return results;
 }
 
-- (NSA*) pathsForItemsInFolder:(NSS*)path withExtension:(NSS*)ext {
+_LT pathsForItemsInFolder __Text_ path withExtension __Text_ ext {
 
 	NSError *error = nil;
 	return [[self contentsOfDirectoryAtPath:path error:&error] filter:^BOOL(NSS* object) {
@@ -192,7 +201,7 @@ _TT              pathForItemNamed __Text_ fname   in __Text_ path {
 }
 
 	// Case insensitive compare, with deep enumeration
-- (NSA*) pathsForItemsNamed:(NSS*)name inFolder:(NSS*)path {
+_LT pathsForItemsNamed __Text_ name inFolder __Text_ path {
 
 	NSString *file;	 AZNewVal(results,NSMA.new); AZNewVal(dirEnum, [self enumeratorAtPath:path]);
 
@@ -202,7 +211,7 @@ _TT              pathForItemNamed __Text_ fname   in __Text_ path {
 	return results;
 
 }
-- (NSA*) pathsForItemsMatchingExtension:(NSS*)ext inFolder:(NSS*)path {
+_LT pathsForItemsMatchingExtension __Text_ ext inFolder __Text_ path {
 //	NSString *file;
 //	NSMutableArray *results = [NSMutableArray array];
 //	NSDirectoryEnumerator *dirEnum = [[NSFileManager defaultManager] enumeratorAtPath:path];
@@ -224,15 +233,15 @@ _TT              pathForItemNamed __Text_ fname   in __Text_ path {
 
 }
 
-- (NSA*) pathsForDocumentsMatchingExtension:(NSS*)ext {
+- (NSA*) pathsForDocumentsMatchingExtension __Text_ ext {
 	return [self pathsForItemsMatchingExtension:ext inFolder:NSDocumentsFolder()];
 }
 
 	// Case insensitive compare
-- (NSA*)  pathsForBundleDocumentsMatchingExtension:(NSS*)ext                {
+- (NSA*)  pathsForBundleDocumentsMatchingExtension __Text_ ext                {
 	return [self pathsForItemsMatchingExtension:ext inFolder:NSBundleFolder()];
 }
-- (NSA*) pathsOfFilesIn:(NSS*)path matchingPattern:(NSS*)regex              {
+- (NSA*) pathsOfFilesIn __Text_ path matchingPattern __Text_ regex              {
 
   glob_t gt; NSMA* globber = @[].mutableCopy;
 
@@ -245,13 +254,13 @@ _TT              pathForItemNamed __Text_ fname   in __Text_ path {
 	globfree(&gt);
 	return globber;
 }
-- (NSA*) pathsOfFilesIn:(NSS*)path   withExtension:(NSS*)ext                {
+- (NSA*) pathsOfFilesIn __Text_ path   withExtension __Text_ ext                {
 
 	return [self pathsOfFilesIn:path passing:^BOOL(NSString*testP){
 		return [testP.pathExtension isEqualToString:ext]; 
 	}];
 }
-- (NSA*) pathsOfFilesIn:(NSS*)path         passing:(BOOL(^)(NSS*))testBlock {
+- (NSA*) pathsOfFilesIn __Text_ path         passing:(BOOL(^)(NSS*))testBlock {
 	
 	NSMutableArray *globber = NSMutableArray.new;
 	for (NSString* file in [self contentsOfDirectoryAtPath:path.stringByStandardizingPath error:nil])
@@ -265,7 +274,7 @@ _TT              pathForItemNamed __Text_ fname   in __Text_ path {
 
 @implementation NSFileManager (OFSimpleExtensions)
 
-- (NSD*)attributesOfItemAtPath:(NSS*)filePath traverseLink:(BOOL)traverseLink error:(NSERR*__autoreleasing*)outError
+- (NSD*)attributesOfItemAtPath __Text_ filePath traverseLink:(BOOL)traverseLink error:(NSERR*__autoreleasing*)outError
 {
 #ifdef MAXSYMLINKS
 	int links_followed = 0;
@@ -299,18 +308,18 @@ _TT              pathForItemNamed __Text_ fname   in __Text_ path {
 	}
 }
 
-- (BOOL)directoryExistsAtPath:(NSS*)path traverseLink:(BOOL)traverseLink;
+_IT directoryExistsAtPath __Text_ path traverseLink:(BOOL)traverseLink;
 {
 	NSDictionary *attributes = [self attributesOfItemAtPath:path traverseLink:traverseLink error:NULL];
 	return attributes && [[attributes fileType] isEqualToString:NSFileTypeDirectory];
 }
 
-- (BOOL)directoryExistsAtPath:(NSS*)path;
+_IT directoryExistsAtPath __Text_ path;
 {
 	return [self directoryExistsAtPath:path traverseLink:NO];
 }
 
-- (BOOL)createPathToFile:(NSS*)path attributes:(NSD*)attributes error:(NSERR*__autoreleasing*)outError;
+_IT createPathToFile __Text_ path attributes:(NSD*)attributes error:(NSERR*__autoreleasing*)outError;
 	// Creates any directories needed to be able to create a file at the specified path.  Returns NO on failure.
 {
 	NSArray *pathComponents = [path pathComponents];
@@ -321,7 +330,7 @@ _TT              pathForItemNamed __Text_ fname   in __Text_ path {
 	return [self createPathComponents:[pathComponents subarrayWithRange:(NSRange){0, componentCount-1}] attributes:attributes error:outError];
 }
 
-- (BOOL)createPathComponents:(NSA*)components attributes:(NSD*)attributes error:(NSERR*__autoreleasing*)outError
+_IT createPathComponents:(NSA*)components attributes:(NSD*)attributes error:(NSERR*__autoreleasing*)outError
 {
 	if ([attributes count] == 0)
 		attributes = nil;
@@ -395,7 +404,7 @@ _TT              pathForItemNamed __Text_ fname   in __Text_ path {
 
 #pragma mark - Changing file access/update timestamps.
 
-- (BOOL)touchItemAtURL:(NSURL *)url error:(NSERR*__autoreleasing*)outError;
+_IT touchItemAtURL:(NSURL *)url error:(NSERR*__autoreleasing*)outError;
 {
 	NSDictionary *attributes = @{NSFileModificationDate: [NSDate date]};
 	BOOL rc = [self setAttributes:attributes ofItemAtPath:[[url absoluteURL] path] error:outError];
@@ -473,7 +482,7 @@ static void _appendPropertiesOfTreeAtURL(NSFileManager *self, NSMutableString *s
 	}
 }
 
-- (void) ogPropertiesOfTreeAtURL:(NSURL *)url;
+_VD ogPropertiesOfTreeAtURL:(NSURL *)url;
 {
 	NSMutableString *str = NSMutableString.new;
 	_appendPropertiesOfTreeAtURL(self, str, url, 0);
@@ -489,7 +498,7 @@ static void _appendPropertiesOfTreeAtURL(NSFileManager *self, NSMutableString *s
 
 @implementation NSFileManager (Extensions)
 #if !TARGET_OS_IPHONE
-- (NSString*) mimeTypeFromFileExtension:(NSString*)extension {
+- (NSString*) mimeTypeFromFileExtension __Text_ extension {
 	NSString* type = nil;
 	extension = [extension lowercaseString];
 	if (extension.length) {
@@ -506,7 +515,7 @@ static void _appendPropertiesOfTreeAtURL(NSFileManager *self, NSMutableString *s
 }
 #endif
 
-- _IsIt_ getExtendedAttributeBytes:(void*)bytes length:(NSUInteger)length withName:(NSString*)name forFileAtPath:(NSString*)path {
+- _IsIt_ getExtendedAttributeBytes:(void*)bytes length:(NSUInteger)length withName __Text_ name forFileAtPath __Text_ path {
 	if (bytes) {
 		const char* utf8Name = [name UTF8String];
 		const char* utf8Path = [path UTF8String];
@@ -518,7 +527,7 @@ static void _appendPropertiesOfTreeAtURL(NSFileManager *self, NSMutableString *s
 	return NO;
 }
 
-- (NSData*) extendedAttributeDataWithName:(NSString*)name forFileAtPath:(NSString*)path {
+- (NSData*) extendedAttributeDataWithName __Text_ name forFileAtPath __Text_ path {
 	const char* utf8Name = [name UTF8String];
 	const char* utf8Path = [path UTF8String];
 	ssize_t result = getxattr(utf8Path, utf8Name, NULL, 0, 0, 0);
@@ -531,12 +540,12 @@ static void _appendPropertiesOfTreeAtURL(NSFileManager *self, NSMutableString *s
 	return nil;
 }
 
-- (NSString*) extendedAttributeStringWithName:(NSString*)name forFileAtPath:(NSString*)path {
+- (NSString*) extendedAttributeStringWithName __Text_ name forFileAtPath __Text_ path {
 	NSData* data = [self extendedAttributeDataWithName:name forFileAtPath:path];
 	return data ? [NSString.alloc initWithData:data encoding:NSUTF8StringEncoding] : nil;
 }
 
-- _IsIt_ setExtendedAttributeBytes:(const void*)bytes length:(NSUInteger)length withName:(NSString*)name forFileAtPath:(NSString*)path {
+- _IsIt_ setExtendedAttributeBytes:(const void*)bytes length:(NSUInteger)length withName __Text_ name forFileAtPath __Text_ path {
 	if (bytes || !length) {
 		const char* utf8Name = [name UTF8String];
 		const char* utf8Path = [path UTF8String];
@@ -546,23 +555,23 @@ static void _appendPropertiesOfTreeAtURL(NSFileManager *self, NSMutableString *s
 	return NO;
 }
 
-- _IsIt_ setExtendedAttributeData:(NSData*)data withName:(NSString*)name forFileAtPath:(NSString*)path {
+_IT setExtendedAttributeData __Data_ data withName __Text_ name forFileAtPath __Text_ path  {
+
 	return [self setExtendedAttributeBytes:data.bytes length:data.length withName:name forFileAtPath:path];
 }
 
-- _IsIt_ setExtendedAttributeString:(NSString*)string withName:(NSString*)name forFileAtPath:(NSString*)path {
-	NSData* data = [string dataUsingEncoding:NSUTF8StringEncoding];
+- _IsIt_ setExtendedAttributeString __Text_ string withName __Text_ name forFileAtPath __Text_ path {
+
+	NSData* data = string.UTF8Data;
 	return data ? [self setExtendedAttributeData:data withName:name forFileAtPath:path] : NO;
 }
 
-- _IsIt_ removeItemAtPathIfExists:(NSString*)path {
-	if ([self fileExistsAtPath:path]) {
-		return [self removeItemAtPath:path error:NULL];
-	}
-	return YES;
+_IT removeItemAtPathIfExists __Text_ path {
+
+	return [self fileExistsAtPath:path] ? [self removeItemAtPath:path error:NULL] : YES;
 }
 
-- (NSA*) _itemsInDirectoryAtPath:(NSString*)path invisible:(BOOL)invisible type1:(mode_t)type1 type2:(mode_t)type2 {
+- (NSA*) _itemsInDirectoryAtPath __Text_ path invisible:(BOOL)invisible type1:(mode_t)type1 type2:(mode_t)type2 {
 	NSMutableArray* array = nil;
 	const char* systemPath = [path fileSystemRepresentation];
 	DIR* directory;
@@ -604,18 +613,18 @@ static void _appendPropertiesOfTreeAtURL(NSFileManager *self, NSMutableString *s
 	return array;
 }
 
-- (NSA*) directoriesInDirectoryAtPath:(NSString*)path includeInvisible:(BOOL)invisible {
+- (NSA*) directoriesInDirectoryAtPath __Text_ path includeInvisible:(BOOL)invisible {
 	return [self _itemsInDirectoryAtPath:path invisible:invisible type1:S_IFDIR type2:0];
 }
 
-- (NSA*) filesInDirectoryAtPath:(NSString*)path includeInvisible:(BOOL)invisible includeSymlinks:(BOOL)symlinks {
+- (NSA*) filesInDirectoryAtPath __Text_ path includeInvisible:(BOOL)invisible includeSymlinks:(BOOL)symlinks {
 	return [self _itemsInDirectoryAtPath:path invisible:invisible type1:S_IFREG type2:(symlinks ? S_IFLNK : 0)];
 }
 
 #if TARGET_OS_IPHONE
 
 // https://developer.apple.com/library/ios/#qa/qa1719/_index.html
-- (void) setDoNotBackupAttributeAtPath:(NSString*)path {
+_VD setDoNotBackupAttributeAtPath __Text_ path {
 	u_int8_t value = 1;
 	int result;
 	if ((result  = setxattr([path fileSystemRepresentation], "com.apple.MobileBackup", &value, sizeof(value), 0, 0)))
@@ -630,8 +639,7 @@ static void _appendPropertiesOfTreeAtURL(NSFileManager *self, NSMutableString *s
 
 @implementation NSFileManager (SGSAdditions)
 
-- (void) createPath: (NSString*) filePath
-{
+_VD     createPath __Text_ filePath {
 	if(![self fileExistsAtPath: filePath])
 	{
 		NSMutableString*	currentPath		= [NSMutableString string];
@@ -657,9 +665,7 @@ static void _appendPropertiesOfTreeAtURL(NSFileManager *self, NSMutableString *s
 		}
 	}
 }
-
-- (NSString*) uniqueFilePath: (NSString*) filePath
-{
+_TT uniqueFilePath __Text_ filePath {
 	if(![self fileExistsAtPath: filePath])
 	{
 		return filePath;
@@ -691,7 +697,7 @@ static void _appendPropertiesOfTreeAtURL(NSFileManager *self, NSMutableString *s
 #import <Carbon/Carbon.h>
 
 @implementation NSString (CarbonUtilities)
-- (NSS*) humanReadableFileTypeForFileExtension {
+_TT humanReadableFileTypeForFileExtension {
   return humanReadableFileTypeForFileExtension([self containsString:@"."] ? self.pathExtension : self);
 }
 + (NSS*) stringWithFSRef:(const FSRef *)aFSRef	{
@@ -702,7 +708,7 @@ static void _appendPropertiesOfTreeAtURL(NSFileManager *self, NSMutableString *s
 - _IsIt_ getFSRef:(FSRef *)aFSRef								{
 	return FSPathMakeRef( (UInt8*) [self UTF8String], aFSRef, NULL ) == noErr;
 }
-- (NSS*) resolveAliasFile								{
+_TT resolveAliasFile								{
 	FSRef			theRef;		Boolean		theIsTargetFolder,
 	theWasAliased;				NSString		* theResolvedAlias = nil;;
 	[self getFSRef:&theRef];
@@ -738,3 +744,161 @@ static void _appendPropertiesOfTreeAtURL(NSFileManager *self, NSMutableString *s
 @end
 #endif
 
+
+
+@XtraPlan(Text,Size)
+
+- (FSRef) _fsRef {
+
+
+	FSRef output;
+
+	// convert the NSString to a C-string
+	const char *filePathAsCString = self.fileURL.absoluteString.UTF8String;
+
+	CFURLRef url = CFURLCreateWithBytes(
+										kCFAllocatorDefault,            // CFAllocatorRef
+										(const UInt8 *)filePathAsCString,              // the bytes
+										strlen(filePathAsCString),      // the length
+										kCFStringEncodingUTF8,          // encoding
+										NULL);                          // CFURLRef baseURL
+
+	CFURLGetFSRef(url, &output);
+	CFRelease(url);
+
+
+	return output;
+}
+
+- (unsigned long long) _size {
+
+  FSRef ref =  self._fsRef;
+  FSRef * theFileRef = &ref;
+
+	FSIterator	thisDirEnum = NULL;
+	unsigned long long totalSize = 0;
+	
+	
+	// Iterate the directory contents, recursing as necessary
+	if (FSOpenIterator(theFileRef, kFSIterateFlat, &thisDirEnum) == noErr)
+	{
+		const ItemCount kMaxEntriesPerFetch = 256;
+		ItemCount actualFetched;
+		FSRef	fetchedRefs[kMaxEntriesPerFetch];
+		FSCatalogInfo fetchedInfos[kMaxEntriesPerFetch];
+
+		// DCJ Note right now this is only fetching data fork sizes...
+    // if we decide to include resource forks we will have to add kFSCatInfoRsrcSizes
+
+		OSErr fsErr = FSGetCatalogInfoBulk(thisDirEnum, kMaxEntriesPerFetch, &actualFetched,
+										   NULL, kFSCatInfoDataSizes | kFSCatInfoRsrcSizes | kFSCatInfoNodeFlags, fetchedInfos,
+										   fetchedRefs, NULL, NULL);
+		while (fsErr == noErr || fsErr == errFSNoMoreItems) {
+
+			ItemCount thisIndex;
+			for (thisIndex = 0; thisIndex < actualFetched; thisIndex++) {
+
+				// Recurse if it's a folder
+        totalSize += fetchedInfos[thisIndex].nodeFlags & kFSNodeIsDirectoryMask
+                   ? [self.class fastFolderSizeAtFSRef:&fetchedRefs[thisIndex]]
+                      // add the size for this item
+                   : fetchedInfos[thisIndex].dataLogicalSize + fetchedInfos[thisIndex].rsrcLogicalSize;
+
+        if (fsErr == errFSNoMoreItems) break;
+
+        else           // get more items
+
+          fsErr = FSGetCatalogInfoBulk(thisDirEnum, kMaxEntriesPerFetch, &actualFetched,
+                         NULL, kFSCatInfoDataSizes | kFSCatInfoNodeFlags, fetchedInfos,
+                         fetchedRefs, NULL, NULL);
+      }
+    }
+
+		FSCloseIterator(thisDirEnum);
+
+	} else { // Otherwise, a single file
+
+		FSCatalogInfo		fsInfo;
+		if(FSGetCatalogInfo(theFileRef, kFSCatInfoDataSizes | kFSCatInfoRsrcSizes, &fsInfo, NULL, NULL, NULL) == noErr)
+
+				totalSize += fsInfo.rsrcLogicalSize > 0 ? (fsInfo.dataLogicalSize + fsInfo.rsrcLogicalSize)
+                                                : (fsInfo.dataLogicalSize);
+	}
+	
+	return totalSize;
+}
+
+//fastFolderSizeAtFSRef
+- (unsigned long long) fsSize {
+
+
+    _Dict attr = [FM attributesOfItemAtPath:self.normalizedPath error:nil];
+
+    return attr[NSFileType] == NSFileTypeDirectory ? ({
+
+//        FSRef theFileRef = [self.normalizedPath _fsRef];
+
+//        CFURLGetFSRef((__bridge CFURLRef)self.normalizedPath.urlified, &theFileRef);
+
+         self.normalizedPath._size;//.class fastFolderSizeAtFSRef:&theFileRef];
+
+    }) : [attr[NSFileSize] longValue];
+}
+
+
++ (unsigned long long) fastFolderSizeAtFSRef:(FSRef*)theFileRef {
+
+	FSIterator	thisDirEnum = NULL;
+	unsigned long long totalSize = 0;
+	
+	
+	// Iterate the directory contents, recursing as necessary
+	if (FSOpenIterator(theFileRef, kFSIterateFlat, &thisDirEnum) == noErr)
+	{
+		const ItemCount kMaxEntriesPerFetch = 256;
+		ItemCount actualFetched;
+		FSRef	fetchedRefs[kMaxEntriesPerFetch];
+		FSCatalogInfo fetchedInfos[kMaxEntriesPerFetch];
+
+		// DCJ Note right now this is only fetching data fork sizes...
+    // if we decide to include resource forks we will have to add kFSCatInfoRsrcSizes
+
+		OSErr fsErr = FSGetCatalogInfoBulk(thisDirEnum, kMaxEntriesPerFetch, &actualFetched,
+										   NULL, kFSCatInfoDataSizes | kFSCatInfoRsrcSizes | kFSCatInfoNodeFlags, fetchedInfos,
+										   fetchedRefs, NULL, NULL);
+		while (fsErr == noErr || fsErr == errFSNoMoreItems) {
+
+			ItemCount thisIndex;
+			for (thisIndex = 0; thisIndex < actualFetched; thisIndex++) {
+
+				// Recurse if it's a folder
+        totalSize += fetchedInfos[thisIndex].nodeFlags & kFSNodeIsDirectoryMask
+                   ? [self fastFolderSizeAtFSRef:&fetchedRefs[thisIndex]]
+                      // add the size for this item
+                   : fetchedInfos[thisIndex].dataLogicalSize + fetchedInfos[thisIndex].rsrcLogicalSize;
+
+        if (fsErr == errFSNoMoreItems) break;
+
+        else           // get more items
+
+          fsErr = FSGetCatalogInfoBulk(thisDirEnum, kMaxEntriesPerFetch, &actualFetched,
+                         NULL, kFSCatInfoDataSizes | kFSCatInfoNodeFlags, fetchedInfos,
+                         fetchedRefs, NULL, NULL);
+      }
+    }
+
+		FSCloseIterator(thisDirEnum);
+
+	} else { // Otherwise, a single file
+
+		FSCatalogInfo		fsInfo;
+		if(FSGetCatalogInfo(theFileRef, kFSCatInfoDataSizes | kFSCatInfoRsrcSizes, &fsInfo, NULL, NULL, NULL) == noErr)
+
+				totalSize += fsInfo.rsrcLogicalSize > 0 ? (fsInfo.dataLogicalSize + fsInfo.rsrcLogicalSize)
+                                                : (fsInfo.dataLogicalSize);
+	}
+	
+	return totalSize;
+}
+
+￭

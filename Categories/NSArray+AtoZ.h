@@ -424,13 +424,13 @@ _RO NSMA * sort,        // shortcut for the default sortUsingSelector:@selector(
  @param	bullet  A string which, if not nil, will be prepended
  to each line in the output.  You'll probably want this string to
  end in one or two space characters.	*/
-- (NSString*)listValuesOnePerLineForKeyPath:(NSString*)key
-									 bullet:(NSString*)bullet ;
+- (NSString*)listValuesOnePerLineForKeyPath __Text_ key
+									 bullet __Text_ bullet ;
 
 /*!
  @brief	Invokes listValuesOnePerLineForKeyPath:bullet: with
  bullet = nil	*/
-- (NSString*)listValuesOnePerLineForKeyPath:(NSString*)key ;
+- (NSString*)listValuesOnePerLineForKeyPath __Text_ key ;
 
 /*!
  @brief	Returns a comma-separated list of the responses to
@@ -461,8 +461,8 @@ _RO NSMA * sort,        // shortcut for the default sortUsingSelector:@selector(
  exceeds this parameter, another comma and an ellipsis will
  be appended to the end.&nbsp;  For convenience, a value of 0
  is interpreted to mean NSIntegerMax.	*/
-- (NSString*)listValuesForKey:(NSString*)key
-				  conjunction:(NSString*)conjunction
+- (NSString*)listValuesForKey __Text_ key
+				  conjunction __Text_ conjunction
 				   truncateTo:(NSInteger)truncateTo ;
 
 /*!

@@ -21,7 +21,7 @@ CONFORM( CAL,     RectLike )
 - _Rect_    bounds          { return AZRectFromSizeOfRect(self.frame); }
 ￭
 @implementation NSIMG (SizeLike)
-- (void) setBounds:(NSR)b { self.size = AZSizeFromRect(b); }
+_VD setBounds:(NSR)b { self.size = AZSizeFromRect(b); }
 -  (NSR)    bounds        { return AZRectFromSize(self.size); }
 ￭
 #endif
@@ -40,34 +40,34 @@ CONFORM( CAL,     RectLike )
   ISA(self,Layr)  ? (_Layr_ self).superlayer.bounds : self.r; }
 
 -  (CGR)         r          { return self.frame; }
-- (void)      setR:(NSR)r   { self.frame = r; }
+_VD      setR:(NSR)r   { self.frame = r; }
 
 -  (CGF)         w          { GETALIASF(width);           }  // ALIASES
 -  (CGF)         h          { GETALIASF(height);          }
-- (void)      setW:(CGF)w   { SETALIAS(width, @(ABS(w))); }
-- (void)      setH:(CGF)h   { SETALIAS(height,@(ABS(h))); }
+_VD      setW:(CGF)w   { SETALIAS(width, @(ABS(w))); }
+_VD      setH:(CGF)h   { SETALIAS(height,@(ABS(h))); }
 
 -  (CGF)         x          { return self.r.origin.x; }
 -  (CGF)         y          { return self.r.origin.y; }
-- (void)      setX:(CGF)x   { self.r = AZRectExceptOriginX(self.r, x); }// (NSP){x, self.y}; }
-- (void)      setY:(CGF)y   { self.r = AZRectExceptOriginX(self.r, y); } // self.position = (NSP){self.x, y}; }
+_VD      setX:(CGF)x   { self.r = AZRectExceptOriginX(self.r, x); }// (NSP){x, self.y}; }
+_VD      setY:(CGF)y   { self.r = AZRectExceptOriginX(self.r, y); } // self.position = (NSP){self.x, y}; }
 
 
 - (NSSZ)      size          {	return self.r.size;          }
 -  (CGF)     width          { return self.size.width;    }
 -  (CGF)    height          { return self.size.height;   }
-- (void)   setSize:(NSSZ)sz { self.frame = AZRectExceptSize(self.frame, sz);  }
-- (void)  setWidth:(CGF)w   { self.frame = AZRectExceptWide(self.frame, w);   }
-- (void) setHeight:(CGF)h   { self.frame = AZRectExceptHigh(self.frame, h);   }
+_VD   setSize:(NSSZ)sz { self.frame = AZRectExceptSize(self.frame, sz);  }
+_VD  setWidth:(CGF)w   { self.frame = AZRectExceptWide(self.frame, w);   }
+_VD setHeight:(CGF)h   { self.frame = AZRectExceptHigh(self.frame, h);   }
 
 -  (CGF)      midX        { return self.x + (self.h/2.);            }
 -  (CGF)      maxX        { return self.x +  self.w;                }
 -  (CGF)      midY        { return self.y + (self.h/2.);            }
 -  (CGF)      maxY        { return self.y +  self.h;                }
-- (void)   setMidX:(CGF)x { self.centerPt = (NSP){x, self.midY};    }
-- (void)   setMidY:(CGF)y { self.centerPt = (NSP){self.midX, y};    }
-- (void)   setMaxX:(CGF)w { self.x = w - self.width;                }
-- (void)   setMaxY:(CGF)h { self.y = h - self.height;               }
+_VD   setMidX:(CGF)x { self.centerPt = (NSP){x, self.midY};    }
+_VD   setMidY:(CGF)y { self.centerPt = (NSP){self.midX, y};    }
+_VD   setMaxX:(CGF)w { self.x = w - self.width;                }
+_VD   setMaxY:(CGF)h { self.y = h - self.height;               }
 
 -  (CGP)      minXmaxY        { return AZPt(self.x,    self.maxY); }
 -  (CGP)      midXmaxY        { return AZPt(self.midX, self.maxY); }
@@ -83,12 +83,12 @@ CONFORM( CAL,     RectLike )
 
 -  (CGP)     bOrigin          { return self.bounds.origin; }
 -  (CGP)      origin          { return self.minXminY; }
-- (void)  setBOrigin:(NSP)o   { self.bounds = AZRectExceptOrigin(self.bounds,o); }
-- (void)   setOrigin:(NSP)o   { self.r = AZRectExceptOrigin(self.r,o); }
+_VD  setBOrigin:(NSP)o   { self.bounds = AZRectExceptOrigin(self.bounds,o); }
+_VD   setOrigin:(NSP)o   { self.r = AZRectExceptOrigin(self.r,o); }
 
 -  (CGP)      apex            { return self.maxXmaxY; }
 -  (CGP)      centerPt        { return self.midXmidY; }
-- (void)   setCenterPt:(NSP)c { self.r = AZCenterRectOnPoint(self.r, c);  }
+_VD   setCenterPt:(NSP)c { self.r = AZCenterRectOnPoint(self.r, c);  }
 
       SYNTHESIZE_ASC_PRIMITIVE_KVO( position, setPosition, _Cord)
 
@@ -103,7 +103,7 @@ SYNTHESIZE_ASC_PRIMITIVE_BLOCK_KVO( supersize, setSupersize, NSSZ, ^{ if (!AZIsZ
 },^{})
 #endif
 
-//- (void) setBounds:(NSRect)bounds   { if ([self isKindOfAnyClass:@[CALayer.class, NSView.class]]) YOU_DONT_BELONG;
+//_VD setBounds:(NSRect)bounds   { if ([self isKindOfAnyClass:@[CALayer.class, NSView.class]]) YOU_DONT_BELONG;
 //
 //  self.frame = AZCenterRectOnPoint(AZRectFromSizeOfRect(bounds), self.centerPt); }
 //
@@ -144,7 +144,7 @@ SetKPfVA(InsideEdge, @"frame", @"superframe");
 //    _self.position     = AZAnchorPointOfActualRect(_self.superlayer.bounds, value);
 //  endswitch
 //-  (CGR) frame            { return (NSR){self.origin,self.size}; }
-//- (void) setFrame:(CGR)f  { self.bounds = AZRectFromSizeOfRect(f); self.origin = f.origin;  }  //(NSR){self.origin,self.size}; }
+//_VD setFrame:(CGR)f  { self.bounds = AZRectFromSizeOfRect(f); self.origin = f.origin;  }  //(NSR){self.origin,self.size}; }
 
 + (INST) withDims:(NSN*)d1, ...     { AZVA_ARRAY(d1,dims); return [self withRect:[NSN rectBy:dims]]; }
 
@@ -188,9 +188,9 @@ SetKPfVA(InsideEdge, @"frame", @"superframe");
 //@pcategoryimplementation(SizeLike, Aliases)
 //
 //-  (CGF)           w  { GETALIAS(width);      }  // ALIASES
-//- (void) setW:(CGF)w  { SETALIAS(width, @(w));  }
+//_VD setW:(CGF)w  { SETALIAS(width, @(w));  }
 //-  (CGF)           h  { GETALIAS(height);     }
-//- (void) setH:(CGF)h  { SETALIAS(height,@(h));  }
+//_VD setH:(CGF)h  { SETALIAS(height,@(h));  }
 //@end
 
 
@@ -198,11 +198,11 @@ SetKPfVA(InsideEdge, @"frame", @"superframe");
 //                        apex;         // origin + size (same as size unless effected)
                         
 //@property        NSSZ   size;         // This is inherited, but supplies a ddefault implementation.                                    
-//- (void) setMinX:(CGF)x  {	self.frame = AZRectExceptOriginX(self.frame,x); }
-//- (void) setMinY:(CGF)y  {	self.frame = AZRectExceptOriginY(self.frame,y); }
-//- (void) setBoundsCenter:(NSP)p { self.bounds = AZCenterRectOnPoint(self.bounds,p); }
-//- (void)  setFrameCenter:(NSP)p { self.frame  = AZCenterRectOnPoint(self.frame, p); }
-//- (void) moveBy:(NSP)distance { if (ISA(self,CAL)||ISA(self,NSV)) self.frame = AZRectOffset(self.frame,distance);   }
+//_VD setMinX:(CGF)x  {	self.frame = AZRectExceptOriginX(self.frame,x); }
+//_VD setMinY:(CGF)y  {	self.frame = AZRectExceptOriginY(self.frame,y); }
+//_VD setBoundsCenter:(NSP)p { self.bounds = AZCenterRectOnPoint(self.bounds,p); }
+//_VD  setFrameCenter:(NSP)p { self.frame  = AZCenterRectOnPoint(self.frame, p); }
+//_VD moveBy:(NSP)distance { if (ISA(self,CAL)||ISA(self,NSV)) self.frame = AZRectOffset(self.frame,distance);   }
 
 //SetKPfVA( Frame,      @"center", @"size", @"position")
 //SetKPfVA( Center,     @"frame", @"origin")
@@ -214,10 +214,10 @@ SetKPfVA(InsideEdge, @"frame", @"superframe");
 @synthesize frame;// = _rect;
 // STOPGAP  BELOW
 - (NSR) bounds { return AZRectFromSizeOfRect(frame); }
-- (void) setBounds:(NSR)bounds { self.frame = AZRectExceptSize(frame,bounds.size); }
+_VD setBounds:(NSR)bounds { self.frame = AZRectExceptSize(frame,bounds.size); }
 
 //- (NSR) frame { return _rect; }
-//- (void) setFrame:(NSR)frame { _rect = frame; }
+//_VD setFrame:(NSR)frame { _rect = frame; }
 
 // STOPGAP  END
 
@@ -240,14 +240,14 @@ SetKPfVA(InsideEdge, @"frame", @"superframe");
 
 
 //-  (NSP)    position            { return AZCenter(self.frame); }  // (NSP){self.originX + (self.width/2), self.originY + (self.height/2));
-//- (void) setPosition:(NSP)p     { /*! @todo */ NSAssertFail(@"neeed to fix");  }        //	frame.origin = NSMakePoint(midpoint.x - (frame.size.width/2), midpoint.y - (frame.size.height/2));
+//_VD setPosition:(NSP)p     { /*! @todo */ NSAssertFail(@"neeed to fix");  }        //	frame.origin = NSMakePoint(midpoint.x - (frame.size.width/2), midpoint.y - (frame.size.height/2));
 //@XtraPlan(CALayer,RectLike) //@dynamic alignment;
 //-  (NSP)     origin {return self.frame.origin; }
-//- (void) setOrigin:(NSP)p { self.frame = (NSR){p, self.bounds.size}; }
+//_VD setOrigin:(NSP)p { self.frame = (NSR){p, self.bounds.size}; }
 //￭
 //@implementation NSV   (RectLike) //@dynamic alignment, position,anchorPoint;
 //-  (NSP)    origin        {return self.frame.origin; }
-//- (void) setOrigin:(NSP)p { self.frame = (NSR){p, self.bounds.size}; }
+//_VD setOrigin:(NSP)p { self.frame = (NSR){p, self.bounds.size}; }
 //-  (NSR) superframe       { return self.superview.bounds; }
 //￭
 
