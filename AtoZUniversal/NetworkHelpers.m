@@ -137,8 +137,10 @@ _List          NetworkInterfaces(){
              isPrivate = _isPrivate;
              
 #if MAC_ONLY
+
 @synthesize speed = _speed, FQDN = _FQDN;
-- (NSString*) speed {
+
+_TT speed {
 
   if (self.isPrivate) return _speed = NOTAPPLICAPLE;
   if (_speed && ![_speed isEqualToString:@"Testing"]) return _speed;
@@ -208,45 +210,34 @@ _List          NetworkInterfaces(){
 //  });
   return _speed = @"Testing";
 }
+
 #endif
 //  [NSOperationQueue.mainQueue addOperationWithBlock:^{
-
 //    id x = runCommand(@"echo \"scale=2; `curl -s -w \"%%{speed_download}\" http://speedtest.wdc01.softlayer.com/downloads/test10.zip -o /dev/null` / 131072\" | bc | xargs -I {} echo {} mbps") ?: @"N/A";
 //    self.speed = [x copy];
 //  }];
 
-- initWithName:n ip:ip { if (!(self = super.init)) return nil;
+- initWithName _ n ip _ ip { SUPERINIT ___
 
   _name       = n;
   _ip         = ip;
-//  _speed      = () ? NOTAPPLICAPLE : nil;
   _isPrimary  = [_ip isEqualToString:NET.primaryIPv4Address];
-//  [NSOperationQueue.mainQueue addOperationWithBlock:^{
-//      self.FQDN = [NET FQDNof:_ip];
-//  }];
+// _speed = () ? NOTAPPLICAPLE : nil; [NSOperationQueue.mainQueue addOperationWithBlock:^{ self.FQDN = [NET FQDNof:_ip]; }];
     return self;
 }
 
-- (NSString*) externalIP {
-  if (_externalIP) return _externalIP;
-  if (self.isPrivate) return _externalIP = NOTAPPLICAPLE;
-  else return [NSOperationQueue.mainQueue addOperationWithBlock:^{
+_TT externalIP { // return self.isLoopback ? NOTAPPLICAPLE : [NET externalIPOf:self.name]; }
+
+  return _externalIP ?: self.isPrivate ? _externalIP = NOTAPPLICAPLE : [NSOperationQueue.mainQueue addOperationWithBlock:^{
       id n = [NET externalIPOf:_name];
       [self setValue:n forKey:@"externalIP"];
     }], @"Pending";
 }
-//- (NSString*) externalIP { return self.isLoopback ? NOTAPPLICAPLE : [NET externalIPOf:self.name]; }
-- (NSString*) ISP {
 
-
-  if (_ISP) return _ISP;
-  if (self.isPrivate)  _ISP = NOTAPPLICAPLE;
-  else [self setValue: [NET ISPon:self.externalIP] forKey:@"ISP"];
-  return _ISP;
-}
-- (NSString*) description { return [NSString.alloc initWithFormat:@"<%@> IP:%@ Ext:%@ ISP:%@ FQDN:%@", _name, _ip, _externalIP, _ISP, [self vFK:@"FQDN"]]; }
-- (BOOL) isPrivate { static dispatch_once_t onceToken; return dispatch_once(&onceToken, ^{ _isPrivate = [NET isPrivate:self.ip]; }), _isPrivate; }
-- (Locale*) locale { return _locale = _locale ?: ({ id x =  [Locale localeOfIP:self.externalIP];
+_TT ISP             { return _ISP = _ISP ?: self.isPrivate ? NOTAPPLICAPLE : [NET ISPon:self.externalIP] ___ }
+_TT description     { return [NSString.alloc initWithFormat:@"<%@> IP:%@ Ext:%@ ISP:%@ FQDN:%@", _name, _ip, _externalIP, _ISP, [self vFK:@"FQDN"]]; }
+_IT isPrivate       { static dispatch_once_t onceToken; return dispatch_once(&onceToken, ^{ _isPrivate = [NET isPrivate:self.ip]; }), _isPrivate; }
+- (Locale*) locale  { return _locale = _locale ?: ({ id x =  [Locale localeOfIP:self.externalIP];
 
 NSLog(@"got locale:%@", [x country]); x; });
 }
@@ -257,16 +248,18 @@ NSLog(@"got locale:%@", [x country]); x; });
 
 @implementation NetworkHelpers
 
-// Private IP address ranges. See RFC 3330.
-static struct {UInt32 mask, value;} const kPrivateRanges[] = {
-    {0xFF000000, 0x00000000},       //   0.x.x.x (hosts on "this" network)
-    {0xFF000000, 0x0A000000},       //  10.x.x.x (private address range)
-    {0xFF000000, 0x7F000000},       // 127.x.x.x (loopback)
-    {0xFFFF0000, 0xA9FE0000},       // 169.254.x.x (link-local self-configured addresses)
-    {0xFFF00000, 0xAC100000},       // 172.(16-31).x.x (private address range)
-    {0xFFFF0000, 0xC0A80000},       // 192.168.x.x (private address range)
-    {0,0}
-};
+
+static struct {UInt32 mask __ value; } const kPrivateRanges[] = {
+
+    {0xFF000000 __ 0x00000000} __       //         0.x.x.x  (hosts on "this" network)
+    {0xFF000000 __ 0x0A000000} __       //        10.x.x.x  (private address range)
+    {0xFF000000 __ 0x7F000000} __       //       127.x.x.x  (loopback)
+    {0xFFFF0000 __ 0xA9FE0000} __       //     169.254.x.x  (link-local self-configured addresses)
+    {0xFFF00000 __ 0xAC100000} __       // 172.(16-31).x.x  (private address range)
+    {0xFFFF0000 __ 0xC0A80000} __       //     192.168.x.x  (private address range)
+             {0 __ 0}
+
+} ___ // Private IP address ranges. See RFC 3330.
 
 + (UInt32) IPv4FromDottedQuadString:(NSString*)str {
 
@@ -281,13 +274,11 @@ static struct {UInt32 mask, value;} const kPrivateRanges[] = {
     return ![scanner isAtEnd] ?: htonl(ipv4);
 }
 
-+ (BOOL) isPrivate:(NSString*)ip
++ _IsIt_ isPrivate __Text_ ip {
 
-  {     UInt32 address = ntohl([self.class IPv4FromDottedQuadString:ip]); int i;
-    for( i=0; kPrivateRanges[i].mask; i++ )
-        if( (address & kPrivateRanges[i].mask) == kPrivateRanges[i].value )
-            return YES;
-    return NO;
+  UInt32 address = ntohl([self.class IPv4FromDottedQuadString:ip]) ___
+  for( int i=0; kPrivateRanges[i].mask; i++ ) if( (address & kPrivateRanges[i].mask) == kPrivateRanges[i].value ) return YES;
+  return NO;
 }
 
 + (NSString*) primaryIPv4Address {
@@ -297,21 +288,19 @@ static struct {UInt32 mask, value;} const kPrivateRanges[] = {
 
   @autoreleasepool {
 
-    int i;
-    NSString * primaryInterface;
+    _Text primaryInterface;
 
     SCDynamicStoreContext context = { 0, (__bridge void *)self, NULL, NULL, NULL };
 
     SCDynamicStoreRef dynStore = SCDynamicStoreCreate( NULL,(__bridge CFStringRef)NSBundle.mainBundle.bundleIdentifier,nil,&context);
 
+    _List allKeys = (__bridge _List)SCDynamicStoreCopyKeyList(dynStore, CFSTR("State:/Network/Global/IPv4"));
 
-    NSArray * allKeys = (__bridge NSArray*)SCDynamicStoreCopyKeyList(dynStore, CFSTR("State:/Network/Global/IPv4"));
-
-    for ( i = 0; i < allKeys.count; i++ ) {
+    for (int i = 0; i < allKeys.count; i++ ) {
 
       // NSLog(@"Current key: %@, value: %@", allKeys[i], [(NSString *)SCDynamicStoreCopyValue(dynStore, (CFStringRef)[allKeys objectAtIndex:i]) autorelease]);
 
-      NSDictionary * dict = (__bridge  NSDictionary *)SCDynamicStoreCopyValue(dynStore, (__bridge CFStringRef)allKeys[i]);
+      _Dict dict = (__bridge  NSDictionary *)SCDynamicStoreCopyValue(dynStore, (__bridge CFStringRef)allKeys[i]);
 
       //  NSLog(@"PrimaryInterface: %@ value is: %@", [allKeys objectAtIndex:i], [dict objectForKey:@"PrimaryInterface"]);
 
@@ -322,7 +311,7 @@ static struct {UInt32 mask, value;} const kPrivateRanges[] = {
                                                                              NULL,
                                                                              CFSTR("State:/Network/Interface/%@/IPv4"),
                                                                              primaryInterface));
-    for ( i = 0; i < allKeys.count; i++ ) {
+    for (int i = 0; i < allKeys.count; i++ ) {
 
       //NSLog(@"Current key: %@, value: %@", allKeys[i], [(NSString *)SCDynamicStoreCopyValue(dynStore, (CFStringRef)[allKeys objectAtIndex:i]) autorelease]);
 
@@ -339,9 +328,9 @@ static struct {UInt32 mask, value;} const kPrivateRanges[] = {
   #endif
 }
 
-+ (NSArray*)       interfaces {
++ _List_       interfaces {
 
-  NSMutableArray *a = @[].mutableCopy;
+  mList a = @[].mC;
   [self.localhosts enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
     [a addObject:[Interface.alloc initWithName:key ip:obj]];
   }];
@@ -368,38 +357,39 @@ static struct {UInt32 mask, value;} const kPrivateRanges[] = {
 #endif
 }
 
-+ (NSString*) externalIP {
++ _Text_ externalIP {
 
-  static NSURL *iPURL = nil; iPURL = iPURL ?: [NSURL URLWithString:@"http://www.dyndns.org/cgi-bin/check_ip.cgi"];
+  static NSURL *iPURL = nil; iPURL = iPURL ?: [NSURL URLWithString:@"http://ident.me"]; //www.dyndns.org/cgi-bin/check_ip.cgi"];
 
   NSUInteger  an_Integer;
 
   NSError       * error = nil;
-  NSString * externalIP = nil,
-            * theIpHtml = [NSString stringWithContentsOfURL:iPURL encoding:NSUTF8StringEncoding error:&error];
+  _Text externalIP = nil,
+         theIpHtml = [NSString stringWithContentsOfURL:iPURL encoding:NSUTF8StringEncoding error:&error];
 
-  if (!error) {
-
-      NSString *text = nil;
-      NSScanner *theScanner = [NSScanner scannerWithString:theIpHtml];
-
-      while (!theScanner.isAtEnd) {
-
-        [theScanner scanUpToString:@"<" intoString:NULL] ; // find start of tag
-
-        [theScanner scanUpToString:@">" intoString:&text] ; // find end of tag
-
-        // replace the found tag with a space (you can filter multi-spaces out later if you wish)
-        theIpHtml = [theIpHtml stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@"%@>", text] withString:@" "];
-        NSArray * ipItemsArray = [theIpHtml componentsSeparatedByString:@" "];
-        an_Integer = [ipItemsArray indexOfObject:@"Address:"];
-
-        externalIP = ipItemsArray[++an_Integer];
-
-      }
-    }
-    return externalIP ? externalIP
-                      : NSLog(@"Cannot get external IP error:%ld (%@)", error.code, error.localizedDescription), externalIP;
+//  if (!error) {
+//
+//      NSString *text = nil;
+//      NSScanner *theScanner = [NSScanner scannerWithString:theIpHtml];
+//
+//      while (!theScanner.isAtEnd) {
+//
+//        [theScanner scanUpToString:@"<" intoString:NULL] ; // find start of tag
+//
+//        [theScanner scanUpToString:@">" intoString:&text] ; // find end of tag
+//
+//        // replace the found tag with a space (you can filter multi-spaces out later if you wish)
+//        theIpHtml = [theIpHtml stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@"%@>", text] withString:@" "];
+//        NSArray * ipItemsArray = [theIpHtml componentsSeparatedByString:@" "];
+//        an_Integer = [ipItemsArray indexOfObject:@"Address:"];
+//
+//        externalIP = ipItemsArray[++an_Integer];
+//
+//      }
+//    }
+//    return externalIP ? externalIP
+      return  theIpHtml ?: NSLog(@"Cannot get external IP error:%ld (%@)", error.code, error.localizedDescription), theIpHtml;
+// externalIP;
 }
 
 + (NSString*)  ISP {
@@ -1567,13 +1557,15 @@ _VD handleWebRequest:(int) fd {
 
   _Dict dict = [Json JSONObjectWithData:data options:0 error:&parsingError];
 
+   [dict log];
+
   if (parsingError)
     return NSLog(@"JSON-parsing error: %@", [parsingError localizedFailureReason]), (locales[ip] = NSNull.null);
 
-  return !dict ? (id) nil : [l = self.class.new setValuesForKeysWithDictionary:dict], (locales[ip] = l);
+  return !dict ? (id) nil : ({ l = [self.class.new objectBySettingValuesWithDictionary:[dict dictionaryWithValuesForKeys:self.class.propertyNames]]; !l ? (id)nil : (locales[ip] = l); });
 }
 
-- _Void_ setValue _ value forUndefinedKey __Text_ key  { }
+//- _Void_ setValue _ value forUndefinedKey __Text_ key  { }
 
 - _Pict_ flag { id component = self.class.flags[self.country] ?: $(@"%@.png",self.country_code3);
 

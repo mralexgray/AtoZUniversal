@@ -4,6 +4,8 @@
 
   #ifdef __OBJC__
 
+
+    #import <_ObjC.h>
     #import <FunSize/FunSize.h>
 //    #import <AtoZUniversal/ObjcAssociatedObjectHelpers.h>
     #import <ObjcAssociatedObjectHelpers.h>
@@ -15,7 +17,7 @@
     #import <F.h>
     #import <EXTConcreteProtocol.h>
     #import <objswitch.h>
-    #import <AtoZGeometry.h>
+//    #import <AtoZGeometry.h>
 
     #import <Protocols.h>
     

@@ -4,16 +4,15 @@
 
 #define GOOGLE_IP 173.194.123.46
 
-
 _XCTCase(LocaleTests) { Locale * locale; _List props; }
 
-_XCTUp(
+_XCTUp( )
 
-)
-
-_XCTest(MyLocale,
+_XCTest(HasNoNilPropertiesForExternalIP,
 
   locale  = [Locale localeOfIP:NET.externalIP];
+
+//  id x= [locale propertyNames];
 
   [Locale.properties each:^(id x){
 

@@ -90,14 +90,19 @@ _EnumKind( AZAlign, AZAlignUnset     		= 0x00000000,
 
 _XCTest(Options, AZA unset;
 
-  XCTAssertEqual( unset, AZUnset,                  @"uninitialized Alignments should be Unset!");
-  XCTAssertEqual( unset,  (AZA)NO,                  @"aka NO");
-  XCTAssertEqual( AZAlignxVal().count, (NSUI)15, @"Should be 12 positions");
-  XCTAssertTrue  ( (AZAlignTop | AZAlignLeft)                              == AZAlignTopLeft,    @"Combining Bitmasks works");
-  XCTAssertTrue  ( (AZAlignTop | AZAlignLeft | AZAlignRight | AZAlignBottom) == AZAlignCenter,     @"Allsides totals center");
+  XCTAssertEqual( unset, AZUnset, @"uninitialized Alignments should be Unset!") ___
+
+  XCTAssertEqual( unset, (AZA)NO, @"aka NO") ___
+
+  XCTAssertEqual( AZAlignxVal().count, _UInt_ 15, @"Should be 12 positions");
+
+  XCTAssertTrue( (AZAlignTop | AZAlignLeft) == AZAlignTopLeft, @"Combining Bitmasks works");
+
+  XCTAssertTrue( (AZAlignTop | AZAlignLeft | AZAlignRight | AZAlignBottom) == AZAlignCenter, @"Allsides totals center");
   
 //  AZAlignByValue().allKeys.nextObject
-  XCTAssertFalse ( AZAlignOutside & (AZAlignTop|AZAlignLeft|AZAlignRight|AZAlignBottom),  @"No sides is outside  ");
+  XCTAssertFalse ( AZAlignOutside & (AZAlignTop|AZAlignLeft|AZAlignRight|AZAlignBottom), @"No sides is outside.");
+
   XCTAssertTrue  ( AZAlignTop&AZAlignCenter,   @"Align Cneter includes top");
 
 )

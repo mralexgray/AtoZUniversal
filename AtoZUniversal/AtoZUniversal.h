@@ -15,6 +15,8 @@
 
 */
 
+#import <_ObjC.h>
+
 #import <FunSize/FunSize.h>
 
 #import <AtoZUniversal/EXTSynthesize.h>
@@ -40,6 +42,7 @@
 #import <AtoZUniversal/AtoZGeometry.h>
 
 #import <AtoZUniversal/SubscriptProtocols.h>
+#import <AtoZUniversal/Rectlike.h>
 #import <AtoZUniversal/BoundingObject.h>
 
 #import <AtoZUniversal/NSObject+AtoZ.h>

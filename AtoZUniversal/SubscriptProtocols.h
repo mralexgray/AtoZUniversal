@@ -1,6 +1,6 @@
 
 #define _Copy id<NSCopying>
-#define _Copy_ (_Copy)
+//#define _Copy_ (_Copy)
 #define forKSub         forKeyedSubscript
 #define atIdxSub       atIndexedSubscript
 #define xAtIndex objectAtIndexedSubscript

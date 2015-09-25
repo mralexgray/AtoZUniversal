@@ -2199,7 +2199,8 @@ CG_EXTERN CFTimeInterval CGEventSourceSecondsSinceLastEventType(CGEventSourceSta
 }
 // Return an array of all an object's properties
 + (NSA*)propertyList {
-	NSMutableArray *propertyNames = [NSMutableArray array];
+
+	NSMutableArray *propertyNames= @[].mC;
 	unsigned int num;
 	objc_property_t *properties = class_copyPropertyList(self, &num);
 	for (int i = 0; i < num; i++) {

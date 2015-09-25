@@ -17,7 +17,7 @@
 
 + _Dict_ flags ___
 
-_RO _Pict flag;
+_PT flag ___
 
 _CP _Text
 

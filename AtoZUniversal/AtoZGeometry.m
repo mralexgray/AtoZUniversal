@@ -2,10 +2,10 @@
 //  THGeometricFunctions.m   Lumumba   Created by Benjamin Schüttler on 19.11.09.  Copyright 2011 Rogue Coding. All rights reserved.
 //  #import <DrawKit/DrawKit.h> import <Quartz/Quartz.h>/#import <Zangetsu/Zangetsu.h>
 
-#import <AtoZUniversal/AtoZUniversal.h>
-#import <AtoZUniversal/AtoZGeometry.h>
-#import <AtoZUniversal/Rectlike.h>
-
+#import "AtoZUniversal.h"
+#import <_ObjC.h>
+//#import <AtoZUniversal/AtoZGeometry.h>
+//#import <AtoZUniversal/Rectlike.h>
 
 //@concreteprotocol( AZScalar ) @dynamic min, max;- (id) valueForUndefinedKey:(NSS*)key {} @end
 #define NONSENSERECT (NSRect){NSNotFound, NSNotFound, NSNotFound,NSNotFound}
@@ -49,9 +49,9 @@ BOOL _AZAllAreEqualRects(int count, ...) {
 }
 */
 
-NSR AZRectOffsetLikePoints(NSR r, NSP p1, NSP p2) { return AZRectOffsetBySize(r,AZSizeFromPoint(AZSubtractPoints(p1,p2))); }    //	frame.origin.x += point2.x - point1.x;	frame.origin.y += point2.y - point1.y; return frame; }
+NSR AZRectOffsetLikePoints(_Rect r, NSP p1, NSP p2) { return AZRectOffsetBySize(r,AZSizeFromPoint(AZSubtractPoints(p1,p2))); }    //	frame.origin.x += point2.x - point1.x;	frame.origin.y += point2.y - point1.y; return frame; }
 
-NSR AZRectResizedLikePointsInQuad(NSR frame, NSP point1, NSP point2, AZQuad quadrant) {
+NSR AZRectResizedLikePointsInQuad(_Rect frame, NSP point1, NSP point2, AZQuad quadrant) {
 
 	int xMod = (quadrant == (AZQuad)3 || quadrant == (AZQuad)4) ? -1 : 1;
 	int yMod = (quadrant == (AZQuad)2 || quadrant == (AZQuad)3) ? -1 : 1;
@@ -64,17 +64,17 @@ NSR AZRectResizedLikePointsInQuad(NSR frame, NSP point1, NSP point2, AZQuad quad
 	return frame; 
 }
 
-NSR	AZTransformRect (NSR target, NSR model) {	NSR r	= target; return ({   r.origin.x   += model.origin.x;   r.origin.y    += model.origin.y;
+NSR	AZTransformRect (_Rect target, NSR model) {	NSR r	= target; return ({   r.origin.x   += model.origin.x;   r.origin.y    += model.origin.y;
                                                                           r.size.width += model.size.width; r.size.height += model.size.height; r; });
 }
 BOOL   AZIsZeroSize (NSSZ   s)              { return NSEqualSizes(NSZeroSize, s); }
-BOOL   AZIsZeroRect (NSR rect)              { return SameRect(rect, NSZeroRect); }
-BOOL       SameRect (NSR r1, NSR r2)        { return NSEqualRects(r1,r2); }
+BOOL   AZIsZeroRect (_Rect rect)              { return SameRect(rect, NSZeroRect); }
+BOOL       SameRect (_Rect r1, NSR r2)        { return NSEqualRects(r1,r2); }
 
 NSP AZAnchorPointInRect(CGP anch, NSR rect) { return (NSP){ (rect.size.width  * anch.x) + rect.origin.x,
                                                             (rect.size.height * anch.y) + rect.origin.y}; }
 
-AZAnchorPt AZAnchorPointOfActualRect(NSR rect, AZPOS pos) { return AZMultiplyPointBySize(AZAnchorPtAligned(pos), rect.size);
+AZAnchorPt AZAnchorPointOfActualRect(_Rect rect, AZPOS pos) { return AZMultiplyPointBySize(AZAnchorPtAligned(pos), rect.size);
 
 //	newP.x = rect.size.width *p.x;	newP.y = rect.size.height *p.y;	return newP;
 }
@@ -89,7 +89,7 @@ const AZAnchorPt         AZAnchorCenter = (CGP) {  .5,  .5 },
                        AZAnchorTopRight = (CGP) { 1. , 1.  },
                     AZAnchorBottomRight = (CGP) { 1. , 0.  };
 
-AZPOS AZPositionAtPerimeterInRect(NSR edgeBox, NSR outer)	{	//	CGF max, left, right, top, bttom
+AZPOS AZPositionAtPerimeterInRect(_Rect edgeBox, NSR outer)	{	//	CGF max, left, right, top, bttom
 
 	AZOrient vORh = (edgeBox.origin.x == outer.origin.x || (edgeBox.origin.x + edgeBox.size.width) == outer.size.width)
 					  ? AZOrientVertical : AZOrientHorizontal;
@@ -135,9 +135,9 @@ NSN	*dNum	(double d) {
 	return @(d);
 }
 
-NSR  AZRectCheckWithMinSize(NSR r, NSSZ z){ return AZRectExceptSize(r,(NSSZ){MAX(z.width,r.size.width),MAX(z.height, r.size.height)}); }
+NSR  AZRectCheckWithMinSize(_Rect r, NSSZ z){ return AZRectExceptSize(r,(NSSZ){MAX(z.width,r.size.width),MAX(z.height, r.size.height)}); }
 //	NSRange AZMakeRange(NSUI min, NSUI max) {  NSUI loc = MIN(min, max);  NSUI len = MAX(min, max) - loc;  return NSMakeRange(loc, len);	}
-NSR 	nanRectCheck	(NSR   rect) {
+NSR 	nanRectCheck	(_Rect   rect) {
 	rect.origin = nanPointCheck(rect.origin);
 	rect.size 	= nanSizeCheck(rect.size);
 	return rect;
@@ -204,7 +204,7 @@ NSS* 	AZAspectRatioString(CGF ratio)	{
 //	return
 // @"poop";
 }
-//CGSZ AZAspectRatio(NSR rect ){ CGF aspectRatio = ( rect.width / rect.height );	}
+//CGSZ AZAspectRatio(_Rect rect ){ CGF aspectRatio = ( rect.width / rect.height );	}
 
 AZPOS                            AZPositionOpposite (AZPOS position)                      {
 	switch (position) {
@@ -219,7 +219,7 @@ AZPOS                            AZPositionOpposite (AZPOS position)            
 	default:					return 99;						break;
 	}
 }
-AZPOS AZPositionOfRectAtOffsetInsidePerimeterOfRect (NSR  inner, CGF offset, NSR outer) 	{
+AZPOS AZPositionOfRectAtOffsetInsidePerimeterOfRect (_Rect  inner, CGF offset, NSR outer) 	{
 		NSSZ outsz = outer.size; AZPOS anchor;
 	anchor =
 	outsz.width == offset 								? AZPositionBottomRight :
@@ -291,8 +291,8 @@ return anchor;
 	CGF top   = intersect < totes - r.size.height;
 */
 
-CGF 	AZPerimeter 					(NSR rect)				 	{	return (2. * rect.size.width) + (2. * rect.size.height); }
-CGF 	AZPerimeterWithRoundRadius (NSR rect, CGF radius)	{
+CGF 	AZPerimeter 					(_Rect rect)				 	{	return (2. * rect.size.width) + (2. * rect.size.height); }
+CGF 	AZPerimeterWithRoundRadius (_Rect rect, CGF radius)	{
 	return  ( AZPerimeter(rect) - ( ( 8 - (   (2 * M_PI/*was pi */) * radius)   )));
 }
 NSR 	AZScreenFrameUnderMenu	(void)	{ return AZRectTrimmedOnTop( AZScreenFrame() , AZMenuBarThickness()); }
@@ -301,8 +301,8 @@ NSSZ 	AZScreenSize  				(void) 	{		  return AZScreenFrame().size; }
 // 2D Functions
 CGF AZMinDim			(NSSZ   sz)			{	return MIN(sz.width, sz.height); }
 CGF AZMaxDim			(NSSZ   sz)		 	{	return MAX(sz.width, sz.height); }
-CGF AZMaxEdge			(NSR     r)			{ 	return AZMaxDim(r.size); }
-CGF AZMinEdge			(NSR     r)			{	return AZMinDim(r.size); }
+CGF AZMaxEdge			(_Rect     r)			{ 	return AZMaxDim(r.size); }
+CGF AZMinEdge			(_Rect     r)			{	return AZMinDim(r.size); }
 
 CGF AZLengthOfPoint	(NSP    pt)			{
 	return sqrt(pt.x * pt.x + pt.y * pt.y);
@@ -311,7 +311,7 @@ CGF AZLengthOfPoint	(NSP    pt)			{
 CGF AZAreaOfSize		(NSSZ size)			{
 	return size.width * size.height;
 }
-CGF AZAreaOfRect		(NSR  rect)			{
+CGF AZAreaOfRect		(_Rect  rect)			{
 	return AZAreaOfSize(rect.size);
 }
 CGF AZPointDistance	(CGP p1, CGP p2) 	{
@@ -444,7 +444,7 @@ NSP AZMovePointAbs				(NSP origin, NSP target, CGF pixels) {
 	NSP move = NSMakePoint(x, x * ratio);
 	return AZAddPoints(origin, move);
 }
-NSP AZCenterOfRect				(NSR  rect) {
+NSP AZCenterOfRect				(_Rect  rect) {
 	// simple math, just the center of the rect
 	return NSMakePoint(rect.origin.x + rect.size.width  * 0.5, 
 				 rect.origin.y + rect.size.height * 0.5);
@@ -452,7 +452,7 @@ NSP AZCenterOfRect				(NSR  rect) {
 
 NSP AZCenterOfSize				(NSSZ size) {	return (NSP){ size.width / 2., size.height / 2.}; }
 
-NSP AZEndOfRect					(NSR  rect) {
+NSP AZEndOfRect					(_Rect  rect) {
 	return NSMakePoint(rect.origin.x + rect.size.width,
 				 rect.origin.y + rect.size.height);
 }
@@ -464,11 +464,11 @@ NSP AZEndOfRect					(NSR  rect) {
     		         |	     |
  		  	         +-------+    
 */
-NSP 	AZCenterDistanceOfRects					(NSR a, NSR b) 			{
+NSP 	AZCenterDistanceOfRects					(_Rect a, NSR b) 			{
 	return AZSubtractPoints(AZCenterOfRect(a),
 					  AZCenterOfRect(b));
 }
-NSP 	AZBorderDistanceOfRects					(NSR a, NSR b) 			{
+NSP 	AZBorderDistanceOfRects					(_Rect a, NSR b) 			{
 	// 
 	// +------------ left
 	// |
@@ -515,7 +515,7 @@ NSP 	AZBorderDistanceOfRects					(NSR a, NSR b) 			{
 	
 	return re;
 }
-NSP 	AZNormalizedDistanceOfRects			(NSR from, NSR to) 		{
+NSP 	AZNormalizedDistanceOfRects			(_Rect from, NSR to) 		{
 	NSSZ mul = AZInvertSize(AZBlendSizes(from.size, to.size, 0.5));
 	NSP re = AZCenterDistanceOfRects(to, from);
 	  re = AZMultiplyPointBySize(re, mul);
@@ -562,7 +562,7 @@ NSP AZPt(CGF x, CGF y) { return _Cord_ {x,y}; }
 
 #pragma mark - NSSZ Functions
 
-NSP AZRectApex(NSR r) {
+NSP AZRectApex(_Rect r) {
 
 #if TARGET_OS_IPHONE
 return _Cord_ { r.origin.x + r.size.width, r.origin.y + r.size.height};
@@ -581,7 +581,7 @@ NSSZ	AZSizeFromDim (CGF   dim) {
 NSSZ 	AZSizeFromPoint			(NSP point) {
 	return NSMakeSize(point.x, point.y);
 }
-NSSZ 	AZSizeFromRect				(NSR rect) {	return NSMakeSize(rect.size.width, rect.size.height);	}
+NSSZ 	AZSizeFromRect				(_Rect rect) {	return NSMakeSize(rect.size.width, rect.size.height);	}
 NSSZ 	AZAbsSize					(NSSZ size) {
 	return NSMakeSize(ABS(size.width), ABS(size.height));
 }
@@ -711,21 +711,21 @@ NSR	AZMakeSquare				(NSP center,CGF radius) 			{
 				2 * radius, 
 				2 * radius);
 }
-NSR	AZMultiplyRectBySize		(NSR rect, 	NSSZ size) 				{
+NSR	AZMultiplyRectBySize		(_Rect rect, 	NSSZ size) 				{
 	return NSMakeRect(rect.origin.x	* size.width,
 				rect.origin.y	* size.height,
 				rect.size.width  * size.width,
 				rect.size.height * size.height
 				);
 }
-NSR	AZRelativeToAbsoluteRect(NSR relative, NSR bounds) 		{
+NSR	AZRelativeToAbsoluteRect(_Rect relative, NSR bounds) 		{
 	return NSMakeRect(relative.origin.x	* bounds.size.width  + bounds.origin.x,
 				relative.origin.y	* bounds.size.height + bounds.origin.y,
 				relative.size.width  * bounds.size.width,
 				relative.size.height * bounds.size.height
 				);
 }
-NSR	AZAbsoluteToRelativeRect(NSR a,		NSR b) 					{
+NSR	AZAbsoluteToRelativeRect(_Rect a,		NSR b) 					{
 	return NSMakeRect((a.origin.x - b.origin.x) / b.size.width,
 				(a.origin.y - b.origin.y) / b.size.height,
 				a.size.width  / b.size.width,
@@ -739,7 +739,7 @@ enum CAAutoresizingMask AZPositionToAutoresizingMask (AZA p) {
           p == AZPositionBottomRight  ? kCALayerMinXMargin | kCALayerMaxYMargin : kCALayerMaxXMargin | kCALayerMaxYMargin;
 }
 #endif
-NSR	AZPositionRectOnRect		(NSR inner, NSR outer, NSP position) {
+NSR	AZPositionRectOnRect		(_Rect inner, NSR outer, NSP position) {
 
 	return NSMakeRect(outer.origin.x + (outer.size.width - inner.size.width) * position.x, 
 				outer.origin.y 
@@ -749,12 +749,12 @@ NSR	AZPositionRectOnRect		(NSR inner, NSR outer, NSP position) {
 				);
 }
 
-NSR AZRectWithDimsCenteredOnPoints(CGF width, CGF height, CGF cx, CGF cy){ return (NSR){cx - (width/2), cy - (height/2), width, height}; }
-NSR	AZCenterRectOnPoint		(NSR rect, 	NSP center)			 	{
+NSR AZRectWithDimsCenteredOnPoints(CGF width, CGF height, CGF cx, CGF cy){ return _Rect_ {cx - (width/2), cy - (height/2), width, height}; }
+NSR	AZCenterRectOnPoint		(_Rect rect, 	NSP center)			 	{
 
-	NSR r = (NSR){ center.x - (rect.size.width  / 2.), center.y - (rect.size.height / 2.), rect.size}; return r;
+	NSR r = _Rect_ { center.x - (rect.size.width  / 2.), center.y - (rect.size.height / 2.), rect.size}; return r;
 }
-NSR	AZCenterRectOnRect		(NSR inner, NSR outer)				{
+NSR	AZCenterRectOnRect		(_Rect inner, NSR outer)				{
 	return AZPositionRectOnRect(inner, outer, AZHalfPoint);
 }
 NSR	AZSquareAround				(NSP center,CGF distance)			{
@@ -764,7 +764,7 @@ NSR	AZSquareAround				(NSP center,CGF distance)			{
 				2 * distance
 				);
 }
-NSR	AZBlendRects				(NSR from, NSR to, CGF p)			{
+NSR	AZBlendRects				(_Rect from, NSR to, CGF p)			{
 	NSR re;
 	CGF q = 1 - p;
 	re.origin.x	= from.origin.x	* q + to.origin.x	* p;
@@ -773,76 +773,76 @@ NSR	AZBlendRects				(NSR from, NSR to, CGF p)			{
 	re.size.height = from.size.height * q + to.size.height * p;
 	return re;
 }
-NSR	AZRectTrimmedOnRight		(NSR rect, CGF width) 				{
+NSR	AZRectTrimmedOnRight		(_Rect rect, CGF width) 				{
 	return NSMakeRect(	rect.origin.x, 					rect.origin.y,
 				  	rect.size.width - width,  		rect.size.height	);
 }
-NSR	AZRectTrimmedOnBottom	(NSR rect, CGF height) 				{
+NSR	AZRectTrimmedOnBottom	(_Rect rect, CGF height) 				{
 	return NSMakeRect(	rect.origin.x,    rect.origin.y + height,
                       rect.size.width,  rect.size.height - height);
 }
-NSR	AZRectTrimmedOnLeft		(NSR rect, CGF width)	 			{
+NSR	AZRectTrimmedOnLeft		(_Rect rect, CGF width)	 			{
 	return NSMakeRect( 	rect.origin.x + width, 					rect.origin.y,
 					rect.size.width - width,  		rect.size.height	);
 }
-NSR	AZRectTrimmedOnTop		(NSR rect, CGF height) 				{
+NSR	AZRectTrimmedOnTop		(_Rect rect, CGF height) 				{
 	return NSMakeRect(	rect.origin.x, 					rect.origin.y,
 					rect.size.width,  				(rect.size.height - height)	);
 }
 NSSZ  AZSizeExceptWide  		(NSSZ sz, CGF wide ) 				{	return NSMakeSize(wide, sz.height); }
 NSSZ  AZSizeExceptHigh  		(NSSZ sz, CGF high ) 				{  return NSMakeSize(sz.width, high);  }
 NSR 	AZRectExceptSize			(NSRect r, NSSZ z) { r.size.width = z.width;  r.size.height = z.height; return r; }
-NSR	AZRectExtendedOnLeft		(NSR rect, CGF amount) 	{
+NSR	AZRectExtendedOnLeft		(_Rect rect, CGF amount) 	{
 	NSR newRect = rect;
 	rect.origin.x -= amount;
 	rect.size.width += amount;
 	return newRect;
 }
-NSR	AZRectExtendedOnBottom	(NSR rect, CGF amount) 	{
+NSR	AZRectExtendedOnBottom	(_Rect rect, CGF amount) 	{
 	NSR newRect = rect;
 	rect.origin.y -= amount;
 	rect.size.height += amount;
 	return newRect;
 }
-NSR	AZRectExtendedOnTop		(NSR rect, CGF amount) 	{
+NSR	AZRectExtendedOnTop		(_Rect rect, CGF amount) 	{
 	NSR newRect = rect;
 	rect.size.height += amount;
 	return newRect;
 }
-NSR	AZRectExtendedOnRight	(NSR rect, CGF amount) 	{
+NSR	AZRectExtendedOnRight	(_Rect rect, CGF amount) 	{
 	NSR newRect = rect;
 	rect.size.width += amount;
 	return newRect;
 }
-NSR	AZRectExceptWide		(NSR r, CGF wide)  { return (NSR){r.origin.x, r.origin.y,         wide, r.size.height}; }
-NSR	AZRectExceptHigh    (NSR r, CGF high)  { return (NSR){r.origin.x, r.origin.y, r.size.width,          high}; }
-NSR	AZRectExceptOriginX (NSR r, CGF x)     { return (NSR){         x, r.origin.y, r.size.width, r.size.height}; }
-NSR	AZRectExceptOriginY	(NSR r, CGF y)     { return (NSR){r.origin.x,          y, r.size.width, r.size.height}; }
-NSR	AZRectExceptOrigin	(NSR r, NSP p)     { return (NSR){       p.x,        p.y, r.size.width, r.size.height}; }
-NSR	AZInsetRect         (NSR r, CGF inset) { return CGRectInset(r, inset, inset); }
-NSR	AZRightEdge         (NSR r, CGF inset) { return (NSR){r.origin.x + r.size.width - inset, r.origin.y,                         inset,        r.size.height}; }
-NSR	AZUpperEdge					(NSR r, CGF inset) { return (NSR){r.origin.x,                        r.origin.y + r.size.height - inset, r.size.width, inset};         }
-NSR	AZLowerEdge         (NSR r, CGF inset) { return (NSR){r.origin.x, r.origin.y, r.size.width,         inset}; }
-NSR	AZLeftEdge          (NSR r, CGF inset) { return (NSR){r.origin.x, r.origin.y,        inset, r.size.height}; }
+NSR	AZRectExceptWide		(_Rect r, CGF wide)  { return _Rect_ {r.origin.x, r.origin.y,         wide, r.size.height}; }
+NSR	AZRectExceptHigh    (_Rect r, CGF high)  { return _Rect_ {r.origin.x, r.origin.y, r.size.width,          high}; }
+NSR	AZRectExceptOriginX (_Rect r, CGF x)     { return _Rect_ {         x, r.origin.y, r.size.width, r.size.height}; }
+NSR	AZRectExceptOriginY	(_Rect r, CGF y)     { return _Rect_ {r.origin.x,          y, r.size.width, r.size.height}; }
+NSR	AZRectExceptOrigin	(_Rect r, NSP p)     { return _Rect_ {       p.x,        p.y, r.size.width, r.size.height}; }
+NSR	AZInsetRect         (_Rect r, CGF inset) { return CGRectInset(r, inset, inset); }
+NSR	AZRightEdge         (_Rect r, CGF inset) { return _Rect_ {r.origin.x + r.size.width - inset, r.origin.y,                         inset,        r.size.height}; }
+NSR	AZUpperEdge					(_Rect r, CGF inset) { return _Rect_ {r.origin.x,                        r.origin.y + r.size.height - inset, r.size.width, inset};         }
+NSR	AZLowerEdge         (NSR r, CGF inset) { return _Rect_ {r.origin.x, r.origin.y, r.size.width,         inset}; }
+NSR	AZLeftEdge          (NSR r, CGF inset) { return _Rect_ {r.origin.x, r.origin.y,        inset, r.size.height}; }
 
-NSR	AZRectFlippedOnEdge		(NSR r, AZPOS position) {
+NSR	AZRectFlippedOnEdge		(_Rect r, AZPOS position) {
 	return  position == AZTop 		? 	AZRectExceptOriginY(r, r.size.height)
 	:		position == AZRgt		?	AZRectExceptOriginX(r, r.size.width )
 	:		position == AZBtm	?	AZRectExceptOriginY(r, -r.size.height)
 	:											AZRectExceptOriginX(r, -r.size.width );
 }
-NSR	AZRectOutsideRectOnEdge	(NSR center, NSR outer, AZPOS position) 	{
+NSR	AZRectOutsideRectOnEdge	(_Rect center, NSR outer, AZPOS position) 	{
 	return  position == AZTop 		? 	AZRectExceptOriginY(outer, center.size.height)
 	:		position == AZRgt		?	AZRectExceptOriginX(outer, center.size.width )
 	:		position == AZBtm	?	AZRectExceptOriginY(outer, -outer.size.height)
 	:											AZRectExceptOriginX(outer, -outer.size.width );
 }
-NSR	AZRectInsideRectOnEdge	(NSR inner, NSR outer, AZPOS p)	{ NSR newR =
+NSR	AZRectInsideRectOnEdge	(_Rect inner, NSR outer, AZPOS p)	{ NSR newR =
 
-    p == AZTop    ? (NSR){ inner.origin.x, outer.size.height - inner.size.height, inner.size}
-  :	p == AZRgt    ?	(NSR){ outer.size.width - inner.size.width, inner.origin.y, inner.size}
-  :	p == AZBtm    ?	(NSR){ inner.origin.x, outer.origin.y, inner.size}
-/*  :	p == AZLft    ? */:	(NSR){ outer.origin.x, inner.origin.y, inner.size};
+    p == AZTop    ? _Rect_ { inner.origin.x, outer.size.height - inner.size.height, inner.size}
+  :	p == AZRgt    ?	_Rect_ { outer.size.width - inner.size.width, inner.origin.y, inner.size}
+  :	p == AZBtm    ?	_Rect_ { inner.origin.x, outer.origin.y, inner.size}
+/*  :	p == AZLft    ? */:	_Rect_ { outer.origin.x, inner.origin.y, inner.size};
 //  :	p == AZBtmLft ?	AZRectExceptOrigin(inner,outer.origin)
 //  : p == AZTopLft ?	AZRectExceptOrigin(inner,(NSP){ outer.origin.x,outer.origin.y + outer.size.height - inner.size.height})
 //  :	p == AZTopRgt ?	AZRectExceptOrigin(inner,(NSP){ outer.size.width - inner.size.width, outer.origin.y + outer.size.height - inner.size.height})
@@ -855,10 +855,10 @@ NSR	AZRectInsideRectOnEdge	(NSR inner, NSR outer, AZPOS p)	{ NSR newR =
 
 
 
-//    p == AZTop    ? (NSR){ outer.size.width/2.- (inner.size.width/2.), outer.size.height - inner.size.height, inner.size}
-//  :	p == AZRgt    ?	(NSR){ outer.size.width - inner.size.width, (outer.size.height/2.) - (inner.size.height/2.), inner.size}
-//  :	p == AZBtm    ?	(NSR){ outer.size.width/2.- (inner.size.width/2.), outer.origin.y, inner.size}
-//  :	p == AZLft    ?	(NSR){ outer.origin.x, (outer.size.height/2.) - (inner.size.height/2.), inner.size}
+//    p == AZTop    ? _Rect_ { outer.size.width/2.- (inner.size.width/2.), outer.size.height - inner.size.height, inner.size}
+//  :	p == AZRgt    ?	_Rect_ { outer.size.width - inner.size.width, (outer.size.height/2.) - (inner.size.height/2.), inner.size}
+//  :	p == AZBtm    ?	_Rect_ { outer.size.width/2.- (inner.size.width/2.), outer.origin.y, inner.size}
+//  :	p == AZLft    ?	_Rect_ { outer.origin.x, (outer.size.height/2.) - (inner.size.height/2.), inner.size}
 //  :	p == AZBtmLft ?	AZRectExceptOrigin(inner,outer.origin)
 //  : p == AZTopLft ?	AZRectExceptOrigin(inner,(NSP){ outer.origin.x,outer.origin.y + outer.size.height - inner.size.height})
 //  :	p == AZTopRgt ?	AZRectExceptOrigin(inner,(NSP){ outer.size.width - inner.size.width, outer.origin.y + outer.size.height - inner.size.height})
@@ -868,11 +868,12 @@ NSR	AZRectInsideRectOnEdge	(NSR inner, NSR outer, AZPOS p)	{ NSR newR =
 BOOL  AZPointIsInInsetRects	(NSP point,  NSR outside,NSSZ inset ) 		{
 
   NSCAssert(inset.width < (outside.size.width/2) && inset.height < (outside.size.height/2), @"inset too big!, rect is only %@",NSStringFromCGRect(outside));
+
 	AZInsetRects e =  AZMakeInsideRects(outside, inset);
-	return  NSPInRect(point, e.top) 	?:
-		      NSPInRect(point, e.right) 	?:
-		      NSPInRect(point, e.bottom) 	?:
-		      NSPInRect(point, e.left) 	?:	NO;
+	return  NSPInRect(point, e.top    ) ?:
+		      NSPInRect(point, e.right  ) ?:
+		      NSPInRect(point, e.bottom ) ?:
+		      NSPInRect(point, e.left   )  ;
 }
 //FOUNDATION_EXPORT 
 //AZPOS AZPositionOnOutsideEdgeOfRect(NSP point, NSR rect, NSSZ size) {
@@ -898,7 +899,7 @@ NSR	AZInsetRectInPosition ( NSR outside, NSSZ inset, AZPOS pos ) 		{
 	scaled.origin.x += pos == AZRgt ? outside.size.width  - inset.width : 0;
 	return scaled;
 }
-//AZOutsideEdges AZOutsideEdgesSized(NSR rect, NSSZ size) {		return (AZOutsideEdges) { AZUpperEdge(rect, size.height),
+//AZOutsideEdges AZOutsideEdgesSized(_Rect rect, NSSZ size) {		return (AZOutsideEdges) { AZUpperEdge(rect, size.height),
 //								  AZRightEdge(rect, size.width ), AZLowerEdge(rect, size.height), AZLeftEdge (rect, size.width ) 	}; }
 
 // Comparison Methods
@@ -914,16 +915,16 @@ BOOL AZIsPointAboveRect		(NSP point, NSR rect)	{
 BOOL AZIsPointBelowRect		(NSP point, NSR rect)	{
 	return AZPointDistanceToBorderOfRect(point, rect).y > 0;
 }
-BOOL AZIsRectLeftOfRect		(NSR rect, NSR compare) {
+BOOL AZIsRectLeftOfRect		(_Rect rect, NSR compare) {
 	return AZNormalizedDistanceOfRects(rect, compare).x <= -1;
 }
-BOOL AZIsRectRightOfRect	(NSR rect, NSR compare) {
+BOOL AZIsRectRightOfRect	(_Rect rect, NSR compare) {
 	return AZNormalizedDistanceOfRects(rect, compare).x >= 1;
 }
-BOOL AZIsRectAboveRect		(NSR rect, NSR compare) {
+BOOL AZIsRectAboveRect		(_Rect rect, NSR compare) {
 	return AZNormalizedDistanceOfRects(rect, compare).y <= -1;
 }
-BOOL AZIsRectBelowRect		(NSR rect, NSR compare) {
+BOOL AZIsRectBelowRect		(_Rect rect, NSR compare) {
 	return AZNormalizedDistanceOfRects(rect, compare).y >= 1;
 }
 #import "math.h"
@@ -940,13 +941,13 @@ int oppositeQuadrant(int quadrant){
 	return quadrant;
 }
 */
-NSR	AZRectOffset(NSR rect, NSP offset)			{
+NSR	AZRectOffset(_Rect rect, NSP offset)			{
 	rect.origin.x += offset.x;
 	rect.origin.y += offset.y;
 	return rect;
 }
 #if MAC_ONLY
-NSP 	AZOffsetOfRects(NSR innerRect,NSR outerRect){ //, QUAD quadrant){
+NSP 	AZOffsetOfRects(_Rect innerRect,NSR outerRect){ //, QUAD quadrant){
 //	if (quadrant )
 //		return NSMakePoint((quadrant == 2 || quadrant == 1) ? NSMaxX(outerRect)-NSMaxX(innerRect) : NSMinX(outerRect)-NSMinX(innerRect),
 //						   (quadrant == 3 || quadrant == 2) ? NSMaxY(outerRect)-NSMaxY(innerRect) : NSMinY(outerRect)-NSMinY(innerRect));
@@ -959,15 +960,15 @@ int 	oppositeQuadrant(int quadrant){
 	return !quadrant ? 3 : quadrant;
 }
 /*
-NSR sectionPositioned(NSR r, AZPOS p){	NSUI quad 	= 	p == AZPositionBottomLeft 	? 0
+NSR sectionPositioned(_Rect r, AZPOS p){	NSUI quad 	= 	p == AZPositionBottomLeft 	? 0
 																	:	p == AZLft 		? 1
 																	:	p == AZPositionTopRight 		? 2
 																	:	p == AZPositionBottomRight 	? 3 : 3;
 return quadrant(r, (NSUInteger)quadrant);
 }
 */
-NSR	AZRectOfQuadInRect(NSR originalRect, AZQuad quad) { return quadrant(originalRect, quad); }
-NSR 	quadrant(NSR r, AZQuad quad)	{
+NSR	AZRectOfQuadInRect(_Rect originalRect, AZQuad quad) { return quadrant(originalRect, quad); }
+NSR 	quadrant(_Rect r, AZQuad quad)	{
 	NSSZ half = AZMultiplySize(r.size, .5);
 	NSR newR  = AZRectBy(half.width, half.height);
 	NSP p 	  = quad == AZQuadTopLeft  ? (NSP) { 0, 			 half.height }
@@ -977,26 +978,26 @@ NSR 	quadrant(NSR r, AZQuad quad)	{
 		 
 	return AZRectOffset(newR, p);
 }
-CGF 	quadrantsVerticalGutter(NSR r)	{
+CGF 	quadrantsVerticalGutter(_Rect r)	{
 	NSR aQ = quadrant(r, 1);
 	return r.size.width - (aQ.size.width *2);
 }
-CGF 	quadrantsHorizontalGutter(NSR r)	{
+CGF 	quadrantsHorizontalGutter(_Rect r)	{
 	NSR aQ = quadrant(r, 1);
 	return r.size.height - (aQ.size.height *2);
 }
-//NSR alignRectInRect(NSR innerRect, NSR outerRect, int quadrant)
+//NSR alignRectInRect(_Rect innerRect, NSR outerRect, int quadrant)
 //{
 ////	NSP offset= AZRectOffset(innerRect,outerRect,quadrant);
 //	return NSOffsetRect(innerRect,offset.x,offset.y);
 //}
-NSR rectZoom(NSR rect,float zoom,int quadrant){
+NSR rectZoom(_Rect rect,float zoom,int quadrant){
 	NSSZ newSize=NSMakeSize(NSWidth(rect)*zoom,NSHeight(rect)*zoom);
 	NSR newRect=rect;
 	newRect.size=newSize;
 	return newRect;
 }
-NSR	AZSizeRectInRect(NSR innerRect,NSR outerRect,bool expand){
+NSR	AZSizeRectInRect(_Rect innerRect,NSR outerRect,bool expand){
 	float proportion=NSWidth(innerRect)/NSHeight(innerRect);
 	NSR xRect=NSMakeRect(0,0,outerRect.size.width,outerRect.size.width/proportion);
 	NSR yRect=NSMakeRect(0,0,outerRect.size.height*proportion,outerRect.size.height);
@@ -1005,11 +1006,11 @@ NSR	AZSizeRectInRect(NSR innerRect,NSR outerRect,bool expand){
 	else newRect = CGRectIntersection(xRect,yRect);
 	return newRect;
 }
-NSR	AZFitRectInRect(NSR innerRect,NSR outerRect,bool expand){
+NSR	AZFitRectInRect(_Rect innerRect,NSR outerRect,bool expand){
 	return AZCenterRectInRect(AZSizeRectInRect(innerRect,outerRect,expand),outerRect);
 }
 /*
-NSR rectWithProportion(NSR innerRect,float proportion,bool expand){
+NSR rectWithProportion(_Rect innerRect,float proportion,bool expand){
 	NSR xRect=NSMakeRect(0,0,innerRect.size.width,innerRect.size.width/proportion);
 	NSR yRect=NSMakeRect(0,0,innerRect.size.height*proportion,innerRect.size.height);
 	NSR newRect;
@@ -1018,14 +1019,14 @@ NSR rectWithProportion(NSR innerRect,float proportion,bool expand){
 	return newRect;
 }
 */
-NSR	AZSquareInRect(NSR rect) {
+NSR	AZSquareInRect(_Rect rect) {
 	return AZCenterRectInRect(AZSquareFromLength(AZMinDim(rect.size)), rect);
 }
-NSR	AZCenterRectInRect(NSR rect, NSR mainRect){
+NSR	AZCenterRectInRect(_Rect rect, NSR mainRect){
 	return CGRectOffset(rect,
   NSMidX(mainRect)-NSMidX(rect),NSMidY(mainRect)-NSMidY(rect));
 }
-NSR	AZConstrainRectToRect(NSR innerRect, NSR outerRect){
+NSR	AZConstrainRectToRect(_Rect innerRect, NSR outerRect){
 	NSP offset=NSZeroPoint;
 	if (NSMaxX(innerRect) > NSMaxX(outerRect))
 	offset.x+= NSMaxX(outerRect) - NSMaxX(innerRect);
@@ -1038,7 +1039,7 @@ NSR	AZConstrainRectToRect(NSR innerRect, NSR outerRect){
 	return CGRectOffset(innerRect,offset.x,offset.y);
 }
 /*
-NSR expelRectFromRect(NSR innerRect, NSR outerRect,float peek){
+NSR expelRectFromRect(_Rect innerRect, NSR outerRect,float peek){
 	NSP offset=NSZeroPoint;
 		float leftDistance=NSMaxX(innerRect) - NSMinX(outerRect);
 	float rightDistance=NSMaxX(outerRect)-NSMinX(innerRect);
@@ -1055,7 +1056,7 @@ NSR expelRectFromRect(NSR innerRect, NSR outerRect,float peek){
 	offset.y-=bottomDistance-peek;
 		return NSOffsetRect(innerRect,offset.x,offset.y);
 }
-NSR expelRectFromRectOnEdge(NSR innerRect, NSR outerRect,NSREdge edge,float peek){
+NSR expelRectFromRectOnEdge(_Rect innerRect, NSR outerRect,NSREdge edge,float peek){
 	NSP offset=NSZeroPoint;
 		switch(edge){
 	case NSMaxXEdge:
@@ -1093,17 +1094,17 @@ CGRectEdge AZEdgeTouchingEdgeForRectInRect( NSR innerRect, NSR outerRect ){
 		NSMaxY(innerRect)  >= NSMaxY(outerRect) ? NSMaxYEdge :
 		NSMinY(innerRect)  <= NSMinY(outerRect) ? NSMinYEdge : -1;
 }
-NSR	AZRectFromSizeOfRect(NSR aRect){ return (NSR){0,0,aRect.size.width,aRect.size.height}; }
+NSR	AZRectFromSizeOfRect(_Rect aRect){ return _Rect_ {0,0,aRect.size.width,aRect.size.height}; }
 
 NSR	AZRectFromSize(NSSZ size){
 	return NSMakeRect(0,0,size.width,size.height);
 }
 
-NSR AZCornerRectPositionedWithSize(NSR outerRect, AZPOS pos, NSSZ sz) {
+NSR AZCornerRectPositionedWithSize(_Rect outerRect, AZPOS pos, NSSZ sz) {
 
-	return pos == AZPositionTopLeft ? (NSR){outerRect.origin.x, outerRect.size.height - sz.height, sz.width, sz.height} 
-	:		 pos == AZPositionTopRight ? (NSR){ outerRect.size.width - sz.width, outerRect.size.height - sz.height, sz.width, sz.height}
-	:		 pos == AZPositionBottomRight ? (NSR){ outerRect.size.width - sz.width,outerRect.origin.y, sz.width, sz.height}
+	return pos == AZPositionTopLeft ? _Rect_ {outerRect.origin.x, outerRect.size.height - sz.height, sz.width, sz.height} 
+	:		 pos == AZPositionTopRight ? _Rect_ { outerRect.size.width - sz.width, outerRect.size.height - sz.height, sz.width, sz.height}
+	:		 pos == AZPositionBottomRight ? _Rect_ { outerRect.size.width - sz.width,outerRect.origin.y, sz.width, sz.height}
 	:												(NSR) {outerRect.origin.x,outerRect.origin.y, sz.width, sz.height };
 }
 
@@ -1114,7 +1115,7 @@ NSP AZTopLeftPoint  ( NSR rect ){	 return (NSP){rect.origin.x,rect.origin.y+NSHe
 NSP AZTopRightPoint( NSR rect ){ return (NSP){NSWidth(rect)  + rect.origin.x, NSHeight(rect) + rect.origin.y}; }
 NSP AZBotLeftPoint  ( NSR rect ){ return rect.origin; }
 NSP AZBotRightPoint ( NSR rect ){ return (NSP){rect.origin.x + NSWidth(rect), rect.origin.y}; }
-AZPOS AZClosestCorner (NSR r,NSP pt) { if (NSEqualPoints(pt, AZCenterOfRect(r))) return (AZAmbiguous|AZAlignCenter);
+AZPOS AZClosestCorner (_Rect r,NSP pt) { if (NSEqualPoints(pt, AZCenterOfRect(r))) return (AZAmbiguous|AZAlignCenter);
 
   AZA corner = AZUnset;
   float distance = HUGE_VALF, test;
@@ -1132,14 +1133,14 @@ AZPOS AZClosestCorner (NSR r,NSP pt) { if (NSEqualPoints(pt, AZCenterOfRect(r)))
 //	}
 //	return closestCorner;
 }
-//void logRect(NSR rect){
+//void logRect(_Rect rect){
 //	LOG_EXPR(rect);
 ////QSLog(@"(%f,%f) (%fx%f)",rect.origin.x,rect.origin.y,rect.size.width,rect.size.height);
 //}
 AZOrient deltaDirectionOfPoints(NSP a, NSP b){
 	return a.x != b.x ? AZOrientHorizontal : AZOrientVertical;
 }
-AZPOS AZPositionOfQuadInRect(NSR rect, NSR outer ) {
+AZPOS AZPositionOfQuadInRect(_Rect rect, NSR outer ) {
 	return NSEqualPoints( rect.origin, outer.origin) 			? AZPositionBottomLeft 	:
 	   	 NSEqualPoints( AZTopLeftPoint(rect), AZTopLeftPoint(outer)) ||
 						  (rect.origin.x == outer.origin.x && (rect.origin.y +NSHeight(rect) ) == NSHeight(outer))
@@ -1148,7 +1149,7 @@ AZPOS AZPositionOfQuadInRect(NSR rect, NSR outer ) {
 	   NSEqualPoints( AZBotRightPoint(rect), AZBotRightPoint(outer))	? AZPositionBottomRight :
 	  ^{ return AZOutsideEdgeOfRectInRect(rect, outer); }();
 }
-AZPOS AZPositionOfRectPinnedToOutisdeOfRect(NSR box, NSR innerBox  )	{
+AZPOS AZPositionOfRectPinnedToOutisdeOfRect(_Rect box, NSR innerBox  )	{
 	NSR tIn  = AZRectFromSize(innerBox.size);
 	box.origin.y -= innerBox.origin.y;
 	box.origin.x -= innerBox.origin.x;
@@ -1178,7 +1179,7 @@ AZA AZAlignNext(AZA a) {
 //	NSEqualPoints( AZBotRightPoint(rect), AZBotRightPoint(outer))	? AZPositionBottomRight :
 //	^{ return AZOutsideEdgeOfRectInRect(rect, outer); }();
 
-AZA AZAlignmentInsideRect(NSR edgeBox, NSR outerBox) {
+AZA AZAlignmentInsideRect(_Rect edgeBox, NSR outerBox) {
 
 	AZRect *edge = $AZR(edgeBox), *outer = $AZR(outerBox);
 	AZA e = 0;
@@ -1234,7 +1235,7 @@ AZPOS AZOutsideEdgeOfPointInRect (NSP inside, NSR outer ) {   	NSN* u, *d, *l, *
 	return c;
 }
 
-NSR AZRectInsideRectOnEdgeInset (NSR rect, AZA side, CGF inset ) {
+NSR AZRectInsideRectOnEdgeInset (_Rect rect, AZA side, CGF inset ) {
 
 return side == AZRgt ? AZRectTrimmedOnLeft(rect, rect.size.width-inset) :
        side == AZLft ? AZRectTrimmedOnRight(rect, rect.size.width-inset) :
@@ -1254,7 +1255,7 @@ return side == AZRgt ? AZRectTrimmedOnLeft(rect, rect.size.width-inset) :
 //	finishline:	return win;
 }
 
-AZPOS AZOutsideEdgeOfRectInRect (NSR rect, NSR outer ) {   			 CGF min = HUGE_VALF, t = HUGE_VALF;
+AZPOS AZOutsideEdgeOfRectInRect (_Rect rect, NSR outer ) {   			 CGF min = HUGE_VALF, t = HUGE_VALF;
 			
 AZPOS	win 	= NSEqualPoints(rect.origin, 				  			 outer.origin) ? AZBtmLft
 				: NSEqualPoints(AZTopLeftPoint (rect),  AZTopLeftPoint(outer)) ? AZTopLft
@@ -1282,7 +1283,7 @@ AZPOS	win 	= NSEqualPoints(rect.origin, 				  			 outer.origin) ? AZBtmLft
 //finishline:
 //	return  winner;
 //}
-NSSZ AZDirectionsOffScreenWithPosition(NSR rect, AZPOS position )	{
+NSSZ AZDirectionsOffScreenWithPosition(_Rect rect, AZPOS position )	{
 	CGF deltaX = position == AZLft 	?  -NSMaxX(rect)
 	: position == AZRgt 	? 	NSMaxX(rect)	: 0;
 	CGF deltaY = position == AZTop 		?  NSMaxY(rect)
@@ -1627,7 +1628,7 @@ NSR	AZScaleRect					(const NSR  inRect, const CGF scale  )	{
 	return r;
 }
 
-NSR AZRectExceptSpanAnchored(NSR r1, CGF span, AZA anchor) {
+NSR AZRectExceptSpanAnchored(_Rect r1, CGF span, AZA anchor) {
 
 //  AZR * self = [AZR withRect:r1];
 
@@ -1637,7 +1638,7 @@ NSR AZRectExceptSpanAnchored(NSR r1, CGF span, AZA anchor) {
          anchor == AZRgt ?      AZRightEdge(r1,span) : r1;//(r1,span) : // (NSR) { self.maxX - span, self.y,           span,     self.h } : self.r;
 }
 
-NSR AZRectScaledToRect(NSR resizeRect, NSR fitRect) {
+NSR AZRectScaledToRect(_Rect resizeRect, NSR fitRect) {
 
   NSSZ inSize = resizeRect.size;
 //  return

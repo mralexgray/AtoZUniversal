@@ -14,6 +14,10 @@
 
 @Xtra(Text,AtoZ)
 
+// Here is a category that will mimic the functionality of the built-in python repr function for strings:
+
+_RC _Text unescaped ___
+
 _RO Class classified;
 
 + _List_ alphabet;

@@ -70,6 +70,18 @@ CLANG_IGNORE(-Wincomplete-implementation)
 
 @XtraPlan(Text,AtoZ)
 
+//Here is a category that will mimic the functionality of the built-in python repr function for strings:
+
+_TT unescaped {
+
+    NSMutableString *myRepr = self.mC;
+    NSRange myRange = NSMakeRange(0, [self length]);
+    _List toReplace = @[@"\0", @"\a", @"\b", @"\t", @"\n", @"\f", @"\r", @"\e"],
+        replaceWith = @[@"\\0", @"\\a", @"\\b", @"\\t", @"\\n", @"\\f", @"\\r", @"\\e"];
+    for (int i = 0, count = [toReplace count]; i < count; ++i)
+        [myRepr replaceOccurrencesOfString:[toReplace objectAtIndex:i] withString:[replaceWith objectAtIndex:i] options:0 range:myRange];
+  return [NSString stringWithFormat:@"\"%@\"", myRepr];
+}
 
 + _Text_ fromFile:_Text_ file { return [self.alloc initWithContentsOfFile:file encoding:NSUTF8StringEncoding error:nil]; }
 

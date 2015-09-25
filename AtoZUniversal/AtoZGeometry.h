@@ -1,45 +1,43 @@
 
-
-//#import <AtoZ/AZGrid.h>
-//#import <AtoZ/AZMatrix.h>
-//#import <AtoZ/AZPoint.h>
-//#import <AtoZ/AZSize.h>
-//#import <AtoZ/AZRect.h>
-//#import <AtoZ/AZSegmentedRect.h>
-
-
-
+//#import <AtoZ/AZGrid, AZMatrix.h, AZPoint, AZSize, AZRect, AZSegmentedRect
 
 // Predifined Points, Sizes and Rects
+
 #define AZHalfPoint NSMakePoint ( .5, .5 )
 #define  AZMaxPoint NSMakePoint ( MAXFLOAT, MAXFLOAT )
-#define  AZHalfSize NSMakeSize 	( .5, .5 )
-#define   AZMaxSize NSMakeSize  ( MAXFLOAT, MAXFLOAT )
 
-#define AZRelationRect NSMakeRect ( 0, 0, 1, 1 )
+#define  AZHalfSize  NSMakeSize ( .5, .5 )
+#define   AZMaxSize  NSMakeSize ( MAXFLOAT, MAXFLOAT )
 
-/*! AZEqualRects(...) - Compare MANY rects. AZAllAreEqualRects(r2, r44, NSZeroRect), etc. */
+#define AZNormalRect NSMakeRect ( 0, 0, 1, 1 )
 
-#define AZEqualRects(...) (BOOL)_AZAllAreEqualRects(metamacro_argcount(__VA_ARGS__),__VA_ARGS__) //metamacro_head(__VA_ARGS__), metamacro_tail(__VA_ARGS__)))
-/* helper */ BOOL _AZAllAreEqualRects(int ct,...);
+/*! AZEqualRects(...) - Compare MANY rects. AZAllAreEqualRects(r2, r44, NSZeroRect), etc.  
+    @see helper _AZAllAreEqualRects 
+ */
+BOOL _AZAllAreEqualRects(int count, ...);
+#define AZEqualRects(...) (BOOL)_AZAllAreEqualRects(metamacro_argcount(__VA_ARGS__),__VA_ARGS__) 
+
+//metamacro_head(__VA_ARGS__), metamacro_tail(__VA_ARGS__)))
+
+///* AZEqualRects macro helper */ BOOL _AZAllAreEqualRects(int ct,...);
 
 
-OBJC_EXPORT NSR AZRectOffsetLikePoints(NSR r, NSP p1, NSP p2);
-OBJC_EXPORT NSR AZRectResizedLikePointsInQuad(NSR frame, NSP point1, NSP point2, AZQuad quadrant);
+OBJC_EXPORT _Rect AZRectOffsetLikePoints( _Rect r, NSP p1, NSP p2);
+OBJC_EXPORT _Rect AZRectResizedLikePointsInQuad( _Rect frame, NSP point1, NSP point2, AZQuad quadrant);
 
 OBJC_EXPORT BOOL            AZIsZeroSize( NSSZ z);
-OBJC_EXPORT BOOL            AZIsZeroRect( NSR r);
-OBJC_EXPORT  NSR  AZRectCheckWithMinSize( NSR r,     NSSZ    sz);
-OBJC_EXPORT  NSR         AZTransformRect( NSR target, NSR model);
-OBJC_EXPORT  NSR            nanRectCheck( NSR  r);
+OBJC_EXPORT BOOL            AZIsZeroRect( _Rect r);
+OBJC_EXPORT _Rect  AZRectCheckWithMinSize( _Rect r,     NSSZ    sz);
+OBJC_EXPORT _Rect         AZTransformRect( _Rect target, _Rect model);
+OBJC_EXPORT _Rect            nanRectCheck( _Rect  r);
 OBJC_EXPORT  NSP           nanPointCheck( NSP   p);
 OBJC_EXPORT NSSZ            nanSizeCheck( NSSZ  s);
 OBJC_EXPORT   id    	          nanCheck( NSV* point);
 
-OBJC_EXPORT BOOL SameRect ( NSR r1, NSR r2 );
+OBJC_EXPORT BOOL SameRect ( _Rect r1, _Rect r2 );
 
-OBJC_EXPORT NSP AZAnchorPointInRect(CGP anch, NSR rect);
-OBJC_EXPORT                   AZAP AZAnchorPointOfActualRect(NSR rect, AZA pos);
+OBJC_EXPORT NSP AZAnchorPointInRect(CGP anch, _Rect rect);
+OBJC_EXPORT                   AZAP AZAnchorPointOfActualRect( _Rect rect, AZA pos);
 OBJC_EXPORT                   AZAP         AZAnchorPtAligned(AZA pos);
 
 FOUNDATION_EXPORT const AZAnchorPt  AZAnchorTop,      AZAnchorBottom,     AZAnchorRight,    AZAnchorLeft, 
@@ -48,10 +46,10 @@ FOUNDATION_EXPORT const AZAnchorPt  AZAnchorTop,      AZAnchorBottom,     AZAnch
 
 OBJC_EXPORT const CGR CGRectOne;
 
-OBJC_EXPORT NSP AZTopLeftPoint  ( NSR rect );
-OBJC_EXPORT NSP AZTopRightPoint ( NSR rect );
-OBJC_EXPORT NSP AZBotLeftPoint  ( NSR rect );
-OBJC_EXPORT NSP AZBotRightPoint ( NSR rect );
+OBJC_EXPORT NSP AZTopLeftPoint  ( _Rect rect );
+OBJC_EXPORT NSP AZTopRightPoint ( _Rect rect );
+OBJC_EXPORT NSP AZBotLeftPoint  ( _Rect rect );
+OBJC_EXPORT NSP AZBotRightPoint ( _Rect rect );
 
 /**	NSRange from a min and max values even though the names imply that min should be greater than max the order does not matter the range will always start at the lower value and have a size to reach the upper value **/
 //NSRange AZMakeRange ( NSUI min, NSUI max );
@@ -77,14 +75,14 @@ OBJC_EXPORT CGF   AZAspectRatioForSize ( NSSZ size );
 
 // Simple Length and Area calculus
 
-OBJC_EXPORT CGF AZPerimeter ( NSR rect );
-OBJC_EXPORT CGF AZPerimeterWithRoundRadius  ( NSR rect, CGF radius );
+OBJC_EXPORT CGF AZPerimeter ( _Rect rect );
+OBJC_EXPORT CGF AZPerimeterWithRoundRadius  ( _Rect rect, CGF radius );
 
 OBJC_EXPORT AZPOS                           AZPositionOpposite(AZPOS pos);
-OBJC_EXPORT AZPOS AZPositionOfEdgeAtOffsetAlongPerimeterOfRect(CGF off, NSR r);
-OBJC_EXPORT   CGP          AZPointAtOffsetAlongPerimeterOfRect(CGF off, NSR r);  //from bottom left going counterclockwise
-OBJC_EXPORT AZPOS        AZPositionOfRectPinnedToOutisdeOfRect(NSR box, NSR innerBox  );
-OBJC_EXPORT   AZA                        AZAlignmentInsideRect(NSR inner, NSR outer);
+OBJC_EXPORT AZPOS AZPositionOfEdgeAtOffsetAlongPerimeterOfRect(CGF off, _Rect r);
+OBJC_EXPORT   CGP          AZPointAtOffsetAlongPerimeterOfRect(CGF off, _Rect r);  //from bottom left going counterclockwise
+OBJC_EXPORT AZPOS        AZPositionOfRectPinnedToOutisdeOfRect( _Rect box, _Rect innerBox  );
+OBJC_EXPORT   AZA                        AZAlignmentInsideRect( _Rect inner, _Rect outer);
 OBJC_EXPORT   AZA AZAlignNext(AZA a);
 
 //NS_INLINE BOOL AZAlignIsCorner(AZA a){ AZA r; int ctr;
@@ -93,29 +91,29 @@ OBJC_EXPORT   AZA AZAlignNext(AZA a);
 //}
 
 //Includes corner preciion based on inner rect size;
-OBJC_EXPORT AZPOS AZPositionOfRectAtOffsetInsidePerimeterOfRect(NSR inner, CGF offset, NSR outer);
-OBJC_EXPORT AZPOS AZPositionOfQuadInRect ( NSR rect, NSR outer );
-OBJC_EXPORT AZPOS AZOutsideEdgeOfRectInRect (NSR rect, NSR outer );
+OBJC_EXPORT AZPOS AZPositionOfRectAtOffsetInsidePerimeterOfRect( _Rect inner, CGF offset, _Rect outer);
+OBJC_EXPORT AZPOS AZPositionOfQuadInRect ( _Rect rect, _Rect outer );
+OBJC_EXPORT AZPOS AZOutsideEdgeOfRectInRect ( _Rect rect, _Rect outer );
 
-OBJC_EXPORT AZPOS AZOutsideEdgeOfPointInRect (NSP inside, NSR outer );
+OBJC_EXPORT AZPOS AZOutsideEdgeOfPointInRect (NSP inside, _Rect outer );
 
-OBJC_EXPORT AZPOS AZPositionAtPerimeterInRect ( NSR edgeBox, NSR outer );
-OBJC_EXPORT NSSZ  AZDirectionsOffScreenWithPosition ( NSR rect, AZPOS position );
+OBJC_EXPORT AZPOS AZPositionAtPerimeterInRect ( _Rect edgeBox, _Rect outer );
+OBJC_EXPORT NSSZ  AZDirectionsOffScreenWithPosition ( _Rect rect, AZPOS position );
 
 OBJC_EXPORT AZOrient deltaDirectionOfPoints ( NSP a, NSP b );
 
-OBJC_EXPORT NSR  AZScreenFrame ( void );
+OBJC_EXPORT _Rect  AZScreenFrame ( void );
 OBJC_EXPORT NSSZ AZScreenSize  ( void );
-OBJC_EXPORT NSR  AZScreenFrameUnderMenu ( void );
+OBJC_EXPORT _Rect  AZScreenFrameUnderMenu ( void );
 
-OBJC_EXPORT CGF AZMinEdge ( NSR r );
-OBJC_EXPORT CGF AZMaxEdge ( NSR r );
+OBJC_EXPORT CGF AZMinEdge ( _Rect r );
+OBJC_EXPORT CGF AZMaxEdge ( _Rect r );
 OBJC_EXPORT CGF AZMaxDim ( NSSZ sz );
 OBJC_EXPORT CGF AZMinDim ( NSSZ sz );
 
 //OBJC_EXPORT CGF AZLengthOfPoint ( NSP  p );
 OBJC_EXPORT CGF    AZAreaOfSize ( NSSZ s );
-OBJC_EXPORT CGF    AZAreaOfRect ( NSR  r );
+OBJC_EXPORT CGF    AZAreaOfRect ( _Rect  r );
 // Size -> Point conversion
 OBJC_EXPORT NSP AZPointFromSize ( NSSZ size );
 OBJC_EXPORT CGF AZMenuBarH (void) ;
@@ -146,9 +144,9 @@ OBJC_EXPORT NSP AZMultiplyPointByPoint ( NSP one, NSP another );
 // multiplies each value with its corresponding value in a size
 OBJC_EXPORT NSP AZMultiplyPointBySize ( NSP one, NSSZ size );
 // positions a relative {0-1,0-1} point within absolute bounds
-OBJC_EXPORT NSP AZRelativeToAbsolutePoint ( NSP relative, NSR bounds );
+OBJC_EXPORT NSP AZRelativeToAbsolutePoint ( NSP relative, _Rect bounds );
 // calculates the relative {0-1,0-1} point from absolute bounds
-OBJC_EXPORT NSP AZAbsoluteToRelativePoint ( NSP absolute, NSR bounds );
+OBJC_EXPORT NSP AZAbsoluteToRelativePoint ( NSP absolute, _Rect bounds );
 OBJC_EXPORT NSP AZDividePoint ( NSP point, CGF divisor );
 OBJC_EXPORT NSP AZDividePointByPoint ( NSP point, NSP divisor );
 OBJC_EXPORT NSP AZDividePointBySize ( NSP point, NSSZ divisor );
@@ -162,13 +160,13 @@ OBJC_EXPORT NSP AZMovePoint ( NSP origin, NSP target, CGF relativeDistance );
 OBJC_EXPORT NSP AZMovePointAbs ( NSP origin, NSP target, CGF pixels );
 
 // returns the center point of a rect
-OBJC_EXPORT NSP AZCenterOfRect ( NSR rect );
+OBJC_EXPORT NSP AZCenterOfRect ( _Rect rect );
 
 // returns the center point of a size
 OBJC_EXPORT NSP AZCenterOfSize ( NSSZ size );
 
 // will return the origin + size value of a rect
-OBJC_EXPORT NSP AZEndOfRect ( NSR rect );
+OBJC_EXPORT NSP AZEndOfRect ( _Rect rect );
 
 /*! Returns the average distance of two rects
 
@@ -180,33 +178,33 @@ OBJC_EXPORT NSP AZEndOfRect ( NSR rect );
     		         |	     |
  		  	         +-------+    
 */
-OBJC_EXPORT NSP AZCenterDistanceOfRects ( NSR from, NSR to );
+OBJC_EXPORT NSP AZCenterDistanceOfRects ( _Rect from, _Rect to );
 
 // will return the shortest possible distance in x and y
-OBJC_EXPORT NSP AZBorderDistanceOfRects ( NSR from, NSR to );
+OBJC_EXPORT NSP AZBorderDistanceOfRects ( _Rect from, _Rect to );
 
 
 
-OBJC_EXPORT NSP AZPointClosestOnRect ( NSP point, NSR rect );
+OBJC_EXPORT NSP AZPointClosestOnRect ( NSP point, _Rect rect );
 
 // will return the shortes possible distance from point to rect
-OBJC_EXPORT NSP AZPointDistanceToBorderOfRect ( NSP point, NSR rect );
+OBJC_EXPORT NSP AZPointDistanceToBorderOfRect ( NSP point, _Rect rect );
 
-OBJC_EXPORT NSP AZNormalizedDistanceOfRects ( NSR from, NSR to );
-OBJC_EXPORT NSP AZNormalizedDistanceToCenterOfRect ( NSP point, NSR rect );
+OBJC_EXPORT NSP AZNormalizedDistanceOfRects ( _Rect from, _Rect to );
+OBJC_EXPORT NSP AZNormalizedDistanceToCenterOfRect ( NSP point, _Rect rect );
 
 OBJC_EXPORT NSP AZPointFromDim ( CGF val );
 /*! NSSZ result methods  */
 // converts a float to a rect of equal sized sizes of dim;
-OBJC_EXPORT NSR AZRectFromDim ( CGF dim );
+OBJC_EXPORT _Rect AZRectFromDim ( CGF dim );
 
 OBJC_EXPORT NSP AZPt(CGF x, CGF y);
 
-//  Makes Rect 0, 0, boundsX, boundsY  easy syntax AZRectBy ( 200,233)
-OBJC_EXPORT NSR AZRectBy ( CGF boundX, CGF boundY );
+//  Makes _Rect 0, 0, boundsX, boundsY  easy syntax AZRectBy ( 200,233)
+OBJC_EXPORT _Rect AZRectBy ( CGF boundX, CGF boundY );
 
 // MaxX, MaxY point of Rect
-OBJC_EXPORT NSP AZRectApex(NSR r);
+OBJC_EXPORT NSP AZRectApex( _Rect r);
 
 // converts a float to a size;
 OBJC_EXPORT NSSZ AZSizeFromDim ( CGF dim );
@@ -216,7 +214,7 @@ OBJC_EXPORT NSSZ	AZScaleSize   (const NSSZ  sz, const CGF scale);
 
 // converts a point to a size
 OBJC_EXPORT NSSZ AZSizeFromPoint ( NSP point );
-OBJC_EXPORT NSSZ 	AZSizeFromRect	(NSR rect);
+OBJC_EXPORT NSSZ 	AZSizeFromRect	( _Rect rect);
 // ABS on both values of the size
 OBJC_EXPORT NSSZ AZAbsSize ( NSSZ size );
 
@@ -253,121 +251,121 @@ OBJC_EXPORT NSSZ AZBlendSizes ( NSSZ one, NSSZ another, CGF percentage );
 OBJC_EXPORT NSSZ AZSizeMax ( NSSZ one, NSSZ another );
 OBJC_EXPORT NSSZ AZSizeMin ( NSSZ one, NSSZ another );
 OBJC_EXPORT NSSZ AZSizeBound ( NSSZ preferred, NSSZ minSize, NSSZ maxSize );
-// NSR result methods
-OBJC_EXPORT NSR AZZeroHeightBelowMenu ( void );
+// _Rect result methods
+OBJC_EXPORT _Rect AZZeroHeightBelowMenu ( void );
 
-OBJC_EXPORT NSR AZFlipRectinRect ( CGRect local, CGRect dest );
+OBJC_EXPORT _Rect AZFlipRectinRect ( CGRect local, CGRect dest );
 
 OBJC_EXPORT CGF AZMenuBarThickness  ( void );
 
-OBJC_EXPORT NSR AZMenuBarFrame ( void );
+OBJC_EXPORT _Rect AZMenuBarFrame ( void );
 
-OBJC_EXPORT NSR AZRectOffsetBy        (CGR rect, CGF x, CGF y);
-OBJC_EXPORT NSR AZRectOffsetBySize    (CGR rect, CGSZ sz);
+OBJC_EXPORT _Rect AZRectOffsetBy        (CGR rect, CGF x, CGF y);
+OBJC_EXPORT _Rect AZRectOffsetBySize    (CGR rect, CGSZ sz);
 OBJC_EXPORT NSR	AZRectResizedBySize		(CGR rect, CGSZ sz);
-OBJC_EXPORT NSR AZRectOffsetByPt      (CGR rect, NSP pt);
-OBJC_EXPORT NSR AZRectOffsetFromDim   (CGR rect, CGF xyDistance);
+OBJC_EXPORT _Rect AZRectOffsetByPt      (CGR rect, NSP pt);
+OBJC_EXPORT _Rect AZRectOffsetFromDim   (CGR rect, CGF xyDistance);
 
-OBJC_EXPORT NSR AZRectVerticallyOffsetBy (CGR rect, CGF offset );
-OBJC_EXPORT NSR AZRectHorizontallyOffsetBy ( CGRect rect, CGF offset );
+OBJC_EXPORT _Rect AZRectVerticallyOffsetBy (CGR rect, CGF offset );
+OBJC_EXPORT _Rect AZRectHorizontallyOffsetBy ( CGRect rect, CGF offset );
 
-OBJC_EXPORT NSR AZMenulessScreenRect ( void );
+OBJC_EXPORT _Rect AZMenulessScreenRect ( void );
 
-OBJC_EXPORT NSR AZMakeRectMaxXUnderMenuBarY ( CGF distance );
+OBJC_EXPORT _Rect AZMakeRectMaxXUnderMenuBarY ( CGF distance );
 
 OBJC_EXPORT CGF AZHeightUnderMenu ( void );
-OBJC_EXPORT NSR AZSquareFromLength ( CGF length );
+OBJC_EXPORT _Rect AZSquareFromLength ( CGF length );
 
 // returns a zero sized rect with the argumented point as origin
-OBJC_EXPORT NSR AZMakeRectFromPoint ( NSP point );
+OBJC_EXPORT _Rect AZMakeRectFromPoint ( NSP point );
 
 // returns a zero point origin with the argumented size
-OBJC_EXPORT NSR AZMakeRectFromSize ( NSSZ size );
+OBJC_EXPORT _Rect AZMakeRectFromSize ( NSSZ size );
 
 // just another way of defining a rect
-OBJC_EXPORT NSR AZMakeRect ( NSP point, NSSZ size );
+OBJC_EXPORT _Rect AZMakeRect ( NSP point, NSSZ size );
 
 // creates a square rect around a center point
-OBJC_EXPORT NSR AZMakeSquare ( NSP center, CGF radius );
+OBJC_EXPORT _Rect AZMakeSquare ( NSP center, CGF radius );
 
-OBJC_EXPORT NSR AZMultiplyRectBySize ( NSR rect, NSSZ size );
+OBJC_EXPORT _Rect AZMultiplyRectBySize ( _Rect rect, NSSZ size );
 
 // transforms a relative rect to an absolute within absolute bounds
-OBJC_EXPORT NSR AZRelativeToAbsoluteRect ( NSR relative, NSR bounds );
+OBJC_EXPORT _Rect AZRelativeToAbsoluteRect ( _Rect relative, _Rect bounds );
 
 // transforms an absolute rect to a relative rect within absolute bounds
-OBJC_EXPORT NSR AZAbsoluteToRelativeRect ( NSR absolute, NSR bounds );
+OBJC_EXPORT _Rect AZAbsoluteToRelativeRect ( _Rect absolute, _Rect bounds );
 
-OBJC_EXPORT NSR AZPositionRectOnRect ( NSR inner, NSR outer, NSP position );
+OBJC_EXPORT _Rect AZPositionRectOnRect ( _Rect inner, _Rect outer, NSP position );
 
 enum CAAutoresizingMask AZPositionToAutoresizingMask (AZPOS p);
 
-OBJC_EXPORT NSR AZRectWithDimsCenteredOnPoints(CGF width, CGF heigt, CGF cx, CGF cy);  /** NICE **/
+OBJC_EXPORT _Rect AZRectWithDimsCenteredOnPoints(CGF width, CGF heigt, CGF cx, CGF cy);  /** NICE **/
 
 // moves the origin of the rect
-OBJC_EXPORT NSR AZCenterRectOnPoint ( NSR rect, NSP center );
+OBJC_EXPORT _Rect AZCenterRectOnPoint ( _Rect rect, NSP center );
 
 // returns the innter rect with its posiion centeredn on the outer rect
-OBJC_EXPORT NSR AZCenterRectOnRect ( NSR inner, NSR outer );
+OBJC_EXPORT _Rect AZCenterRectOnRect ( _Rect inner, _Rect outer );
 
-OBJC_EXPORT NSR AZConstrainRectToRect(NSR innerRect, NSR outerRect);
+OBJC_EXPORT _Rect AZConstrainRectToRect( _Rect innerRect, _Rect outerRect);
 
 // will a square rect with a given center
-OBJC_EXPORT NSR AZSquareAround ( NSP center, CGF distance );
+OBJC_EXPORT _Rect AZSquareAround ( NSP center, CGF distance );
 
 // blends a rect from one to another
-OBJC_EXPORT NSR AZBlendRects ( NSR from, NSR to, CGF at );
+OBJC_EXPORT _Rect AZBlendRects ( _Rect from, _Rect to, CGF at );
 
 // Croped Rects
 
-OBJC_EXPORT NSR AZRectTrimmedOnRight ( NSR rect, CGF width );
-OBJC_EXPORT NSR AZRectTrimmedOnBottom ( NSR rect, CGF height );
-OBJC_EXPORT NSR AZRectTrimmedOnLeft ( NSR rect, CGF width );
-OBJC_EXPORT NSR AZRectTrimmedOnTop ( NSR rect, CGF height );
+OBJC_EXPORT _Rect AZRectTrimmedOnRight ( _Rect rect, CGF width );
+OBJC_EXPORT _Rect AZRectTrimmedOnBottom ( _Rect rect, CGF height );
+OBJC_EXPORT _Rect AZRectTrimmedOnLeft ( _Rect rect, CGF width );
+OBJC_EXPORT _Rect AZRectTrimmedOnTop ( _Rect rect, CGF height );
 
 OBJC_EXPORT NSSZ AZSizeExceptWide  ( NSSZ sz, CGF wide );
 OBJC_EXPORT NSSZ AZSizeExceptHigh  ( NSSZ sz, CGF high );
 
-OBJC_EXPORT NSR AZRectExtendedOnLeft(NSR rect, CGF amount);
-OBJC_EXPORT NSR AZRectExtendedOnBottom(NSR rect, CGF amount);
-OBJC_EXPORT NSR AZRectExtendedOnTop(NSR rect, CGF amount);
-OBJC_EXPORT NSR AZRectExtendedOnRight(NSR rect, CGF amount);
+OBJC_EXPORT _Rect AZRectExtendedOnLeft( _Rect rect, CGF amount);
+OBJC_EXPORT _Rect AZRectExtendedOnBottom( _Rect rect, CGF amount);
+OBJC_EXPORT _Rect AZRectExtendedOnTop( _Rect rect, CGF amount);
+OBJC_EXPORT _Rect AZRectExtendedOnRight( _Rect rect, CGF amount);
 
-OBJC_EXPORT NSR 	AZRectExceptSize (NSR rect, NSSZ size);
-FOUNDATION_EXPORT NSR AZRectExceptWide  ( NSR rect, CGF wide );
-FOUNDATION_EXPORT NSR AZRectExceptHigh  ( NSR rect, CGF high );
-FOUNDATION_EXPORT NSR AZRectExceptOriginX  ( NSR rect, CGF x );
-FOUNDATION_EXPORT NSR AZRectExceptOriginY  ( NSR rect, CGF y );
-FOUNDATION_EXPORT NSR	AZRectExceptOrigin	(NSR r, NSP origin);
+OBJC_EXPORT _Rect 	AZRectExceptSize ( _Rect rect, NSSZ size);
+FOUNDATION_EXPORT _Rect AZRectExceptWide  ( _Rect rect, CGF wide );
+FOUNDATION_EXPORT _Rect AZRectExceptHigh  ( _Rect rect, CGF high );
+FOUNDATION_EXPORT _Rect AZRectExceptOriginX  ( _Rect rect, CGF x );
+FOUNDATION_EXPORT _Rect AZRectExceptOriginY  ( _Rect rect, CGF y );
+FOUNDATION_EXPORT NSR	AZRectExceptOrigin	( _Rect r, NSP origin);
 
 // returns a rect with insets of the same size x and y
-FOUNDATION_EXPORT NSR AZInsetRect ( NSR rect, CGF inset );
+FOUNDATION_EXPORT _Rect AZInsetRect ( _Rect rect, CGF inset );
 
 // returns a rect at the left edge of a rect with a given inset width
-FOUNDATION_EXPORT NSR AZLeftEdge ( NSR rect, CGF width );
+FOUNDATION_EXPORT _Rect AZLeftEdge ( _Rect rect, CGF width );
 
 // returns a rect at the right edge of a rect with a given inset width
-FOUNDATION_EXPORT NSR AZRightEdge ( NSR rect, CGF width );
+FOUNDATION_EXPORT _Rect AZRightEdge ( _Rect rect, CGF width );
 
 // returns a rect at the lower edge of a rect with a given inset width
-FOUNDATION_EXPORT NSR AZLowerEdge ( NSR rect, CGF height );
+FOUNDATION_EXPORT _Rect AZLowerEdge ( _Rect rect, CGF height );
 
 // returns a rect at the upper edge of a rect with a given inset width
-FOUNDATION_EXPORT NSR AZUpperEdge ( NSR rect, CGF height );
+FOUNDATION_EXPORT _Rect AZUpperEdge ( _Rect rect, CGF height );
 
 
-OBJC_EXPORT NSR AZRectInsideRectOnEdge(NSRect center, NSR outer, AZPOS position);
-OBJC_EXPORT NSR AZRectOutsideRectOnEdge(NSRect center, NSR outer, AZPOS position);
-OBJC_EXPORT NSR AZRectFlippedOnEdge(NSRect r, AZPOS position);
+OBJC_EXPORT _Rect AZRectInsideRectOnEdge(NSRect center, _Rect outer, AZPOS position);
+OBJC_EXPORT _Rect AZRectOutsideRectOnEdge(NSRect center, _Rect outer, AZPOS position);
+OBJC_EXPORT _Rect AZRectFlippedOnEdge(NSRect r, AZPOS position);
 
-FOUNDATION_EXPORT NSR AZInsetRectInPosition ( NSR outside, NSSZ inset, AZPOS pos );
+FOUNDATION_EXPORT _Rect AZInsetRectInPosition ( _Rect outside, NSSZ inset, AZPOS pos );
 
-FOUNDATION_EXPORT AZPOS AZPosOfPointInInsetRects ( NSP point, NSR outside, NSSZ inset );
+FOUNDATION_EXPORT AZPOS AZPosOfPointInInsetRects ( NSP point, _Rect outside, NSSZ inset );
 
 /* Is point "point" within edges of "rect" within inset of size? */ /* UNIT TESTS OK */
-FOUNDATION_EXPORT BOOL  AZPointIsInInsetRects	(NSP innerPoint, NSR outerRect, NSSZ size);
+FOUNDATION_EXPORT BOOL  AZPointIsInInsetRects	(NSP innerPoint, _Rect outerRect, NSSZ size);
 
-typedef struct AZInsetRects {	NSR top; NSR right; NSR bottom;	NSR left; } AZInsetRects;
+typedef struct AZInsetRects {	_Rect top; _Rect right; _Rect bottom;	_Rect left; } AZInsetRects;
 
 /*!  +-------+------------------+-------+
      |	     |        T         |       |             
@@ -382,7 +380,7 @@ typedef struct AZInsetRects {	NSR top; NSR right; NSR bottom;	NSR left; } AZInse
      |	     |        B         |       |
      +-------+------------------+-------+    */
 
-NS_INLINE AZInsetRects AZMakeInsideRects(NSRect rect, NSSZ inset) {
+NS_INLINE AZInsetRects AZMakeInsideRects(_Rect rect, NSSZ inset) {
 
  return  (AZInsetRects){ AZUpperEdge(rect, inset.height), AZRightEdge(rect, inset.width),
                          AZLowerEdge(rect, inset.height),  AZLeftEdge(rect, inset.width)}; 
@@ -390,7 +388,7 @@ NS_INLINE AZInsetRects AZMakeInsideRects(NSRect rect, NSSZ inset) {
 
 //FOUNDATION_EXPORT AZOutsideEdges AZOutsideEdgesSized(NSRect rect, NSSZ size);
 
-//BOOL AZPointInOutsideEdgeOfRect(NSP point, NSR rect, NSSZ size);
+//BOOL AZPointInOutsideEdgeOfRect(NSP point, _Rect rect, NSSZ size);
 
 // macro to call a border drawing method with a border width
 // this will effectively draw the border but clip the inner rect
@@ -403,50 +401,50 @@ NS_INLINE AZInsetRects AZMakeInsideRects(NSRect rect, NSSZ inset) {
 	METHOD ( RECT, AZUpperEdge ( RECT, BORDER ) ); \
 	METHOD ( RECT, AZLowerEdge ( RECT, BORDER ))
 // Comparison methods
-OBJC_EXPORT BOOL AZIsPointLeftOfRect  ( NSP point, NSR rect );
-OBJC_EXPORT BOOL AZIsPointRightOfRect ( NSP point, NSR rect );
-OBJC_EXPORT BOOL AZIsPointAboveRect   ( NSP point, NSR rect );
-OBJC_EXPORT BOOL AZIsPointBelowRect   ( NSP point, NSR rect );
+OBJC_EXPORT BOOL AZIsPointLeftOfRect  ( NSP point, _Rect rect );
+OBJC_EXPORT BOOL AZIsPointRightOfRect ( NSP point, _Rect rect );
+OBJC_EXPORT BOOL AZIsPointAboveRect   ( NSP point, _Rect rect );
+OBJC_EXPORT BOOL AZIsPointBelowRect   ( NSP point, _Rect rect );
 
-OBJC_EXPORT BOOL AZIsRectLeftOfRect   ( NSR rect, NSR compare );
-OBJC_EXPORT BOOL AZIsRectRightOfRect  ( NSR rect, NSR compare );
-OBJC_EXPORT BOOL AZIsRectAboveRect	( NSR rect, NSR compare );
-OBJC_EXPORT BOOL AZIsRectBelowRect	( NSR rect, NSR compare );
+OBJC_EXPORT BOOL AZIsRectLeftOfRect   ( _Rect rect, _Rect compare );
+OBJC_EXPORT BOOL AZIsRectRightOfRect  ( _Rect rect, _Rect compare );
+OBJC_EXPORT BOOL AZIsRectAboveRect	( _Rect rect, _Rect compare );
+OBJC_EXPORT BOOL AZIsRectBelowRect	( _Rect rect, _Rect compare );
 
-OBJC_EXPORT NSR rectZoom 			 ( NSR rect,float zoom,int quadrant );
-OBJC_EXPORT NSR 	AZSquareInRect      (NSR rect );
-OBJC_EXPORT NSR 	AZSizeRectInRect    (NSR innerRect,NSR outerRect,bool expand );
+OBJC_EXPORT _Rect rectZoom 			 ( _Rect rect,float zoom,int quadrant );
+OBJC_EXPORT _Rect 	AZSquareInRect      ( _Rect rect );
+OBJC_EXPORT _Rect 	AZSizeRectInRect    ( _Rect innerRect,_Rect outerRect,bool expand );
 OBJC_EXPORT NSP 	AZOffsetPoint       (NSP fromPoint, NSP toPoint );
-OBJC_EXPORT NSR 	AZFitRectInRect     (NSR innerRect,NSR outerRect,bool expand );
-OBJC_EXPORT NSR 	AZCenterRectInRect  (NSR rect, NSR mainRect );
-OBJC_EXPORT NSR 	AZRectFromSize      (NSSZ size );
-OBJC_EXPORT NSR	AZRectFromSizeOfRect  (NSR rect);
-//NSR rectWithProportion ( NSR innerRect,float proportion,bool expand );
+OBJC_EXPORT _Rect 	AZFitRectInRect     ( _Rect innerRect,_Rect outerRect,bool expand );
+OBJC_EXPORT _Rect 	AZCenterRectInRect  ( _Rect rect, _Rect mainRect );
+OBJC_EXPORT _Rect 	AZRectFromSize      (NSSZ size );
+OBJC_EXPORT NSR	AZRectFromSizeOfRect  ( _Rect rect);
+//Rect rectWithProportion ( _Rect innerRect,float proportion,bool expand );
 
-OBJC_EXPORT NSR AZRectInsideRectOnEdgeInset (NSR rect, AZA side, CGF inset );
-OBJC_EXPORT NSR AZCornerRectPositionedWithSize(NSR outerRect, AZPOS pos, NSSZ sz);
-//NSR 	sectionPositioned ( NSR r, AZPOS p );
+OBJC_EXPORT _Rect AZRectInsideRectOnEdgeInset ( _Rect rect, AZA side, CGF inset );
+OBJC_EXPORT _Rect AZCornerRectPositionedWithSize( _Rect outerRect, AZPOS pos, NSSZ sz);
+//Rect 	sectionPositioned ( _Rect r, AZPOS p );
 OBJC_EXPORT int 	oppositeQuadrant ( int quadrant );
-OBJC_EXPORT NSR 	quadrant ( NSR r, AZQuad quad );
-OBJC_EXPORT NSR 	AZRectOfQuadInRect		  (NSR originalRect, AZQuad quad); //alias for quadrant
+OBJC_EXPORT _Rect 	quadrant ( _Rect r, AZQuad quad );
+OBJC_EXPORT _Rect 	AZRectOfQuadInRect		  ( _Rect originalRect, AZQuad quad); //alias for quadrant
 
-OBJC_EXPORT CGF 	quadrantsVerticalGutter   ( NSR r );
-OBJC_EXPORT CGF quadrantsHorizontalGutter ( NSR r );
-OBJC_EXPORT NSR constrainRectToRect 		  ( NSR innerRect, 	NSR outerRect );
-OBJC_EXPORT NSR alignRectInRect			  ( NSR innerRect,	NSR outerRect,	int quadrant );
-//NSR expelRectFromRect ( NSR innerRect, NSR outerRect,float peek );
-//NSR expelRectFromRectOnEdge ( NSR innerRect, NSR outerRect,NSREdge edge,float peek );
+OBJC_EXPORT CGF 	quadrantsVerticalGutter   ( _Rect r );
+OBJC_EXPORT CGF quadrantsHorizontalGutter ( _Rect r );
+OBJC_EXPORT _Rect constrainRectToRect 		  ( _Rect innerRect, _Rect outerRect );
+OBJC_EXPORT _Rect alignRectInRect			  ( _Rect innerRect,	_Rect outerRect,	int quadrant );
+//Rect expelRectFromRect ( _Rect innerRect, _Rect outerRect,float peek );
+//Rect expelRectFromRectOnEdge ( _Rect innerRect, _Rect outerRect,NSREdge edge,float peek );
 
 OBJC_EXPORT AZPOS AZPosAtCGRectEdge ( CGRectEdge edge );
 OBJC_EXPORT CGRectEdge CGRectEdgeAtPosition ( AZPOS pos );
 
-OBJC_EXPORT CGRectEdge AZEdgeTouchingEdgeForRectInRect ( NSR innerRect, NSR outerRect );
-AZPOS AZClosestCorner (NSR r,NSP pt);
+OBJC_EXPORT CGRectEdge AZEdgeTouchingEdgeForRectInRect ( _Rect innerRect, _Rect outerRect );
+AZPOS AZClosestCorner ( _Rect r,NSP pt);
 OBJC_EXPORT QUAD 	AZOppositeQuadrant ( int quadrant );
-OBJC_EXPORT NSR 	AZBlendRects ( NSR start, NSR end, CGF b );
-OBJC_EXPORT void 	logRect ( NSR rect );
-OBJC_EXPORT NSR AZRandomRectInRect 	( CGRect rect );
-OBJC_EXPORT NSR AZRandomRectInFrame		( CGRect rect );
+OBJC_EXPORT _Rect 	AZBlendRects ( _Rect start, _Rect end, CGF b );
+OBJC_EXPORT void 	logRect ( _Rect rect );
+OBJC_EXPORT _Rect AZRandomRectInRect 	( CGRect rect );
+OBJC_EXPORT _Rect AZRandomRectInFrame		( CGRect rect );
 OBJC_EXPORT CGP AZRandomPointInRect ( CGRect rect );
 
 /** Returns the center point of a CGRect. */
@@ -457,17 +455,17 @@ NS_INLINE CGP AZCenter(CGR r){ return CGPointMake( CGRectGetMidX(r),CGRectGetMid
 //float BTFloatRangeMod ( BTFloatRange range );
 //float BTFloatRangeUnit ( BTFloatRange range );
 
-//NSP AZRectOffset ( NSR innerRect, NSR outerRect, QUAD quadrant );
+//NSP AZRectOffset ( _Rect innerRect, _Rect outerRect, QUAD quadrant );
 
-OBJC_EXPORT NSR        AZRectOffset(NSR r, NSP ptOff);
-OBJC_EXPORT NSR NSRectFromTwoPoints	( const NSP a, const NSP b );
-OBJC_EXPORT NSR NSRectCentredOnPoint	( const NSP p, const NSSZ size );
-OBJC_EXPORT NSR AZUnionOfTwoRects		( const NSR a, const NSR b );
-OBJC_EXPORT NSR AZUnionOfRectsInSet		( const NSSet* aSet );
-OBJC_EXPORT NSST* AZDifferenceOfTwoRects ( const NSR a, const NSR b );
-OBJC_EXPORT NSST* AZSubtractTwoRects		( const NSR a, const NSR b );
+OBJC_EXPORT _Rect        AZRectOffset( _Rect r, NSP ptOff);
+OBJC_EXPORT _Rect NSRectFromTwoPoints	( const NSP a, const NSP b );
+OBJC_EXPORT _Rect NSRectCentredOnPoint	( const NSP p, const NSSZ size );
+OBJC_EXPORT _Rect AZUnionOfTwoRects		( const _Rect a, const _Rect b );
+OBJC_EXPORT _Rect AZUnionOfRectsInSet		( const NSSet* aSet );
+OBJC_EXPORT NSST* AZDifferenceOfTwoRects ( const _Rect a, const _Rect b );
+OBJC_EXPORT NSST* AZSubtractTwoRects		( const _Rect a, const _Rect b );
 
-OBJC_EXPORT BOOL AZAreSimilarRects( const NSR a, const NSR b, const CGF epsilon );
+OBJC_EXPORT BOOL AZAreSimilarRects( const _Rect a, const _Rect b, const CGF epsilon );
 
 OBJC_EXPORT CGF AZPointFromLine		 ( const NSP inPoint, const NSP a, const NSP b );
 OBJC_EXPORT NSP AZNearestPointOnLine ( const NSP inPoint, const NSP a, const NSP b );
@@ -490,19 +488,19 @@ OBJC_EXPORT CGF AZDotProduct		( const NSP a, const NSP b );
 OBJC_EXPORT NSP AZIntersection	( const NSP aa, const NSP ab, const NSP ba, const NSP bb );
 OBJC_EXPORT NSP AZIntersection2	( const NSP p1, const NSP p2, const NSP p3, const NSP p4 );
 
-OBJC_EXPORT NSR AZCentreRectOnPoint		  ( const NSR inRect, const NSP p 	 );
-OBJC_EXPORT NSP AZMapPointFromRect		  ( const NSP p, 		 const NSR rect );
-OBJC_EXPORT NSP AZMapPointToRect			  ( const NSP p, 		 const NSR rect );
-OBJC_EXPORT NSP AZMapPointFromRectToRect ( const NSP p, 		 const NSR srcRect, const NSR destRect );
-OBJC_EXPORT NSR AZMapRectFromRectToRect  ( const NSR inRect, const NSR srcRect, const NSR destRect );
+OBJC_EXPORT _Rect AZCentreRectOnPoint		  ( const _Rect inRect, const NSP p 	 );
+OBJC_EXPORT NSP AZMapPointFromRect		  ( const NSP p, 		 const _Rect rect );
+OBJC_EXPORT NSP AZMapPointToRect			  ( const NSP p, 		 const _Rect rect );
+OBJC_EXPORT NSP AZMapPointFromRectToRect ( const NSP p, 		 const _Rect srcRect, const _Rect destRect );
+OBJC_EXPORT _Rect AZMapRectFromRectToRect  ( const _Rect inRect, const _Rect srcRect, const _Rect destRect );
 
-OBJC_EXPORT NSR AZRectExceptSpanAnchored(NSR r1, CGF span, AZA anchor);
-OBJC_EXPORT NSR         AZScaleRect	( const NSR  inRect, const CGF scale 	);
-OBJC_EXPORT NSR AZRectScaledToRect(NSR resizeRect, NSR fitRect);
-OBJC_EXPORT NSR  AZCentreRectInRect	( const NSR  r, 		const NSR cr 		);
-OBJC_EXPORT NSBP *    AZRotatedRect ( const NSR  r,	 	const CGF radians );
+OBJC_EXPORT _Rect AZRectExceptSpanAnchored( _Rect r1, CGF span, AZA anchor);
+OBJC_EXPORT _Rect         AZScaleRect	( const _Rect  inRect, const CGF scale 	);
+OBJC_EXPORT _Rect AZRectScaledToRect( _Rect resizeRect, _Rect fitRect);
+OBJC_EXPORT _Rect  AZCentreRectInRect	( const _Rect  r, 		const _Rect cr 		);
+OBJC_EXPORT NSBP *    AZRotatedRect ( const _Rect  r,	 	const CGF radians );
 
-OBJC_EXPORT NSR AZNormalizedRect( const NSR r );
+OBJC_EXPORT _Rect AZNormalizedRect( const _Rect r );
 
 OBJC_EXPORT _AffT AZRotationTransform( const CGF radians, const NSP aboutPoint );
 
