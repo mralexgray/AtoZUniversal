@@ -22,7 +22,7 @@
 	 url = https://github.com/mralexgray/DatabaseStorage.git
 [submodule "OrderedDictionary"]
 	path = Vendor/OrderedDictionary
-	 url = https://github.com/nicklockwood/OrderedDictionary.git
+	 url = https://github.com/mralexgray/OrderedDictionary.git
 [submodule "THObserversAndBinders"]
 	path = Vendor/THObserversAndBinders
 	 url = https://github.com/mralexgray/THObserversAndBinders.git
