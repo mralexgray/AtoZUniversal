@@ -2,7 +2,7 @@
 language: objective-c
 osx_image: xcode6.4
 xcode_project: AtoZUniversal.xcodeproj
-xcode_scheme: AtoZUniversal Tests
+xcode_scheme: AtoZUniversal
 
 # disable the default submodule logic
 git:
