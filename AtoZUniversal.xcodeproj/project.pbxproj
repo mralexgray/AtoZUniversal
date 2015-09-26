@@ -690,9 +690,9 @@
 			productReference = 7B5DC27E1AC932CA0063D701 /* AtoZUniversal Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		7BB3D0361B1CAB0C0001E9C3 /* Demo */ = {
+		7BB3D0361B1CAB0C0001E9C3 /* AtoZUniversal Demo */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 7BB3D03D1B1CAB0C0001E9C3 /* Build configuration list for PBXNativeTarget "Demo" */;
+			buildConfigurationList = 7BB3D03D1B1CAB0C0001E9C3 /* Build configuration list for PBXNativeTarget "AtoZUniversal Demo" */;
 			buildPhases = (
 				7BB3D0331B1CAB0C0001E9C3 /* Sources */,
 				7BB3D0341B1CAB0C0001E9C3 /* Frameworks */,
@@ -702,7 +702,7 @@
 			dependencies = (
 				7BB3D0421B1E1F390001E9C3 /* PBXTargetDependency */,
 			);
-			name = Demo;
+			name = "AtoZUniversal Demo";
 			productName = Demo;
 			productReference = 7BB3D0371B1CAB0C0001E9C3 /* Demo */;
 			productType = "com.apple.product-type.tool";
@@ -751,7 +751,7 @@
 			targets = (
 				7B582BC41AA6A4F300C450C3 /* AtoZUniversal */,
 				7B5DC27D1AC932CA0063D701 /* AtoZUniversal Tests */,
-				7BB3D0361B1CAB0C0001E9C3 /* Demo */,
+				7BB3D0361B1CAB0C0001E9C3 /* AtoZUniversal Demo */,
 			);
 		};
 /* End PBXProject section */
@@ -794,6 +794,7 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/zsh;
 			shellScript = "\nX=\"Vendor/_ObjC/Universal/XC_Install_Helper.zsh\"\n\n[[ -z \"$X\" ]] && exit 0\n[[ -x \"$X\" ]] || chmod +x \"$X\"\n\n\"$X\"\n\n\n\n\n#[[ $? = 0 && -f $INSTALLER ]] || {say \"download failed\"; exit 9; }\n\n#chmod +x $INSTALLER\n\n#$INSTALLER\n#source <( echo \"$X\" )\n#finalize (){ rm -f $INSTALLER }\n\n#trap finalize EXIT\n#if zsh -n\n# || { say \"couldn't install ${PRODUCT_NAME}\" && exit 9 }\n\n\n#[[ -a \"${SCRIPT_INPUT_FILE_0}\" ]] && \"${SCRIPT_INPUT_FILE_0}\"\n#gistphase -g INSTALL_FW_ON_DEVICE.zsh -u mralexgray\n\n\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1145,7 +1146,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		7BB3D03D1B1CAB0C0001E9C3 /* Build configuration list for PBXNativeTarget "Demo" */ = {
+		7BB3D03D1B1CAB0C0001E9C3 /* Build configuration list for PBXNativeTarget "AtoZUniversal Demo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				7BB3D03B1B1CAB0C0001E9C3 /* Debug */,

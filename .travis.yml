@@ -10,6 +10,8 @@ git:
 before_install:
   - git submodule update --init --recursive
 
+script: xcodebuild -scheme AtoZUniversal test
+
 
 #script: xctool -project AtoZUniversal.xcodeproj -scheme AtoZUniversal build test CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
 
